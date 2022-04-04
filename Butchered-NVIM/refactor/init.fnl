@@ -1,0 +1,6 @@
+(require :packer)
+(require :settings)
+(require :keymaps)
+(require :commands)
+(require :events)
+(require :lsp)
