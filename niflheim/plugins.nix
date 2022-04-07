@@ -43,7 +43,6 @@ in with plugins; [
   (plugWithLuaCfg null-ls-nvim)
   (plugWithLuaCfg trouble-nvim)
   (plugWithLuaCfg nvim-lspconfig)
-  (plugWithLuaCfg nvim-lsp-installer)
   (plugWithLuaCfg nvim-cmp)
 
   # Miscellaneous
