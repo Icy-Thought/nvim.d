@@ -1,7 +1,7 @@
 { config, optionalString, ... }:
 let
-  themesDir = config.snowflake.themesDir;
-  acs = config.modules.themes.active;
+  active = config.modules.themes.active;
+  themesDir = "${config.snowflake.themesDir}/${active}";
 in ''
   (import-macros {: pack
                   : pack! : unpack!} :macros.pack)
@@ -18,8 +18,8 @@ in ''
   (pack! "Olical/conjure")
 
   ;; Aesthetic Dependencies:
-  ${optionalString (acs != null)
-  (builtins.readFile "${themesDir}/${acs}/config/nvim/pack.fnl")}
+  ${optionalString (active != null)
+  (builtins.readFile "${themesDir}/config/nvim/pack.fnl")}
 
   (pack! "akinsho/bufferline.nvim" {:req "bufferline"
                                     :requires ["kyazdani42/nvim-web-devicons"]})

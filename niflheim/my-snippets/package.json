@@ -1,0 +1,102 @@
+{
+  "name": "my-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": ["plaintext", "markdown", "tex", "html", "global"],
+        "path": "./snippets/global.json"
+      },
+      {
+        "language": "c",
+        "path": "./snippets/c.json"
+      },
+      {
+        "language": "cpp",
+        "path": "./snippets/cpp.json"
+      },
+      {
+        "language": "elixir",
+        "path": "./snippets/elixir.json"
+      },
+      {
+        "language": "fennel",
+        "path": "./snippets/fennel.json"
+      },
+      {
+        "language": "flutter",
+        "path": "./snippets/frameworks/flutter.json"
+      },
+      {
+        "language": "go",
+        "path": "./snippets/go.json"
+      },
+      {
+        "language": "haskell",
+        "path": "./snippets/haskell.json"
+      },
+      {
+        "language": ["plaintex", "tex"],
+        "path": "./snippets/latex.json"
+      },
+      {
+        "language": "lua",
+        "path": "./snippets/lua.json"
+      },
+      {
+        "language": ["markdown", "rmd"],
+        "path": "./snippets/markdown.json"
+      },
+      {
+        "language": "nix",
+        "path": "./snippets/nix.json"
+      },
+      {
+        "language": "rust",
+        "path": "./snippets/rust.json"
+      },
+      {
+        "language": "scala",
+        "path": "./snippets/scala.json"
+      },
+      {
+        "language": ["shellscript", "shell", "sh"],
+        "path": "./snippets/shell.json"
+      },
+      {
+        "language": ["html", "jade", "pug", "eruby"],
+        "path": "./snippets/html.json"
+      },
+      {
+        "language": ["css", "scss", "sass", "less", "stylus"],
+        "path": "./snippets/css.json"
+      },
+      {
+        "language": ["javascript", "javascriptreact", "vue"],
+        "path": "./snippets/javascript/javascript.json"
+      },
+      {
+        "language": ["typescript", "typescriptreact"],
+        "path": "./snippets/javascript/typescript.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/python.json"
+      },
+      {
+        "language": "kotlin",
+        "path": "./snippets/kotlin.json"
+      },
+      {
+        "language": "org",
+        "path": "./snippets/org.json"
+      },
+      {
+        "language": "norg",
+        "path": "./snippets/norg.json"
+      }
+    ]
+  }
+}

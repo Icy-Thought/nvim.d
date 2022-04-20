@@ -201,6 +201,8 @@ for _, lsp in ipairs(servers) do
             texlab = {
                 build = {
                     args = {
+                        "-X",
+                        "compile",
                         "%f",
                         "--synctex",
                         "--keep-logs",
