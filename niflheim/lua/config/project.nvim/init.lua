@@ -8,7 +8,15 @@ project.setup({
     ignore_lsp = {},
     manual_mode = false,
     on_config_done = nil,
-    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+    patterns = {
+        ".git",
+        "_darcs",
+        ".hg",
+        ".bzr",
+        ".svn",
+        "Makefile",
+        "package.json",
+    },
     show_hidden = false,
     silent_chdir = true,
 })

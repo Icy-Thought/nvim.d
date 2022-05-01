@@ -1,6 +1,6 @@
 local web_devicons = prequire("nvim-web-devicons")
 
-web_devicons.set_icon {
+web_devicons.set_icon({
     rs = {
         icon = "",
         color = "#d28445",
@@ -60,5 +60,5 @@ web_devicons.set_icon {
         icon = "",
         color = "#689FB6",
         name = "HCL",
-    }
-}
+    },
+})

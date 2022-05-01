@@ -42,10 +42,10 @@ end
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true, buffer = bufnr }
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
+vim.keymap.set("n", "<C-e>", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+vim.keymap.set("n", "<C-l>", vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -60,19 +60,13 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set(
-        "n",
-        "<space>wl",
-        vim.pretty_print(vim.lsp.buf.list_workspace_folders),
-        opts
-    )
-    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<C-d>", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "<C-b>", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "<space>f", vim.lsp.buf.formatting, opts)
+
+    --  Allow null-ls to handle formatting
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
 end
 
 -- Add additional capabilities supported by nvim-cmp
@@ -86,6 +80,8 @@ capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 lspconfig.hls.setup({
     on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "haskell-language-server-wrapper", "--lsp" },
     settings = {
         haskell = {
             formattingProvider = "stylish-haskell",
@@ -95,7 +91,5 @@ lspconfig.hls.setup({
 
 lspconfig.rnix.setup({
     on_attach = on_attach,
-    settings = {
-        formattingProvider = "nixfmt",
-    },
+    capabilities = capabilities,
 })

@@ -1,18 +1,18 @@
 local octo = prequire("octo")
 
 octo.setup({
-    default_remote = {"upstream", "origin"};
-    reaction_viewer_hint_icon = "";
-    user_icon = " ";
-    timeline_marker = "";
-    timeline_indent = "2";
-    right_bubble_delimiter = "";
-    left_bubble_delimiter = "";
-    github_hostname = "";
-    snippet_context_lines = 4;
+    default_remote = { "upstream", "origin" },
+    reaction_viewer_hint_icon = "",
+    user_icon = " ",
+    timeline_marker = "",
+    timeline_indent = "2",
+    right_bubble_delimiter = "",
+    left_bubble_delimiter = "",
+    github_hostname = "",
+    snippet_context_lines = 4,
     file_panel = {
         size = 10,
-        use_icons = true
+        use_icons = true,
     },
     mappings = {
         issue = {
@@ -122,6 +122,6 @@ octo.setup({
             select_prev_entry = "[q",
             close_review_tab = "<C-c>",
             toggle_viewed = "<leader><space>",
-        }
-    }
+        },
+    },
 })

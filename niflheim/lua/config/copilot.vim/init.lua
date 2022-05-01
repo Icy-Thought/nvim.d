@@ -7,6 +7,6 @@ vim.g.copilot_filetypes = {
     python = true,
     lua = true,
     rust = true,
-    html = true;
+    html = true,
     javascript = true,
 }

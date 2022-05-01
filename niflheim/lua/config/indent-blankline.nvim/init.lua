@@ -7,7 +7,7 @@ vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 
-indent_blankline.setup {
+indent_blankline.setup({
     char = "│",
     space_char_blankline = " ",
     show_first_indent_level = true,
@@ -48,4 +48,4 @@ indent_blankline.setup {
         "var",
         "import",
     },
-}
+})

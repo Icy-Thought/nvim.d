@@ -1,11 +1,11 @@
 local spectre = prequire("spectre")
 
 local sed_args = nil
-if vim.fn.has "mac" == 1 then
-  sed_args = { "-I", "" }
+if vim.fn.has("mac") == 1 then
+    sed_args = { "-I", "" }
 end
 
-spectre.setup {
+spectre.setup({
     color_devicons = true,
     highlight = {
         ui = "String",
@@ -127,4 +127,4 @@ spectre.setup {
     replace_vim_cmd = "cdo",
     is_open_target_win = true,
     is_insert_mode = false,
-}
+})

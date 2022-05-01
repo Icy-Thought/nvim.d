@@ -23,4 +23,14 @@ in with pkgs; {
       sha256 = "JTldjJz5XnG9bgPfAYvjUaHYm0PtJ0MiDBQ9DfjSTQ8=";
     };
   };
+  latex-snippets = buildPlugin rec {
+    pname = "luasnip-latex-snippets.nvim";
+    version = "2021-12-18";
+    src = pkgs.fetchFromGitHub {
+      owner = "iurimateus";
+      repo = pname;
+      rev = "536aa5636fdde37847f59ac332b5e8ea8c10e9ed";
+      sha256 = "/PFT9PYikdCOxyIhka8dghDZObjES9pdKOUKjjzA9pc=";
+    };
+  };
 }

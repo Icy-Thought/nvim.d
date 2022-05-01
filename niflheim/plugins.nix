@@ -8,6 +8,12 @@ let
     config = readLuaFile "lua/config/${plugin.pname}/init";
   };
 in with plugins; [
+  # Startup
+  {
+    plugin = impatient-nvim;
+    config = "lua require('impatient')";
+  }
+
   # UI
   (plugWithLuaCfg dashboard-nvim)
   (plugWithLuaCfg nvim-colorizer-lua)
@@ -46,7 +52,6 @@ in with plugins; [
   (plugWithLuaCfg nvim-cmp)
 
   # Miscellaneous
-  (plugWithLuaCfg auto-session)
   (plugWithLuaCfg comment-nvim)
   (plugWithLuaCfg copilot-vim)
   (plugWithLuaCfg indent-blankline-nvim)
@@ -54,4 +59,6 @@ in with plugins; [
   (plugWithLuaCfg nvim-tree-lua)
   (plugWithLuaCfg markdown-preview-nvim)
   (plugWithLuaCfg todo-comments-nvim)
+  (plugWithLuaCfg vimtex)
+  latex-snippets
 ]

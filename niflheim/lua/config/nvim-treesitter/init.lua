@@ -1,7 +1,7 @@
 local configs = prequire("nvim-treesitter.configs")
 
-configs.setup {
-    ensure_installed = "maintained",
+configs.setup({
+    ensure_installed = { "c", "haskell", "lua", "nix", "python", "rust" },
     sync_install = false,
     ignore_install = {},
     autopairs = {
@@ -20,4 +20,4 @@ configs.setup {
         enable = true,
         enable_autocmd = false,
     },
-}
+})
