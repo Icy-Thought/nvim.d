@@ -1,7 +1,7 @@
 ![Niflheim](../assets/niflheim.png)
 
 # Table of Contents
-- [Greetings from NVIM! 🌒](#greetings-from-nvim----)
+- [Greetings from NVIM! 🌒](#greetings-from-nvim-)
   * [Future Announcement](#future-announcement)
   * [Structure](#structure)
 - [Sections](#sections)
