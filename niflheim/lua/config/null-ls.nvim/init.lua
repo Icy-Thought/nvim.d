@@ -33,6 +33,7 @@ null_ls.setup({
         diagnostics.shellcheck,
         diagnostics.markdownlint.with({
             filetypes = { "markdown" },
+            command = "markdownlint-cli2",
         }),
         diagnostics.vale.with({
             filetypes = { "markdown" },

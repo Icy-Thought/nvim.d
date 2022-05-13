@@ -1,14 +1,18 @@
-local options = {
+local opts = {
+    autoread = true,
     backup = false,
     clipboard = "unnamedplus",
     cmdheight = 2,
     completeopt = { "menuone", "noselect" },
-    conceallevel = 0,
+    conceallevel = 1,
     cursorline = true,
     expandtab = true,
     fileencoding = "utf-8",
+    gdefault = true,
     hlsearch = true,
     ignorecase = true,
+    lazyredraw = true,
+    magic = true,
     mouse = "a",
     number = true,
     numberwidth = 4,
@@ -23,6 +27,7 @@ local options = {
     smartcase = true,
     smartindent = true,
     softtabstop = 4,
+    spell = false,
     splitbelow = true,
     splitright = true,
     swapfile = false,
@@ -35,11 +40,13 @@ local options = {
 }
 
 vim.opt.shortmess:append("c")
+vim.opt.diffopt:append({ "internal", "algorithm:patience" })
 
-for k, v in pairs(options) do
+for k, v in pairs(opts) do
     vim.opt[k] = v
 end
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
-vim.cmd([[set iskeyword+=-]])
 vim.cmd([[au BufEnter * set fo-=c fo-=r fo-=o]])
+vim.cmd([[au BufRead,BufNewFile *.md setlocal textwidth=80 fo+=t]])
+vim.cmd([[set iskeyword+=-]])
