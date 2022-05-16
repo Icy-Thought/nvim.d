@@ -154,7 +154,7 @@
 (config.rnix.setup 
   (deep-merge 
     global-options
-    {:settings {:formattingProvider "nixfmt"}}))
+    {:settings {:formattingProvider "alejandra"}}))
 ;; Bash
 (config.bashls.setup global-options)
 ;; Python

@@ -1,5 +1,8 @@
-{ config, optionalString, ... }:
-let
+{
+  config,
+  optionalString,
+  ...
+}: let
   active = config.modules.themes.active;
   themesDir = "${config.snowflake.themesDir}/${active}";
 in ''
@@ -19,7 +22,7 @@ in ''
 
   ;; Aesthetic Dependencies:
   ${optionalString (active != null)
-  (builtins.readFile "${themesDir}/config/nvim/pack.fnl")}
+    (builtins.readFile "${themesDir}/config/nvim/pack.fnl")}
 
   (pack! "akinsho/bufferline.nvim" {:req "bufferline"
                                     :requires ["kyazdani42/nvim-web-devicons"]})
