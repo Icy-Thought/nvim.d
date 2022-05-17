@@ -39,7 +39,7 @@ local opts = {
     writebackup = false,
 }
 
-vim.opt.shortmess:append("c")
+vim.opt.shortmess:append({ c = true })
 vim.opt.diffopt:append({ "internal", "algorithm:patience" })
 
 for k, v in pairs(opts) do
