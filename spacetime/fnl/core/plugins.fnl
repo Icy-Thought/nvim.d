@@ -31,7 +31,7 @@
     (use! :gelguy/wilder.nvim
           :module "../modules/wilder.fnl") ; TODO: add fzy-lua-native + cpsm deps.
     (use! :lukas-reineke/indent-blankline.nvim
-          :module "../modules/indent-blankline.fnl")
+          :module "../modules/blankline.fnl")
 
     ;; Toolset
     (use! :kyazdani42/nvim-tree.lua
