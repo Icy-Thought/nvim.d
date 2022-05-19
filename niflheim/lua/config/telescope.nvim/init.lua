@@ -1,4 +1,4 @@
-local telescope = prequire("telescope")
+local telescope = require("telescope")
 
 telescope.setup({
     defaults = {
@@ -59,9 +59,14 @@ telescope.setup({
             show_unindexed = true,
             ignore_patterns = { "*.git/*", "*/tmp/*" },
         },
+        project = {
+            hidden_files = true,
+            theme = "dropdown",
+        },
     },
 })
 
 telescope.load_extension("fzf")
 telescope.load_extension("frecency")
 telescope.load_extension("file_browser")
+telescope.load_extension("project")

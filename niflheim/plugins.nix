@@ -1,49 +1,34 @@
 plugins: let
-  readFile = file: ext: builtins.readFile (./. + "/${file}.${ext}");
-  readLuaFile = file: (readFile file "lua");
-  plugWithLuaCfg = plugin: {
+  readLuaFile = file: builtins.readFile (./. + "/${file}.lua");
+  plugWithCfg = plugin: {
     inherit plugin;
     type = "lua";
     config = readLuaFile "lua/config/${plugin.pname}/init";
   };
+  initPlug = plugin: pcall: {
+    plugins = plugin;
+    config = "require('${pcall}').setup();";
+  };
 in
   with plugins; [
-    # Startup
-    {
-      plugin = impatient-nvim;
-      config = "lua require('impatient')";
-    }
+    # Plugins with Configurations
+    (plugWithCfg catppuccin-nvim)
+    # (plugWithCfg kanagawa-nvim)
+    # (plugWithCfg rose-pine)
 
-    # Colorscheme
-    (plugWithLuaCfg catppuccin-nvim)
-    # (plugWithLuaCfg neovim-ayu)
-    # (plugWithLuaCfg kanagawa-nvim)
-    # (plugWithLuaCfg onedarkpro-nvim)
-    # (plugWithLuaCfg rose-pine)
-
-    # UI
-    (plugWithLuaCfg dashboard-nvim)
-    (plugWithLuaCfg nvim-colorizer-lua)
-    (plugWithLuaCfg gitsigns-nvim)
-    (plugWithLuaCfg nvim-web-devicons)
-    (plugWithLuaCfg lualine-nvim)
-    (plugWithLuaCfg bufferline-nvim)
-    (plugWithLuaCfg which-key-nvim)
-    (plugWithLuaCfg wilder-nvim)
+    (plugWithCfg dashboard-nvim)
+    (plugWithCfg lualine-nvim)
+    (plugWithCfg bufferline-nvim)
+    (plugWithCfg which-key-nvim)
+    (plugWithCfg wilder-nvim)
     fzy-lua-native # wilder dep.
 
-    # Utility
-    (plugWithLuaCfg neogit)
-    (plugWithLuaCfg octo-nvim)
-    (plugWithLuaCfg nvim-spectre)
-    (plugWithLuaCfg project-nvim)
-    (plugWithLuaCfg telescope-nvim)
+    (plugWithCfg telescope-nvim)
     telescope-file-browser-nvim
     telescope-frecency-nvim
     telescope-fzf-native-nvim
-    (plugWithLuaCfg toggleterm-nvim)
+    telescope-project-nvim
 
-    # Development
     cmp-nvim-lsp
     cmp-buffer
     cmp-path
@@ -51,21 +36,30 @@ in
     cmp_luasnip
     luasnip
     friendly-snippets
-    (plugWithLuaCfg nvim-treesitter)
+    (plugWithCfg nvim-treesitter)
     nvim-ts-context-commentstring
-    (plugWithLuaCfg null-ls-nvim)
-    (plugWithLuaCfg trouble-nvim)
-    (plugWithLuaCfg nvim-lspconfig)
-    (plugWithLuaCfg nvim-cmp)
+    (plugWithCfg null-ls-nvim)
+    (plugWithCfg nvim-lspconfig)
+    (plugWithCfg nvim-cmp)
 
-    # Miscellaneous
-    (plugWithLuaCfg comment-nvim)
-    (plugWithLuaCfg copilot-vim)
-    (plugWithLuaCfg indent-blankline-nvim)
-    (plugWithLuaCfg nvim-autopairs)
-    (plugWithLuaCfg nvim-tree-lua)
-    (plugWithLuaCfg markdown-preview-nvim)
-    (plugWithLuaCfg todo-comments-nvim)
-    (plugWithLuaCfg vimtex)
+    (plugWithCfg copilot-vim)
+    (plugWithCfg indent-blankline-nvim)
+    (plugWithCfg nvim-tree-lua)
+    (plugWithCfg markdown-preview-nvim)
+    (plugWithCfg todo-comments-nvim)
+    (plugWithCfg vimtex)
     latex-snippets
+
+    # Plugins configured in Nix module
+    ## impatient-nvim
+    nvim-colorizer-lua
+    gitsigns-nvim
+    nvim-web-devicons
+    neogit
+    octo-nvim
+    nvim-spectre
+    toggleterm-nvim
+    comment-nvim
+    trouble-nvim
+    nvim-autopairs
   ]
