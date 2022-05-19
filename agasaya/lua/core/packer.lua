@@ -14,12 +14,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Creds: Ae-Mc/nvim (GitHub)
-local function prequire(plugin_name, setup)
-    local ok, plugin =  pcall(require, plugin_name)
+function prequire(plugin_name, setup)
+    local ok, plugin = pcall(require, plugin_name)
     if ok then
         if type(setup) == "function" then
             setup()
-        elseif type(setup) =="table" then
+        elseif type(setup) == "table" then
             plugin.setup(setup)
         elseif type(setup) == "string" then
             plugin.setup(loadstring(setup))
@@ -28,7 +28,7 @@ local function prequire(plugin_name, setup)
 end
 
 -- Minor Packer-UI customizations
-local packer = require('packer')
+local packer = require("packer")
 
 packer.init({
     display = {
@@ -45,7 +45,7 @@ return packer.startup(function(use)
     use({
         "catppuccin/nvim",
         as = "catppuccin",
-        opt = true,
+        opt = false,
         config = [[ prequire('themes.catppuccin') ]],
     })
 
@@ -96,6 +96,7 @@ return packer.startup(function(use)
     })
     use({
         "gelguy/wilder.nvim",
+        run = ":UpdateRemotePlugins",
         config = [[ prequire('modules.wilder') ]], -- TODO: add fzy-lua-native + cpsm deps.
     })
     use({
@@ -111,18 +112,20 @@ return packer.startup(function(use)
     })
     use({
         "nvim-telescope/telescope.nvim",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-            "nvim-telescope/telescope-file-browser.nvim",
-            "nvim-telescope/telescope-frecency.nvim",
-            "nvim-telescope/telescope-project.nvim",
-        },
+        requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('modules.telescope') ]],
     })
+    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+    use({ "nvim-telescope/telescope-file-browser.nvim" })
+    use({
+        "nvim-telescope/telescope-frecency.nvim",
+        requires = { "tami5/sqlite.lua" },
+    })
+    use({ "nvim-telescope/telescope-project.nvim" })
     use({
         "folke/which-key.nvim",
-        config = [[ prequire('modules.which-key') ]],
+        config = [[ prequire('modules.which-key')
+                    prequire('keymaps.which-key') ]],
     })
     use({
         "akinsho/nvim-toggleterm.lua",
@@ -164,17 +167,16 @@ return packer.startup(function(use)
     })
     use({
         "hrsh7th/nvim-cmp",
-        requires = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            "L3MON4D3/LuaSnip",
-            "rafamadriz/friendly-snippets",
-            "saadparwaiz1/cmp_luasnip",
-        },
+        requires = { "neovim/nvim-lspconfig" },
         config = [[ prequire('modules.cmp') ]],
     })
+    use({ "hrsh7th/cmp-nvim-lsp" })
+    use({ "hrsh7th/cmp-buffer" })
+    use({ "hrsh7th/cmp-path" })
+    use({ "L3MON4D3/LuaSnip" })
+    use({ "rafamadriz/friendly-snippets" })
+    use({ "saadparwaiz1/cmp_luasnip" })
+
     -- use {'github/copilot.vim'}
     use({
         "nvim-treesitter/nvim-treesitter",
@@ -210,4 +212,9 @@ return packer.startup(function(use)
         requires = { "L3MON4D3/LuaSnip", "lervag/vimtex" },
         ft = "tex",
     })
+
+    -- Allow Packer to auto-compile nvim config
+    if packer_bootstrap then
+        packer.sync()
+    end
 end)

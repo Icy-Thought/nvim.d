@@ -2,7 +2,7 @@ vim.g.dashboard_footer_icon = "🐬 "
 vim.g.dashboard_default_executive = "telescope"
 
 local config_dir = vim.fn.stdpath("config")
-local dasHead = vim.fn.systemlist("cat" .. config_dir .. "./dasHead.txt")
+local dasHead = vim.fn.systemlist("cat " .. config_dir .. "/dasHead.txt")
 vim.g.dashboard_custom_header = dasHead
 
 vim.g.dashboard_custom_section = {

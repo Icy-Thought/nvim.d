@@ -1,4 +1,4 @@
-local blankline = require("indent_blankline")
+local indent_blankline = prequire("indent_blankline")
 
 -- Lazy load indent-blankline
 vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
@@ -7,23 +7,27 @@ vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 
-blankline.setup({
+indent_blankline.setup({
     char = "│",
-    char_list_blankline = { "|", "┊", "┆", "¦" },
     space_char_blankline = " ",
     show_first_indent_level = true,
     show_trailing_blankline_indent = false,
     filetype_exclude = {
-        "",
+        "startify",
+        "dashboard",
+        "git",
+        "gitcommit",
+        "help",
+        "json",
+        "log",
+        "markdown",
         "NvimTree",
         "Octo",
         "TelescopePrompt",
         "Trouble",
-        "dashboard",
-        "git",
-        "help",
-        "markdown",
+        "txt",
         "undotree",
+        "",
     },
     buftype_exclude = { "terminal", "nofile" },
     show_current_context = true,

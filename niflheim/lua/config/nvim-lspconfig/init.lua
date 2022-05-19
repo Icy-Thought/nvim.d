@@ -1,4 +1,4 @@
-local lspconfig = require("lspconfig")
+local lspconfig = prequire("lspconfig")
 
 local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -50,6 +50,10 @@ vim.keymap.set("n", "<C-l>", vim.diagnostic.setloclist, opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+    -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -61,12 +65,12 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
     --  Allow null-ls to handle formatting
-    client.server_capabilities.document_formatting = false
-    client.server_capabilities.document_range_formatting = false
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
 end
 
 -- Add additional capabilities supported by nvim-cmp
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
+local cmp_nvim_lsp = prequire("cmp_nvim_lsp")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)

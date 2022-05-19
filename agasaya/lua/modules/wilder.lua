@@ -12,8 +12,14 @@ wilder.set_option("pipeline", {
                     return { "rg", "-tf" }
                 end
             end,
-            dir_command = { "fd", "-td" },
-            filters = { "cpsm_filter" },
+            dir_command = function(ctx, arg)
+                if string.find(arg, ".") ~= nil then
+                    return { "fd", "-tf", "-H" }
+                else
+                    return { "fd", "-tf" }
+                end
+            end,
+            filters = { "fuzzy_filter", "difflib_sorter" },
         }),
         wilder.substitute_pipeline({
             pipeline = wilder.python_search_pipeline({

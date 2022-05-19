@@ -1,4 +1,69 @@
-local which_key = require("which-key")
+local which_key = prequire("which-key")
+
+local setup = {
+    plugins = {
+        marks = true,
+        registers = true,
+        spelling = {
+            enabled = true,
+            suggestions = 20,
+        },
+        presets = {
+            operators = false,
+            motions = true,
+            text_objects = true,
+            windows = true,
+            nav = true,
+            z = true,
+            g = true,
+        },
+    },
+    operators = { gc = "Comments" },
+    key_labels = {
+        ["<space>"] = "SPC",
+        ["<cr>"] = "RET",
+        ["<tab>"] = "TAB",
+    },
+    icons = {
+        breadcrumb = "»",
+        separator = "➜",
+        group = "+",
+    },
+    popup_mappings = {
+        scroll_down = "<c-d>",
+        scroll_up = "<c-u>",
+    },
+    window = {
+        border = "rounded",
+        position = "bottom",
+        margin = { 1, 0, 1, 0 },
+        padding = { 1, 1, 1, 1 },
+        winblend = 0,
+    },
+    layout = {
+        height = { min = 4, max = 25 },
+        width = { min = 20, max = 50 },
+        spacing = 3,
+        align = "left",
+    },
+    ignore_missing = true,
+    hidden = {
+        "<silent>",
+        "<cmd>",
+        "<Cmd>",
+        "<CR>",
+        "call",
+        "lua",
+        "^:",
+        "^ ",
+    },
+    show_help = true,
+    triggers = "auto",
+    triggers_blacklist = {
+        i = { "j", "k" },
+        v = { "j", "k" },
+    },
+}
 
 local opts = {
     mode = "n",
@@ -26,7 +91,7 @@ local mappings = {
     f = {
         name = "Find",
         f = { "<CMD>Telescope file_browser<CR>", "Browse Files" },
-        r = { "<CMD>Telescope frecency<CR>", "List Frequent File" },
+        r = { "<CMD>Telescope frequency<CR>", "List Frequent File" },
         R = { "<CMD>Telescope oldfiles<CR>", "Open Recent File" },
         s = { "<CMD>w!<CR>", "Save" },
     },
@@ -65,7 +130,7 @@ local mappings = {
             "<CMD>Telescope lsp_workspace_diagnostics<CR>",
             "Workspace Diagnostics",
         },
-        f = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
+        f = { "<CMD>lua vim.lsp.buf.formatting()<CR>", "Format" },
         i = { "<CMD>LspInfo<CR>", "Info" },
         I = { "<CMD>LspInstallInfo<CR>", "Installer Info" },
         j = {
@@ -133,5 +198,6 @@ local vmappings = {
     },
 }
 
+which_key.setup(setup)
 which_key.register(mappings, opts)
 which_key.register(vmappings, vopts)

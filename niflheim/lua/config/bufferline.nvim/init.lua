@@ -1,10 +1,10 @@
-local bufferline = require("bufferline")
+local bufferline = prequire("bufferline")
 
 bufferline.setup({
     options = {
         numbers = "none",
-        close_command = "bdelete! %d",
-        right_mouse_command = "bdelete! %d",
+        close_command = "Bdelete! %d",
+        right_mouse_command = "Bdelete! %d",
         left_mouse_command = "buffer %d",
         middle_mouse_command = nil,
         -- NOTE: plugin is designed with this icon in mind -> do not change.
