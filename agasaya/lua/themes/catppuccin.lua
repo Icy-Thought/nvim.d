@@ -1,7 +1,7 @@
 local catppuccin = require("catppuccin")
 
 catppuccin.setup({
-    transparent_background = true,
+    transparent_background = false,
     term_colors = true,
     styles = {
         comments = "italic",
@@ -39,10 +39,10 @@ catppuccin.setup({
         which_key = true,
         indent_blankline = {
             enabled = true,
-            colored_indent_levels = false,
+            colored_indent_levels = true,
         },
         dashboard = true,
-        neogit = false,
+        neogit = true,
         vim_sneak = false,
         fern = false,
         barbar = false,

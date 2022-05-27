@@ -7,16 +7,16 @@ wilder.set_option("pipeline", {
         wilder.python_file_finder_pipeline({
             file_command = function(ctx, arg)
                 if string.find(arg, ".") ~= nil then
-                    return { "rg", "-tf", "-H" }
+                    return { "rg", "--files", "--hidden" }
                 else
-                    return { "rg", "-tf" }
+                    return { "rg", "--files" }
                 end
             end,
             dir_command = function(ctx, arg)
                 if string.find(arg, ".") ~= nil then
-                    return { "fd", "-tf", "-H" }
+                    return { "fd", "-td", "-H" }
                 else
-                    return { "fd", "-tf" }
+                    return { "fd", "-td" }
                 end
             end,
             filters = { "fuzzy_filter", "difflib_sorter" },
@@ -54,6 +54,11 @@ local highlighters = {
 
 local popupmenu_renderer = wilder.popupmenu_renderer(
     wilder.popupmenu_border_theme({
+        highlights = {
+            default = "Normal",
+            border = "NormalFloat",
+            accent = wilder.make_hl("WilderAccent", "Normal", "TabLineSel"),
+        },
         border = "rounded",
         empty_message = wilder.popupmenu_empty_message_with_spinner(),
         highlighter = highlighters,

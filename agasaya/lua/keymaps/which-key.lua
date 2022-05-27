@@ -1,4 +1,4 @@
-local which_key = require("which-key")
+local wk = require("which-key")
 
 local opts = {
     mode = "n",
@@ -9,10 +9,10 @@ local opts = {
     nowait = true,
 }
 
-local mappings = {
+local maps = {
     ["/"] = { "<CMD>Telescope live_grep<CR>", "Search Project" },
     [" "] = { "<CMD>Telescope find_files<CR>", "Find File" },
-    ["d"] = { "<CMD>Dashboard<CR>", "Dashboard" },
+    ["d"] = { "<CMD>Alpha<CR>", "Launch Alpha" },
     ["e"] = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
     ["n"] = { "<CMD>nohlsearch<CR>", "No Highlight" },
     b = {
@@ -28,7 +28,7 @@ local mappings = {
         f = { "<CMD>Telescope file_browser<CR>", "Browse Files" },
         r = { "<CMD>Telescope frecency<CR>", "List Frequent File" },
         R = { "<CMD>Telescope oldfiles<CR>", "Open Recent File" },
-        s = { "<CMD>w!<CR>", "Save" },
+        s = { "<CMD>w!<CR>", "Save Buffer" },
     },
     g = {
         name = "Git",
@@ -93,11 +93,11 @@ local mappings = {
     },
     p = {
         name = "Project",
-        p = { "<CMD>Telescope projects<CR>", "Select Project" },
+        p = { "<CMD>Telescope project<CR>", "Select Project" },
         t = { "<CMD>TodoTelescope<CR>", "List Project Tasks" },
     },
     q = {
-        d = { "<CMD>%bd|Dashboard<CR>", "Close All Buffers" },
+        d = { "<CMD>%bd|Alpha<CR>", "Close All Buffers" },
         q = { "<CMD>q!<CR>", "Quit Nvim Without Saving" },
     },
     t = {
@@ -122,7 +122,7 @@ local vopts = {
     nowait = true,
 }
 
-local vmappings = {
+local vmaps = {
     ["/"] = {
         "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
         "Comment Linewise",
@@ -133,5 +133,5 @@ local vmappings = {
     },
 }
 
-which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
+wk.register(maps, opts)
+wk.register(vmaps, vopts)

@@ -69,9 +69,14 @@ return packer.startup(function(use)
     })
 
     -- Aesthetics
+    -- use({
+    --     "ChristianChiarulli/dashboard-nvim",
+    --     config = [[ prequire('modules.dashboard') ]],
+    -- })
     use({
-        "ChristianChiarulli/dashboard-nvim",
-        config = [[ prequire('modules.dashboard') ]],
+        "goolord/alpha-nvim",
+        requires = { "kyazdani42/nvim-web-devicons" },
+        config = [[ prequire('modules.alpha') ]],
     })
     use({
         "norcalli/nvim-colorizer.lua",
@@ -97,6 +102,7 @@ return packer.startup(function(use)
     use({
         "gelguy/wilder.nvim",
         run = ":UpdateRemotePlugins",
+        requires = { "romgrk/fzy-lua-native" },
         config = [[ prequire('modules.wilder') ]], -- TODO: add fzy-lua-native + cpsm deps.
     })
     use({
@@ -106,11 +112,6 @@ return packer.startup(function(use)
 
     -- Toolset
     use({
-        "kyazdani42/nvim-tree.lua",
-        requires = { "kyazdani42/nvim-web-devicons" },
-        config = [[ prequire('nvim-tree', {}) ]],
-    })
-    use({
         "nvim-telescope/telescope.nvim",
         requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('modules.telescope') ]],
@@ -119,9 +120,17 @@ return packer.startup(function(use)
     use({ "nvim-telescope/telescope-file-browser.nvim" })
     use({
         "nvim-telescope/telescope-frecency.nvim",
-        requires = { "tami5/sqlite.lua" },
+        requires = {
+            "tami5/sqlite.lua",
+            "kyazdani42/nvim-web-devicons",
+        },
     })
     use({ "nvim-telescope/telescope-project.nvim" })
+    use({
+        "kyazdani42/nvim-tree.lua",
+        requires = { "kyazdani42/nvim-web-devicons" },
+        config = [[ prequire('nvim-tree', {}) ]],
+    })
     use({
         "folke/which-key.nvim",
         config = [[ prequire('modules.which-key')
@@ -189,7 +198,7 @@ return packer.startup(function(use)
     })
     use({
         "windwp/nvim-autopairs",
-        config = [[ prequire('nvim-autopairs', {}) ]], -- TODO: use config if default = terrible..
+        config = [[ prequire('nvim-autopairs', {}) ]],
     })
     use({
         "folke/todo-comments.nvim",

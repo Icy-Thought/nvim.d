@@ -1,7 +1,16 @@
 local treesitter = require("nvim-treesitter.configs")
 
 treesitter.setup({
-    ensure_installed = { "c", "haskell", "lua", "nix", "python", "rust" },
+    ensure_installed = {
+        "c",
+        "haskell",
+        "latex",
+        "lua",
+        "markdown",
+        "nix",
+        "python",
+        "rust",
+    },
     sync_install = false,
     ignore_install = {},
     autopairs = {

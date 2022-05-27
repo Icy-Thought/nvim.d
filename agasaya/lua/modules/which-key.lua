@@ -1,6 +1,6 @@
-local which_key = require("which-key")
+local wk = require("which-key")
 
-which_key.setup = {
+local setup = {
     key_labels = {
         ["<space>"] = "SPC",
         ["<cr>"] = "RET",
@@ -14,3 +14,5 @@ which_key.setup = {
         winblend = 0,
     },
 }
+
+wk.setup(setup)
