@@ -2,6 +2,7 @@
 vim.g.tex_conceal = ""
 vim.g.vimtex_fold_manual = 1
 vim.g.tex_comment_nospell = 1
+vim.g.vimtex_syntax_enabled = 0
 
 -- Compile & View methods
 vim.g.vimtex_compiler_progname = "nvr"
