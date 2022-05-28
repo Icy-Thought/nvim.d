@@ -1,4 +1,4 @@
-vim.cmd("set guifont=VictorMono\\ Nerd\\ Font:h12:sb")
+vim.o.guifont = "VictorMono Nerd Font:h9:sb"
 
 -- general
 vim.g.neovide_refresh_rate = 60
