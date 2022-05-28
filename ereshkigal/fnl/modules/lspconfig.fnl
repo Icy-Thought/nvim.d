@@ -70,6 +70,3 @@
                       :capabilities capabilities
                       :cmd ["haskell-language-server-wrapper" "--lsp"]
                       :settings [:haskell {:formattingProvider "stylish-haskell"}]})
-
-(lspconfig.rnix.setup {:on_attach on-attach 
-                       :capabilities capabilities})

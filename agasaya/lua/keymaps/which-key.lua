@@ -69,15 +69,15 @@ local maps = {
         i = { "<CMD>LspInfo<CR>", "Info" },
         I = { "<CMD>LspInstallInfo<CR>", "Installer Info" },
         j = {
-            "<CMD>lua vim.lsp.diagnostic.goto_next()<CR>",
+            "<CMD>lua vim.diagnostic.goto_next()<CR>",
             "Next Diagnostic",
         },
         k = {
-            "<CMD>lua vim.lsp.diagnostic.goto_prev()<CR>",
+            "<CMD>lua vim.diagnostic.goto_prev()<CR>",
             "Prev Diagnostic",
         },
         l = { "<CMD>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
-        q = { "<CMD>lua vim.lsp.diagnostic.set_loclist()<CR>", "Quickfix" },
+        q = { "<CMD>lua vim.diagnostic.set_loclist()<CR>", "Quickfix" },
         r = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },
         s = { "<CMD>Telescope lsp_document_symbols<CR>", "Document Symbols" },
         S = {
