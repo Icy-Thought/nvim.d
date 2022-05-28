@@ -1,28 +1,22 @@
-![Niflheim](../assets/niflheim.png)
+![Agasaya](../.assets/agasaya.png)
 
 # Table of Contents
 - [Greetings from NVIM! 🌒](#greetings-from-nvim-)
-  * [Future Announcement](#future-announcement)
-  * [Structure](#structure)
-- [Sections](#sections)
-- [Inspiration](#inspiration)
+- [Sections](##sections)
 
 # Greetings from NVIM! 🌒
-## Future Announcement
-My nvim configuration will be re-written in Fennel. 
-The lisp like syntax is rather appealing compared to Lua. 😏
+Agasaya is a non nix-dependent neovim configuration file that I crafted myself
+and consists mainly of a minimal setup and neovide settings for the sake of
+having a neovim-gui available.
 
-Whenever that occurs -> I have to bid my farewell to our beloved Emacs.
-Why? Because Emacs is not a text editor and what I want is a text editor.
+You might notice that there is a missing `init.lua` file in this folder and the
+reason for that is that I have decided to generate it through `home-manager`
+(Nix) to automate the theme selection process on desktop theme change!
 
-## Structure
-At the time of writing, the Neovim configuration files contained within the `lua` folder mostly consists of the recommended settings mentioned in the `README.md` of the installed plugins.
-Meanwhile the remaining modifications are written by myself + other Neovim users.
-
-# Sections
-Safety feature was added to the first configuration file that attempted to called `local x = require('x)` because of how Nix (Home-Manager) handles the Neovim config.
-
-To explain this, using Neovim through Home-Manager will generate *ONE* large file containing all the plugin configurations placed inside `config/nvim` -> omits the need to re-define it and create a non-useful boilerplate block.
+## Sections
+Instead of directly using `require('xyz')`, I have instead chosen to write a
+function which requires only when the plugin exists, otherwise it returns
+nothing.
 
 ```lua
 local function prequire(...)
@@ -31,9 +25,3 @@ local function prequire(...)
     return nil
 end
 ```
-
-# Inspiration
-- [Ayamir/nvimdots](https:github.com/ayamir/nvimdots)
-- [NTBBloodbath/doom-nvim](https:github.com/NTBBloodbath/doom-nvim)
-- [ABZCoding/lvim](https:github.com/abzcoding/lvim)
-- [LunarVim/Neovim-from-scratch](https:github.com/LunarVim/Neovim-from-scratch)
