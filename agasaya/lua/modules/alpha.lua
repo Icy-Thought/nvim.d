@@ -11,16 +11,15 @@ dashboard.section.buttons.val = {
         " Change Colorscheme",
         ":Telescope colorscheme<CR>"
     ),
-    dashboard.button("SPC f n", "  New File", ":ene <BAR> startinsert<CR>"),
     dashboard.button(
         "SPC f r",
         "  File Frecency",
         ":Telescope frecency<CR>"
     ),
-    dashboard.button("SPC f e", "  File History", ":Telescope oldfiles<CR>"),
     dashboard.button("SPC f f", "  Find File", ":Telescope find_files<CR>"),
-    dashboard.button("SPC f w", "  Find word", ":Telescope live_grep<CR>"),
+    dashboard.button("SPC f n", "  New File", ":ene <BAR> startinsert<CR>"),
     dashboard.button("SPC f p", "  Find Project", ":Telescope project<CR>"),
+    dashboard.button("SPC u u", "  Update Plugins", ":PackerUpdate<CR>"),
     dashboard.button("SPC q q", "  Quit", ":q<CR>"),
 }
 
