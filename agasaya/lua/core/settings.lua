@@ -1,5 +1,4 @@
 local opts = {
-    autochdir = true,
     autoread = true,
     backup = false,
     clipboard = "unnamedplus",

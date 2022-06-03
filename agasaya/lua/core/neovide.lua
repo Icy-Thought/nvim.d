@@ -13,3 +13,13 @@ vim.g.neovide_cursor_vfx_opacity = 200.0
 vim.g.neovide_cursor_vfx_particle_density = 5.0
 vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
 vim.g.neovide_cursor_vfx_particle_speed = 20.0
+
+-- Define font-resize behaviour
+-- local keymap = vim.keymap.set
+-- local opts = { noremap = true, silent = true }
+--
+-- function ResizeFont()
+-- end
+--
+-- keymap("n", "<C-+>", "<CMD>lua ResizeFont(1)<CR>", opts)
+-- keymap("n", "<C-->", "<CMD>lua ResizeFont(-1)<CR>", opts)

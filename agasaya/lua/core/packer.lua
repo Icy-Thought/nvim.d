@@ -113,16 +113,18 @@ return packer.startup(function(use)
     -- Toolset
     use({
         "nvim-telescope/telescope.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        requires = {
+            "nvim-lua/plenary.nvim",
+            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+            {
+                "nvim-telescope/telescope-frecency.nvim",
+                requires = { "tami5/sqlite.lua" },
+            },
+            "nvim-telescope/telescope-file-browser.nvim",
+            "nvim-telescope/telescope-project.nvim",
+        },
         config = [[ prequire('modules.telescope') ]],
     })
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-    use({ "nvim-telescope/telescope-file-browser.nvim" })
-    use({
-        "nvim-telescope/telescope-frecency.nvim",
-        requires = { "tami5/sqlite.lua" },
-    })
-    use({ "nvim-telescope/telescope-project.nvim" })
     use({
         "kyazdani42/nvim-tree.lua",
         requires = { "kyazdani42/nvim-web-devicons" },
@@ -156,7 +158,8 @@ return packer.startup(function(use)
         config = [[ prequire('spectre', {}) ]],
     })
 
-    -- Editor
+    -- Language Server Protocol (LSP)
+    -- use {'github/copilot.vim'}
     use({
         "neovim/nvim-lspconfig",
         config = [[ prequire('modules.lspconfig') ]],
@@ -173,17 +176,25 @@ return packer.startup(function(use)
     })
     use({
         "hrsh7th/nvim-cmp",
-        requires = { "neovim/nvim-lspconfig" },
+        requires = {
+            "neovim/nvim-lspconfig",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "L3MON4D3/LuaSnip",
+            "rafamadriz/friendly-snippets",
+            "saadparwaiz1/cmp_luasnip",
+        },
         config = [[ prequire('modules.cmp') ]],
     })
-    use({ "hrsh7th/cmp-nvim-lsp" })
-    use({ "hrsh7th/cmp-buffer" })
-    use({ "hrsh7th/cmp-path" })
-    use({ "L3MON4D3/LuaSnip" })
-    use({ "rafamadriz/friendly-snippets" })
-    use({ "saadparwaiz1/cmp_luasnip" })
 
-    -- use {'github/copilot.vim'}
+    -- Editor
+    use({
+        "nvim-neorg/neorg",
+        ft = "norg",
+        requires = "nvim-lua/plenary.nvim",
+        config = [[ prequire('neorg', {}) ]],
+    })
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
@@ -215,8 +226,8 @@ return packer.startup(function(use)
     })
     use({
         "iurimateus/luasnip-latex-snippets.nvim",
-        requires = { "L3MON4D3/LuaSnip", "lervag/vimtex" },
         ft = "tex",
+        requires = { "L3MON4D3/LuaSnip", "lervag/vimtex" },
     })
 
     -- Allow Packer to auto-compile nvim config
