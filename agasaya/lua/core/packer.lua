@@ -56,16 +56,16 @@ return packer.startup(function(use)
         config = [[ prequire('themes.ayu') ]],
     })
     use({
+        "rebelot/kanagawa.nvim",
+        as = "rose-pine",
+        opt = true,
+        config = [[ prequire('themes.kanagawa') ]],
+    })
+    use({
         "olimorris/onedarkpro.nvim",
         as = "onedark-pro",
         opt = true,
         config = [[ prequire('themes.onedark-pro') ]],
-    })
-    use({
-        "rose-pine/neovim",
-        as = "rose-pine",
-        opt = true,
-        config = [[ prequire('themes.rose-pine') ]],
     })
 
     -- Aesthetics
