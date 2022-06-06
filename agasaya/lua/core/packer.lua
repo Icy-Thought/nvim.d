@@ -229,6 +229,10 @@ return packer.startup(function(use)
         ft = "tex",
         requires = { "L3MON4D3/LuaSnip", "lervag/vimtex" },
     })
+    use({
+        "Pocco81/TrueZen.nvim",
+        config = [[ prequire('true-zen', {}) ]],
+    })
 
     -- Allow Packer to auto-compile nvim config
     if packer_bootstrap then

@@ -20,16 +20,17 @@ neorg.setup({
                 workspaces = {
                     work = "~/Notes/Neorg/Work",
                     home = "~/Notes/Neorg/Journal",
+                    GTD = "~/Notes/Neorg/GTD",
                 },
                 autochdir = true,
                 autodetect = true,
                 open_last_workspace = true,
-                index = "index.norg",
+                default_workspace = "home",
             },
         },
         ["core.gtd.base"] = {
             config = {
-                workspace = "~/Notes/Neorg/GTD",
+                workspace = "GTD",
             },
         },
         ["core.keybinds"] = {
@@ -43,7 +44,11 @@ neorg.setup({
                 strategy = "nested",
             },
         },
-        ["core.presenter"] = {},
+        ["core.presenter"] = {
+            config = {
+                zen_mode = "truezen",
+            },
+        },
         ["core.norg.qol.toc"] = {
             config = {
                 default_toc_mode = "split",
