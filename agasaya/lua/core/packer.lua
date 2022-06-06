@@ -193,7 +193,7 @@ return packer.startup(function(use)
         "nvim-neorg/neorg",
         ft = "norg",
         requires = "nvim-lua/plenary.nvim",
-        config = [[ prequire('neorg', {}) ]],
+        config = [[ prequire('modules.neorg') ]],
     })
     use({
         "nvim-treesitter/nvim-treesitter",

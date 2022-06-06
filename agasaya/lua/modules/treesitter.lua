@@ -7,6 +7,7 @@ treesitter.setup({
         "latex",
         "lua",
         "markdown",
+        "norg",
         "nix",
         "python",
         "rust",
