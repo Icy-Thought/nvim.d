@@ -9,7 +9,7 @@ dashboard.section.buttons.val = {
     dashboard.button(
         "SPC s c",
         " Change Colorscheme",
-        ":Telescope colorscheme<CR>"
+        ":Telescope themes<CR>"
     ),
     dashboard.button(
         "SPC f r",

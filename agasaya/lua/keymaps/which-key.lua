@@ -52,7 +52,7 @@ local maps = {
         h = { "<CMD>Telescope help_tags<CR>", "Find Help" },
         k = { "<CMD>Telescope keymaps<CR>", "List Keybindings" },
         m = { "<CMD>Telescope man_pages<CR>", "Man Pages" },
-        s = { "<CMD>Telescope colorscheme<CR>", "Change Colorscheme" },
+        s = { "<CMD>Telescope themes<CR>", "Change Colorscheme" },
     },
     l = {
         name = "LSP",

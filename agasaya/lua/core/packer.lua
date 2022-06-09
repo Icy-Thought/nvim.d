@@ -41,38 +41,11 @@ packer.init({
 return packer.startup(function(use)
     use({ "wbthomason/packer.nvim" })
 
-    -- Colorschemes
-    use({
-        "catppuccin/nvim",
-        as = "catppuccin",
-        opt = false,
-        config = [[ prequire('themes.catppuccin') ]],
-    })
-
-    use({
-        "Shatur/neovim-ayu",
-        as = "ayu",
-        opt = true,
-        config = [[ prequire('themes.ayu') ]],
-    })
-    use({
-        "rebelot/kanagawa.nvim",
-        as = "rose-pine",
-        opt = true,
-        config = [[ prequire('themes.kanagawa') ]],
-    })
-    use({
-        "olimorris/onedarkpro.nvim",
-        as = "onedark-pro",
-        opt = true,
-        config = [[ prequire('themes.onedark-pro') ]],
-    })
-
     -- Aesthetics
-    -- use({
-    --     "ChristianChiarulli/dashboard-nvim",
-    --     config = [[ prequire('modules.dashboard') ]],
-    -- })
+    use({
+        "themercorp/themer.lua",
+        config = [[ prequire('themes.themer') ]],
+    })
     use({
         "goolord/alpha-nvim",
         requires = { "kyazdani42/nvim-web-devicons" },
