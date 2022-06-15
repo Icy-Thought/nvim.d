@@ -42,9 +42,15 @@ return packer.startup(function(use)
     use({ "wbthomason/packer.nvim" })
 
     -- Aesthetics
+    -- use({
+    --     "themercorp/themer.lua",
+    --     config = [[ prequire('themes.themer') ]],
+    -- })
+
     use({
-        "themercorp/themer.lua",
-        config = [[ prequire('themes.themer') ]],
+        "catppuccin/nvim",
+        as = "catppuccin",
+        config = [[ prequire('themes.catppuccin') ]],
     })
     use({
         "goolord/alpha-nvim",
@@ -165,6 +171,7 @@ return packer.startup(function(use)
     use({
         "nvim-neorg/neorg",
         ft = "norg",
+        after = "nvim-treesitter",
         requires = "nvim-lua/plenary.nvim",
         config = [[ prequire('modules.neorg') ]],
     })
