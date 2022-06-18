@@ -37,6 +37,11 @@ local kind_icons = {
 }
 
 cmp.setup({
+    enabled = function()
+        return vim.bo.filetype ~= "tex"
+            or vim.fn["vimtex#syntax#in_mathzone"]() ~= 1
+    end,
+    history = true,
     snippet = {
         expand = function(args)
             ls.lsp_expand(args.body)

@@ -91,6 +91,13 @@ local maps = {
         s = { "<CMD>MarkdownPreviewStop<CR>", "Stop Markdown Preview" },
         t = { "<CMD>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
     },
+    o = {
+        name = "Launch X",
+        t = {
+            "<CMD>ToggleTerm size=10 direction=horizontal<CR>",
+            "Horizontal Terminal",
+        },
+    },
     p = {
         name = "Project",
         p = { "<CMD>Telescope project<CR>", "Select Project" },
@@ -110,6 +117,14 @@ local maps = {
         },
         t = { "<CMD>ToggleTerm direction=tab<CR>", "Tab" },
         v = { "<CMD>ToggleTerm size=80 direction=vertical<CR>", "Vertical" },
+    },
+    w = {
+        name = "Buffer Navigation",
+        c = { "<CMD>bd!<CR>", "Close Buffer" },
+        h = { "<c-w>h", "Displace Left" },
+        j = { "<c-w>j", "Displace Downwards" },
+        k = { "<c-w>k", "Displace Upwards" },
+        l = { "<c-w>l", "Displace Right" },
     },
 }
 

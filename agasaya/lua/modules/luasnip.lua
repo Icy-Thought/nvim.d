@@ -5,17 +5,14 @@ local types = require("luasnip.util.types")
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- Load custom lua-snippets
-require("snippets.tex-main")
-require("snippets.tex-math")
+require("snippets.latex")
 
 ls.config.setup({
     enable_autosnippets = true,
     history = true,
-
     delete_check_events = "TextChangedI",
     region_check_events = "CursorMoved",
     updateevents = "TextChanged,TextChangedI,InsertLeave",
-
     ext_opts = {
         [types.choiceNode] = {
             active = {
