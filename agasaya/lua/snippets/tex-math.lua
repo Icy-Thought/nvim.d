@@ -18,11 +18,11 @@ end
 local tex_rightarrow = [[\rightarrow]]
 local tex_rightarrow2 = [[\Rightarrow]]
 local tex_quad = [[\quad]]
-local tex_qquad = [[\qquad]]
+local tex_boxed = [[\boxed{$1}]]
 
 ls.add_snippets("tex", {
     parse({ trig = "->" }, tex_rightarrow, { condition = tex.in_text }),
     parse({ trig = "=>" }, tex_rightarrow2, { condition = tex.in_text }),
-    parse({ trig = "quad" }, tex_quad, { condition = tex.in_text }),
-    parse({ trig = "qquad" }, tex_qquad, { condition = tex.in_text }),
+    parse({ trig = "qq" }, tex_quad, { condition = tex.in_text }),
+    parse({ trig = "box" }, tex_boxed, { condition = tex.in_text }),
 })

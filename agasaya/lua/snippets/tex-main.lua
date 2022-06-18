@@ -21,6 +21,7 @@ usepackage[swedish]{babel}
 \usepackage{fancyvrb}
 \usepackage{gfsartemisia-euler}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage{longtable}
 \usepackage{rotating}
 \usepackage{tikz}
@@ -31,8 +32,15 @@ usepackage[swedish]{babel}
 \color[HTML]{DCD7BA} % Change text-color
 
 \author{$1}
-\date{\today}
-\title{$2}
+\date{$2}
+\title{$3}
+\hypersetup{
+    pdfauthor={$1},
+    pdftitle={$3},
+    pdfkeywords={$4},
+    pdfsubject={$4},
+    pdflang={$5}
+}
 
 \begin{document}
 \maketitle
