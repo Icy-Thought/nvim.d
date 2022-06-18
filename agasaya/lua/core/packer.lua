@@ -160,11 +160,17 @@ return packer.startup(function(use)
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-            "L3MON4D3/LuaSnip",
-            "rafamadriz/friendly-snippets",
             "saadparwaiz1/cmp_luasnip",
         },
         config = [[ prequire('modules.cmp') ]],
+    })
+    use({
+        "L3MON4D3/LuaSnip",
+        requires = {
+            "hrsh7th/nvim-cmp",
+            "rafamadriz/friendly-snippets",
+        },
+        config = [[ prequire('modules.luasnip') ]],
     })
 
     -- Editor
@@ -203,11 +209,6 @@ return packer.startup(function(use)
     use({
         "lervag/vimtex",
         config = [[ prequire('modules.vimtex') ]],
-    })
-    use({
-        "iurimateus/luasnip-latex-snippets.nvim",
-        ft = "tex",
-        requires = { "L3MON4D3/LuaSnip", "lervag/vimtex" },
     })
     use({
         "Pocco81/TrueZen.nvim",
