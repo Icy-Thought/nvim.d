@@ -17,8 +17,12 @@ end
 
 local tex_rightarrow = [[\rightarrow]]
 local tex_rightarrow2 = [[\Rightarrow]]
+local tex_quad = [[\quad]]
+local tex_qquad = [[\qquad]]
 
 ls.add_snippets("tex", {
     parse({ trig = "->" }, tex_rightarrow, { condition = tex.in_text }),
     parse({ trig = "=>" }, tex_rightarrow2, { condition = tex.in_text }),
+    parse({ trig = "quad" }, tex_quad, { condition = tex.in_text }),
+    parse({ trig = "qquad" }, tex_qquad, { condition = tex.in_text }),
 })

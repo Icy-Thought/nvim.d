@@ -9,22 +9,22 @@ require("snippets.tex-main")
 require("snippets.tex-math")
 
 ls.config.setup({
-    history = true,
     enable_autosnippets = true,
+    history = true,
 
-    region_check_events = "CursorMoved",
     delete_check_events = "TextChangedI",
+    region_check_events = "CursorMoved",
     updateevents = "TextChanged,TextChangedI,InsertLeave",
 
     ext_opts = {
         [types.choiceNode] = {
             active = {
-                virt_text = { { "●", "GruvboxOrange" } },
+                virt_text = { { "●", "Special" } },
             },
         },
         [types.insertNode] = {
             active = {
-                virt_text = { { "●", "GruvboxBlue" } },
+                virt_text = { { "●", "Special" } },
             },
         },
     },
