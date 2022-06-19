@@ -38,14 +38,26 @@ end
 
 ls.add_snippets(nil, {
     tex = {
-        -- `is_math` dependent
+        -- `is_math` dependent (Symbols)
         sin("->", { t("\\rightarrow ") }),
         sin("=>", { t("\\Rightarrow ") }),
+        sin("==", { t("&=& ") }),
+        sin("~=", { t("\\approx ") }),
+        sin(":.", { t("\\because ") }),
+
+        -- `is_math` dependent (Text)
         sin("qq", { t("\\quad ") }),
         sin("box", { t("\\boxed{"), i(1), t("}") }),
-        sin("==", { t("&=& ") }),
+        sin("diffn", {
+            t("\\frac{d"),
+            i(1, "y"),
+            t("}{d"),
+            i(2, "x"),
+            t("}"),
+        }),
+        sin("text", { t("\\text{"), i(1), t("}") }),
 
-        -- general snippets
+        -- normal-mode snippets
         s({ trig = "ls", name = "Auto-Itemize" }, {
             t({ "\\begin{itemize}", "\t\\item " }),
             i(1),
@@ -72,7 +84,6 @@ ls.add_snippets(nil, {
             i(0),
             t({ "", "\\end{alignat}" }),
         }),
-        s("repeat", { i(1, "text"), t({ "", "" }), rep(1) }),
         s({ trig = "min_temp", name = "Minimal Template" }, {
             t({
                 "\\documentclass[a4paper,12pt]{article}",
