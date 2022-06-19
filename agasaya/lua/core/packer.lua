@@ -192,7 +192,8 @@ return packer.startup(function(use)
     })
     use({
         "windwp/nvim-autopairs",
-        config = [[ prequire('nvim-autopairs', {}) ]],
+        requires = "hrsh7th/nvim-cmp",
+        config = [[ prequire('modules.autopairs') ]],
     })
     use({
         "folke/todo-comments.nvim",
