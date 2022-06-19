@@ -26,3 +26,19 @@ ls.config.setup({
         },
     },
 })
+
+-- Keymaps required for dynamic_node(s)
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+keymap({ "i", "s" }, "<C-n>", function()
+    if ls.choice_active() then
+        ls.change_choice(1)
+    end
+end)
+
+keymap({ "i", "s" }, "<C-p>", function()
+    if ls.choice_active() then
+        ls.change_choice(-1)
+    end
+end)
