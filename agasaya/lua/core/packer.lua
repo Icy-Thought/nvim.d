@@ -66,11 +66,10 @@ return packer.startup(function(use)
         requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('gitsigns', {}) ]],
     })
-
-    use({ "kyazdani42/nvim-web-devicons" }) -- TODO: check icon status later.
+    use({ "kyazdani42/nvim-web-devicons" })
     use({
         "nvim-lualine/lualine.nvim",
-        requires = { "kyazdani42/nvim-web-devicons", opt = true }, -- TODO: check proper way
+        requires = { "kyazdani42/nvim-web-devicons", opt = true },
         config = [[ prequire('modules.lualine') ]],
     })
     use({
@@ -82,14 +81,14 @@ return packer.startup(function(use)
         "gelguy/wilder.nvim",
         run = ":UpdateRemotePlugins",
         requires = { "romgrk/fzy-lua-native" },
-        config = [[ prequire('modules.wilder') ]], -- TODO: add fzy-lua-native + cpsm deps.
+        config = [[ prequire('modules.wilder') ]],
     })
     use({
         "lukas-reineke/indent-blankline.nvim",
         config = [[ prequire('modules.blankline') ]],
     })
 
-    -- Toolset
+    -- Toolbox
     use({
         "nvim-telescope/telescope.nvim",
         requires = {
@@ -187,6 +186,11 @@ return packer.startup(function(use)
         config = [[ prequire('modules.treesitter') ]],
     })
     use({
+        "kevinhwang91/nvim-ufo",
+        requires = "kevinhwang91/promise-async",
+        config = [[ prequire('modules.folding') ]],
+    })
+    use({
         "numToStr/Comment.nvim",
         config = [[ prequire('Comment', {}) ]],
     })
@@ -209,6 +213,7 @@ return packer.startup(function(use)
     })
     use({
         "lervag/vimtex",
+        ft = "tex",
         config = [[ prequire('modules.vimtex') ]],
     })
     use({

@@ -1,11 +1,11 @@
 -- Editor settings
-vim.g.tex_conceal = ""
-vim.g.vimtex_fold_manual = 1
-vim.g.tex_comment_nospell = 1
-vim.g.vimtex_syntax_enabled = 0
+vim.g.vimtex_fold_enabled = true
+vim.g.vimtex_fold_manual = true
+vim.g.tex_comment_nospell = true
+vim.g.vimtex_syntax_enabled = true
+vim.g.vimtex_syntax_conceal_disable = true -- \alpha -> α (very slow)
 
--- Compile & View methods
-vim.g.vimtex_compiler_progname = "nvr"
+-- Compile & view methods
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_view_general_viewer = "zathura"
 vim.g.vimtex_compiler_method = "tectonic"

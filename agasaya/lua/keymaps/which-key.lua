@@ -104,8 +104,9 @@ local maps = {
         t = { "<CMD>TodoTelescope<CR>", "List Project Tasks" },
     },
     q = {
-        d = { "<CMD>%bd|Alpha<CR>", "Close All Buffers" },
-        q = { "<CMD>q!<CR>", "Quit Nvim Without Saving" },
+        name = "Quit!",
+        d = { "<CMD>%bd|Alpha<CR>", "All Buffers" },
+        q = { "<CMD>q!<CR>", "Nvim (NO SAVE)" },
     },
     t = {
         name = "Terminal",

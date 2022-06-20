@@ -3,7 +3,6 @@ local treesitter = require("nvim-treesitter.configs")
 treesitter.setup({
     ensure_installed = {
         "bash",
-        "bibtex",
         "c",
         "clojure",
         "cmake",
@@ -22,7 +21,6 @@ treesitter.setup({
         "jsonc",
         "julia",
         "kotlin",
-        "latex",
         "ledger",
         "lua",
         "markdown",

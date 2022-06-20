@@ -13,7 +13,7 @@ local sn = ls.snippet_node
 local t = ls.text_node
 
 local function is_math(...)
-    return vim.fn["vimtex#syntax#in_mathzone"]
+    return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 end
 
 local function sin(trigger, expansion)
