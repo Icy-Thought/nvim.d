@@ -31,7 +31,16 @@ end
 local packer = require("packer")
 
 packer.init({
+    auto_clean = true,
+    compile_on_sync = true,
+    -- disable_commands = true,
+    git = { clone_timeout = 5000 },
     display = {
+        working_sym = "ﲊ",
+        error_sym = "✗",
+        done_sym = "﫟",
+        removed_sym = "",
+        moved_sym = "",
         open_fn = function()
             return require("packer.util").float({ border = "rounded" })
         end,
@@ -41,12 +50,17 @@ packer.init({
 return packer.startup(function(use)
     use({ "wbthomason/packer.nvim" })
 
+    -- Speed up Neovim cold-start
+    use({
+        "lewis6991/impatient.nvim",
+        config = [[ require'impatient'.enable_profile() ]],
+    })
+
     -- Aesthetics
     -- use({
     --     "themercorp/themer.lua",
     --     config = [[ prequire('themes.themer') ]],
     -- })
-
     use({
         "catppuccin/nvim",
         as = "catppuccin",
@@ -137,7 +151,11 @@ return packer.startup(function(use)
     })
 
     -- Language Server Protocol (LSP)
-    -- use {'github/copilot.vim'}
+    -- use({
+    --     zbirenbaum/copilot.lua",
+    --     after = "nvim-cmp",
+    --     requires = {"zbirenbaum/copilot-cmp"},
+    -- })
     use({
         "neovim/nvim-lspconfig",
         config = [[ prequire('modules.lspconfig') ]],
@@ -154,12 +172,13 @@ return packer.startup(function(use)
     })
     use({
         "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         requires = {
-            "neovim/nvim-lspconfig",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "saadparwaiz1/cmp_luasnip",
+            { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+            { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+            { "hrsh7th/cmp-path", after = "nvim-cmp" },
         },
         config = [[ prequire('modules.cmp') ]],
     })
@@ -167,7 +186,7 @@ return packer.startup(function(use)
         "L3MON4D3/LuaSnip",
         requires = {
             "hrsh7th/nvim-cmp",
-            "rafamadriz/friendly-snippets",
+            { "rafamadriz/friendly-snippets", after = "LuaSnip" },
         },
         config = [[ prequire('modules.luasnip') ]],
     })
@@ -177,7 +196,7 @@ return packer.startup(function(use)
         "nvim-neorg/neorg",
         ft = "norg",
         after = "nvim-treesitter",
-        requires = "nvim-lua/plenary.nvim",
+        requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('modules.neorg') ]],
     })
     use({
@@ -185,9 +204,10 @@ return packer.startup(function(use)
         run = ":TSUpdate",
         config = [[ prequire('modules.treesitter') ]],
     })
+    use("Pocco81/AutoSave.nvim")
     use({
         "kevinhwang91/nvim-ufo",
-        requires = "kevinhwang91/promise-async",
+        requires = { "kevinhwang91/promise-async" },
         config = [[ prequire('modules.folding') ]],
     })
     use({
@@ -196,7 +216,7 @@ return packer.startup(function(use)
     })
     use({
         "windwp/nvim-autopairs",
-        requires = "hrsh7th/nvim-cmp",
+        requires = { "hrsh7th/nvim-cmp" },
         config = [[ prequire('modules.autopairs') ]],
     })
     use({

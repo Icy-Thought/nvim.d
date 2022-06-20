@@ -102,6 +102,7 @@ local maps = {
         name = "Project",
         p = { "<CMD>Telescope project<CR>", "Select Project" },
         t = { "<CMD>TodoTelescope<CR>", "List Project Tasks" },
+        u = { "<CMD>PackerSync<CR>", "Packer Synchronize" },
     },
     q = {
         name = "Quit!",
