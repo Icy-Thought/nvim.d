@@ -82,9 +82,9 @@ return packer.startup(function(use)
     })
     use({ "kyazdani42/nvim-web-devicons" })
     use({
-        "nvim-lualine/lualine.nvim",
+        "feline-nvim/feline.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
-        config = [[ prequire('modules.lualine') ]],
+        config = [[ prequire('feline', {}) ]],
     })
     use({
         "akinsho/bufferline.nvim",
@@ -154,7 +154,9 @@ return packer.startup(function(use)
     -- use({
     --     zbirenbaum/copilot.lua",
     --     after = "nvim-cmp",
+    --     event = "InsertEnter",
     --     requires = {"zbirenbaum/copilot-cmp"},
+    --     config = [[ prequire('copilot', {}) ]],
     -- })
     use({
         "neovim/nvim-lspconfig",
@@ -169,6 +171,11 @@ return packer.startup(function(use)
         "folke/trouble.nvim",
         requires = { "kyazdani42/nvim-web-devicons" },
         config = [[ prequire('trouble', {}) ]],
+    })
+    use({
+        "rcarriga/nvim-dap-ui",
+        requires = { "mfussenegger/nvim-dap" },
+        config = [[ prequire('dapui', { floating = { border = "rounded" } }) ]],
     })
     use({
         "hrsh7th/nvim-cmp",

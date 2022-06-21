@@ -1,5 +1,3 @@
-use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
-
 vim.wo.foldcolumn = "1"
 vim.wo.foldlevel = 99 -- feel free to decrease the value
 vim.wo.foldenable = true
@@ -10,4 +8,5 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
-require("ufo").setup()
+local ufo = require("ufo")
+ufo.setup()

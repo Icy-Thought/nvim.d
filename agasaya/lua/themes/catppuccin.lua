@@ -54,10 +54,8 @@ catppuccin.setup({
     },
 })
 
-local lualine = require("lualine")
+local feline = require("feline")
 
-lualine.setup({
-    options = {
-        theme = "catppuccin",
-    },
+feline.setup({
+    components = require("catppuccin.core.integrations.feline"),
 })
