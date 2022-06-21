@@ -1,4 +1,6 @@
 local telescope = require("telescope")
+local ts_prev = require("telescope.previewers")
+local ts_sort = require("telescope.sorters")
 
 telescope.setup({
     defaults = {
@@ -35,15 +37,15 @@ telescope.setup({
             "╯",
             "╰",
         },
-        buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+        buffer_previewer_maker = ts_prev.buffer_previewer_maker,
         color_devicons = true,
         file_ignore_patterns = { "node_modules" },
-        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-        file_sorter = require("telescope.sorters").get_fuzzy_file,
-        generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-        grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+        file_previewer = ts_prev.vim_buffer_cat.new,
+        file_sorter = ts_sort.get_fuzzy_file,
+        generic_sorter = ts_sort.get_generic_fuzzy_sorter,
+        grep_previewer = ts_prev.vim_buffer_vimgrep.new,
         path_display = { "absolute" },
-        qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+        qflist_previewer = ts_prev.vim_buffer_qflist.new,
         use_less = true,
         winblend = 0,
     },

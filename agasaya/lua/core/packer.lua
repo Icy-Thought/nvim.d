@@ -33,7 +33,6 @@ local packer = require("packer")
 packer.init({
     auto_clean = true,
     compile_on_sync = true,
-    -- disable_commands = true,
     git = { clone_timeout = 5000 },
     display = {
         working_sym = "ﲊ",
@@ -107,19 +106,31 @@ return packer.startup(function(use)
         "nvim-telescope/telescope.nvim",
         requires = {
             "nvim-lua/plenary.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                run = "make",
+                after = "telescope.nvim",
+            },
             {
                 "nvim-telescope/telescope-frecency.nvim",
+                after = "telescope.nvim",
                 requires = { "tami5/sqlite.lua" },
             },
-            "nvim-telescope/telescope-file-browser.nvim",
-            "nvim-telescope/telescope-project.nvim",
+            {
+                "nvim-telescope/telescope-file-browser.nvim",
+                after = "telescope.nvim",
+            },
+            {
+                "nvim-telescope/telescope-project.nvim",
+                after = "telescope.nvim",
+            },
         },
         config = [[ prequire('modules.telescope') ]],
     })
     use({
         "kyazdani42/nvim-tree.lua",
         requires = { "kyazdani42/nvim-web-devicons" },
+        tag = "nightly",
         config = [[ prequire('nvim-tree', {}) ]],
     })
     use({
