@@ -24,6 +24,7 @@ treesitter.setup({
         "ledger",
         "lua",
         "markdown",
+        "markdown_inline",
         "nix",
         "norg",
         "perl",
