@@ -222,7 +222,10 @@ return packer.startup(function(use)
         run = ":TSUpdate",
         config = [[ prequire('modules.treesitter') ]],
     })
-    use("Pocco81/AutoSave.nvim")
+    -- use({
+    --     "Pocco81/AutoSave.nvim",
+    --     config = [[ prequire('autosave', {}) ]],
+    -- })
     use({
         "kevinhwang91/nvim-ufo",
         requires = { "kevinhwang91/promise-async" },
