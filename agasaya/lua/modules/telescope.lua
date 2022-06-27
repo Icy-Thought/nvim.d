@@ -55,6 +55,12 @@ telescope.setup({
             show_unindexed = true,
             ignore_patterns = { "*.git/*", "*/tmp/*" },
         },
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+        },
     },
 })
 
@@ -62,4 +68,3 @@ telescope.load_extension("file_browser")
 telescope.load_extension("frecency")
 telescope.load_extension("fzf")
 telescope.load_extension("project")
-telescope.load_extension("themes")
