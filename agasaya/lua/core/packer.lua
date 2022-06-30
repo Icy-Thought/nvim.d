@@ -171,6 +171,7 @@ return packer.startup(function(use)
     -- })
     use({
         "neovim/nvim-lspconfig",
+        requires = { "ray-x/lsp_signature.nvim" },
         config = [[ prequire('modules.lspconfig') ]],
     })
     use({
@@ -192,11 +193,11 @@ return packer.startup(function(use)
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         requires = {
-            { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
-            { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-            { "hrsh7th/cmp-path", after = "nvim-cmp" },
+            { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
+            { "hrsh7th/cmp-nvim-lua", after = "cmp_luasnip" },
+            { "hrsh7th/cmp-nvim-lsp", after = "cmp-nvim-lua" },
+            { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
+            { "hrsh7th/cmp-path", after = "cmp-buffer" },
         },
         config = [[ prequire('modules.cmp') ]],
     })
@@ -222,10 +223,6 @@ return packer.startup(function(use)
         run = ":TSUpdate",
         config = [[ prequire('modules.treesitter') ]],
     })
-    -- use({
-    --     "Pocco81/AutoSave.nvim",
-    --     config = [[ prequire('autosave', {}) ]],
-    -- })
     use({
         "kevinhwang91/nvim-ufo",
         requires = { "kevinhwang91/promise-async" },
@@ -237,6 +234,7 @@ return packer.startup(function(use)
     })
     use({
         "windwp/nvim-autopairs",
+        after = "nvim-cmp",
         requires = { "hrsh7th/nvim-cmp" },
         config = [[ prequire('modules.autopairs') ]],
     })

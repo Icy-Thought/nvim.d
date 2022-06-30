@@ -102,10 +102,10 @@ cmp.setup({
         end,
     },
     sources = {
-        { name = "buffer" },
-        -- { name = "copilot" },
         { name = "luasnip" },
+        -- { name = "copilot" },
         { name = "nvim_lsp" },
+        { name = "buffer" },
         { name = "nvim_lua" },
         { name = "path" },
     },

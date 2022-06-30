@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local lsp_signature = require("lsp_signature")
 
 local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -63,16 +64,54 @@ local on_attach = function(client, bufnr)
     --  Allow null-ls to handle formatting
     client.server_capabilities.document_formatting = false
     client.server_capabilities.document_range_formatting = false
+
+    -- LSP-Signature support
+    lsp_signature.on_attach({
+        bind = true,
+        handler_opts = {
+            border = "rounded",
+        },
+    }, bufnr)
 end
 
 -- Add additional capabilities supported by nvim-cmp
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 -- Language Server Protocols
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+lspconfig.sumneko_lua.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+})
+
+lspconfig.pyright.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+lspconfig.rust_analyzer.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        ["rust-analyzer"] = {},
+    },
+})
 
 lspconfig.hls.setup({
     on_attach = on_attach,
