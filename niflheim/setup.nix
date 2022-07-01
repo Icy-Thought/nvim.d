@@ -1,7 +1,7 @@
 {...}: {
   modules.develop.lua.enable = true;
 
-  home.programs.neovim = let
+  hm.programs.neovim = let
     customPlugins =
       pkgs.callPackage "${nvimDir}/niflheim/custom-plugins.nix" pkgs;
     plugins = pkgs.vimPlugins // customPlugins;

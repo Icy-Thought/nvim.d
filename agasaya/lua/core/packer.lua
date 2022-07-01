@@ -212,6 +212,10 @@ return packer.startup(function(use)
 
     -- Editor
     use({
+        "Vonr/align.nvim",
+        config = [[ prequire('keymaps.align') ]],
+    })
+    use({
         "nvim-neorg/neorg",
         ft = "norg",
         after = "nvim-treesitter",
