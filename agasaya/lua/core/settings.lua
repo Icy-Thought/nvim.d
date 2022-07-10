@@ -1,4 +1,4 @@
-local opts = {
+local options = {
     autoread = true,
     backup = false,
     clipboard = "unnamedplus",
@@ -39,14 +39,17 @@ local opts = {
     writebackup = false,
 }
 
-vim.opt.shortmess:append({ c = true })
-vim.opt.diffopt:append({ "internal", "algorithm:patience" })
-
-for k, v in pairs(opts) do
+for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
-vim.cmd("set whichwrap+=<,>,[,],h,l")
-vim.cmd([[au BufEnter * set fo-=c fo-=r fo-=o]])
-vim.cmd([[au BufRead,BufNewFile *.md setlocal textwidth=80 fo+=t]])
-vim.cmd([[set iskeyword+=-]])
+vim.opt.iskeyword:append("-")
+vim.opt.shortmess:append({ c = true })
+vim.opt.diffopt:append({ "internal", "algorithm:patience" })
+vim.opt.whichwrap:append("<>[]hl")
+
+-- Limit text-width to 80 chars for documentation formats
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = { "*.md", "*.norg" },
+    command = "set textwidth=80",
+})
