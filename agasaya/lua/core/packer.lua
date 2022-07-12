@@ -63,7 +63,6 @@ return packer.startup(function(use)
     use({
         "catppuccin/nvim",
         as = "catppuccin",
-        requires = { "feline-nvim/feline.nvim" },
         config = [[ prequire('themes.catppuccin') ]],
     })
     use({
@@ -80,10 +79,10 @@ return packer.startup(function(use)
         requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('gitsigns', {}) ]],
     })
-    use({ "kyazdani42/nvim-web-devicons" })
+    use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
     use({
         "feline-nvim/feline.nvim",
-        requires = { "kyazdani42/nvim-web-devicons", opt = true },
+        requires = { "kyazdani42/nvim-web-devicons" },
         config = [[ prequire('feline', {}) ]],
     })
     use({

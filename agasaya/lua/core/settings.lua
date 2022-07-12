@@ -1,4 +1,4 @@
-_G.Config = {
+_G.Core = {
     disabled_builtins = {
         "netrw",
         "netrwPlugin",
@@ -19,17 +19,21 @@ _G.Config = {
         "rrhelper",
         "spellfile_plugin",
     },
+    global_options = {
+        conceallevel = 1,
+        fileencoding = "utf-8",
+        pumheight = 10,
+    },
     options = {
         autoread = true,
         backspace = { "indent", "eol", "start" },
         backup = false,
         clipboard = "unnamedplus",
         cmdheight = 1,
-        conceallevel = 1,
         cursorline = true,
         diffopt = { "internal", "algorithm:patience" },
+        encoding = "UTF-8",
         expandtab = true,
-        fileencoding = "UTF-8",
         gdefault = true,
         hlsearch = true,
         ignorecase = true,
@@ -39,7 +43,6 @@ _G.Config = {
         mouse = "a",
         number = true,
         numberwidth = 4,
-        pumheight = 10,
         relativenumber = true,
         scrolloff = 8,
         shiftwidth = 4,
@@ -59,7 +62,7 @@ _G.Config = {
         timeoutlen = 100,
         undofile = true,
         updatetime = 300,
-        whichwrap = { "<>[]hl" },
+        whichwrap = "<>[]hl",
         wrap = false,
         writebackup = false,
     },
