@@ -47,15 +47,21 @@ packer.init({
 })
 
 return packer.startup(function(use)
-    use({ "wbthomason/packer.nvim" })
-
-    -- Speed up Neovim cold-start
+    -------===[ Core ]===-------
     use({
         "lewis6991/impatient.nvim",
         config = [[ require'impatient'.enable_profile() ]],
     })
+    use({ "wbthomason/packer.nvim" })
+    use({ "nvim-lua/plenary.nvim", event = "BufRead" })
 
-    -- Aesthetics
+    -------===[ Aesthetics ]===-------
+    use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
+    use({
+        "akinsho/bufferline.nvim",
+        after = "nvim-web-devicons",
+        config = [[ prequire('modules.bufferline') ]],
+    })
     -- use({
     --     "themercorp/themer.lua",
     --     config = [[ prequire('themes.themer') ]],
@@ -63,32 +69,19 @@ return packer.startup(function(use)
     use({
         "catppuccin/nvim",
         as = "catppuccin",
+        after = "bufferline.nvim",
         config = [[ prequire('themes.catppuccin') ]],
     })
     use({
-        "goolord/alpha-nvim",
-        requires = { "kyazdani42/nvim-web-devicons" },
-        config = [[ prequire('modules.alpha') ]],
-    })
-    use({
-        "norcalli/nvim-colorizer.lua",
-        config = [[ prequire('colorizer', {}) ]],
-    })
-    use({
-        "lewis6991/gitsigns.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = [[ prequire('gitsigns', {}) ]],
-    })
-    use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
-    use({
         "feline-nvim/feline.nvim",
-        requires = { "kyazdani42/nvim-web-devicons" },
+        after = "catppuccin",
         config = [[ prequire('feline', {}) ]],
     })
     use({
-        "akinsho/bufferline.nvim",
-        requires = { "kyazdani42/nvim-web-devicons" },
-        config = [[ prequire('modules.bufferline') ]],
+        "goolord/alpha-nvim",
+        event = "BufWinEnter",
+        after = "catppuccin",
+        config = [[ prequire('modules.alpha') ]],
     })
     use({
         "gelguy/wilder.nvim",
@@ -100,12 +93,22 @@ return packer.startup(function(use)
         "lukas-reineke/indent-blankline.nvim",
         config = [[ prequire('modules.blankline') ]],
     })
+    use({
+        "norcalli/nvim-colorizer.lua",
+        after = "catppuccin",
+        config = [[ prequire('colorizer', {}) ]],
+    })
+    use({
+        "lewis6991/gitsigns.nvim",
+        after = "plenary.nvim",
+        config = [[ prequire('gitsigns', {}) ]],
+    })
 
-    -- Toolbox
+    -------===[ Toolbox ]===-------
     use({
         "nvim-telescope/telescope.nvim",
+        after = "plenary.nvim",
         requires = {
-            { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
             {
@@ -120,7 +123,6 @@ return packer.startup(function(use)
         "kyazdani42/nvim-tree.lua",
         tag = "nightly",
         cmd = "NvimTreeToggle",
-        requires = { "kyazdani42/nvim-web-devicons" },
         config = [[ prequire('nvim-tree', {}) ]],
     })
     use({
@@ -134,31 +136,25 @@ return packer.startup(function(use)
     })
     use({
         "TimUntersberger/neogit",
+        after = "plenary.nvim",
         config = [[ prequire('neogit', {}) ]],
     })
     use({
         "pwntester/octo.nvim",
+        after = "nvim-web-devicons",
         requires = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
-            "kyazdani42/nvim-web-devicons",
         },
         config = [[ prequire('octo', {}) ]],
     })
     use({
         "windwp/nvim-spectre",
-        requires = { "nvim-lua/plenary.nvim" },
+        after = "plenary.nvim",
         config = [[ prequire('spectre', {}) ]],
     })
 
-    -- Language Server Protocol (LSP)
-    -- use({
-    --     zbirenbaum/copilot.lua",
-    --     after = "nvim-cmp",
-    --     event = "InsertEnter",
-    --     requires = {"zbirenbaum/copilot-cmp"},
-    --     config = [[ prequire('copilot', {}) ]],
-    -- })
+    -------===[ Language Server Protocol (LSP) ]===-------
     use({
         "neovim/nvim-lspconfig",
         requires = { "ray-x/lsp_signature.nvim" },
@@ -166,12 +162,12 @@ return packer.startup(function(use)
     })
     use({
         "jose-elias-alvarez/null-ls.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        after = "plenary.nvim",
         config = [[ prequire('modules.null-ls') ]],
     })
     use({
         "folke/trouble.nvim",
-        requires = { "kyazdani42/nvim-web-devicons" },
+        after = "catppuccin",
         config = [[ prequire('trouble', {}) ]],
     })
     use({
@@ -193,17 +189,37 @@ return packer.startup(function(use)
     })
     use({
         "L3MON4D3/LuaSnip",
-        requires = {
-            "hrsh7th/nvim-cmp",
-            { "rafamadriz/friendly-snippets", after = "LuaSnip" },
-        },
+        after = "nvim-cmp",
+        requires = { "rafamadriz/friendly-snippets" },
         config = [[ prequire('modules.luasnip') ]],
     })
+    -- use({
+    --     zbirenbaum/copilot.lua",
+    --     after = "nvim-cmp",
+    --     event = "InsertEnter",
+    --     requires = {"zbirenbaum/copilot-cmp"},
+    --     config = [[ prequire('copilot', {}) ]],
+    -- })
 
-    -- Editor
+    -------===[ Editor ]===-------
     use({
         "Vonr/align.nvim",
         config = [[ prequire('keymaps.align') ]],
+    })
+    use({
+        "windwp/nvim-autopairs",
+        after = "nvim-cmp",
+        config = [[ prequire('modules.autopairs') ]],
+    })
+    use({
+        "numToStr/Comment.nvim",
+        config = [[ prequire('Comment', {}) ]],
+    })
+    use({
+        "folke/todo-comments.nvim",
+        after = "catppuccin",
+        requires = { "nvim-lua/plenary.nvim" },
+        config = [[ prequire('todo-comments', {}) ]],
     })
     use({
         "nvim-neorg/neorg",
@@ -215,27 +231,13 @@ return packer.startup(function(use)
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
+        event = "BufRead",
         config = [[ prequire('modules.treesitter') ]],
     })
     use({
         "kevinhwang91/nvim-ufo",
         requires = { "kevinhwang91/promise-async" },
         config = [[ prequire('modules.folding') ]],
-    })
-    use({
-        "numToStr/Comment.nvim",
-        config = [[ prequire('Comment', {}) ]],
-    })
-    use({
-        "windwp/nvim-autopairs",
-        after = "nvim-cmp",
-        requires = { "hrsh7th/nvim-cmp" },
-        config = [[ prequire('modules.autopairs') ]],
-    })
-    use({
-        "folke/todo-comments.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = [[ prequire('todo-comments', {}) ]],
     })
     use({
         "iamcco/markdown-preview.nvim",

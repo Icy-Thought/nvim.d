@@ -21,7 +21,7 @@ _G.Core = {
     },
     global_options = {
         conceallevel = 1,
-        fileencoding = "utf-8",
+        fileencoding = "UTF-8",
         pumheight = 10,
     },
     options = {

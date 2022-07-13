@@ -5,7 +5,7 @@ catppuccin.setup({
     term_colors = true,
     styles = {
         comments = "italic",
-        functions = "italic,bold",
+        functions = { "italic", "bold" },
         keywords = "italic",
         strings = "NONE",
         variables = "NONE",
@@ -59,3 +59,6 @@ local feline = require("feline")
 feline.setup({
     components = require("catppuccin.core.integrations.feline"),
 })
+
+-- Apply colorscheme
+vim.cmd("colorscheme catppuccin")
