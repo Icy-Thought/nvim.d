@@ -37,11 +37,10 @@ local kind_icons = {
 }
 
 cmp.setup({
-    enabled = function()
-        return vim.bo.filetype ~= "tex"
-            or vim.fn["vimtex#syntax#in_mathzone"]() ~= 1
-    end,
-    history = true,
+    -- enabled = function()
+    --     return vim.bo.filetype ~= "tex"
+    --         or vim.fn["vimtex#syntax#in_mathzone"]() ~= 1
+    -- end,
     snippet = {
         expand = function(args)
             ls.lsp_expand(args.body)
@@ -103,11 +102,11 @@ cmp.setup({
     },
     sources = {
         { name = "luasnip" },
-        -- { name = "copilot" },
         { name = "nvim_lsp" },
         { name = "buffer" },
         { name = "nvim_lua" },
         { name = "path" },
+        -- { name = "copilot" },
     },
     confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
