@@ -222,17 +222,18 @@ return packer.startup(function(use)
         config = [[ prequire('todo-comments', {}) ]],
     })
     use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+        event = { "BufRead", "BufNewFile" },
+        requires = { "nvim-treesitter/nvim-treesitter-textobjects" },
+        config = [[ prequire('modules.treesitter') ]],
+    })
+    use({
         "nvim-neorg/neorg",
         ft = "norg",
         after = "nvim-treesitter",
         requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('modules.neorg') ]],
-    })
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-        event = "BufRead",
-        config = [[ prequire('modules.treesitter') ]],
     })
     use({
         "kevinhwang91/nvim-ufo",
@@ -246,11 +247,6 @@ return packer.startup(function(use)
             vim.fn["mkdp#util#install"]()
         end,
         config = [[ prequire('modules.md-preview') ]],
-    })
-    use({
-        "lervag/vimtex",
-        ft = "tex",
-        config = [[ prequire('modules.vimtex') ]],
     })
     use({
         "Pocco81/TrueZen.nvim",
