@@ -5,11 +5,10 @@ local c = ls.choice_node
 local t = ls.text_node
 local i = ls.insert_node
 local d = ls.dynamic_node
-local parse = ls.parser.parse_snippet
 local rep = require("luasnip.extras").rep
 
-local iter_item
-iter_item = function()
+local iterate_item
+iterate_item = function()
     return sn(nil, {
         c(1, {
             -- WARNING: Having the sn(...) as the first choice will cause infinite recursion.
@@ -18,14 +17,14 @@ iter_item = function()
             sn(nil, {
                 t({ "", "\t\\item " }),
                 i(1),
-                d(2, iter_item, {}),
+                d(2, iterate_item, {}),
             }),
         }),
     })
 end
 
 ls.add_snippets("tex", {
-    parse({ trig = "min_temp", name = "Minimal Template" }, {
+    s({ trig = "init", name = "Minimal LaTeX template" }, {
         t({
             "\\documentclass[a4paper,12pt]{article}",
             "\\usepackage[a4paper, margin=1in, total={20cm,27cm}]{geometry}",
@@ -87,14 +86,14 @@ ls.add_snippets("tex", {
     s({ trig = "ls", name = "Auto-Itemize" }, {
         t({ "\\begin{itemize}", "\t\\item " }),
         i(1),
-        d(2, iter_item, {}),
+        d(2, iterate_item, {}),
         t({ "", "\\end{itemize}" }),
         i(0),
     }),
     s({ trig = "enum", name = "Auto-Enumerate" }, {
         t({ "\\begin{enumerate}", "\t\\item " }),
         i(1),
-        d(2, iter_item, {}),
+        d(2, iterate_item, {}),
         t({ "", "\\end{enumerate}" }),
         i(0),
     }),
@@ -110,7 +109,20 @@ ls.add_snippets("tex", {
         i(0),
         t({ "", "\\end{alignat}" }),
     }),
-    s("rm", { t("\\textrm{"), i(1), t("}"), i(0) }),
-    s("smallcaps", { t("\\textsc{"), i(1), t("}"), i(0) }),
-    s("reals", { t("\\mathbb{R}"), i(0) }),
+    s({ trig = "rm", name = "Display plain text" }, {
+        t("\\textrm{"),
+        i(1),
+        t("}"),
+        i(0),
+    }),
+    s({ trig = "smallcaps", name = "CAPSLOCK" }, {
+        t("\\textsc{"),
+        i(1),
+        t("}"),
+        i(0),
+    }),
+    s({ trig = "reals", name = "Correctly display R in Real" }, {
+        t("\\mathbb{R}"),
+        i(0),
+    }),
 }, {})

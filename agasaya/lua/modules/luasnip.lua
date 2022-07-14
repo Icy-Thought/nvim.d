@@ -8,7 +8,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 require("snippets.tex")
 require("snippets.tex_math")
 
-ls.config.setup({
+ls.config.set_config({
     delete_check_events = "TextChangedI",
     enable_autosnippets = true,
     ext_opts = {
@@ -26,7 +26,7 @@ ls.config.setup({
     history = true,
     region_check_events = "CursorMoved",
     store_selection_keys = "<Tab>",
-    updateevents = { "TextChanged", "TextChangedI", "InsertLeave" },
+    updateevents = "TextChanged,TextChangedI,InsertLeave",
 })
 
 -- Keymaps required for dynamic_node(s)

@@ -136,7 +136,7 @@ return packer.startup(function(use)
     })
     use({
         "TimUntersberger/neogit",
-        after = "plenary.nvim",
+        requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('neogit', {}) ]],
     })
     use({

@@ -3,6 +3,7 @@ local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
+local f = ls.function_node
 local d = ls.dynamic_node
 
 local in_mathzone = require("utils").in_mathzone
@@ -24,7 +25,9 @@ local auto_snippets = {
                     { t("\\frac{"), t(selected), t("}{"), i(1), t("}") }
                 )
             end
-            P(snip.captures[1])
+            f(function(_, snip)
+                return "Captured Text: " .. snip.captures[1] .. "."
+            end)
             if snip.captures[1] == " " then
                 return sn(nil, { t("\\frac{"), i(1), t("}{"), i(2), t("}") })
             end
@@ -34,34 +37,6 @@ local auto_snippets = {
             )
         end),
         i(0),
-    }),
-    s({ trig = "(.*%))//", regTrig = true }, {
-        d(1, function(_, snip)
-            local capture = snip.captures[1]
-            local level = 0
-            local pos = #capture
-            while pos > 1 do
-                local char = capture:sub(pos, pos)
-                if char == ")" then
-                    level = level + 1
-                elseif char == "(" then
-                    level = level - 1
-                end
-                if level == 0 then
-                    break
-                end
-                pos = pos - 1
-            end
-            return sn(nil, {
-                t(capture:sub(1, pos - 1)),
-                t("\\frac{"),
-                t(capture:sub(pos + 1, #capture - 1)),
-                t("}{"),
-                i(1),
-                t("}"),
-                i(0),
-            })
-        end),
     }),
     s("~=", { t("\\approx ") }),
     s("!=", { t("\neq "), i(0) }),
@@ -134,7 +109,8 @@ local general_snippets = {
         i(1, "y"),
         t("}{d"),
         i(2, "x"),
-        t("}"),
+        t("} = "),
+        i(0),
     }),
     s("partial", {
         t({ "\\frac{\\partial " }),
