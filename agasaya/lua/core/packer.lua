@@ -107,15 +107,16 @@ return packer.startup(function(use)
     -------===[ Toolbox ]===-------
     use({
         "nvim-telescope/telescope.nvim",
-        after = "plenary.nvim",
+        after = "nvim-web-devicons",
         requires = {
-            { "nvim-telescope/telescope-file-browser.nvim" },
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
             {
                 "nvim-telescope/telescope-frecency.nvim",
                 requires = { "tami5/sqlite.lua" },
             },
-            { "nvim-telescope/telescope-project.nvim" },
+            "nvim-telescope/telescope-project.nvim",
         },
         config = [[ prequire('modules.telescope') ]],
     })
@@ -141,11 +142,8 @@ return packer.startup(function(use)
     })
     use({
         "pwntester/octo.nvim",
-        after = "nvim-web-devicons",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
-        },
+        after = "telescope.nvim",
+        requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('octo', {}) ]],
     })
     use({

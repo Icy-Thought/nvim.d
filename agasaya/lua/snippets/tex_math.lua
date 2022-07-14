@@ -6,7 +6,7 @@ local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
 
-local in_mathzone = require("utils").in_mathzone
+local in_mathzone = require("utils.math").in_mathzone
 
 local function add_math_snippets(lang, snips, opts)
     for _, v in pairs(snips) do
