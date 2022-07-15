@@ -1,5 +1,5 @@
 require("core.settings")
-require("core.autocmds")
+require("core.commands")
 
 for _, blt in pairs(Core.disabled_builtins) do
     vim.g["loaded_" .. blt] = 1
