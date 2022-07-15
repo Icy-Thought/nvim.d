@@ -2,6 +2,7 @@ local treesitter = require("nvim-treesitter.configs")
 
 treesitter.setup({
     ensure_installed = "all",
+    auto_install = true,
     sync_install = false,
     ignore_install = {},
     autopairs = {

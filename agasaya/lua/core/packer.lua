@@ -157,12 +157,14 @@ return packer.startup(function(use)
     -------===[ Language Server Protocol (LSP) ]===-------
     use({
         "neovim/nvim-lspconfig",
+        event = "BufReadPre",
         requires = { "ray-x/lsp_signature.nvim" },
         config = [[ prequire('modules.lspconfig') ]],
     })
     use({
         "jose-elias-alvarez/null-ls.nvim",
-        after = "plenary.nvim",
+        after = "nvim-lspconfig",
+        requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('modules.null-ls') ]],
     })
     use({
@@ -212,16 +214,6 @@ return packer.startup(function(use)
         config = [[ prequire('modules.autopairs') ]],
     })
     use({
-        "numToStr/Comment.nvim",
-        config = [[ prequire('Comment', {}) ]],
-    })
-    use({
-        "folke/todo-comments.nvim",
-        after = "catppuccin",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = [[ prequire('todo-comments', {}) ]],
-    })
-    use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
         event = { "BufRead", "BufNewFile" },
@@ -241,16 +233,28 @@ return packer.startup(function(use)
         config = [[ prequire('modules.folding') ]],
     })
     use({
+        "numToStr/Comment.nvim",
+        after = "nvim-treesitter",
+        config = [[ prequire('Comment', {}) ]],
+    })
+    use({
+        "folke/todo-comments.nvim",
+        after = "nvim-treesitter",
+        requires = { "nvim-lua/plenary.nvim" },
+        config = [[ prequire('todo-comments', {}) ]],
+    })
+    use({
+        "Pocco81/TrueZen.nvim",
+        after = "nvim-treesitter",
+        config = [[ prequire('true-zen', {}) ]],
+    })
+    use({
         "iamcco/markdown-preview.nvim",
         ft = { "markdown" },
         run = function()
             vim.fn["mkdp#util#install"]()
         end,
         config = [[ prequire('modules.md-preview') ]],
-    })
-    use({
-        "Pocco81/TrueZen.nvim",
-        config = [[ prequire('true-zen', {}) ]],
     })
 
     -- Allow Packer to auto-compile nvim config
