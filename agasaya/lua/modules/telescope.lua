@@ -64,6 +64,7 @@ telescope.setup({
     },
 })
 
+telescope.load_extension("dotfiles")
 telescope.load_extension("file_browser")
 telescope.load_extension("frecency")
 telescope.load_extension("fzf")

@@ -78,10 +78,10 @@ return packer.startup(function(use)
         config = [[ prequire('feline', {}) ]],
     })
     use({
-        "goolord/alpha-nvim",
+        "glepnir/dashboard-nvim",
         event = "BufWinEnter",
         after = "catppuccin",
-        config = [[ prequire('modules.alpha') ]],
+        config = [[ prequire('modules.dashboard') ]],
     })
     use({
         "gelguy/wilder.nvim",
@@ -137,7 +137,7 @@ return packer.startup(function(use)
     })
     use({
         "TimUntersberger/neogit",
-        after = "alpha-nvim",
+        after = "dashboard-nvim",
         cmd = "Neogit",
         requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('neogit', {}) ]],

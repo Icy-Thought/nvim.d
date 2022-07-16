@@ -1,37 +1,57 @@
-vim.g.dashboard_footer_icon = "🐬 "
-vim.g.dashboard_default_executive = "telescope"
+local db = require("dashboard")
+local config_dir = os.getenv("XDG_CONFIG_HOME")
 
-local config_dir = vim.fn.stdpath("config")
-local dasHead = vim.fn.systemlist("cat " .. config_dir .. "/dasHead.txt")
-vim.g.dashboard_custom_header = dasHead
+db.custom_header =
+    vim.fn.systemlist("cat " .. config_dir .. "/nvim/dasHead.txt")
 
-vim.g.dashboard_custom_section = {
-    change_colorscheme = {
-        description = { " Scheme change              SPC s c " },
-        command = "DashboardChangeColorscheme",
+db.custom_center = {
+    -- {
+    --     icon = "  ",
+    --     desc = "Change Colorscheme",
+    --     shortcut = "SPC s c",
+    --     action = "Telescope themes",
+    -- },
+    {
+        icon = "  ",
+        desc = "File Frecency" .. "                          ",
+        shortcut = "SPC f r",
+        action = "Telescope frecency",
     },
-    find_frecency = {
-        description = { " File Frecency              SPC f r " },
-        command = "Telescope frecency",
+    {
+        icon = "  ",
+        desc = "Find File" .. "                              ",
+        shortcut = "SPC f f",
+        action = "Telescope find_files",
     },
-    find_history = {
-        description = { " File History               SPC f e " },
-        command = "DashboardFindHistory",
+    {
+        icon = "  ",
+        desc = "New File" .. "                              ",
+        shortcut = "SPC f n",
+        action = "DashboardNewFile",
     },
-    find_project = {
-        description = { " Find Project               SPC f p " },
-        command = "Telescope project",
+    {
+        icon = "  ",
+        desc = "Find Project" .. "                          ",
+        shortcut = "SPC f p",
+        action = "Telescope project",
     },
-    find_file = {
-        description = { " Find File                  SPC f f " },
-        command = "DashboardFindFile",
+    {
+        icon = "  ",
+        desc = "Browse Neovim Dotfiles" .. "                ",
+        action = "Telescope dotfiles path=" .. config_dir .. "/nvim",
+        shortcut = "SPC f d",
     },
-    file_new = {
-        description = { " New File                   SPC f n " },
-        command = "DashboardNewFile",
+    {
+        icon = "  ",
+        desc = "Update Plugins" .. "                        ",
+        shortcut = "SPC u u",
+        action = "PackerUpdate",
     },
-    find_word = {
-        description = { " Find word                  SPC f w " },
-        command = "DashboardFindWord",
+
+    {
+        icon = "  ",
+        desc = "Quit" .. "                                  ",
+        shortcut = "SPC q q",
+        action = "q",
     },
 }
