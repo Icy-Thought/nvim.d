@@ -97,17 +97,17 @@ ls.add_snippets("tex", {
         t({ "", "\\end{enumerate}" }),
         i(0),
     }),
-    s({ trig = "eqn", name = "eqnarray" }, {
-        t({ "\\begin{eqnarray}", "    " }),
+    s({ trig = "eqn", name = "Non-numbered eqnarray" }, {
+        t({ "\\begin{eqnarray*}", "    " }),
         i(0),
-        t({ "", "\\end{eqnarray}" }),
+        t({ "", "\\end{eqnarray*}" }),
     }),
-    s({ trig = "alt", name = "Alignat" }, {
-        t("\\begin{alignat}["),
+    s({ trig = "alt", name = "Non-numbered alignat" }, {
+        t("\\begin{alignat*}["),
         i(1, "n"),
         t({ "]", "    " }),
         i(0),
-        t({ "", "\\end{alignat}" }),
+        t({ "", "\\end{alignat*}" }),
     }),
     s({ trig = "rm", name = "Display plain text" }, {
         t("\\textrm{"),

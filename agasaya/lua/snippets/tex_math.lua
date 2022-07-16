@@ -74,6 +74,9 @@ local auto_snippets = {
     s({ trig = "__", wordTrig = false }, { t("_{"), i(1), t("} "), i(0) }),
     s({ trig = ">>", wordTrig = false }, { t("\\gg "), i(0) }),
     s({ trig = "<<", wordTrig = false }, { t("\\ll "), i(0) }),
+    s("sin", { t("\\sin("), i(1, "x"), t(") "), i(0) }),
+    s("cos", { t("\\cos("), i(1, "x"), t(") "), i(0) }),
+    s("tan", { t("\\tan("), i(1, "x"), t(") "), i(0) }),
 }
 
 for _, v in pairs({ "bar", "hat", "vec", "tilde" }) do
@@ -102,12 +105,13 @@ local general_snippets = {
     s("ceil", { t("\\left\\lceil"), i(1), t("\\right\\rceil"), i(0) }),
     s("bmat", { t("\\begin{bmatrix} "), i(1), t("\\end{bmatrix} "), i(0) }),
     s("pmat", { t("\\begin{pmatrix} "), i(1), t("\\end{pmatrix} "), i(0) }),
+    s("sqrt", { t("\\sqrt{"), i(1), t("} "), i(0) }),
     s("derive", {
         t("\\frac{d"),
         i(1, "y"),
         t("}{d"),
         i(2, "x"),
-        t("} = "),
+        t("} "),
         i(0),
     }),
     s("partial", {
@@ -115,7 +119,7 @@ local general_snippets = {
         i(1),
         t({ "}{\\partial " }),
         i(2),
-        t({ "}" }),
+        t({ "} " }),
         i(0),
     }),
     s("integral", { t("\\int_{"), i(1), t("}^{"), i(2), t("} "), i(0) }),
