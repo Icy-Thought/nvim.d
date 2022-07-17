@@ -20,3 +20,11 @@ usercmd("NeogitCB", function()
     local neogit = prequire("neogit")
     neogit.open({ cwd = vim.fn.expand("%:p:h") })
 end, { nargs = 0 })
+
+-- Auto-update Catppuccin after compiling
+autocmd("User", {
+    pattern = "PackerCompileDone",
+    callback = function()
+        vim.cmd("CatppuccinCompile")
+    end,
+})

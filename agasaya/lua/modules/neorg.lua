@@ -1,6 +1,4 @@
-local neorg = require("neorg")
-
-neorg.setup({
+require("neorg").setup({
     load = {
         ["core.defaults"] = {},
         ["core.norg.completion"] = {

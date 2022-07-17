@@ -8,5 +8,4 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
-local ufo = require("ufo")
-ufo.setup()
+require("ufo").setup()

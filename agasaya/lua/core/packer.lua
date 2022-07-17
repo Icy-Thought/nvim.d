@@ -22,7 +22,7 @@ function prequire(plugin_name, setup)
         elseif type(setup) == "table" then
             plugin.setup(setup)
         elseif type(setup) == "string" then
-            plugin.setup(loadstring(setup))
+            plugin.setup(load(setup))
         end
     end
 end
@@ -32,6 +32,7 @@ local packer = require("packer")
 
 packer.init({
     auto_clean = true,
+    auto_reload_compiled = true,
     compile_on_sync = true,
     git = { clone_timeout = 5000 },
     display = {
@@ -69,13 +70,16 @@ return packer.startup(function(use)
     use({
         "catppuccin/nvim",
         as = "catppuccin",
+        run = "CatppuccinCompile",
         after = "bufferline.nvim",
         config = [[ prequire('themes.catppuccin') ]],
     })
     use({
         "feline-nvim/feline.nvim",
         after = "catppuccin",
-        config = [[ prequire('feline', {}) ]],
+        config = [[ prequire('feline', {
+	    components = require('catppuccin.groups.integrations.feline')
+        }) ]],
     })
     use({
         "glepnir/dashboard-nvim",
@@ -171,7 +175,9 @@ return packer.startup(function(use)
     use({
         "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" },
-        config = [[ prequire('dapui', { floating = { border = "rounded" } }) ]],
+        config = [[ prequire('dapui', { 
+            floating = { border = "rounded" } 
+        }) ]],
     })
     use({
         "hrsh7th/nvim-cmp",

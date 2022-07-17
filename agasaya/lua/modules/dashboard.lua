@@ -12,14 +12,14 @@ db.custom_center = {
     --     action = "Telescope themes",
     -- },
     {
-        icon = "  ",
-        desc = "File Frecency" .. "                          ",
+        icon = "   ",
+        desc = "File Frecency" .. "                         ",
         shortcut = "SPC f r",
         action = "Telescope frecency",
     },
     {
-        icon = "  ",
-        desc = "Find File" .. "                              ",
+        icon = "   ",
+        desc = "Find File" .. "                             ",
         shortcut = "SPC f f",
         action = "Telescope find_files",
     },

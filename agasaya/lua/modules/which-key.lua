@@ -1,6 +1,4 @@
-local wk = require("which-key")
-
-local setup = {
+require("which-key").setup({
     key_labels = {
         ["<space>"] = "SPC",
         ["<cr>"] = "RET",
@@ -13,6 +11,4 @@ local setup = {
         padding = { 1, 1, 1, 1 },
         winblend = 0,
     },
-}
-
-wk.setup(setup)
+})

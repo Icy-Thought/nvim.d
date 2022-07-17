@@ -1,7 +1,6 @@
 require("core.packer")
 require("core.base")
 require("core.neovide")
-
 require("keymaps.default")
 
 -- Point nvim to correct sqlite path

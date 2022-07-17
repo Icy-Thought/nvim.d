@@ -1,6 +1,4 @@
-local bufferline = require("bufferline")
-
-bufferline.setup({
+require("bufferline").setup({
     options = {
         numbers = "none",
         close_command = "bdelete! %d",
