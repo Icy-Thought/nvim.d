@@ -78,7 +78,7 @@ return packer.startup(function(use)
         "feline-nvim/feline.nvim",
         after = "catppuccin",
         config = [[ prequire('feline', {
-	    components = require('catppuccin.groups.integrations.feline')
+	    components = require('catppuccin.groups.integrations.feline').get()
         }) ]],
     })
     use({
