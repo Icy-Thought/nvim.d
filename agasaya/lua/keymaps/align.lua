@@ -1,36 +1,35 @@
 local ALG = require("align")
-local NS = { noremap = true, silent = true }
-local keymap = vim.keymap.set
+local utils = require("utils")
 
 -- left-align (1 char)
-keymap("x", "aa", function()
-    require("align").align_to_char(1, true)
-end, NS)
+utils.xnoremap("aa", function()
+    ALG.align_to_char(1, true)
+end, { desc = "Align to 1 Char" })
 
 -- left-aligns + preview (2 char)
-keymap("x", "as", function()
-    require("align").align_to_char(2, true, true)
-end, NS)
+utils.xnoremap("as", function()
+    ALG.align_to_char(2, true, true)
+end, { desc = "Align to 2 Char" })
 
 -- left-aligns + preview (string)
-keymap("x", "aw", function()
-    require("align").align_to_string(false, true, true)
-end, NS)
+utils.xnoremap("aw", function()
+    ALG.align_to_string(false, true, true)
+end, { desc = "Align to Str" })
 
 -- left-align + preview (lua pattern)
-keymap("x", "ar", function()
-    require("align").align_to_string(true, true, true)
-end, NS)
+utils.xnoremap("ar", function()
+    ALG.align_to_string(true, true, true)
+end, { desc = "Align to Lua pattern" })
 
 -- Example: gawip to align a paragraph to a string, looking left and with previews
-keymap("n", "gaw", function()
+utils.nnoremap("gaw", function()
     ALG.operator(
         ALG.align_to_string,
         { is_pattern = false, reverse = true, preview = true }
     )
-end, NS)
+end, { desc = "Align paragraph to Str" })
 
 -- Example gaaip to aling a paragraph to 1 character, looking left
-keymap("n", "gaa", function()
+utils.nnoremap("gaa", function()
     ALG.operator(ALG.align_to_char, { reverse = true })
-end, NS)
+end, { desc = "Align paragraph to 1 Char" })

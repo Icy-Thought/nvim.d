@@ -158,19 +158,14 @@ return packer.startup(function(use)
     use({
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
-        requires = { "ray-x/lsp_signature.nvim" },
         config = [[ prequire('modules.lspconfig') ]],
     })
     use({
-        "jose-elias-alvarez/null-ls.nvim",
+        "glepnir/lspsaga.nvim",
+        branch = "main",
         after = "nvim-lspconfig",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = [[ prequire('modules.null-ls') ]],
-    })
-    use({
-        "folke/trouble.nvim",
-        after = "catppuccin",
-        config = [[ prequire('trouble', {}) ]],
+        config = [[ prequire('modules.lspsaga') 
+                    prequire('keymaps.lspsaga') ]],
     })
     use({
         "rcarriga/nvim-dap-ui",

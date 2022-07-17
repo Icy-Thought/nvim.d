@@ -1,5 +1,4 @@
 local lspconfig = require("lspconfig")
-local lsp_signature = require("lsp_signature")
 
 local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -60,18 +59,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<C-d>", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "<C-b>", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-
-    --  Allow null-ls to handle formatting
-    client.server_capabilities.document_formatting = false
-    client.server_capabilities.document_range_formatting = false
-
-    -- LSP-Signature support
-    lsp_signature.on_attach({
-        bind = true,
-        handler_opts = {
-            border = "rounded",
-        },
-    }, bufnr)
 end
 
 -- Add additional capabilities supported by nvim-cmp

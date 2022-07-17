@@ -52,8 +52,8 @@ local highlighters = {
     wilder.lua_fzy_highlighter(),
 }
 
-local popupmenu_renderer = wilder.popupmenu_renderer(
-    wilder.popupmenu_border_theme({
+local popupmenu_renderer =
+    wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
         highlights = {
             default = "Normal",
             border = "NormalFloat",
@@ -74,8 +74,7 @@ local popupmenu_renderer = wilder.popupmenu_renderer(
             " ",
             wilder.popupmenu_scrollbar(),
         },
-    })
-)
+    }))
 
 local wildmenu_renderer = wilder.wildmenu_renderer({
     highlighter = highlighters,

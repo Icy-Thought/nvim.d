@@ -54,71 +54,18 @@ local maps = {
         m = { "<CMD>Telescope man_pages<CR>", "Man Pages" },
         -- s = { "<CMD>Telescope themes<CR>", "Change Colorscheme" },
     },
-    l = {
-        name = "LSP",
-        a = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-        d = {
-            "<CMD>Telescope lsp_document_diagnostics<CR>",
-            "Document Diagnostics",
-        },
-        w = {
-            "<CMD>Telescope lsp_workspace_diagnostics<CR>",
-            "Workspace Diagnostics",
-        },
-        f = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
-        i = { "<CMD>LspInfo<CR>", "Info" },
-        I = { "<CMD>LspInstallInfo<CR>", "Installer Info" },
-        j = {
-            "<CMD>lua vim.diagnostic.goto_next()<CR>",
-            "Next Diagnostic",
-        },
-        k = {
-            "<CMD>lua vim.diagnostic.goto_prev()<CR>",
-            "Prev Diagnostic",
-        },
-        l = { "<CMD>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
-        q = { "<CMD>lua vim.diagnostic.set_loclist()<CR>", "Quickfix" },
-        r = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },
-        s = { "<CMD>Telescope lsp_document_symbols<CR>", "Document Symbols" },
-        S = {
-            "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>",
-            "Workspace Symbols",
-        },
-    },
-    m = {
-        name = "Markdown Preview",
-        p = { "<CMD>MarkdownPreview<CR>", "Preview Markdown" },
-        s = { "<CMD>MarkdownPreviewStop<CR>", "Stop Markdown Preview" },
-        t = { "<CMD>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
-    },
-    o = {
-        name = "Launch X",
-        t = {
-            "<CMD>ToggleTerm size=10 direction=horizontal<CR>",
-            "Horizontal Terminal",
-        },
-    },
+    l = { name = "Language Server" },
+    o = { name = "Launch X" },
     p = {
-        name = "Project",
+        name = "Packer & Project",
         p = { "<CMD>Telescope project<CR>", "Select Project" },
         t = { "<CMD>TodoTelescope<CR>", "List Project Tasks" },
         u = { "<CMD>PackerSync<CR>", "Packer Synchronize" },
     },
     q = {
         name = "Quit!",
-        d = { "<CMD>%bd|Alpha<CR>", "All Buffers" },
+        d = { "<CMD>%bd|Dashboard<CR>", "All Buffers" },
         q = { "<CMD>q!<CR>", "Nvim (NO SAVE)" },
-    },
-    t = {
-        name = "Terminal",
-        p = { "<CMD>lua _PYTHON_TOGGLE()<CR>", "Python" },
-        f = { "<CMD>ToggleTerm direction=float<CR>", "Float" },
-        h = {
-            "<CMD>ToggleTerm size=10 direction=horizontal<CR>",
-            "Horizontal",
-        },
-        t = { "<CMD>ToggleTerm direction=tab<CR>", "Tab" },
-        v = { "<CMD>ToggleTerm size=80 direction=vertical<CR>", "Vertical" },
     },
     w = {
         name = "Buffer Navigation",
@@ -130,25 +77,4 @@ local maps = {
     },
 }
 
-local vopts = {
-    mode = "v",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = true,
-}
-
-local vmaps = {
-    ["/"] = {
-        "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
-        "Comment Linewise",
-    },
-    ["["] = {
-        "<ESC><CMD>lua require('Comment.api').toggle_blockwise_op(vim.fn.visualmode())<CR>",
-        "Comment Blockwise",
-    },
-}
-
 wk.register(maps, opts)
-wk.register(vmaps, vopts)
