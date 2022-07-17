@@ -1,27 +1,19 @@
 local lspconfig = require("lspconfig")
+local format = require("utils.format")
 
 local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
+    Error = " ",
+    Warn = " ",
+    Info = " ",
+    Hint = "ﴞ ",
 }
 
-for _, sign in ipairs(signs) do
-    vim.fn.sign_define(
-        sign.name,
-        { texthl = sign.name, text = sign.text, numhl = "" }
-    )
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 vim.diagnostic.config({
-    virtual_text = false,
-    signs = {
-        active = signs,
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
     float = {
         focusable = false,
         style = "minimal",
@@ -29,6 +21,13 @@ vim.diagnostic.config({
         source = "always",
         header = "",
         prefix = "",
+    },
+    severity_sort = true,
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+    virtual_text = {
+        source = true,
     },
 })
 
@@ -40,38 +39,35 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true, buffer = bufnr }
-vim.keymap.set("n", "<C-e>", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<C-l>", vim.diagnostic.setloclist, opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-    vim.keymap.set("n", "<C-d>", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set("n", "<C-b>", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-end
-
 -- Add additional capabilities supported by nvim-cmp
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
+function _G.reload_lsp()
+    vim.lsp.stop_client(vim.lsp.get_active_clients())
+    vim.cmd([[edit]])
+end
+
+function _G.open_lsp_log()
+    local path = vim.lsp.get_log_path()
+    vim.cmd("edit " .. path)
+end
+
+vim.cmd("command! -nargs=0 LspLog call v:lua.open_lsp_log()")
+vim.cmd("command! -nargs=0 LspRestart call v:lua.reload_lsp()")
+
+local enhance_attach = function(client, bufnr)
+    if client.server_capabilities.document_formatting then
+        format.lsp_before_save()
+    end
+    api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+end
+
 -- Language Server Protocols
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 lspconfig.sumneko_lua.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
     settings = {
         Lua = {
             diagnostics = {
@@ -87,21 +83,48 @@ lspconfig.sumneko_lua.setup({
     },
 })
 
-lspconfig.pyright.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
+local lsp_servers = {
+    -- 'bashls',
+    -- 'dockerls',
+    "pyright",
+    -- 'tsserver',
+}
+
+for _, server in ipairs(lsp_servers) do
+    lspconfig[server].setup({
+        on_attach = enhance_attach,
+    })
+end
+
+lspconfig.clangd.setup({
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--suggest-missing-includes",
+        "--clang-tidy",
+        "--header-insertion=iwyu",
+    },
 })
 
 lspconfig.rust_analyzer.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
     settings = {
-        ["rust-analyzer"] = {},
+        ["rust-analyzer"] = {
+            assist = {
+                importGranularity = "module",
+                importPrefix = "self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true,
+            },
+            procMacro = {
+                enable = true,
+            },
+        },
     },
 })
 
 lspconfig.hls.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "haskell-language-server-wrapper", "--lsp" },
     settings = {
@@ -112,7 +135,6 @@ lspconfig.hls.setup({
 })
 
 lspconfig.texlab.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
     log_level = vim.lsp.protocol.MessageType.Log,
     settings = {

@@ -129,11 +129,12 @@ return packer.startup(function(use)
     use({
         "folke/which-key.nvim",
         config = [[ prequire('modules.which-key')
-                    prequire('keymaps.which-key') ]],
+                    prequire('keymaps.wk-main') ]],
     })
     use({
         "akinsho/nvim-toggleterm.lua",
-        config = [[ prequire('toggleterm', {}) ]],
+        config = [[ prequire('toggleterm', {})
+                    prequire('keymaps.toggleterm') ]],
     })
     use({
         "TimUntersberger/neogit",
@@ -230,7 +231,8 @@ return packer.startup(function(use)
     use({
         "numToStr/Comment.nvim",
         after = "nvim-treesitter",
-        config = [[ prequire('Comment', {}) ]],
+        config = [[ prequire('Comment', {})
+                    prequire('keymaps.comment ') ]],
     })
     use({
         "folke/todo-comments.nvim",
