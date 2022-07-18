@@ -61,7 +61,7 @@ return packer.startup(function(use)
     use({
         "akinsho/bufferline.nvim",
         after = "nvim-web-devicons",
-        config = [[ prequire('modules.bufferline') ]],
+        config = [[ prequire('modules.ui.bufferline') ]],
     })
     -- use({
     --     "themercorp/themer.lua",
@@ -85,17 +85,17 @@ return packer.startup(function(use)
         "glepnir/dashboard-nvim",
         event = "BufWinEnter",
         after = "catppuccin",
-        config = [[ prequire('modules.dashboard') ]],
+        config = [[ prequire('modules.ui.dashboard') ]],
     })
     use({
         "gelguy/wilder.nvim",
         run = ":UpdateRemotePlugins",
         requires = { "romgrk/fzy-lua-native" },
-        config = [[ prequire('modules.wilder') ]],
+        config = [[ prequire('modules.ui.wilder') ]],
     })
     use({
         "lukas-reineke/indent-blankline.nvim",
-        config = [[ prequire('modules.blankline') ]],
+        config = [[ prequire('modules.ui.blankline') ]],
     })
     use({
         "norcalli/nvim-colorizer.lua",
@@ -122,7 +122,7 @@ return packer.startup(function(use)
             },
             "nvim-telescope/telescope-project.nvim",
         },
-        config = [[ prequire('modules.telescope') ]],
+        config = [[ prequire('modules.toolbox.telescope') ]],
     })
     use({
         "kyazdani42/nvim-tree.lua",
@@ -132,7 +132,7 @@ return packer.startup(function(use)
     })
     use({
         "folke/which-key.nvim",
-        config = [[ prequire('modules.which-key')
+        config = [[ prequire('modules.toolbox.which-key')
                     prequire('keymaps.wk-main') ]],
     })
     use({
@@ -163,13 +163,13 @@ return packer.startup(function(use)
     use({
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
-        config = [[ prequire('modules.lspconfig') ]],
+        config = [[ prequire('modules.completion.lspconfig') ]],
     })
     use({
         "glepnir/lspsaga.nvim",
         branch = "main",
         after = "nvim-lspconfig",
-        config = [[ prequire('modules.lspsaga') 
+        config = [[ prequire('modules.completion.lspsaga') 
                     prequire('keymaps.lspsaga') ]],
     })
     use({
@@ -189,13 +189,13 @@ return packer.startup(function(use)
             { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
             { "hrsh7th/cmp-path", after = "cmp-buffer" },
         },
-        config = [[ prequire('modules.cmp') ]],
+        config = [[ prequire('modules.completion.cmp') ]],
     })
     use({
         "L3MON4D3/LuaSnip",
         after = "nvim-cmp",
         requires = { "rafamadriz/friendly-snippets" },
-        config = [[ prequire('modules.luasnip') ]],
+        config = [[ prequire('modules.completion.luasnip') ]],
     })
     -- use({
     --     zbirenbaum/copilot.lua",
@@ -214,26 +214,26 @@ return packer.startup(function(use)
     use({
         "windwp/nvim-autopairs",
         after = "nvim-cmp",
-        config = [[ prequire('modules.autopairs') ]],
+        config = [[ prequire('modules.editor.autopairs') ]],
     })
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
         event = { "BufRead", "BufNewFile" },
         requires = { "nvim-treesitter/nvim-treesitter-textobjects" },
-        config = [[ prequire('modules.treesitter') ]],
+        config = [[ prequire('modules.editor.treesitter') ]],
     })
     use({
         "nvim-neorg/neorg",
         ft = "norg",
         after = "nvim-treesitter",
         requires = { "nvim-lua/plenary.nvim" },
-        config = [[ prequire('modules.neorg') ]],
+        config = [[ prequire('modules.editor.neorg') ]],
     })
     use({
         "kevinhwang91/nvim-ufo",
         requires = { "kevinhwang91/promise-async" },
-        config = [[ prequire('modules.folding') ]],
+        config = [[ prequire('modules.editor.folding') ]],
     })
     use({
         "numToStr/Comment.nvim",
@@ -258,7 +258,7 @@ return packer.startup(function(use)
             vim.fn["mkdp#util#install"]()
         end,
         ft = { "markdown" },
-        config = [[ prequire('modules.md-preview')
+        config = [[ prequire('modules.editor.md-preview')
                     prequire('keymaps.md-preview') ]],
     })
 
