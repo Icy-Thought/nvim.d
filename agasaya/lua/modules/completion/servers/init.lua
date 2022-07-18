@@ -3,20 +3,20 @@ local lsputils = require("utils.lsp")
 
 -- Language Server Protocols
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-local auto_lsp_setup = {
+local lsp_noconf = {
     -- 'dockerls',
     "pyright",
     -- 'tsserver',
 }
 
-for _, server in ipairs(auto_lsp_setup) do
+for _, server in ipairs(lsp_noconf) do
     lspconfig[server].setup({
         lsputils.init,
     })
 end
 
 -- Import language servers defined within ./servers
-function langserv(server)
+function _G.lsp_require(server)
     if type(server) == "string" then
         require("modules.completion.servers." .. server)
     else
@@ -24,9 +24,15 @@ function langserv(server)
     end
 end
 
-langserv("c")
-langserv("haskell")
-langserv("latex")
-langserv("lua")
-langserv("python")
-langserv("rust")
+local languages = {
+    "c",
+    "haskell",
+    "latex",
+    "lua",
+    "python",
+    "rust"
+}
+
+for v in ipairs(languages) do
+    lsp_require(languages[v])
+end

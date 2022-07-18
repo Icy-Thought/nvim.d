@@ -1,6 +1,3 @@
--- Init language-servers
-require("modules.completion.servers")
-
 local signs = {
     Error = " ",
     Warn = " ",
@@ -39,15 +36,18 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-function lsputils.reload_lsp()
+function _G.reload_lsp()
     vim.lsp.stop_client(vim.lsp.get_active_clients())
     vim.cmd([[edit]])
 end
 
-function lsputils.open_lsp_log()
+function _G.open_lsp_log()
     local path = vim.lsp.get_log_path()
     vim.cmd("edit " .. path)
 end
 
 vim.cmd("command! -nargs=0 LspLog call v:lua.open_lsp_log()")
 vim.cmd("command! -nargs=0 LspRestart call v:lua.reload_lsp()")
+
+-- Init language-servers
+require("modules.completion.servers")
