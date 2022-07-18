@@ -208,7 +208,8 @@ return packer.startup(function(use)
     -------===[ Editor ]===-------
     use({
         "Vonr/align.nvim",
-        config = [[ prequire('keymaps.align') ]],
+        config = [[ prequire('keymaps.align')
+                    prequire('keymaps.align') ]],
     })
     use({
         "windwp/nvim-autopairs",
@@ -253,11 +254,12 @@ return packer.startup(function(use)
     })
     use({
         "iamcco/markdown-preview.nvim",
-        ft = { "markdown" },
         run = function()
             vim.fn["mkdp#util#install"]()
         end,
-        config = [[ prequire('modules.md-preview') ]],
+        ft = { "markdown" },
+        config = [[ prequire('modules.md-preview')
+                    prequire('keymaps.md-preview') ]],
     })
 
     -- Allow Packer to auto-compile nvim config
