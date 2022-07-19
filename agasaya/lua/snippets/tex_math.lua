@@ -6,6 +6,16 @@ local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
 
+-- Additional functions
+local function newline(n)
+  n = n or 1
+  local lines = { "" }
+  for _ = 1, n do
+    lines[#lines + 1] = ""
+  end
+  return t(lines)
+end
+
 local in_mathzone = require("utils.math").in_mathzone
 
 local function add_math_snippets(lang, snips, opts)
@@ -38,6 +48,7 @@ local auto_snippets = {
         end),
         i(0),
     }),
+    s("..", { t("\\cdot "), i(0) }),
     s("...", { t("\\ldots "), i(0) }),
     s("~=", { t("\\approx "), i(0) }),
     s("!=", { t("\\neq "), i(0) }),
@@ -49,11 +60,11 @@ local auto_snippets = {
     s("==", { t("&=& "), i(0) }),
     s(">=", { t("\\ge "), i(0) }),
     s("//", { t("\\frac{"), i(1), t("}{"), i(2), t("}") }),
+    s("\\\\~", { t("\\\\~\\\\"), newline(1), i(0) }),
     s("\\\\\\", { t("\\setminus "), i(0) }),
     s("bcs", { t("\\because ") }),
     s("box", { t("\\boxed{"), i(1), t("} "), i(0) }),
     s("cc", { t("\\subset "), i(0) }),
-    s("cdot", { t("\\cdot "), i(0) }),
     s("compl", { t("^{C} "), i(0) }),
     s("dint", { t("\\int_{"), i(1), t("}^{"), i(2), t("} "), i(0) }),
     s("inn", { t("\\in "), i(0) }),
