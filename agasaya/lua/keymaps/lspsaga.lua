@@ -3,11 +3,7 @@ local action = require("lspsaga.codeaction")
 local diagnostic = require("lspsaga.diagnostic")
 
 -- General LSP mappings
-utils.nnoremap(
-    "<leader>lf",
-    "<CMD>lua vim.lsp.buf.format({ async = true })<CR>",
-    { desc = "Format Code" }
-)
+utils.nnoremap("<leader>lf", "<CMD>FormatWrite<CR>", { desc = "Format Code" })
 
 -- Find word definition and reference
 utils.nnoremap(

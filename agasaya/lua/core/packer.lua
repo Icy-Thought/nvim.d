@@ -173,6 +173,11 @@ return packer.startup(function(use)
                     prequire('keymaps.lspsaga') ]],
     })
     use({
+        "mhartington/formatter.nvim",
+        after = "nvim-lspconfig",
+        config = [[ prequire('modules.completion.formatter') ]],
+    })
+    use({
         "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" },
         config = [[ prequire('dapui', { 
