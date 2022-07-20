@@ -2,10 +2,8 @@ require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
     auto_install = true,
     sync_install = false,
-    ignore_install = {},
-    autopairs = {
-        enable = true,
-    },
+
+    autopairs = { enable = true },
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -17,9 +15,7 @@ require("nvim-treesitter.configs").setup({
         end,
         use_languagetree = false,
     },
-    indent = {
-        enable = true,
-    },
+    indent = { enable = true },
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -29,9 +25,7 @@ require("nvim-treesitter.configs").setup({
             node_decremental = "gnp",
         },
     },
-    context_commentstring = {
-        enable = true,
-    },
+    context_commentstring = { enable = true },
     textobjects = {
         select = {
             enable = true,

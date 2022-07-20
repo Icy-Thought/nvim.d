@@ -44,7 +44,7 @@ telescope.setup({
         file_sorter = ts_sort.get_fuzzy_file,
         generic_sorter = ts_sort.get_generic_fuzzy_sorter,
         grep_previewer = ts_prev.vim_buffer_vimgrep.new,
-        path_display = { "absolute" },
+        path_display = { shorten = 4 },
         qflist_previewer = ts_prev.vim_buffer_qflist.new,
         use_less = true,
         winblend = 0,
