@@ -1,7 +1,7 @@
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({
+    _G.packer_bootstrap = fn.system({
         "git",
         "clone",
         "--depth",
@@ -14,7 +14,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Creds: Ae-Mc/nvim (GitHub)
-function prequire(plugin_name, setup)
+function _G.prequire(plugin_name, setup)
     local ok, plugin = pcall(require, plugin_name)
     if ok then
         if type(setup) == "function" then
@@ -51,32 +51,32 @@ return packer.startup(function(use)
     -------===[ Core ]===-------
     use({
         "lewis6991/impatient.nvim",
-        config = [[ require'impatient'.enable_profile() ]],
+        config = [[ require('impatient') ]],
     })
     use({ "wbthomason/packer.nvim" })
-    use({ "nvim-lua/plenary.nvim", event = "BufRead" })
 
     -------===[ Aesthetics ]===-------
     use({ "kyazdani42/nvim-web-devicons", event = "VimEnter" })
     use({
-        "akinsho/bufferline.nvim",
-        after = "nvim-web-devicons",
-        config = [[ prequire('modules.ui.bufferline') ]],
+        "catppuccin/nvim",
+        as = "catppuccin",
+        run = "CatppuccinCompile",
+        config = [[ prequire('themes.catppuccin') ]],
     })
     -- use({
     --     "themercorp/themer.lua",
     --     config = [[ prequire('themes.themer') ]],
     -- })
     use({
-        "catppuccin/nvim",
-        as = "catppuccin",
-        run = "CatppuccinCompile",
-        after = "bufferline.nvim",
-        config = [[ prequire('themes.catppuccin') ]],
+        "akinsho/bufferline.nvim",
+        event = "VimEnter",
+        wants = "nvim-web-devicons",
+        config = [[ prequire('modules.ui.bufferline') ]],
     })
     use({
         "feline-nvim/feline.nvim",
-        after = "catppuccin",
+        event = "VimEnter",
+        wants = "nvim-web-devicons",
         config = [[ prequire('feline', {
 	    components = require('catppuccin.groups.integrations.feline').get()
         }) ]],
@@ -84,34 +84,19 @@ return packer.startup(function(use)
     use({
         "glepnir/dashboard-nvim",
         event = "BufWinEnter",
-        after = "catppuccin",
         config = [[ prequire('modules.ui.dashboard') ]],
     })
     use({
         "gelguy/wilder.nvim",
-        run = ":UpdateRemotePlugins",
+        run = "UpdateRemotePlugins",
+        event = "CmdlineEnter",
         requires = { "romgrk/fzy-lua-native" },
         config = [[ prequire('modules.ui.wilder') ]],
-    })
-    use({
-        "lukas-reineke/indent-blankline.nvim",
-        config = [[ prequire('modules.ui.blankline') ]],
-    })
-    use({
-        "norcalli/nvim-colorizer.lua",
-        after = "catppuccin",
-        config = [[ prequire('colorizer', {}) ]],
-    })
-    use({
-        "lewis6991/gitsigns.nvim",
-        after = "plenary.nvim",
-        config = [[ prequire('gitsigns', {}) ]],
     })
 
     -------===[ Toolbox ]===-------
     use({
         "nvim-telescope/telescope.nvim",
-        after = "nvim-web-devicons",
         requires = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
@@ -132,6 +117,7 @@ return packer.startup(function(use)
     })
     use({
         "folke/which-key.nvim",
+        event = "VimEnter",
         config = [[ prequire('modules.toolbox.which-key')
                     prequire('keymaps.wk-main') ]],
     })
@@ -142,20 +128,19 @@ return packer.startup(function(use)
     })
     use({
         "TimUntersberger/neogit",
-        after = "dashboard-nvim",
         cmd = "Neogit",
+        event = "VimEnter",
         requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('neogit', {}) ]],
     })
     use({
-        "pwntester/octo.nvim",
-        after = "telescope.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = [[ prequire('octo', {}) ]],
+        "lewis6991/gitsigns.nvim",
+        event = "BufReadPost",
+        config = [[ prequire('gitsigns', {}) ]],
     })
     use({
         "windwp/nvim-spectre",
-        after = "plenary.nvim",
+        requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('spectre', {}) ]],
     })
 
@@ -169,19 +154,19 @@ return packer.startup(function(use)
         "glepnir/lspsaga.nvim",
         branch = "main",
         after = "nvim-lspconfig",
-        config = [[ prequire('modules.completion.lspsaga') 
+        config = [[ prequire('modules.completion.lspsaga')
                     prequire('keymaps.lspsaga') ]],
     })
     use({
         "mhartington/formatter.nvim",
-        after = "nvim-lspconfig",
+        event = "BufWritePre",
         config = [[ prequire('modules.completion.formatter') ]],
     })
     use({
         "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" },
-        config = [[ prequire('dapui', { 
-            floating = { border = "rounded" } 
+        config = [[ prequire('dapui', {
+            floating = { border = "rounded" }
         }) ]],
     })
     use({
@@ -204,8 +189,8 @@ return packer.startup(function(use)
     })
     -- use({
     --     zbirenbaum/copilot.lua",
-    --     after = "nvim-cmp",
     --     event = "InsertEnter",
+    --     after = "nvim-cmp",
     --     requires = {"zbirenbaum/copilot-cmp"},
     --     config = [[ prequire('copilot', {}) ]],
     -- })
@@ -213,6 +198,7 @@ return packer.startup(function(use)
     -------===[ Editor ]===-------
     use({
         "Vonr/align.nvim",
+        event = "BufReadPost",
         config = [[ prequire('keymaps.align')
                     prequire('keymaps.align') ]],
     })
@@ -222,39 +208,49 @@ return packer.startup(function(use)
         config = [[ prequire('modules.editor.autopairs') ]],
     })
     use({
+        "lukas-reineke/indent-blankline.nvim",
+        event = "BufReadPost",
+        config = [[ prequire('modules.editor.blankline') ]],
+    })
+    use({
         "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-        event = { "BufRead", "BufNewFile" },
+        run = "TSUpdate",
+        event = { "BufReadPost", "BufNewFile" },
         requires = { "nvim-treesitter/nvim-treesitter-textobjects" },
         config = [[ prequire('modules.editor.treesitter') ]],
     })
     use({
+        "norcalli/nvim-colorizer.lua",
+        event = "BufReadPost",
+        config = [[ prequire('colorizer', {}) ]],
+    })
+    use({
         "nvim-neorg/neorg",
         ft = "norg",
-        after = "nvim-treesitter",
         requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('modules.editor.neorg') ]],
     })
     use({
         "kevinhwang91/nvim-ufo",
+        event = "BufReadPost",
         requires = { "kevinhwang91/promise-async" },
         config = [[ prequire('modules.editor.folding') ]],
     })
     use({
         "numToStr/Comment.nvim",
-        after = "nvim-treesitter",
+        event = "BufReadPost",
         config = [[ prequire('Comment', {})
                     prequire('keymaps.comment ') ]],
     })
     use({
         "folke/todo-comments.nvim",
-        after = "nvim-treesitter",
+        event = "BufReadPost",
         requires = { "nvim-lua/plenary.nvim" },
         config = [[ prequire('todo-comments', {}) ]],
     })
     use({
         "Pocco81/TrueZen.nvim",
-        after = "nvim-treesitter",
+        event = "BufReadPost",
         config = [[ prequire('true-zen', {}) ]],
     })
     use({

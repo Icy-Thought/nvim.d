@@ -4,6 +4,7 @@ require("nvim-treesitter.configs").setup({
     sync_install = false,
 
     autopairs = { enable = true },
+    context_commentstring = { enable = true },
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -25,7 +26,6 @@ require("nvim-treesitter.configs").setup({
             node_decremental = "gnp",
         },
     },
-    context_commentstring = { enable = true },
     textobjects = {
         select = {
             enable = true,

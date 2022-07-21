@@ -26,6 +26,7 @@ local maps = {
     f = {
         name = "Find",
         f = { "<CMD>Telescope file_browser path=%:p:h<CR>", "Browse Files" },
+        p = { "<CMD>Telescope dotfiles<CR>", "Open Private Config" },
         r = { "<CMD>Telescope frecency<CR>", "List Frequent File" },
         R = { "<CMD>Telescope oldfiles<CR>", "Open Recent File" },
         s = { "<CMD>w!<CR>", "Save Buffer" },

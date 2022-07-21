@@ -1,16 +1,15 @@
 local db = require("dashboard")
-local config_dir = os.getenv("XDG_CONFIG_HOME")
+local config_dir = vim.fn.stdpath("config")
 
-db.custom_header =
-    vim.fn.systemlist("cat " .. config_dir .. "/nvim/dasHead.txt")
-
+db.custom_header = vim.fn.systemlist("cat " .. config_dir .. "/dasHead.txt")
+--
 db.custom_center = {
-    -- {
-    --     icon = "  ",
-    --     desc = "Change Colorscheme",
-    --     shortcut = "SPC s c",
-    --     action = "Telescope themes",
-    -- },
+    {
+        icon = "  ",
+        desc = "Switch Colorscheme" .. "                    ",
+        shortcut = "SPC s c",
+        action = "Telescope colorscheme",
+    },
     {
         icon = "  ",
         desc = "File Frecency" .. "                         ",
@@ -38,7 +37,7 @@ db.custom_center = {
     {
         icon = "  ",
         desc = "Browse Neovim Dotfiles" .. "                ",
-        action = "Telescope dotfiles path=" .. config_dir .. "/nvim",
+        action = "Telescope dotfiles path=" .. config_dir,
         shortcut = "SPC f d",
     },
     {
