@@ -18,9 +18,9 @@ end
 
 local saga_smart_scroll = function(direction)
     if direction == "up" then
-        return action.smart_scroll_with_saga(1)
+        return require("lspsaga.action").smart_scroll_with_saga(1)
     elseif direction == "down" then
-        return action.smart_scroll_with_saga(-1)
+        return require("lspsaga.action").smart_scroll_with_saga(-1)
     end
 end
 
@@ -54,9 +54,9 @@ local def_lspsaga = {
         "Bring forward Hover-DOC"
     ),
 
-    ["n|<C-b>"] = map_cr(saga_smart_scroll("up"))
-        :with_noremap()
-        :with_desc("Scroll Hover-DOC up"),
+    ["n|<C-b>"] = map_cr(saga_smart_scroll("up")):with_desc(
+        "Scroll Hover-DOC up"
+    ),
 
     ["n|<C-f>"] = map_cr(saga_smart_scroll("down")):with_desc(
         "Scroll Hover-DOC down | def. preview"
