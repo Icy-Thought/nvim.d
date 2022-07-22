@@ -13,7 +13,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     vim.cmd([[packadd packer.nvim]])
 end
 
--- Creds: Ae-Mc/nvim (GitHub)
+-- @Ae-Mc/nvim (GitHub)
 function _G.prequire(plugin_name, setup)
     local ok, plugin = pcall(require, plugin_name)
     if ok then
@@ -88,9 +88,9 @@ return packer.startup(function(use)
     })
     use({
         "gelguy/wilder.nvim",
-        run = "UpdateRemotePlugins",
         event = "CmdlineEnter",
         requires = { "romgrk/fzy-lua-native" },
+        run = "UpdateRemotePlugins",
         config = [[ prequire('modules.ui.wilder') ]],
     })
 
@@ -119,12 +119,12 @@ return packer.startup(function(use)
         "folke/which-key.nvim",
         event = "VimEnter",
         config = [[ prequire('modules.toolbox.which-key')
-                    prequire('keymaps.wk-main') ]],
+                    prequire('keymap.wk-main') ]],
     })
     use({
         "akinsho/nvim-toggleterm.lua",
         config = [[ prequire('toggleterm', {})
-                    prequire('keymaps.toggleterm') ]],
+                    prequire('keymap.toggleterm') ]],
     })
     use({
         "TimUntersberger/neogit",
@@ -155,7 +155,7 @@ return packer.startup(function(use)
         branch = "main",
         after = "nvim-lspconfig",
         config = [[ prequire('modules.completion.lspsaga')
-                    prequire('keymaps.lspsaga') ]],
+                    prequire('keymap.lspsaga') ]],
     })
     use({
         "mhartington/formatter.nvim",
@@ -170,10 +170,16 @@ return packer.startup(function(use)
         }) ]],
     })
     use({
-        "hrsh7th/nvim-cmp",
+        "L3MON4D3/LuaSnip",
         event = "InsertEnter",
+        requires = { "rafamadriz/friendly-snippets" },
+        config = [[ prequire('modules.completion.luasnip') ]],
+    })
+    use({
+        "hrsh7th/nvim-cmp",
+        after = { "LuaSnip" },
         requires = {
-            { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
+            { "saadparwaiz1/cmp_luasnip", after = { "LuaSnip", "nvim-cmp" } },
             { "hrsh7th/cmp-nvim-lua", after = "cmp_luasnip" },
             { "hrsh7th/cmp-nvim-lsp", after = "cmp-nvim-lua" },
             { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
@@ -181,15 +187,8 @@ return packer.startup(function(use)
         },
         config = [[ prequire('modules.completion.cmp') ]],
     })
-    use({
-        "L3MON4D3/LuaSnip",
-        after = "nvim-cmp",
-        requires = { "rafamadriz/friendly-snippets" },
-        config = [[ prequire('modules.completion.luasnip') ]],
-    })
     -- use({
     --     zbirenbaum/copilot.lua",
-    --     event = "InsertEnter",
     --     after = "nvim-cmp",
     --     requires = {"zbirenbaum/copilot-cmp"},
     --     config = [[ prequire('copilot', {}) ]],
@@ -199,8 +198,8 @@ return packer.startup(function(use)
     use({
         "Vonr/align.nvim",
         event = "BufReadPost",
-        config = [[ prequire('keymaps.align')
-                    prequire('keymaps.align') ]],
+        config = [[ prequire('keymap.align')
+                    prequire('keymap.align') ]],
     })
     use({
         "windwp/nvim-autopairs",
@@ -209,7 +208,7 @@ return packer.startup(function(use)
     })
     use({
         "lukas-reineke/indent-blankline.nvim",
-        event = "BufReadPost",
+        after = "nvim-treesitter",
         config = [[ prequire('modules.editor.blankline') ]],
     })
     use({
@@ -240,7 +239,7 @@ return packer.startup(function(use)
         "numToStr/Comment.nvim",
         event = "BufReadPost",
         config = [[ prequire('Comment', {})
-                    prequire('keymaps.comment ') ]],
+                    prequire('keymap.comment ') ]],
     })
     use({
         "folke/todo-comments.nvim",
@@ -260,7 +259,7 @@ return packer.startup(function(use)
         end,
         ft = { "markdown" },
         config = [[ prequire('modules.editor.md-preview')
-                    prequire('keymaps.md-preview') ]],
+                    prequire('keymap.md-preview') ]],
     })
 
     -- Allow Packer to auto-compile nvim config
