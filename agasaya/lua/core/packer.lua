@@ -172,7 +172,7 @@ return packer.startup(function(use)
     use({
         "L3MON4D3/LuaSnip",
         event = "InsertEnter",
-        requires = { "rafamadriz/friendly-snippets" },
+        requires = { "icy-thought/friendly-snippets" },
         config = [[ prequire('modules.completion.luasnip') ]],
     })
     use({
