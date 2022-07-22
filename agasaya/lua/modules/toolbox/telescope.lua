@@ -50,11 +50,11 @@ telescope.setup({
         winblend = 0,
     },
     extensions = {
-        frecency = {
-            show_scores = true,
-            show_unindexed = true,
-            ignore_patterns = { "*.git/*", "*/tmp/*" },
-        },
+        --     frecency = {
+        --         show_scores = true,
+        --         show_unindexed = true,
+        --         ignore_patterns = { "*.git/*", "*/tmp/*" },
+        --     },
         fzf = {
             fuzzy = true,
             override_generic_sorter = true,
@@ -66,6 +66,5 @@ telescope.setup({
 
 telescope.load_extension("dotfiles")
 telescope.load_extension("file_browser")
-telescope.load_extension("frecency")
 telescope.load_extension("fzf")
 telescope.load_extension("project")
