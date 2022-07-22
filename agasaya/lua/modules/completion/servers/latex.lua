@@ -10,12 +10,10 @@ lspconfig.texlab.setup({
             build = {
                 executable = "tectonic",
                 args = {
-                    "--keep-logs",
-                    "--keep-intermediates",
-                    "-synctex",
                     "-X",
                     "compile",
                     "%f",
+                    "--synctex",
                 },
                 -- onSave = true,
             },
