@@ -8,12 +8,12 @@ local d = ls.dynamic_node
 
 -- Additional functions
 local function newline(n)
-  n = n or 1
-  local lines = { "" }
-  for _ = 1, n do
-    lines[#lines + 1] = ""
-  end
-  return t(lines)
+    n = n or 1
+    local lines = { "" }
+    for _ = 1, n do
+        lines[#lines + 1] = ""
+    end
+    return t(lines)
 end
 
 local in_mathzone = require("utils.math").in_mathzone
@@ -117,6 +117,14 @@ local general_snippets = {
     s("bmat", { t("\\begin{bmatrix} "), i(1), t("\\end{bmatrix} "), i(0) }),
     s("pmat", { t("\\begin{pmatrix} "), i(1), t("\\end{pmatrix} "), i(0) }),
     s("sqrt", { t("\\sqrt{"), i(1), t("} "), i(0) }),
+    s("lim", {
+        t("\\lim\\limits_{"),
+        i(1, "x"),
+        t(" \\to "),
+        i(2, "0"),
+        t("} "),
+        i(0),
+    }),
     s("derive", {
         t("\\frac{d"),
         i(1, "y"),
