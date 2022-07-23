@@ -44,7 +44,7 @@ function events.load_autocmds()
             -- Limit text-width to 80 chars for documentation formats
             {
                 "FileType",
-                "markdown, norg",
+                "markdown,norg",
                 "set textwidth=80",
             },
         },
