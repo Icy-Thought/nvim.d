@@ -27,6 +27,7 @@ ls.add_snippets("tex", {
     s({ trig = "init", name = "Minimal LaTeX template" }, {
         t({
             "\\documentclass[10pt,a4paper,twocolumn]{report}",
+            "\\setcounter{secnumdepth}{4}",
             "",
             "\\usepackage[margin=2cm]{geometry}",
             "\\setlength{\\columnsep}{1.5cm}",
