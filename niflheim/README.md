@@ -1,4 +1,4 @@
-![Niflheim](../.assets/niflheim.png)
+![Niflheim](../.assets/png/niflheim.png)
 
 # Table of Contents
 - [Greetings from NVIM! 🌒](#greetings-from-nvim-)

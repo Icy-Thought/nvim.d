@@ -1,4 +1,4 @@
-![Agasaya](../.assets/agasaya.png)
+![Agasaya](../.assets/png/agasaya.png)
 
 # Table of Contents
 - [Greetings from NVIM! 🌒](#greetings-from-nvim-)
