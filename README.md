@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./.assets/NeovimIcon.svg" alt="Emacs Logo" width="742" height="214"/>
+  <img src="./.assets/neovim.svg" alt="Neovim" width="300" height="300"/>
 </p>
 
 # Neovim Dotfiles
