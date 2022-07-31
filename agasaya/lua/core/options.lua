@@ -31,6 +31,7 @@ local vim_options = function()
         foldcolumn = "1",
         foldenable = true,
         foldlevel = 99,
+        foldlevelstart = 99,
         gdefault = true,
         grepformat = "%f:%l:%c:%m",
         grepprg = "rg --hidden --vimgrep --smart-case --",

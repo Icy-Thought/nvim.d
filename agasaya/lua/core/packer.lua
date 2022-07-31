@@ -207,16 +207,16 @@ return packer.startup(function(use)
         config = [[ prequire('modules.editor.autopairs') ]],
     })
     use({
-        "lukas-reineke/indent-blankline.nvim",
-        after = "nvim-treesitter",
-        config = [[ prequire('modules.editor.blankline') ]],
-    })
-    use({
         "nvim-treesitter/nvim-treesitter",
         run = "TSUpdate",
         event = { "BufReadPost", "BufNewFile" },
         requires = { "nvim-treesitter/nvim-treesitter-textobjects" },
         config = [[ prequire('modules.editor.treesitter') ]],
+    })
+    use({
+        "lukas-reineke/indent-blankline.nvim",
+        after = "nvim-treesitter",
+        config = [[ prequire('modules.editor.blankline') ]],
     })
     use({
         "norcalli/nvim-colorizer.lua",
@@ -231,7 +231,7 @@ return packer.startup(function(use)
     })
     use({
         "kevinhwang91/nvim-ufo",
-        event = "BufReadPost",
+        after = "nvim-treesitter",
         requires = { "kevinhwang91/promise-async" },
         config = [[ prequire('modules.editor.folding') ]],
     })
