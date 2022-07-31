@@ -1,7 +1,7 @@
 (import-macros {: color!} :hibiscus.vim)
 
-(require :core.plugins)
-(require :core.settings)
+(require :core.packer)
+(require :core.options)
 
 (require :keymaps.default)
 (require :keymaps.which-key)

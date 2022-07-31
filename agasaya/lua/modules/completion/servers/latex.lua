@@ -18,8 +18,15 @@ lspconfig.texlab.setup({
                 -- onSave = true,
             },
             forwardSearch = {
-                executable = "zathura",
-                args = { "--synctex-forward", "%l:1:%f", "%p" },
+                executable = "sioyek",
+                -- FIXME: not working atm
+                args = {
+                    "--reuse-instance",
+                    "--forward-search-file '%b'",
+                    "--forward-search-line %n",
+                    "--inverse-search",
+                    "'nvim --headless -es --cmd %l:%f'",
+                },
             },
             chktex = { onEdit = false, onOpenAndSave = true },
             diagnosticsDelay = 100,

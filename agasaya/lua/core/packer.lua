@@ -248,7 +248,7 @@ return packer.startup(function(use)
         config = [[ prequire('todo-comments', {}) ]],
     })
     use({
-        "Pocco81/TrueZen.nvim",
+        "Pocco81/true-zen.nvim",
         event = "BufReadPost",
         config = [[ prequire('true-zen', {}) ]],
     })
