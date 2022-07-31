@@ -1,59 +1,78 @@
-(require-macros :hibiscus.vim)
+(import-macros {: set!} :macros.option-macros)
 
-;; General
-(set! :autoread true)
-(set! :backup false)
-(set! :lazyredraw true)
-(set! :spell false)
-(set! :swapfile false)
-(set! :timeoutlen 100)
-(set! :undofile true)
-(set! :updatetime 300)
-(set! :wrap false)
-(set! :writebackup false)
-(set+ :fileencoding :utf-8)
-(set+ :mouse "a")
+;; add Mason to path
+(set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
-; commands
-;; (command! "set whichwrap+=<,>,[,],h,l")
-;; (command! "set iskeyword+=-")
+;; improve updatetime for quicker refresh + gitsigns
+(set! updatetime 200)
+(set! timeoutlen 500)
 
-;; Aesthetics
-(set! :cmdheight 2)
-(set! :conceallevel 1)
-(set! :cursorline true)
-(set! :number true)
-(set! :numberwidth 4)
-(set! :pumheight 10)
-(set! :relativenumber true)
-(set! :showmode false)
-(set! :termguicolors true)
+;; Set shortmess
+(set! shortmess :filnxtToOFatsIc)
 
-;; Editor
-(set! :expandtab true)
-(set! :scrolloff 8)
-(set! :shiftwidth 4)
-(set! :showtabline 2)
-(set! :sidescrolloff 8)
-(set! :smartindent true)
-(set! :softtabstop 4)
-(set! :splitbelow true)
-(set! :splitright true)
-(set+ :clipboard "unnamedplus")
-(set+ :signcolumn "yes")
-(set^ :completeopt ["menuone" "noselect"])
+;; trailing characters setup
+(set! list)
+(set! listchars {:tab "> " :nbsp "␣" :trail "-"})
 
-;;(set^ "shortmess:append" {:c true))
-;;(set! :diffopt:append({ "internal", "algorithm:patience" })
+;; don't wrap text
+(set! nowrap)
 
-;; Search
-(set! :gdefault true)
-(set! :hlsearch true)
-(set! :ignorecase true)
-(set! :magic true)
-(set! :smartcase true)
+;; Use clipboard outside Neovim
+(set! clipboard :unnamedplus)
 
-;; Limit MD char(length) = 80
-(augroup! :Markdown 
-  [[BufEnter] * "set fo-=c fo-=r fo-=o"]
-  [[BufRead BufNewFile] *.md "setlocal textwidth=80 fo+=t"])
+;; Enable mouse input
+(set! mouse :a)
+
+;; Disable swapfiles and enable undofiles
+(set! undofile)
+(set! noswapfile)
+
+;; Disable ruler
+(set! noruler)
+
+;; Disable showing mode 
+(set! noshowmode)
+
+;; Global statusline
+(set! laststatus 3)
+
+;; low cmdheight
+(set! cmdheight 0)
+
+;; Numbering
+(set! nonumber)
+
+;; Smart search
+(set! smartcase)
+
+;; Indentation rules
+(set! copyindent)
+(set! smartindent)
+(set! preserveindent)
+
+;; Indentation level
+(set! tabstop 4)
+(set! shiftwidth 4)
+(set! softtabstop 4)
+
+;; Expand tabs
+(set! expandtab)
+
+;; Enable cursorline/column
+(set! cursorline)
+(set! nocursorcolumn)
+
+;; Automatic split locations
+(set! splitright)
+(set! splitbelow)
+
+;; Scroll off
+(set! scrolloff 8)
+
+;; cmp options
+(set! completeopt [:menu :menuone :preview :noinsert])
+
+;; colorscheme
+(set! background :dark)
+(set! guifont "Liga SFMono Nerd Font:h15")
+
