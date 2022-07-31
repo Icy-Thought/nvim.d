@@ -6,7 +6,7 @@
 ;;; Extra parsers
 (local parser-config (tsp.get_parser_configs))
 
-;; neorg treesitter parsers 
+;; neorg treesitter parsers
 (set parser-config.norg {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg"
                                         :files [:src/parser.c :src/scanner.cc]
                                         :branch :main}})
@@ -23,7 +23,7 @@
 
 ;; WIP highlight/parse only buffer scope
 (ts.define_modules
-  {:nyoom-ts
+  {:ereshkigal-ts
    {:highlight_scope {:module_path :utils.ts-highlight-scope
                       :enable false
                       :disable []
@@ -33,7 +33,7 @@
         :ignore_install [:phpdoc :norg]
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
-        :rainbow {:enable true 
+        :rainbow {:enable true
                   :extended_mode true
                   :colors [:#878d96
                            :#a8a8a8
@@ -47,13 +47,13 @@
                                 :keymaps {:init_selection :gnn
                                           :node_incremental :grn
                                           :scope_incremental :grc
-                                          :node_decremental :grm}}  
+                                          :node_decremental :grm}}
         :textobjects {:select {:enable true}
                       :lookahead true
                       :keymaps {:af "@function.outer"
                                 :if "@function.inner"
                                 :ac "@class.outer"
-                                :ic "@class.inner"}  
+                                :ic "@class.inner"}
                       :move {:enable true
                              :set_jumps true
                              :goto_next_start {"]m" "@function.outer"
@@ -63,4 +63,4 @@
                              :goto_previous_start {"[m" "@function.outer"
                                                    "[[" "@class.outer"}
                              :goto_previous_end {"[M" "@function.outer"
-                                                 "[]" "@class.outer"}}}})  
+                                                 "[]" "@class.outer"}}}})

@@ -9,14 +9,14 @@ end
 -- if it isn't it will be installed
 ---@param plugin string #the plugin, must follow the format `username/repository`
 ---@param branch string? #the branch of the plugin
-local function assert_installed_plugin(plugin, branch)
+local function assert_installed(plugin, branch)
     local _, _, plugin_name = string.find(plugin, [[%S+/(%S+)]])
     local plugin_path = vim.fn.stdpath("data")
         .. "/site/pack/packer/start/"
         .. plugin_name
     if vim.fn.empty(vim.fn.glob(plugin_path)) ~= 0 then
         fprint(
-            "Couldn't find '%s', cloning new copy to %s",
+            "Couldn't find '%s'. Cloning a new copy to %s",
             plugin_name,
             plugin_path
         )
@@ -25,8 +25,7 @@ local function assert_installed_plugin(plugin, branch)
                 "git",
                 "clone",
                 "https://github.com/" .. plugin,
-                "--branch",
-                branch,
+                "--branch " .. branch,
                 plugin_path,
             })
         else
@@ -40,16 +39,14 @@ local function assert_installed_plugin(plugin, branch)
     end
 end
 
--- Install essential plugins
-assert_installed_plugin("wbthomason/packer.nvim")
-assert_installed_plugin("rktjmp/hotpot.nvim", "nightly")
+assert_installed("wbthomason/packer.nvim")
+assert_installed("rktjmp/hotpot.nvim", "nightly")
 
 if pcall(require, "hotpot") then
-    -- Setup hotpot.nvim
     require("hotpot").setup({
         provide_require_fennel = true,
     })
     require("init")
 else
-    print("Unable to require hotpot")
+    print("Failed to require hotpot.")
 end

@@ -1,6 +1,6 @@
-(import-macros {: set! : local-set!} :macros.option-macros)
+(import-macros {: set! : local-set!} :macros.option)
 
-;; Icons/text for each mode 
+;; Icons/text for each mode
 (local modes {:n :RW
               :no :RO
               :v "**"

@@ -1,5 +1,5 @@
-(require-macros :macros.event-macros)
-(import-macros {: set!} :macros.option-macros)
+(require-macros :macros.event)
+(import-macros {: set!} :macros.option)
 
 ;; Restore cursor on exit
 (augroup! restore-cursor-on-exit

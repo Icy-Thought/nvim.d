@@ -1,4 +1,4 @@
-(import-macros {: set!} :macros.option-macros)
+(import-macros {: set!} :macros.option)
 
 (local {: insert} table)
 (local {: setup
@@ -11,10 +11,10 @@
 
 (local types (require :cmp.types))
 (local under-compare (require :cmp-under-comparator))
-(local {: lsp_expand 
-        : expand_or_jump 
-        : expand_or_jumpable 
-        : jump 
+(local {: lsp_expand
+        : expand_or_jump
+        : expand_or_jumpable
+        : jump
         : jumpable} (require :luasnip))
 
 ;; default icons (lspkind)

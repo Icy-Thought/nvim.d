@@ -1,11 +1,47 @@
-;; load keybinds
-(require :core.keybinds)
+(require-macros :macros.event)
 
-;; load vim options
-(require :core.options)
+;; disable some built-in Neovim plugins and unneeded providers
+(let [built-ins [:2html_plugin
+                 :getscript
+                 :getscriptPlugin
+                 :gtags
+                 :gzip
+                 :logiPat
+                 :matchit
+                 :matchparen
+                 :netrw
+                 :netrwFileHandlers
+                 :netrwPlugin
+                 :netrwSettings
+                 :rrhelper
+                 :spellfile_plugin
+                 :tar
+                 :tarPlugin
+                 :vimball
+                 :vimballPlugin
+                 :zip
+                 :zipPlugin]
+      providers [:perl :node :ruby :python :python3]]
+  (each [_ v (ipairs built-ins)]
+    (let [plugin (.. :loaded_ v)]
+      (tset vim.g plugin 1)))
+  (each [_ v (ipairs providers)]
+    (let [provider (.. :loaded_ v :_provider)]
+      (tset vim.g provider 0))))
 
-;; load user commands
-(require :core.commands)
+;; make sure packer is all ready to go
+(let [compiled? (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
+      load-compiled #(require :packer_compiled)]
+ (if compiled?
+     (load-compiled)
+     (. (require :packer) :sync)))
 
-;; load user autocommands
+;; colorscheme
+(colorscheme catppuccin)
+
+;; Load core modules
+(require :core.packer)
 (require :core.events)
+(require :core.options)
+(require :core.neovide)
+(require :keymap.basics)

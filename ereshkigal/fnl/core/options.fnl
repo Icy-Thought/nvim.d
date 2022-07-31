@@ -1,4 +1,4 @@
-(import-macros {: set!} :macros.option-macros)
+(import-macros {: set!} :macros.option)
 
 ;; add Mason to path
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
@@ -30,7 +30,7 @@
 ;; Disable ruler
 (set! noruler)
 
-;; Disable showing mode 
+;; Disable showing mode
 (set! noshowmode)
 
 ;; Global statusline
@@ -74,5 +74,3 @@
 
 ;; colorscheme
 (set! background :dark)
-(set! guifont "Liga SFMono Nerd Font:h15")
-

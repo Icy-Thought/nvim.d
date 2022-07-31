@@ -22,8 +22,8 @@
        (with handlers.hover {:border :solid})))
 
 (fn on-attach [client bufnr]
-  (import-macros {: buf-map!} :macros.keybind-macros)
-  (import-macros {: autocmd! : augroup! : clear!} :macros.event-macros)
+  (import-macros {: buf-map!} :macros.keybind)
+  (import-macros {: autocmd! : augroup! : clear!} :macros.event)
 
   ;; Keybindings
   (local {:hover open-doc-float!
