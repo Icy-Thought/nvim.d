@@ -18,7 +18,7 @@ end
 -- Import language servers defined within ./servers
 function _G.lsp_require(server)
     if type(server) == "string" then
-        require("modules.completion.servers." .. server)
+        require("plugins.completion.servers." .. server)
     else
         return nil
     end

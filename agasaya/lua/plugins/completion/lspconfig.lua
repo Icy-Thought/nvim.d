@@ -50,4 +50,4 @@ vim.cmd("command! -nargs=0 LspLog call v:lua.open_lsp_log()")
 vim.cmd("command! -nargs=0 LspRestart call v:lua.reload_lsp()")
 
 -- Init language-servers
-require("modules.completion.servers")
+require("plugins.completion.servers")

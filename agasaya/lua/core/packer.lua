@@ -71,7 +71,7 @@ return packer.startup(function(use)
         "akinsho/bufferline.nvim",
         event = "VimEnter",
         wants = "nvim-web-devicons",
-        config = [[ prequire('modules.ui.bufferline') ]],
+        config = [[ prequire('plugins.ui.bufferline') ]],
     })
     use({
         "feline-nvim/feline.nvim",
@@ -84,14 +84,14 @@ return packer.startup(function(use)
     use({
         "glepnir/dashboard-nvim",
         event = "BufWinEnter",
-        config = [[ prequire('modules.ui.dashboard') ]],
+        config = [[ prequire('plugins.ui.dashboard') ]],
     })
     use({
         "gelguy/wilder.nvim",
         event = "CmdlineEnter",
         requires = { "romgrk/fzy-lua-native" },
         run = "UpdateRemotePlugins",
-        config = [[ prequire('modules.ui.wilder') ]],
+        config = [[ prequire('plugins.ui.wilder') ]],
     })
 
     -------===[ Toolbox ]===-------
@@ -107,7 +107,7 @@ return packer.startup(function(use)
             },
             "nvim-telescope/telescope-project.nvim",
         },
-        config = [[ prequire('modules.toolbox.telescope') ]],
+        config = [[ prequire('plugins.toolbox.telescope') ]],
     })
     use({
         "kyazdani42/nvim-tree.lua",
@@ -118,7 +118,7 @@ return packer.startup(function(use)
     use({
         "folke/which-key.nvim",
         event = "VimEnter",
-        config = [[ prequire('modules.toolbox.which-key')
+        config = [[ prequire('plugins.toolbox.which-key')
                     prequire('keymap.wk-main') ]],
     })
     use({
@@ -148,19 +148,19 @@ return packer.startup(function(use)
     use({
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
-        config = [[ prequire('modules.completion.lspconfig') ]],
+        config = [[ prequire('plugins.completion.lspconfig') ]],
     })
     use({
         "glepnir/lspsaga.nvim",
         branch = "main",
         after = "nvim-lspconfig",
-        config = [[ prequire('modules.completion.lspsaga')
+        config = [[ prequire('plugins.completion.lspsaga')
                     prequire('keymap.lspsaga') ]],
     })
     use({
         "mhartington/formatter.nvim",
         event = "BufWritePre",
-        config = [[ prequire('modules.completion.formatter') ]],
+        config = [[ prequire('plugins.completion.formatter') ]],
     })
     use({
         "rcarriga/nvim-dap-ui",
@@ -173,7 +173,7 @@ return packer.startup(function(use)
         "L3MON4D3/LuaSnip",
         event = "InsertEnter",
         requires = { "icy-thought/friendly-snippets" },
-        config = [[ prequire('modules.completion.luasnip') ]],
+        config = [[ prequire('plugins.completion.luasnip') ]],
     })
     use({
         "hrsh7th/nvim-cmp",
@@ -185,7 +185,7 @@ return packer.startup(function(use)
             { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
             { "hrsh7th/cmp-path", after = "cmp-buffer" },
         },
-        config = [[ prequire('modules.completion.cmp') ]],
+        config = [[ prequire('plugins.completion.cmp') ]],
     })
     -- use({
     --     zbirenbaum/copilot.lua",
@@ -204,19 +204,19 @@ return packer.startup(function(use)
     use({
         "windwp/nvim-autopairs",
         after = "nvim-cmp",
-        config = [[ prequire('modules.editor.autopairs') ]],
+        config = [[ prequire('plugins.editor.autopairs') ]],
     })
     use({
         "nvim-treesitter/nvim-treesitter",
         run = "TSUpdate",
         event = { "BufReadPost", "BufNewFile" },
         requires = { "nvim-treesitter/nvim-treesitter-textobjects" },
-        config = [[ prequire('modules.editor.treesitter') ]],
+        config = [[ prequire('plugins.editor.treesitter') ]],
     })
     use({
         "lukas-reineke/indent-blankline.nvim",
         after = "nvim-treesitter",
-        config = [[ prequire('modules.editor.blankline') ]],
+        config = [[ prequire('plugins.editor.blankline') ]],
     })
     use({
         "norcalli/nvim-colorizer.lua",
@@ -227,13 +227,13 @@ return packer.startup(function(use)
         "nvim-neorg/neorg",
         ft = "norg",
         requires = { "nvim-lua/plenary.nvim" },
-        config = [[ prequire('modules.editor.neorg') ]],
+        config = [[ prequire('plugins.editor.neorg') ]],
     })
     use({
         "kevinhwang91/nvim-ufo",
         after = "nvim-treesitter",
         requires = { "kevinhwang91/promise-async" },
-        config = [[ prequire('modules.editor.folding') ]],
+        config = [[ prequire('plugins.editor.folding') ]],
     })
     use({
         "numToStr/Comment.nvim",
@@ -258,7 +258,7 @@ return packer.startup(function(use)
             vim.fn["mkdp#util#install"]()
         end,
         ft = { "markdown" },
-        config = [[ prequire('modules.editor.md-preview')
+        config = [[ prequire('plugins.editor.md-preview')
                     prequire('keymap.md-preview') ]],
     })
 
