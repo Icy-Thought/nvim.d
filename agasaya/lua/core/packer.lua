@@ -106,6 +106,7 @@ return packer.startup(function(use)
                 requires = { "tami5/sqlite.lua" },
             },
             "nvim-telescope/telescope-project.nvim",
+            "nvim-telescope/telescope-ui-select.nvim",
         },
         config = [[ prequire('plugins.toolbox.telescope') ]],
     })

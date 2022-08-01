@@ -4,25 +4,28 @@
 (λ map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.
 
-  Accepts the following arguments:
-  modes -> is a sequence containing a symbol, each character of the symbol is
-           a mode.
-  lhs -> must be an string.
-  rhs -> can be an string, a symbol, a function or a quoted expression.
-  options -> a table of options. Optional. If the :desc option is not specified
-             it will be inferred.
+  Valid arguments:
+  - modes -> is a sequence containing a symbol, each character of the symbol is
+             a mode.
+  - lhs -> must be an string.
+  - rhs -> can be an string, a symbol, a function or a quoted expression.
+  - options -> a table of options. Optional. If the :desc option is not specified
+               it will be inferred.
 
   Example of use:
   ```fennel
   (map! [nv] \"<leader>lr\" vim.lsp.references
-        {:silent true :buffer 0 :desc \"This is a description\"})
+         {:silent true
+          :buffer 0
+          :desc \"This is a description\"})
   ```
-  That compiles to:
+
+  Which compiles to:
   ```fennel
-  (vim.keymap.set [:n :v] \"<leader>lr\" vim.lsp.references
-                  {:silent true
-                   :buffer 0
-                   :desc \"This is a description\"})
+  (vim.keymap.set [nv] \"<leader>lr\" vim.lsp.references
+                   {:silent true
+                    :buffer 0
+                    :desc \"This is a description\"})
   ```"
   (assert-compile (sym? modes) "expected symbol for modes" modes)
   (assert-compile (str? lhs) "expected string for lhs" lhs)
@@ -42,25 +45,27 @@
   "Add a new mapping using the vim.keymap.set API.
   Sets by default the buffer option.
 
-  Accepts the following arguments:
-  modes -> is a sequence containing a symbol, each character of the symbol is
-           a mode.
-  lhs -> must be an string.
-  rhs -> can be an string, a symbol, a function or a quoted expression.
-  options -> a table of options. Optional. If the :desc option is not specified
-             it will be inferred.
+  Valid arguments:
+  - modes -> is a sequence containing a symbol, each character of the symbol is
+             a mode.
+  - lhs -> must be an string.
+  - rhs -> can be an string, a symbol, a function or a quoted expression.
+  - options -> a table of options. Optional. If the :desc option is not specified
+               it will be inferred.
 
   Example of use:
   ```fennel
   (map! [nv] \"<leader>lr\" vim.lsp.references
-        {:silent true :desc \"This is a description\"})
+         {:silent true
+          :desc \"This is a description\"})
   ```
-  That compiles to:
+
+  Which compiles to:
   ```fennel
-  (vim.keymap.set [:n :v] \"<leader>lr\" vim.lsp.references
-                  {:silent true
-                   :buffer 0
-                   :desc \"This is a description\"})
+  (vim.keymap.set [nv] \"<leader>lr\" vim.lsp.references
+                   {:silent true
+                    :buffer 0
+                    :desc \"This is a description\"})
   ```"
   (assert-compile (sym? modes) "expected symbol for modes" modes)
   (assert-compile (str? lhs) "expected string for lhs" lhs)

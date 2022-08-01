@@ -11,10 +11,11 @@
                            :title " packer.nvim"
                            :open_fn (λ open_fn []
                                       (local {: float} (require :packer.util))
-                                      (float {:border :solid}))}}))
+                                      (float {:border :rounded}))}}))
 
 
-;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
+;; There are some plugins we only want to load for lisps. Heres a list of lispy
+;; filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
 (local treesitter-cmds [:TSInstall
@@ -38,16 +39,18 @@
 ;; Used by quite a few plugins
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 
-;; lispy configs
+;; Lispy configs
 (use-package! :rktjmp/hotpot.nvim {:branch :nightly})
-(use-package! :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
+(use-package! :eraserhd/parinfer-rust {:opt true
+                                       :run "cargo build --release"})
 (use-package! :Olical/conjure {:branch :develop
                                :ft lisp-ft
                                :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
 
 ;; Mappings
-(use-package! :anuvyklack/hydra.nvim {:keys :<space> :config (load-file hydras)})
-(use-package! :windwp/nvim-autopairs {:event :InsertEnter :config (load-file autopairs)})
+(use-package! :windwp/nvim-autopairs {:event :InsertEnter
+                                      :config (fn []
+                                                ((. (require :autopairs) :setup)))})
 (use-package! :ggandor/leap.nvim {:setup (fn []
                                           ((. (require :utils.lazy-load)
                                               :load-on-file-open!) :leap.nvim))
@@ -55,7 +58,10 @@
                                             ((. (require :leap) :set_default_keymaps)))})
 
 ;; File Navigation
-(use-package! :kyazdani42/nvim-tree.lua {:cmd :NvimTreeToggle :config (load-file nvimtree)})
+(use-package! :kyazdani42/nvim-tree.lua {:tag :nightly
+                                         :cmd :NvimTreeToggle
+                                         :config (fn []
+                                                   ((. (require :nvim-tree) :setup)))})
 (use-package! :nvim-lua/telescope.nvim
               {:cmd :Telescope
                :config (load-file telescope)

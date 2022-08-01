@@ -64,8 +64,22 @@
   (use-package! :catppuccin/nvim {:config (load-theme catppuccin)})
   ```"
   (assert-compile (sym? theme) "expected symbol for theme" theme)
-  (let [lang (->str lang)]
-    `#(require (.. "themes." ,lang))))
+  (let [theme (->str theme)]
+    `#(require (.. "themes." ,theme))))
+
+(λ load-keymap [theme]
+  "Configure plugin-specific keybindings by defining the desired binding in the
+  `keymaps` directory and later enable/disable those bindings through the
+  `config` option for the installed plugin.
+  Valid arguements:
+    - file -> a symbol
+  Example of use:
+  ```fennel
+  (use-package! :catppuccin/nvim {:config (load-keymap basics)})
+  ```"
+  (assert-compile (sym? keymap) "expected symbol for keymap" keymap)
+  (let [keymap (->str keymap)]
+    `#(require (.. "keymaps." ,keymap))))
 
 (λ load-lang [lang]
   "Configure a language-specific plugin by loading a file from the
@@ -109,6 +123,8 @@
  : rock!
  : use-package!
  : load-file
+ : load-theme
+ : load-keymap
  : load-lang
  : call-setup
  : unpack!}
