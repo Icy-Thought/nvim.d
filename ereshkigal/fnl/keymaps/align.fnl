@@ -31,13 +31,13 @@
                     {:is_pattern false
                      :reverse true
                      :preview true}))
-        {:noremap
+        {:noremap true
          :silent true
          :desc "Align paragraph to Str"})
 
 (map! [x] "gaa" (fn []
                   (ALG.operator ALG.align_to_char
                     {:reverse true}))
-        {:noremap
+        {:noremap true
          :silent true
          :desc "Align paragraph to 1 Char"})

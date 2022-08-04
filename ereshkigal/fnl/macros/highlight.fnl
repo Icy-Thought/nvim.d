@@ -2,11 +2,13 @@
 
 (λ colorscheme [scheme]
   "Set a colorscheme using the vim.api.nvim_cmd API.
-  Accepts the following arguements:
-  scheme -> a symbol.
-  Example of use:
-  ```fennel
-  (colorscheme carbon)
+
+   Valid Argument(s):
+   scheme -> a symbol.
+
+   Example of use:
+   ```fennel
+   (colorscheme carbon)
   ```"
   (assert-compile (sym? scheme) "expected symbol for name" scheme)
   (let [scheme (->str scheme)]
@@ -14,34 +16,37 @@
 
 (λ custom-set-face! [name attributes colors]
   "Sets a highlight group globally using the vim.api.nvim_set_hl API.
-  Accepts the following arguments:
-  name -> a symbol.
-  attributes -> a list of boolean attributes:
-    - bold
-    - italic
-    - reverse
-    - inverse
-    - standout
-    - underline
-    - underlineline
-    - undercurl
-    - underdot
-    - underdash
-    - strikethrough
-    - default
-  colors -> a table of colors:
-    - fg
-    - bg
-    - ctermfg
-    - ctermbg
-  Example of use:
-  ```fennel
-  (custom-set-face! Error [:bold] {:fg \"#ff0000\"})
-  ```
-  That compiles to:
-  ```fennel
-  (vim.api.nvim_set_hl 0 \"Error\" {:fg \"#ff0000\"
-                                    :bold true})
+
+   Valid Argument(s):
+   name -> a symbol.
+   attributes -> a list of boolean attributes:
+      - bold
+      - italic
+      - reverse
+      - inverse
+      - standout
+      - underline
+      - underlineline
+      - undercurl
+      - underdot
+      - underdash
+      - strikethrough
+      - default
+   colors -> a table of colors:
+      - fg
+      - bg
+      - ctermfg
+      - ctermbg
+
+   Example of use:
+   ```fennel
+   (custom-set-face! Error [:bold] {:fg \"#ff0000\"})
+   ```
+
+   Which compiles to:
+   ```fennel
+   (vim.api.nvim_set_hl 0 \"Error\" {:fg \"#ff0000\"
+                                     :bold true})
   ```"
   (assert-compile (sym? name) "expected symbol for name" name)
   (assert-compile (tbl? attributes) "expected table for attributes" attributes)
@@ -53,8 +58,7 @@
     `(vim.api.nvim_set_hl 0 ,name ,definition)))
 
 (λ link! [new to old]
-  "Defines a highlight group using the vim API.
-  e.g. (link! new => old)"
+  "Defines a highlight group using the vim API. (Ex: link! new => old)"
   (assert-compile (sym? new) "expected symbol for new" new)
   (assert-compile (= `=> to) "expected => for to" to)
   (assert-compile (sym? old) "expected symbol for old" old)

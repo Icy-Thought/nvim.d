@@ -8,4 +8,4 @@
 ;; require custom parinfer plugin on InsertEnter
 ;; hence why parinfer-rust is added in /opt (we just use it to build the dylib)
 (augroup! parinfer
-          (autocmd! InsertEnter * '(require :pack.parinfer)))
+          (autocmd! InsertEnter * '(require :plugins.editor.parinfer)))

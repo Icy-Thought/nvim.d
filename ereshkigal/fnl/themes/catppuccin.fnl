@@ -33,3 +33,5 @@
                                   :telescope true
                                   :nvimtree {:enabled true :show_root true}
                                   :which_key true}})
+
+(tset vim.g :catppuccin_flavour :mocha)

@@ -3,74 +3,141 @@
 ;; add Mason to path
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
-;; improve updatetime for quicker refresh + gitsigns
+;; Faster refresh-rate + Gitsigns
 (set! updatetime 200)
 (set! timeoutlen 500)
+(set! ttimeoutlen 0)
+(set! redrawtime 1500)
 
-;; Set shortmess
-(set! shortmess :filnxtToOFatsIc)
+;; General UI-Conf
+(set! cmdheight 1)
+(set! conceallevel 0)
+(set! helpheight 12)
+(set! laststatus 2)
+(set! pumheight 15)
+(set! showtabline 2)
 
-;; trailing characters setup
-(set! list)
-(set! listchars {:tab "> " :nbsp "␣" :trail "-"})
+(set! termguicolors)
+(set! background :dark)
 
-;; don't wrap text
+;; Options -> Maintain sanity
+(set! breakat "\\ \\\t;:,!?")
+(set! backspace [:indent :eol :start])
+(set! clipboard :unnamedplus)
+(set! concealcursor :niv)
+(set! cursorline)
+(set! nocursorcolumn)
+(set! magic)
+(set! mouse :a)
+(set! nowrap)
+(set! noshowmode)
+(set! shada [ "!" "'300" "<50" "@100" "s10" "h"])
+(set! shortmess {:c true
+                 :I true
+                 :s true })
+(set! signcolumn "yes")
+(set! nostartofline)
+(set! whichwrap "<>[]hl")
 (set! nowrap)
 
-;; Use clipboard outside Neovim
-(set! clipboard :unnamedplus)
+;; Diff & View & View Conf
+(set! diffopt [:filler
+               :iwhite
+               :internal
+               "algorithm:patience"])
 
-;; Enable mouse input
-(set! mouse :a)
+(set! sessionoptions [:curdir
+                      :help
+                      :tabpages
+                      :winsize])
 
-;; Disable swapfiles and enable undofiles
+(set! viewoptions [:folds
+                   :cursor
+                   :curdir
+                   :slash
+                   :unix ])
+
+;; File-Encoding
+(set! encoding :UTF-8)
+(set! fileencoding "UTF-8")
+
+;; File(s) status & Swap
+(set! autoread)
 (set! undofile)
 (set! noswapfile)
+(set! nowritebackup)
 
-;; Disable ruler
-(set! noruler)
+;; A decent number-line
+(set! number)
+(set! numberwidth 4)
+(set! relativenumber)
 
-;; Disable showing mode
-(set! noshowmode)
+;; A good-enough scroll
+(set! scrolloff 8)
+(set! sidescrolloff 8)
 
-;; Global statusline
-(set! laststatus 3)
-
-;; low cmdheight
-(set! cmdheight 0)
-
-;; Numbering
-(set! nonumber)
-
-;; Smart search
-(set! smartcase)
-
-;; Indentation rules
-(set! copyindent)
-(set! smartindent)
-(set! preserveindent)
-
-;; Indentation level
-(set! tabstop 4)
+;; Maintainging a healthier <tab>
+(set! expandtab)
+(set! showtabline 2)
+(set! shiftround)
 (set! shiftwidth 4)
 (set! softtabstop 4)
 
-;; Expand tabs
-(set! expandtab)
+;; Indentation rules
+(set! copyindent)
+(set! preserveindent)
+(set! smartindent)
 
-;; Enable cursorline/column
-(set! cursorline)
-(set! nocursorcolumn)
+;; Completion & Aesthetics
+(set! completeopt [:menu :menuone :preview :noinsert])
 
-;; Automatic split locations
+;; How folds shall be treated
+(set! foldcolumn "1")
+(set! foldenable)
+(set! foldlevel 99)
+(set! foldlevelstart 99)
+
+;; Search + Word Params
+(set! gdefault)
+(set! grepformat "%f:%l:%c:%m")
+(set! grepprg "rg --hidden --vimgrep --smart-case --")
+(set! hidden)
+(set! hlsearch)
+(set! ignorecase)
+(set! inccommand :nosplit)
+(set! incsearch)
+(set! infercase)
+(set! iskeyword ["-"])
+(set! linebreak)
+(set! smartcase)
+
+;; List & their aesthetics
+(set! list)
+(set! listchars {:eol "↴"
+                 :extends "→"
+                 :nbsp "+"
+                 :precedes "←"
+                 :space "⋅"
+                 :tab "»·"
+                 :trail "•"})
+
+;; Specify desired split-location
 (set! splitright)
 (set! splitbelow)
 
-;; Scroll off
-(set! scrolloff 8)
-
-;; cmp options
-(set! completeopt [:menu :menuone :preview :noinsert])
-
-;; colorscheme
-(set! background :dark)
+;; Wildcard exansions
+(set! wildignore [:.git
+                  :.hg
+                  :.svn
+                  :*.pyc
+                  :*.o
+                  :*.out
+                  :*.jpg
+                  :*.jpeg
+                  :*.png
+                  :*.gif
+                  :*.zip
+                  :**/tmp/**
+                  :*.DS_Store
+                  :**/node_modules/**
+                  :**/bower_modules/**])

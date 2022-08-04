@@ -5,7 +5,7 @@
 (local definition (require :lspsaga.definition))
 (local hover (require :lspsaga.hover))
 (local rename (require :lspsaga.rename))
-(local signature (require :lspsaga.signature))
+(local signature (require :lspsaga.signaturehelp))
 
 ;; Function for quicker access:
 (local {: ->str} (require :macros.lib.types))
@@ -19,13 +19,13 @@
     (if (= direction :up)
         ((. (require :lspsaga.action) :smart_scroll_with_saga) 1)
         (= direction :down)
-        ((. (require :lspsaga.action) :smart_scroll_with_saga) (- 1))))
+        ((. (require :lspsaga.action) :smart_scroll_with_saga) (- 1)))))
 
 (fn saga-err-jump! [direction]
   (let [direction (->str direction)]
     (let [severity vim.diagnostic.severity.ERROR]
       (if (= direction :prev) (diagnostic.goto_prev {: severity})
-          (= direction :next) (diagnostic.goto_next {: severity}))))
+          (= direction :next) (diagnostic.goto_next {: severity})))))
 
 (buf-map! [n] "<leader>lf" "<CMD>FormatWrite<CR>"
           {:noremap true
@@ -58,12 +58,14 @@
            :silent true
            :desc "Bring forward Hover-DOC"})
 
-(buf-map! [n] "<C-b>" (. saga-smart-scroll up) ;; TODO:
+(buf-map! [n] "<C-b>" (fn []
+                        (saga-smart-scroll! :up)) ;; TODO:
           {:noremap true
            :silent true
            :desc "Scroll Hover-DOC up"})
 
-(buf-map! [n] "<C-f>" (. saga-smart-scroll down) ;; TODO:
+(buf-map! [n] "<C-f>" (fn []
+                        (saga-smart-scroll! :down)) ;; TODO:
           {:noremap true
            :silent true
            :desc "Scroll Hover-DOC down | def. preview"})
@@ -98,12 +100,14 @@
            :silent true
            :desc "Goto next diagnostic"})
 
-(buf-map! [n] "[E" (. saga-err-jump! prev) ;; TODO:
+(buf-map! [n] "[E" (fn []
+                     (saga-err-jump! :prev)) ;; TODO:
           {:noremap true
            :silent true
            :desc "Jump to previous Err"})
 
-(buf-map! [n] "]E" (. saga-err-jump! next) ;; TODO:
+(buf-map! [n] "]E" (fn []
+                     (saga-err-jump! :next)) ;; TODO:
           {:noremap true
            :silent true
            :desc "Jump to next Err"})

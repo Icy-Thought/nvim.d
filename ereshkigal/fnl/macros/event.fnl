@@ -1,32 +1,42 @@
-(local {: all? : first} (require :macros.lib.seq))
-(local {: ->str : nil? : tbl? : str?} (require :macros.lib.types))
-(local {: fn? : quoted? : quoted->fn : quoted->str : expand-exprs} (require :macros.lib.compile-time))
+(local {: all?
+        : first} (require :macros.lib.seq))
+
+(local {: ->str
+        : nil?
+        : tbl?
+        : str?} (require :macros.lib.types))
+
+(local {: fn?
+        : quoted?
+        : quoted->fn
+        : quoted->str
+        : expand-exprs} (require :macros.lib.compile-time))
 
 (λ autocmd! [event pattern command ?options]
   "Create an autocommand using the nvim_create_autocmd API.
 
-  Accepts the following arguments:
-  event -> can be either a symbol or a list of symbols.
-  pattern -> can be either a symbol or a list of symbols. If it's <buffer> the
-             buffer option is set to 0. If the buffer option is set this value
-             is ignored.
-  command -> can be an string, a symbol, a function or a quoted expression.
-  options -> a table of options. Optional. If the :desc option is not specified
-             it will be inferred.
+   Accepts the following arguments:
+   event -> can be either a symbol or a list of symbols.
+   pattern -> can be either a symbol or a list of symbols. If it's <buffer> the
+              buffer option is set to 0. If the buffer option is set this value
+              is ignored.
+   command -> can be an string, a symbol, a function or a quoted expression.
+   options -> a table of options. Optional. If the :desc option is not specified
+              it will be inferred.
 
-  Example of use:
-  ```fennel
-  (autocmd! VimEnter *.py '(print \"Hello World\")
-            {:once true :group \"custom\" :desc \"This is a description\"})
-  ```
-  That compiles to:
-  ```fennel
-  (vim.api.nvim_create_autocmd :VimEnter
-                               {:pattern \"*.py\"
-                                :callback (fn [] (print \"Hello World\"))
-                                :once true
-                                :group \"custom\"
-                                :desc \"This is a description\"})
+   Example of use:
+   ```fennel
+   (autocmd! VimEnter *.py '(print \"Hello World\")
+             {:once true :group \"custom\" :desc \"This is a description\"})
+   ```
+   That compiles to:
+   ```fennel
+   (vim.api.nvim_create_autocmd :VimEnter
+                                {:pattern \"*.py\"
+                                 :callback (fn [] (print \"Hello World\"))
+                                 :once true
+                                 :group \"custom\"
+                                 :desc \"This is a description\"})
   ```"
   (assert-compile (or (sym? event) (and (tbl? event) (all? #(sym? $) event)) "expected symbol or list of symbols for event" event))
   (assert-compile (or (sym? pattern) (and (tbl? pattern) (all? #(sym? $) pattern)) "expected symbol or list of symbols for pattern" pattern))
@@ -58,20 +68,21 @@
 
 (λ augroup! [name ...]
   "Create an augroup using the nvim_create_augroup API.
-  Accepts either a name or a name and a list of autocmd statements.
+   Accepts either a name or a name and a list of autocmd statements.
 
-  Example of use:
-  ```fennel
-  (augroup! a-nice-group
-    (autocmd! Filetype *.py '(print \"Hello World\"))
-    (autocmd! Filetype *.sh '(print \"Hello World\")))
-  ```
-  That compiles to:
-  ```fennel
-  (do
-    (vim.api.nvim_create_augroup \"a-nice-group\" {:clear false})
-    (autocmd! Filetype *.py '(print \"Hello World\") {:group \"a-nice-group\"})
-    (autocmd! Filetype *.sh '(print \"Hello World\") {:group \"a-nice-group\"}))
+   Example of use:
+   ```fennel
+   (augroup! a-nice-group
+     (autocmd! Filetype *.py '(print \"Hello World\"))
+     (autocmd! Filetype *.sh '(print \"Hello World\")))
+   ```
+
+   Which compiles to:
+   ```fennel
+   (do
+     (vim.api.nvim_create_augroup \"a-nice-group\" {:clear false})
+     (autocmd! Filetype *.py '(print \"Hello World\") {:group \"a-nice-group\"})
+     (autocmd! Filetype *.sh '(print \"Hello World\") {:group \"a-nice-group\"}))
   ```"
   (assert-compile (or (str? name) (sym? name)) "expected string or symbol for name" name)
   (assert-compile (all? #(and (list? $) (or (= 'clear! (first $))
@@ -91,13 +102,14 @@
 (λ clear! [name ?options]
   "Clears an augroup using the nvim_clear_autocmds API.
 
-  Example of use:
-  ```fennel
-  (clear! some-group)
-  ```
-  That compiles to:
-  ```fennel
-  (vim.api.nvim_clear_autocmds {:group \"some-group\"})
+   Example of use:
+   ```fennel
+   (clear! some-group)
+   ```
+
+   That compiles to:
+   ```fennel
+   (vim.api.nvim_clear_autocmds {:group \"some-group\"})
   ```"
   (assert-compile (or (str? name) (sym? name)) "expected string or symbol for name" name)
   (assert-compile (or (nil? ?options) (tbl? ?options)) "expected table for options" ?options)

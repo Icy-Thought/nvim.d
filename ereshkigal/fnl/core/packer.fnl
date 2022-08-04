@@ -9,6 +9,11 @@
                  ;; :snapshot_path (vim.fn.stdpath :config)
                  :display {:header_lines 2
                            :title " packer.nvim"
+                           :working_sym "ﲊ"
+                           :error_sym "✗"
+                           :done_sym "﫟"
+                           :removed_sym ""
+                           :moved_sym ""
                            :open_fn (λ open_fn []
                                       (local {: float} (require :packer.util))
                                       (float {:border :rounded}))}}))
@@ -77,7 +82,7 @@
                :config (load-file toolbox.telescope)
                :requires [(pack :nvim-telescope/telescope-file-browser.nvim
                                 {:module :telescope._extensions.file-browser})
-                          (pack :nvim-telescope/telescope-frecency.nvim 
+                          (pack :nvim-telescope/telescope-frecency.nvim
                                 {:module :telescope._extensions.frecency
                                  :requires :tami5/sqlite.lua})
                           (pack :nvim-telescope/telescope-fzf-native.nvim
@@ -93,11 +98,11 @@
                                          :config (call-setup nvim-tree)})
 
 (use-package! :folke/which-key.nvim {:event :VimEnter
-                                     :config {(load-file toolbox.which-key)
-                                              (load-keymap wk-main)}})
+                                     :config [(load-file toolbox.which-key)
+                                              (load-keymap which-key)]})
 
-(use-package! :akinsho/nvim-toggleterm.lua {:config {(call-setup toggleterm)
-                                                     (load-keymap toggleterm)}})
+(use-package! :akinsho/nvim-toggleterm.lua {:config [(call-setup toggleterm)
+                                                     (load-keymap toggleterm)]})
 
 (use-package! :TimUntersberger/neogit {:cmd :Neogit
                                        :event :VimEnter
@@ -115,8 +120,7 @@
                                          ((. (require :utils.lazy-load)
                                              :load-on-file-open!) :align.nvim))})
 
-(use-package! :numToStr/Comment.nvim {:config {(call-setup Comment)
-                                               (load-keymap comment)}
+(use-package! :numToStr/Comment.nvim {:config (call-setup Comment)
                                       :setup (fn []
                                                ((. (require :utils.lazy-load)
                                                    :load-on-file-open!) :Comment.nvim))})
@@ -148,8 +152,7 @@
                        ((. (require :utils.lazy-load)
                            :load-on-file-open!) :nvim-treesitter))
                :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
-                          (pack :p00f/nvim-ts-rainbow {:after :nvim-treesitter})
-                          (pack :nvim-treesitter/nvim-treesitter-textobjects 
+                          (pack :nvim-treesitter/nvim-treesitter-textobjects
                                 {:after :nvim-treesitter})]})
 
 (use-package! :monkoose/matchparen.nvim {:opt true
@@ -158,8 +161,8 @@
                                                   ((. (require :utils.lazy-load)
                                                       :load-on-file-open!) :matchparen.nvim))})
 
-(use-package! :nvim-neorg/neorg {:config (load-file editor.neorg) 
-                                 :ft :norg 
+(use-package! :nvim-neorg/neorg {:config (load-file editor.neorg)
+                                 :ft :norg
                                  :after :nvim-treesitter})
 
 (use-package! :norcalli/nvim-colorizer.lua {:opt true
@@ -180,37 +183,37 @@
 (use-package! :iamcco/markdown-preview.nvim {:run (fn []
                                                     ((. vim.fn "mkdp#util#install")))
                                              :ft :markdown
-                                             :config {(load-file editor.md-preview)
-                                                      (load-keymap md-preview)}})
+                                             :config [(load-file editor.md-preview)
+                                                      (load-keymap md-preview)]})
 
 ;; ----------===[ Language Server Protocol (LSP) ]===----------
 (use-package! :neovim/nvim-lspconfig {:opt true
                                       :setup (fn []
                                               ((. (require :utils.lazy-load)
                                                   :load-on-file-open!) :nvim-lspconfig))
-                                      :config (load-file completion.lspconfig)})
+                                      :config (load-file completion.lsp)})
 
-(use-package! :williamboman/mason.nvim {:cmd mason-cmds 
+(use-package! :williamboman/mason.nvim {:cmd mason-cmds
                                         :config (load-file completion.mason)})
 
-(use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig 
+(use-package! :j-hui/fidget.nvim {:after :nvim-lspconfig
                                   :config (call-setup fidget)})
 
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file completion.cmp)
                :wants :LuaSnip
                :event :InsertEnter
-               :requires [(pack :hrsh7th/cmp-path 
+               :requires [(pack :hrsh7th/cmp-path
                                 {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-buffer 
+                          (pack :hrsh7th/cmp-buffer
                                 {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-nvim-lsp 
+                          (pack :hrsh7th/cmp-nvim-lsp
                                 {:after :nvim-cmp})
-                          (pack :PaterJason/cmp-conjure 
+                          (pack :PaterJason/cmp-conjure
                                 {:after :conjure})
-                          (pack :saadparwaiz1/cmp_luasnip 
+                          (pack :saadparwaiz1/cmp_luasnip
                                 {:after :nvim-cmp})
-                          (pack :lukas-reineke/cmp-under-comparator 
+                          (pack :lukas-reineke/cmp-under-comparator
                                 {:module :cmp-under-comparator})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
@@ -219,8 +222,8 @@
 
 (use-package! :glepnir/lspsaga.nvim {:branch :main
                                      :after :nvim-lspconfig
-                                     :config {(load-file completion.lspsaga)
-                                              (load-keymap lspsaga)}})
+                                     :config [(load-file completion.lspsaga)
+                                              (load-keymap lspsaga)]})
 
 (use-package! :mhartington/formatter.nvim {:config (load-file completion.formatter)
                                            :setup (fn []
@@ -232,10 +235,10 @@
 ;;                                        :config (call-setup copilot)})
 
 ;; ----------===[ LSP-Lang Specific Conf ]===----------
-(use-package! :saecki/crates.nvim {:event ["BufRead Cargo.toml"] 
+(use-package! :saecki/crates.nvim {:event ["BufRead Cargo.toml"]
                                    :config (call-setup crates)})
 
-(use-package! :simrat39/rust-tools.nvim {:ft :rust 
+(use-package! :simrat39/rust-tools.nvim {:ft :rust
                                          :branch :modularize_and_inlay_rewrite
                                          :config (call-setup rust)})
 

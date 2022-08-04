@@ -22,20 +22,22 @@
 
 (λ let! [...]
   "Set a vim variable using the vim.<scope>.name API.
-  Accepts the following arguments:
-  [scope] -> optional. Can be either [g], [w], [t] or [b]. It's either a symbol
-             or a string surrounded by square brackets.
-  name -> either a symbol or a string.
-  value -> anything.
-  Example of use:
-  ```fennel
-  (let! hello :world)
-  (let! [w] hello :world)
-  ```
-  That compiles to:
-  ```fennel
-  (tset vim.g :hello :world)
-  (tset vim.w :hello :world)
+   Valid Argument(s):
+      [scope] -> optional. Can be either [g], [w], [t] or [b]. It's either a symbol
+                 or a string surrounded by square brackets.
+      name    -> either a symbol or a string.
+      value   -> anything.
+
+   Example of use:
+   ```fennel
+   (let! hello :world)
+   (let! [w] hello :world)
+   ```
+
+   Which compiles to:
+   ```fennel
+   (tset vim.g :hello :world)
+   (tset vim.w :hello :world)
   ```"
    (match [...]
      [[scope] name value] (let-with-scope! [scope] name value)

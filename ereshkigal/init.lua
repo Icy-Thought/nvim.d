@@ -25,7 +25,8 @@ local function assert_installed(plugin, branch)
                 "git",
                 "clone",
                 "https://github.com/" .. plugin,
-                "--branch " .. branch,
+                "--branch",
+		branch,
                 plugin_path,
             })
         else
@@ -46,7 +47,7 @@ if pcall(require, "hotpot") then
     require("hotpot").setup({
         provide_require_fennel = true,
     })
-    require("init")
+    require("core.init")
 else
     print("Failed to require hotpot.")
 end

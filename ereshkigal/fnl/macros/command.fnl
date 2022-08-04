@@ -19,44 +19,46 @@
 (λ command! [name command ?options]
   "Create a new user command using the vim.api.nvim_create_user_command API.
 
-  Accepts the following arguments:
-  name -> must be a symbol.
-  command -> can be an string, a symbol, a function or a quoted expression.
-  options -> a table of options. Optional. If the :desc option is not specified
-             it will be inferred.
+   Accepts the following arguments:
+   name -> must be a symbol.
+   command -> can be an string, a symbol, a function or a quoted expression.
+   options -> a table of options. Optional. If the :desc option is not specified
+              it will be inferred.
 
-  Example of use:
-  ```fennel
-  (command! Salute '(print \"Hello World\")
-            {:bang true :desc \"This is a description\"})
-  ```
-  That compiles to:
-  ```fennel
-  (vim.api.nvim_create_user_command \"Salute\" (fn [] (print \"Hello World\"))
-                                    {:bang true
-                                     :desc \"This is a description\"})
+   Example of use:
+   ```fennel
+   (command! Salute '(print \"Hello World\")
+             {:bang true :desc \"This is a description\"})
+   ```
+
+   That compiles to:
+   ```fennel
+   (vim.api.nvim_create_user_command \"Salute\" (fn [] (print \"Hello World\"))
+                                     {:bang true
+                                      :desc \"This is a description\"})
   ```"
   (shared-command! 'vim.api.nvim_create_user_command name command ?options))
 
 (λ local-command! [name command ?options]
   "Create a new user command using the vim.api.nvim_buf_create_user_command API.
 
-  Accepts the following arguments:
-  name -> must be a symbol.
-  command -> can be an string, a symbol, a function or a quoted expression.
-  options -> a table of options. Optional. If the :desc option is not specified
-             it will be inferred.
+   Accepts the following arguments:
+   name    -> must be a symbol.
+   command -> can be: string, symbol, function or quoted expr.
+   options -> a table of options.
+              (Optional. :desc option has not been specified -> inferred.
 
-  Example of use:
-  ```fennel
-  (local-command! Salute '(print \"Hello World\")
-                  {:bang true :desc \"This is a description\"})
-  ```
-  That compiles to:
-  ```fennel
-  (vim.api.nvim_buf_create_user_command \"Salute\" (fn [] (print \"Hello World\"))
-                                        {:bang true
-                                         :desc \"This is a description\"})
+   Example of use:
+   ```fennel
+   (local-command! Salute '(print \"Hello World\")
+                   {:bang true :desc \"This is a description\"})
+   ```
+
+   Which compiles to:
+   ```fennel
+   (vim.api.nvim_buf_create_user_command \"Salute\" (fn [] (print \"Hello World\"))
+                                         {:bang true
+                                          :desc \"This is a description\"})
   ```"
   (shared-command! 'vim.api.nvim_buf_create_user_command name command ?options))
 

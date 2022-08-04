@@ -8,16 +8,16 @@
 
 (λ set! [name ?value]
   "Set a vim option using the vim.opt.<name> API.
-  Accepts the following arguments:
-  name -> must be a symbol.
-          - If it ends with '+' it appends to the current value.
-          - If it ends with '-' it removes from the current value.
-          - If it ends with with '^' it prepends to the current value.
-  value -> anything.
-           - If it is not specified, whether the name begins with 'no' is used
-             as a boolean value.
-           - If it is a quoted expression or a function it becomes
-             v:lua.<symbol>()."
+  Valid argument(s):
+    name  -> must be a symbol.
+             - If it ends with '+' it appends to the current value.
+             - If it ends with '-' it removes from the current value.
+             - If it ends with with '^' it prepends to the current value.
+    value -> anything.
+             - If it is not specified, whether the name begins with 'no' is used
+               as a boolean value.
+             - If it is a quoted expression or a function it becomes
+               v:lua.<symbol>()."
   (assert-compile (sym? name) "expected symbol for name" name)
   (let [name (->str name)
         value (if (nil? ?value)

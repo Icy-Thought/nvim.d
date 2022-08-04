@@ -34,8 +34,6 @@
         :ignore_install [:phpdoc :norg]
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
-        :rainbow {:enable true
-                  :extended_mode true}
         :ereshkigal-ts {:highlight_scope {:enable true}}
         :incremental_selection {:enable true
                                 :keymaps {:init_selection :gnn
