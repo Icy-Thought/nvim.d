@@ -1,6 +1,6 @@
 (require-macros :macros.event)
 
-;; disable some built-in Neovim plugins and unneeded providers
+;; Disable several built-in Neovim plugins + unneeded providers
 (let [built-ins [:2html_plugin
                  :getscript
                  :getscriptPlugin
@@ -21,7 +21,11 @@
                  :vimballPlugin
                  :zip
                  :zipPlugin]
-      providers [:perl :node :ruby :python :python3]]
+      providers [:perl
+                 :node
+                 ;; :python
+                 ;; :python3
+                 :ruby]]
   (each [_ v (ipairs built-ins)]
     (let [plugin (.. :loaded_ v)]
       (tset vim.g plugin 1)))

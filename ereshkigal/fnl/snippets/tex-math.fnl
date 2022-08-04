@@ -32,40 +32,7 @@
     (t lines))
 
   (local auto-snippets
-         ;; [(s {:trig "([^%s]*[^%)])//" :regTrig true}
-         ;;     [(d 1 (fn [_ snip]
-         ;;               (local selected (. snip.env.TM_SELECTED_TEXT 1))
-         ;;                 (when selected
-         ;;                   (sn nil [(t "\\frac{")
-         ;;                            (t selected)
-         ;;                            (t "}{")
-         ;;                            (i 1)
-         ;;                            (t "}")]))
-         ;;             (f (fn [_ snip]
-         ;;                  (.. "Captured Text: " (.. (snip.captures 1) "."))))
-         ;;             (when (= (. snip.captures 1) " ")
-         ;;               (sn nil [(t "\\frac{") 
-         ;;                        (i 1) (t "}{")
-         ;;                        (i 2) 
-         ;;                        (t "}")]))
-         ;;           (lua "return (table.unpack or _G.unpack)(___antifnl_rtns_1___)"))
-         ;;       (f (fn [_ snip]
-         ;;            (.. "Captured Text: " (. snip.captures 1) ".")))
-         ;;       (when (= (. snip.captures 1) " ")
-         ;;         (let  [(sn nil
-         ;;                                         [(t "\\frac{")
-         ;;                                          (i 1)
-         ;;                                          (t "}{")
-         ;;                                          (i 2)
-         ;;                                          (t "}")])]]
-         ;;           ))
-         ;;       (sn nil [(t "\\frac{")
-         ;;                (t (. snip.captures 1))
-         ;;                (t "}{")
-         ;;                (i 1)
-         ;;                (t "}")])
-         ;;       (i 0))])
-          (s ".." [(t "\\cdot ") (i 0)])
+         [(s ".." [(t "\\cdot ") (i 0)])
           (s "..." [(t "\\ldots ") (i 0)])
           (s "~=" [(t "\\approx ") (i 0)])
           (s "!=" [(t "\\neq ") (i 0)])
@@ -121,13 +88,13 @@
 
   (math-snippet :tex auto-snippets {:type :autosnippets})
 
-  (local general-snippets 
+  (local general-snippets
          [(s "||" {1 (t "\\mid ") 2 (i 0)})
           (s :ceil [(t "\\left\\lceil") (i 1) (t "\\right\\rceil") (i 0)])
           (s :bmat [(t "\\begin{bmatrix} ") (i 1) (t "\\end{bmatrix} ") (i 0)])
           (s :pmat [(t "\\begin{pmatrix} ") (i 1) (t "\\end{pmatrix} ") (i 0)])
           (s :sqrt [(t "\\sqrt{") (i 1) (t "} ") (i 0)])
-          (s :lim [(t "\\lim\\limits_{") 
+          (s :lim [(t "\\lim\\limits_{")
                    (i 1 :x)
                    (t " \\to ")
                    (i 2 :0)

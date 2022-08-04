@@ -18,7 +18,6 @@
                                       (local {: float} (require :packer.util))
                                       (float {:border :rounded}))}}))
 
-
 ;; Defining several local's for ease-of-use:
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
@@ -77,9 +76,10 @@
 ;; ----------===[ Toolbox ]===----------
 (use-package! :nvim-lua/telescope.nvim
               {:cmd :Telescope
-               :config (load-file toolbox.telescope)
+               :config [(load-file toolbox.telescope)
+                        (load-keymap hydra.telescope)]
                :requires [(pack :nvim-telescope/telescope-file-browser.nvim
-                                {:module :telescope._extensions.file-browser})
+                                {:module :telescope._extensions.file_browser})
                           (pack :nvim-telescope/telescope-frecency.nvim
                                 {:module :telescope._extensions.frecency
                                  :requires :tami5/sqlite.lua})
@@ -95,25 +95,30 @@
                                          :cmd :NvimTreeToggle
                                          :config (call-setup nvim-tree)})
 
-(use-package! :folke/which-key.nvim {:event :VimEnter
-                                     :config [(load-file toolbox.which-key)
-                                              (load-keymap which-key)]})
+;; (use-package! :folke/which-key.nvim {:event :VimEnter
+;;                                      :config [(load-file toolbox.which-key)
+;;                                               (load-keymap which-key)]})
 
-(use-package! :akinsho/nvim-toggleterm.lua {:config [(call-setup toggleterm)
-                                                     (load-keymap toggleterm)]})
+(use-package! :anuvyklack/hydra.nvim {:keys :<space>
+                                      :config (load-keymap hydra.options)})
+
+(use-package! :akinsho/nvim-toggleterm.lua {:config [(call-setup toggleterm)]})
+                                                     ; (load-keymap hydra.toggleterm)
+
 
 (use-package! :TimUntersberger/neogit {:cmd :Neogit
                                        :event :VimEnter
                                        :config (call-setup neogit)})
 
 (use-package! :lewis6991/gitsigns.nvim {:ft :gitcommit
-                                        :config (call-setup gitsigns)
+                                        :config [(call-setup gitsigns)
+                                                 (load-keymap hydra.gitsigns)]
                                         :setup (fn []
                                                  ((. (require :utils.lazy-load)
                                                      :load-gitsigns)))})
 
 ;; ----------===[ Editor ]===----------
-(use-package! :Vonr/align.nvim {:config (load-keymap align)
+(use-package! :Vonr/align.nvim {;; :config (load-keymap hydra.align)
                                 :setup (fn []
                                          ((. (require :utils.lazy-load)
                                              :load-on-file-open!) :align.nvim))})
@@ -145,7 +150,8 @@
               {:run ":TSUpdate"
                :cmd treesitter_cmds
                :module :nvim-treesitter
-               :config (load-file editor.treesitter)
+               :config [(load-file editor.treesitter)
+                        (load-keymap hydra.treesitter)]
                :setup (fn []
                        ((. (require :utils.lazy-load)
                            :load-on-file-open!) :nvim-treesitter))
@@ -181,8 +187,9 @@
 (use-package! :iamcco/markdown-preview.nvim {:run (fn []
                                                     ((. vim.fn "mkdp#util#install")))
                                              :ft :markdown
-                                             :config [(load-file editor.md-preview)
-                                                      (load-keymap md-preview)]})
+                                             :config [(load-file editor.md-preview)]})
+                                                      ;(load-keymap hydra.md-preview)
+
 
 ;; ----------===[ Language Server Protocol (LSP) ]===----------
 (use-package! :neovim/nvim-lspconfig {:opt true
@@ -220,8 +227,9 @@
 
 (use-package! :glepnir/lspsaga.nvim {:branch :main
                                      :after :nvim-lspconfig
-                                     :config [(load-file completion.lspsaga)
-                                              (load-keymap lspsaga)]})
+                                     :config [(load-file completion.lspsaga)]})
+                                              ; (load-keymap hydra.lspsaga)
+
 
 (use-package! :mhartington/formatter.nvim {:config (load-file completion.formatter)
                                            :setup (fn []
@@ -238,6 +246,7 @@
 
 (use-package! :simrat39/rust-tools.nvim {:ft :rust
                                          :branch :modularize_and_inlay_rewrite
-                                         :config (call-setup rust)})
+                                         :config [(call-setup rust)
+                                                  (load-keymap hydra.rust)]})
 
 (unpack!)

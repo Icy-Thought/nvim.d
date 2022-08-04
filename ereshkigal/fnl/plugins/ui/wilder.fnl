@@ -23,22 +23,23 @@
         : wildmenu_renderer
         : wildmenu_spinner} (require :wilder))
 
-(setup {:modes {1 ":" 2 "/" 3 "?"}})
+(setup {:modes [":" "/" "?"]})
+
 (set_option :pipeline
-            [(branch 
-               (python_file_finder_pipeline 
+            [(branch
+               (python_file_finder_pipeline
                  {:file_command (fn [ctx arg]
                                   (if (not= (string.find arg ".") nil)
                                       [:rg "--files" "--hidden"]
                                     [:rg "--files"]))
                   :dir_command (fn [ctx arg]
-                                 (if (not= (string.find arg ".") nil) 
+                                 (if (not= (string.find arg ".") nil)
                                      [:fd "-td" "-H"]
                                    [:fd "-td"]))
                   :filters [:fuzzy_filter :difflib_sorter]})
 
-               (substitute_pipeline 
-                 {:pipeline (python_search_pipeline 
+               (substitute_pipeline
+                 {:pipeline (python_search_pipeline
                               {:skip_cmdtype_check 1
                                :pattern (python_fuzzy_pattern {:start_at_boundary 0})})})
                (cmdline_pipeline  {:fuzzy 2
@@ -46,15 +47,15 @@
                [(check (fn [ctx x]
                            (= x "")))
                 (history)]
-               (python_search_pipeline 
-                 {:pattern (python_fuzzy_pattern 
+               (python_search_pipeline
+                 {:pattern (python_fuzzy_pattern
                              {:start_at_boundary 0})}))])
 
 (local highlighters [(pcre2_highlighter)
                      (lua_fzy_highlighter)])
 
 (local popupmenu-renderer
-       (popupmenu_renderer 
+       (popupmenu_renderer
          (popupmenu_border_theme {:highlights {:default :Normal
                                                :border :NormalFloat
                                                :accent (make_hl :WilderAccent
@@ -65,7 +66,7 @@
                                   :highlighter highlighters
                                   :left [" "
                                          (popupmenu_devicons)
-                                         (popupmenu_buffer_flags 
+                                         (popupmenu_buffer_flags
                                            {:flags " a + "
                                             :icons {:+ ""
                                             :a ""
@@ -77,8 +78,7 @@
                            :separator " · "
                            :left [" " (wildmenu_spinner) " "]
                            :right [" " (wildmenu_index)]})]
-       (set_option 
-         :renderer
-         (renderer_mux {":" popupmenu-renderer
-                        :/ wildmenu-renderer
-                        :substitute wildmenu-renderer})))
+       (set_option :renderer
+                   (renderer_mux {":" popupmenu-renderer
+                                  :/ wildmenu-renderer
+                                  :substitute wildmenu-renderer})))
