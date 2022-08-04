@@ -28,21 +28,15 @@
                       :enable false
                       :disable []
                       :is_supported tsq.has_locals}}})
-;; the usual
+
+;; Initialize Treesitter
 (setup {:ensure_installed :all
         :ignore_install [:phpdoc :norg]
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
         :rainbow {:enable true
-                  :extended_mode true
-                  :colors [:#878d96
-                           :#a8a8a8
-                           :#8d8d8d
-                           :#a2a9b0
-                           :#8f8b8b
-                           :#ada8a8
-                           :#878d96]}
-        :nyoom-ts {:highlight_scope {:enable true}}
+                  :extended_mode true}
+        :ereshkigal-ts {:highlight_scope {:enable true}}
         :incremental_selection {:enable true
                                 :keymaps {:init_selection :gnn
                                           :node_incremental :grn
@@ -52,15 +46,34 @@
                       :lookahead true
                       :keymaps {:af "@function.outer"
                                 :if "@function.inner"
-                                :ac "@class.outer"
-                                :ic "@class.inner"}
+                                :il "@loop.inner"
+                                :al "@loop.outer"
+                                :icd "@conditional.inner"
+                                :acd "@conditional.outer"
+                                :acm "@comment.outer"
+                                :ast "@statement.outer"
+                                :isc "@scopename.inner"
+                                :iB "@block.inner"
+                                :aB "@block.outer"}
                       :move {:enable true
                              :set_jumps true
-                             :goto_next_start {"]m" "@function.outer"
-                                               "]]" "@class.outer"}
-                             :goto_next_end {"]M" "@function.outer"
-                                             "][" "@class.outer"}
-                             :goto_previous_start {"[m" "@function.outer"
-                                                   "[[" "@class.outer"}
-                             :goto_previous_end {"[M" "@function.outer"
-                                                 "[]" "@class.outer"}}}})
+                             :goto_next_start {:gnf "@function.outer"
+                                               :gnif "@function.inner"
+                                               :gnp "@parameter.inner"
+                                               :gnc "@call.outer"
+                                               :gnic "@call.inner"}
+                             :goto_next_end {:gnF "@function.outer"
+                                             :gniF "@function.inner"
+                                             :gnP "@parameter.inner"
+                                             :gnC "@call.outer"
+                                             :gniC "@call.inner"}
+                             :goto_previous_start {:gpf "@function.outer"
+                                                   :gpif "@function.inner"
+                                                   :gpp "@parameter.inner"
+                                                   :gpc "@call.outer"
+                                                   :gpic "@call.inner"}
+                             :goto_previous_end {:gpF "@function.outer"
+                                                 :gpiF "@function.inner"
+                                                 :gpP "@parameter.inner"
+                                                 :gpC "@call.outer"
+                                                 :gpiC "@call.inner"}}}})

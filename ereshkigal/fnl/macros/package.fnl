@@ -1,4 +1,7 @@
-(local {: str? : nil? : tbl? : ->str} (require :macros.lib.types))
+(local {: str? 
+        : nil? 
+        : tbl? 
+        : ->str} (require :macros.lib.types))
 
 (tset _G :ereshkigal/plugins [])
 (tset _G :ereshkigal/rock [])
@@ -48,7 +51,7 @@
     - file -> a symbol
   Example of use:
   ```fennel
-  (use-package! :anuvyklack/hydra.nvim {:config (load-file hydras)})
+  (use-package! :anuvyklack/hydra.nvim {:config (load-file toolbox.hydras)})
   ```"
   (assert-compile (sym? file) "expected symbol for file" file)
   (let [file (->str file)]

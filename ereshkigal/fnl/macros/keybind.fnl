@@ -1,5 +1,12 @@
-(local {: ->str : nil? : str? : tbl?} (require :macros.lib.types))
-(local {: fn? : quoted? : quoted->fn : quoted->str} (require :macros.lib.compile-time))
+(local {: ->str 
+        : nil? 
+        : str? 
+        : tbl?} (require :macros.lib.types))
+
+(local {: fn? 
+        : quoted? 
+        : quoted->fn 
+        : quoted->str} (require :macros.lib.compile-time))
 
 (λ map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.

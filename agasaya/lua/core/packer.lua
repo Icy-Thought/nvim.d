@@ -199,8 +199,7 @@ return packer.startup(function(use)
     use({
         "Vonr/align.nvim",
         event = "BufReadPost",
-        config = [[ prequire('keymap.align')
-                    prequire('keymap.align') ]],
+        config = [[ prequire('keymap.align') ]],
     })
     use({
         "windwp/nvim-autopairs",

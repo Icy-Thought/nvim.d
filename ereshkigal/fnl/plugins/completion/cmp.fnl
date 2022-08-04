@@ -55,8 +55,7 @@
 (fn replace-termcodes [code]
   (vim.api.nvim_replace_termcodes code true true true))
 
-
-;;; Setup
+;;; cmp-setup
 (setup {:preselect types.cmp.PreselectMode.None
         :experimental {:ghost_text true}
         :window {:documentation {:border :solid} :completion {:border :solid}}
@@ -65,11 +64,15 @@
         :mapping {:<C-b> (mapping.scroll_docs -4)
                   :<C-f> (mapping.scroll_docs 4)
                   :<C-e> (mapping.abort)
-                  :<C-n> (mapping (mapping.select_next_item {:behavior insert-behavior}) [:i :s])
-                  :<C-p> (mapping (mapping.select_prev_item {:behavior insert-behavior}) [:i :s])
+                  :<C-k> (mapping (mapping.select_prev_item 
+                                    {:behavior insert-behavior}) [:i :s])
+
+                  :<C-j> (mapping (mapping.select_next_item 
+                                    {:behavior insert-behavior}) [:i :s])
                   :<Tab> (mapping (fn [fallback]
                                     (if (visible)
-                                        (mapping.select_next_item {:behavior insert-behavior})
+                                        (mapping.select_next_item 
+                                          {:behavior insert-behavior})
                                         (expand_or_jumpable)
                                         (expand_or_jump)
                                         (has-words-before)
@@ -99,7 +102,7 @@
                                 compare.sort_text
                                 compare.length
                                 compare.order]}
-        :formatting {:fields {1 :kind 2 :abbr 3 :menu}
+        :formatting {:fields [:kind :abbr :menu]
                      :format (fn [_ vim-item]
                                (set vim-item.menu vim-item.kind)
                                (set vim-item.kind (. icons vim-item.kind))
