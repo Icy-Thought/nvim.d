@@ -3,6 +3,9 @@
 ;; add Mason to path
 (set vim.env.PATH (.. vim.env.PATH ":" (vim.fn.stdpath :data) :/mason/bin))
 
+;; Point tsc-frecency to correct sqlite-path
+(set vim.g.sqlite_clib_path (. vim.env :SQLITE_PATH))
+
 ;; Faster refresh-rate + Gitsigns
 (set! updatetime 200)
 (set! timeoutlen 500)

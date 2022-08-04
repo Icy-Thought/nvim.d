@@ -64,17 +64,15 @@
                                         :config (load-file ui.bufferline)})
 
 (use-package! :feline-nvim/feline.nvim {:event :VimEnter
-                                        :config (fn []
-                                                  (local ctp-feline (require :catppuccin.groups.integrations.feline))
-                                                  (ctp-feline.setup)
-                                                  ((. (require :feline) :setup) {:components (ctp-feline.get)}))})
+                                        :config (load-file ui.feline)})
 
 (use-package! :glepnir/dashboard-nvim {:event :BufWinEnter
                                        :config (load-file ui.dashboard)})
 
 (use-package! :gelguy/wilder.nvim {:run :UpdateRemotePlugins
                                    :event :CmdlineEnter
-                                   :requires [(pack :romgrk/fzy-lua-native)]})
+                                   :requires [(pack :romgrk/fzy-lua-native)]
+                                   :config (load-file ui.wilder)})
 
 ;; ----------===[ Toolbox ]===----------
 (use-package! :nvim-lua/telescope.nvim

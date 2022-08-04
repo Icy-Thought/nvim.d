@@ -40,13 +40,12 @@
 (require :core.packer)
 
 ;; colorscheme
-(import-macros {: colorscheme} :macros.highlight) 
-
-;; (colorscheme oxocarbon)
+(import-macros {: colorscheme} :macros.highlight)
 (colorscheme catppuccin)
+;; (colorscheme oxocarbon)
 
 ;; Load remaining core-modules
-(require :core.events)
 (require :core.options)
-(require :core.neovide)
+(require :core.events)
 (require :keymaps.basics)
+(require :core.neovide)

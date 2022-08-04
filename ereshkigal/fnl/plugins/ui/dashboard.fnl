@@ -1,46 +1,47 @@
-(local {: custom_header
-        : custom_center} (require :dashboard))
+(local db (require :dashboard))
 
 (local config-dir (vim.fn.stdpath :config))
-(custom_header (vim.fn.systemlist 
+
+;; Find a way to reduce font size for proper sizing
+(set db.custom_header (vim.fn.systemlist
                  (.. "cat " config-dir :/dasHead.txt)))
 
-(custom_center [{:icon "  "
-                 :desc (.. "Switch Colorscheme" "                    ")
+(set db.custom_center [{:icon "  "
+                 :desc "Switch Colorscheme                           "
                  :shortcut "SPC s c"
                  :action "Telescope colorscheme"}
 
                 {:icon "  "
-                 :desc (.. "File Frecency" "                         ")
+                 :desc "File Frecency                               "
                  :shortcut "SPC f r"
                  :action "Telescope frecency"}
 
                 {:icon "  "
-                 :desc (.. "Find File" "                             ")
+                 :desc "Find File                                   "
                  :shortcut "SPC f f"
                  :action "Telescope find_files"}
 
                 {:icon "  "
-                 :desc (.. "New File" "                              ")
+                 :desc "New File                                    "
                  :shortcut "SPC f n"
                  :action :DashboardNewFile}
 
                 {:icon "  "
-                 :desc (.. "Find Project" "                          ")
+                 :desc "Find Project                                "
                  :shortcut "SPC f p"
                  :action "Telescope project"}
 
                 {:icon "  "
-                 :desc (.. "Browse Neovim Dotfiles" "                ")
+                 :desc "Browse Neovim Dotfiles                      "
                  :action (.. "Telescope dotfiles path=" config-dir)
                  :shortcut "SPC f d"}
 
                 {:icon "  "
-                 :desc (.. "Update Plugins" "                        ")
+                 :desc "Update Plugins                              "
                  :shortcut "SPC u u"
                  :action :PackerUpdate}
 
                 {:icon "  "
-                 :desc (.. "Quit" "                                  ")
+                 :desc "Quit                                        "
                  :shortcut "SPC q q"
                  :action :q}])
