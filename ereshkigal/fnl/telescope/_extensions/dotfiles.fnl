@@ -28,4 +28,4 @@
                         :previewer (conf.file_previewer opts)
                         :sorter (conf.file_sorter opts)}) :find))
 
-(register_extension {:exports {: dotfiles}})	
+(register_extension {:exports {: dotfiles}})

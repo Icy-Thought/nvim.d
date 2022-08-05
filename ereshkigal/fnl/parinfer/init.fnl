@@ -31,10 +31,14 @@
 (local buf_add_highlight vim.api.nvim_buf_add_highlight)
 (local buf_clear_namespace vim.api.nvim_buf_clear_namespace)
 
-(local process-events
-  [:CursorMoved :InsertEnter :TextChanged :TextChangedI :TextChangedP])
-(local cursor-events
-  [:BufEnter :WinEnter])
+(local process-events [:CursorMoved
+                       :InsertEnter
+                       :TextChanged
+                       :TextChangedI
+                       :TextChangedP])
+
+(local cursor-events [:BufEnter
+                      :WinEnter])
 
 (fn notify-error [buf request res]
   (vim.notify

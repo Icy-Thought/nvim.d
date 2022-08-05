@@ -27,7 +27,7 @@
                                 :ignore_patterns [:ignore_patterns ["*.git/*"
                                                                     "*/tmp/*"]]}}})
 
-;; (load_extension :dotfiles) TODO
+(load_extension :dotfiles)
 (load_extension :fzf)
 (load_extension :file_browser)
 (load_extension :project)

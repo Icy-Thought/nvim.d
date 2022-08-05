@@ -5,9 +5,14 @@
         : mapping
         : visible
         : complete
-        :config {: compare : disable}
-        :ItemField {:Kind kind :Abbr abbr :Menu menu}
-        :SelectBehavior {:Insert insert-behavior :Select select-behavior}} (require :cmp))
+        :config {: compare
+                 : disable
+                 :window {: bordered}}
+        :ItemField {:Kind kind
+                    :Abbr abbr
+                    :Menu menu}
+        :SelectBehavior {:Insert insert-behavior
+                         :Select select-behavior}} (require :cmp))
 
 (local types (require :cmp.types))
 (local under-compare (require :cmp-under-comparator))
@@ -45,7 +50,11 @@
               :TypeParameter ""})
 
 ;; cmp options
-(set! completeopt [:menu :menuone :preview :noinsert])
+(set! completeopt [:menu
+                   :menuone
+                   :preview
+                   :noinsert])
+
 ;;; Supertab functionality utility functions
 (fn has-words-before []
   (let [col (- (vim.fn.col ".") 1)
@@ -58,36 +67,34 @@
 ;;; cmp-setup
 (setup {:preselect types.cmp.PreselectMode.None
         :experimental {:ghost_text true}
-        :window {:documentation {:border :solid} :completion {:border :solid}}
+        :window {:completion (bordered)
+                 :documentation (bordered)}
         :snippet {:expand (fn [args]
                             (lsp_expand args.body))}
-        :mapping {:<C-b> (mapping.scroll_docs -4)
+        :mapping {:<CR> (mapping.confirm {:select true})
+                  :<C-p> (mapping.select_prev_item)
+                  :<C-n> (mapping.select_next_item)
+                  :<C-d> (mapping.scroll_docs -4)
                   :<C-f> (mapping.scroll_docs 4)
-                  :<C-e> (mapping.abort)
-                  :<C-k> (mapping (mapping.select_prev_item 
-                                    {:behavior insert-behavior}) [:i :s])
-
-                  :<C-j> (mapping (mapping.select_next_item 
-                                    {:behavior insert-behavior}) [:i :s])
+                  :<C-e> (mapping.close)
                   :<Tab> (mapping (fn [fallback]
                                     (if (visible)
-                                        (mapping.select_next_item 
-                                          {:behavior insert-behavior})
-                                        (expand_or_jumpable)
-                                        (expand_or_jump)
+                                        (mapping.select_next_item)
                                         (has-words-before)
-                                        (vim.fn.feedkeys (replace-termcodes :<Tab>)
-                                                         :n)
                                         (fallback)))
-                                  [:i :s :c])
+                                  [:i :s])
                   :<S-Tab> (mapping (fn [fallback]
                                       (if (visible)
-                                          (mapping.select_prev_item {:behavior insert-behavior})
-                                          (jumpable -1)
-                                          (jump -1)
+                                          (mapping.select_prev_item)
                                           (fallback)))
-                                    [:i :s :c])
-                  :<C-Space> (mapping.confirm {:select true})}
+                                    [:i :s])
+                  :<C-h> (mapping (fn [fallback]
+                                    (if (jumpable -1)
+                                        (fallback))))
+                  :<C-l> (mapping (fn [fallback]
+                                    (if (expand_or_jumpable)
+                                        (expand_or_jump)
+                                        (fallback))))}
         :sources [{:name :nvim_lsp}
                   {:name :luasnip}
                   {:name :path}

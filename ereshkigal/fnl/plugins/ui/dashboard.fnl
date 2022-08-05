@@ -14,7 +14,7 @@
                 {:icon "  "
                  :desc "File Frecency                               "
                  :shortcut "SPC f r"
-                 :action "Telescope frecency"}
+                 :action "lua require('telescope').extensions.frecency.frecency()"}
 
                 {:icon "  "
                  :desc "Find File                                   "

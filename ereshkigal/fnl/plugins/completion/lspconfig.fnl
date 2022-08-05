@@ -7,11 +7,14 @@
       {: sign_define} vim.fn]
 
   (config {:underline {:severity {:min severity.INFO}}
-           :signs {:severity {:min severity.INFO}}
-           :virtual_text false ;; lsp_lines handles this
-           :update_in_insert true
+           :float {:style :minimal
+                   :border :rounded
+                   :source :always}
            :severity_sort true
-           :float {:show_header false :border :rounded}})
+           :signs {:severity {:min severity.INFO}}
+           :underline true
+           :virtual_text {:source true}
+           :update_in_insert true})
 
   (sign_define :DiagnosticSignError
                {:text "" :texthl :DiagnosticSignError})

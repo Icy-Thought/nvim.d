@@ -1,41 +1,38 @@
 (var config-opts {})
 
-(local defaults
-  {:enabled true
-   :mode "smart"
-   :trail_highlight true
-   :trail_highlight_group :Whitespace
-   :forceBalance false
-   :commentChar ";"
-   :stringDelimiters ["\""]
-   :lispVlineSymbols false
-   :lispBlockComments false
-   :guileBlockComments false
-   :schemeSexpComments false
-   :janetLongStrings false})
+(local defaults {:enabled true
+                 :mode "smart"
+                 :trail_highlight true
+                 :trail_highlight_group :Whitespace
+                 :forceBalance false
+                 :commentChar ";"
+                 :stringDelimiters ["\""]
+                 :lispVlineSymbols false
+                 :lispBlockComments false
+                 :guileBlockComments false
+                 :schemeSexpComments false
+                 :janetLongStrings false})
 
-(local ft-opts
-  {:lisp {:lispVlineSymbols true
-          :lispBlockComments true}
-   :scheme {:lispVlineSymbols true
-            :lispBlockComments true}
-   :janet {:commentChar "#"
-           :janetLongStrings true}
-   :yuck {:stringDelimiters ["\"" "'" "`"]}})
+(local ft-opts {:lisp {:lispVlineSymbols true
+                :lispBlockComments true}
+                :scheme {:lispVlineSymbols true
+                         :lispBlockComments true}
+                :janet {:commentChar "#"
+                        :janetLongStrings true}
+                :yuck {:stringDelimiters ["\"" "'" "`"]}})
 
-(local scoped-opts*
-  {:mode "mode"
-   :enabled "enabled"
-   :trail_highlight "trail_highlight"
-   :trail_highlight_group "trail_highlight_group"
-   :force_balance "forceBalance"
-   :comment_char "commentChar"
-   :string_delimiters "stringDelimiters"
-   :lisp_vline_symbols "lispVlineSymbols"
-   :lisp_block_comments "lispBlockComments"
-   :guile_block_comments "guileBlockComments"
-   :scheme_sexp_comments "schemeSexpComments"
-   :janet_long_strings "janetLongStrings"})
+(local scoped-opts* {:mode "mode"
+                     :enabled "enabled"
+                     :trail_highlight "trail_highlight"
+                     :trail_highlight_group "trail_highlight_group"
+                     :force_balance "forceBalance"
+                     :comment_char "commentChar"
+                     :string_delimiters "stringDelimiters"
+                     :lisp_vline_symbols "lispVlineSymbols"
+                     :lisp_block_comments "lispBlockComments"
+                     :guile_block_comments "guileBlockComments"
+                     :scheme_sexp_comments "schemeSexpComments"
+                     :janet_long_strings "janetLongStrings"})
 
 (local scoped-opts (collect [k v (pairs scoped-opts*)]
                      (.. :parinfer_ k) v))
