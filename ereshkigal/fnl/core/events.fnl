@@ -14,12 +14,21 @@
           (autocmd! VimLeave * '(set! guicursor ["a:ver100-blinkon0"])))
 
 ;; Auto move to the location of the last edit (TODO)
-;; [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]]
+(augroup! last-nvimtree-close
+         (autocmd! BufEnter * (fn []
+                                (when (and (and (not (: (vim.fn.expand "%:p") :match :.git))
+                                                (> (vim.fn.line "'\"") 1))
+                                           (<= (vim.fn.line "'\"") (vim.fn.line "$")))
+                                  (vim.cmd "normal! g'\"")
+                                  (vim.cmd "normal zz")))))
+
 
 ;; Force write shada on nvim-exit
-;; (augroup! force-write-shada
-;;           (autocmd! BufReadPost * TODO))
-;; [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]]
+(augroup! force-write-shada
+          (autocmd! VimLeave * (fn []
+                                 (if (= (vim.fn.has :nvim-0.7) 1)
+                                     (vim.cmd :wshada!)
+                                     (vim.cmd :wviminfo!)))))
 
 ;; require custom parinfer plugin on InsertEnter
 ;; hence why parinfer-rust is added in /opt (we just use it to build the dylib)
@@ -27,9 +36,12 @@
           (autocmd! InsertEnter * '(require :plugins.editor.parinfer)))
 
 ;; Close Nvim-Tree if == last window
-;; (augroup! last-nvimtree-close
-;;          (autocmd! BufEnter * TODO))
-;; [[++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
+(augroup! last-nvimtree-close
+         (autocmd! BufEnter * (fn []
+                                (when (and (= (vim.fn.winnr "$") 1)
+                                           (= (vim.fn.bufname)
+                                              (.. :NvimTree_ (vim.fn.tabpagenr))))
+                                  (vim.cmd :quit)))))
 
 ;; Equalize window dimensions after resize
 (augroup! auto-window-resize
@@ -38,7 +50,3 @@
 ;; Limit char-width = 80 chars
 (augroup! character-width-limit
           (autocmd! FileType "markdown,norg" '(set! textwidth 80)))
-
-;; Auto-compile Catppuccin after PackerCompile
-;; (augroup! colorscheme-compile
-;;     (autocmd! User :PackerCompileDone (vim.cmd :CatppuccinCompile)))

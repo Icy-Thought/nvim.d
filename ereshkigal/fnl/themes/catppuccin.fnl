@@ -35,3 +35,9 @@
                                   :which_key true}})
 
 (tset vim.g :catppuccin_flavour :mocha)
+
+;; Auto-compile Catppuccin after PackerCompile
+;; (require-macros :macros.event)
+
+;; (augroup! colorscheme-compile
+;;     (autocmd! User :PackerCompileDone (vim.cmd :CatppuccinCompile)))
