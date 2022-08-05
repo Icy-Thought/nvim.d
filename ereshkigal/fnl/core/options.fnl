@@ -25,8 +25,8 @@
 
 ;; Options -> Maintain sanity
 (set! breakat "\\ \\\t;:,!?")
-(set! breakindentopt ["shift:2" "min:20"])
-(set! backspace [:indent :eol :start])
+(set! breakindentopt+ ["shift:2" "min:20"])
+(set! backspace+ [:indent :eol :start])
 (set! clipboard :unnamedplus)
 (set! concealcursor :niv)
 (set! cursorline)
@@ -35,31 +35,31 @@
 (set! mouse :a)
 (set! nowrap)
 (set! noshowmode)
-(set! shada [ "!" "'300" "<50" "@100" "s10" "h"])
-(set! shortmess {:c true
-                 :I true
-                 :s true })
+(set! shada+ [ "!" "'300" "<50" "@100" "s10" "h"])
+(set! shortmess+ {:c true
+                  :I true
+                  :s true})
 (set! signcolumn "yes")
 (set! nostartofline)
 (set! whichwrap "<>[]hl")
 (set! nowrap)
 
 ;; Diff & View & View Conf
-(set! diffopt [:filler
-               :iwhite
-               :internal
-               "algorithm:patience"])
+(set! diffopt+ [:filler
+                :iwhite
+                :internal
+                "algorithm:patience"])
 
-(set! sessionoptions [:curdir
-                      :help
-                      :tabpages
-                      :winsize])
+(set! sessionoptions+ [:curdir
+                       :help
+                       :tabpages
+                       :winsize])
 
-(set! viewoptions [:folds
-                   :cursor
-                   :curdir
-                   :slash
-                   :unix ])
+(set! viewoptions+ [:folds
+                    :cursor
+                    :curdir
+                    :slash
+                    :unix ])
 
 ;; File-Encoding
 (set! encoding :UTF-8)
@@ -93,7 +93,7 @@
 (set! smartindent)
 
 ;; Completion & Aesthetics
-(set! completeopt [:menu :menuone :preview :noinsert])
+(set! completeopt+ [:menu :menuone :preview :noinsert])
 
 ;; How folds shall be treated
 (set! foldcolumn "1")
@@ -111,37 +111,37 @@
 (set! inccommand :nosplit)
 (set! incsearch)
 (set! infercase)
-(set! iskeyword ["-"])
+(set! iskeyword+ ["-"])
 (set! linebreak)
 (set! smartcase)
 
 ;; List & their aesthetics
 (set! list)
-(set! listchars {:eol "↴"
-                 :extends "→"
-                 :nbsp "+"
-                 :precedes "←"
-                 :space "⋅"
-                 :tab "»·"
-                 :trail "•"})
+(set! listchars+ {:eol "↴"
+                  :extends "→"
+                  :nbsp "+"
+                  :precedes "←"
+                  :space "⋅"
+                  :tab "»·"
+                  :trail "•"})
 
 ;; Specify desired split-location
 (set! splitright)
 (set! splitbelow)
 
 ;; Wildcard exansions
-(set! wildignore [:.git
-                  :.hg
-                  :.svn
-                  :*.pyc
-                  :*.o
-                  :*.out
-                  :*.jpg
-                  :*.jpeg
-                  :*.png
-                  :*.gif
-                  :*.zip
-                  :**/tmp/**
-                  :*.DS_Store
-                  :**/node_modules/**
-                  :**/bower_modules/**])
+(set! wildignore+ [:.git
+                   :.hg
+                   :.svn
+                   :*.pyc
+                   :*.o
+                   :*.out
+                   :*.jpg
+                   :*.jpeg
+                   :*.png
+                   :*.gif
+                   :*.zip
+                   :**/tmp/**
+                   :*.DS_Store
+                   :**/node_modules/**
+                   :**/bower_modules/**])
