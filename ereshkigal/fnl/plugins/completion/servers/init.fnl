@@ -1,11 +1,11 @@
-(import-macros {: lsp-init!} :macros.lsp)
+(local {: lsp-init!} :utils.lsp)
 
-(local lspconfig (require :lspconfig))
+(local lsp (require :lspconfig))
 
 (let [lsp-noconf [:pyright
                   :clojure_lsp]]
-  (each [_ server (ipairs lsp-noconf)]
-    ((. (. lspconfig server) :setup) lsp-init!)))
+  (each [_ server (pairs lsp-noconf)]
+    ((. (. lsp server) :setup) lsp-init!)))
 
 (fn lsp-require [server]
   (if (= (type server) :string)
@@ -17,5 +17,5 @@
                  :lua
                  ;;:rust
                  :python]]
-  (each [v (ipairs languages)]
+  (each [v (pairs languages)]
     (lsp-require (. languages v))))

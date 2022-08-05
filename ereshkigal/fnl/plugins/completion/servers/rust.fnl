@@ -1,4 +1,4 @@
-(import-macros {: lsp-init!} :macros.lsp)
+(local {: lsp-init!} :utils.lsp)
 (local lsp (require :lspconfig))
 
 (lsp.rust_analyzer.setup {1 lsp-init!
