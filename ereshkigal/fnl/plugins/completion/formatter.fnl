@@ -1,16 +1,19 @@
+(require-macros :macros.event)
+
 (local {: setup} (require :formatter))
-(local {: util} (require :formatter.util))
+(local {: get_current_buffer_file_path
+        : escape_path} (require :formatter.util))
 
 (local rs (require :formatter.filetypes.rust))
 (local py (require :formatter.filetypes.python))
 
 ;; Language-specific Conf
 (fn alejandra []
-  {:exe :alejandra 
+  {:exe :alejandra
    :stdin true})
 
 (fn markdown-cli []
-  {:exe :markdownlint-cli2 
+  {:exe :markdownlint-cli2
    :stdin true})
 
 (fn prettier []
@@ -30,21 +33,21 @@
    :stdin true})
 
 (fn stylish-hs []
-  {:exe :stylish-haskell 
+  {:exe :stylish-haskell
    :stdin true})
 
 (fn stylua []
   {:exe :stylua
    :args [:--search-parent-directories
           :--stdin-filepath
-          (util.escape_path (util.get_current_buffer_file_path))
+          (escape_path (get_current_buffer_file_path))
           "--"
           "-"]
    :stdin true})
 
 (setup {:logging true
         :log_level vim.log.levels.WARN
-        :filetype {:* [(. (require :formatter.filetypes.any) 
+        :filetype {:* [(. (require :formatter.filetypes.any)
                           :remove_trailing_whitespace)]
                    :c [(. (require :formatter.filetypes.lua)
                           :clangformat)]
@@ -61,9 +64,5 @@
                    :typescript [prettier]
                    :yaml [prettier]}})
 
-(local format-grp 
-       (vim.api.nvim_create_augroup :FormatAutogroup {:clear true}))
-(vim.api.nvim_create_autocmd :BufWritePost
-                             {:pattern {1 "*"}
-                              :command :FormatWrite
-                              :group format-grp})	
+(augroup! format-file-on-demand
+          (autocmd! BufWritePost * "FormatWrite"))

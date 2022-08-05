@@ -16,7 +16,7 @@
   "Create an autocommand using the nvim_create_autocmd API.
 
    Accepts the following arguments:
-   event -> can be either a symbol or a list of symbols.
+   event   -> can be either a symbol or a list of symbols.
    pattern -> can be either a symbol or a list of symbols. If it's <buffer> the
               buffer option is set to 0. If the buffer option is set this value
               is ignored.

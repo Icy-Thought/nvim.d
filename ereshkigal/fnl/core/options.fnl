@@ -25,6 +25,7 @@
 
 ;; Options -> Maintain sanity
 (set! breakat "\\ \\\t;:,!?")
+(set! breakindentopt ["shift:2" "min:20"])
 (set! backspace [:indent :eol :start])
 (set! clipboard :unnamedplus)
 (set! concealcursor :niv)

@@ -1,17 +1,17 @@
-(import-macros {: load-file} :macros.package)
-
 (local lsp (require :lspconfig))
 
 ;;; Diagnostics configuration
 (let [{: config
        : severity} vim.diagnostic
       {: sign_define} vim.fn]
+
   (config {:underline {:severity {:min severity.INFO}}
            :signs {:severity {:min severity.INFO}}
            :virtual_text false ;; lsp_lines handles this
            :update_in_insert true
            :severity_sort true
            :float {:show_header false :border :rounded}})
+
   (sign_define :DiagnosticSignError
                {:text "" :texthl :DiagnosticSignError})
   (sign_define :DiagnosticSignWarn
@@ -41,4 +41,4 @@
 (vim.cmd "command! -nargs=0 LspLog call v:lua.open_lsp_log()")
 (vim.cmd "command! -nargs=0 LspRestart call v:lua.reload_lsp()")
 
-(load-file completion.servers)
+(require "plugins.completion.servers")
