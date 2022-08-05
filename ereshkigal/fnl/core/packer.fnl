@@ -196,7 +196,7 @@
                                       :setup (fn []
                                               ((. (require :utils.lazy-load)
                                                   :load-on-file-open!) :nvim-lspconfig))
-                                      :config (load-file completion.lsp)})
+                                      :config (load-file completion.lspconfig)})
 
 (use-package! :williamboman/mason.nvim {:cmd mason-cmds
                                         :config (load-file completion.mason)})
