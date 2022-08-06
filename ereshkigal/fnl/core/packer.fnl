@@ -194,6 +194,10 @@
 ;(load-keymap hydra.md-preview)
 
 ;; ----------===[ Language Server Protocol (LSP) ]===----------
+(use-package! "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+              {:after :nvim-lspconfig
+              :config (call-setup lsp_lines)})
+
 (use-package! :neovim/nvim-lspconfig
               {:opt true
                :setup (fn []

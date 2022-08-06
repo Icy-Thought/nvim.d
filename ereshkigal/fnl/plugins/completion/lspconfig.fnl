@@ -13,7 +13,7 @@
            :severity_sort true
            :signs {:severity {:min severity.INFO}}
            :underline true
-           :virtual_text {:source true}
+           :virtual_text false ;; handled by lsp_lines
            :update_in_insert true})
 
   (sign_define :DiagnosticSignError
