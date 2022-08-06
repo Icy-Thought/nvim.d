@@ -13,9 +13,8 @@
 (local buf-set-lines vim.api.nvim_buf_set_lines)
 (local create-buf vim.api.nvim_create_buf)
 
-(local d-line-opts {:result_type "indices" :ignore_cr_at_eol true})
-(local d-opts {:result_type "indices"})
-
+(local d-line-opts {:result_type :indices :ignore_cr_at_eol true})
+(local d-opts {:result_type :indices})
 
 (fn set-line-text [buf line cs ce replacement]
   (buf-set-text buf line cs line ce [replacement]))
@@ -31,16 +30,15 @@
 ;; @params (i j) single-line-diff style range
 ;; @returns (start_col end_col)
 (fn transform-range [i j]
-  (if (= 0 j) (values i i)
-      (values (- i 1) (+ i j -1))))
+  (if (= 0 j) (values i i) (values (- i 1) (+ i j -1))))
 
 ;; the j=0: -1 condition is either never true or by a miraculous
 ;; coincidence is actually the *correct* return value.
 (fn hunk2lines [i j]
-  (if (= 0 j) [-1]
-      (let [range []]
-        (for [x i (+ i j -1)]
-          (t/ins range x)) range)))
+  (if (= 0 j) [-1] (let [range []]
+                     (for [x i (+ i j -1)]
+                       (t/ins range x))
+                     range)))
 
 (fn dl2bst-multi [strA strB]
   (icollect [_ [i j u v] (sriapi (diff-line strA strB))]
@@ -51,10 +49,13 @@
 ;; or two lines replaced with one, etc. (actually maybe it doesn't need
 ;; to be able to handle that)
 (fn buf-apply-diff [buf prev prevLines text textLines]
-  (ieach^ [[hl hn hle hne] (diff prev text d-opts)
-           l (hunk2lines hl hn)
-           [cs ce replacement] (dl2bst-multi (. prevLines l) (. textLines l))]
-    (set-line-text buf (- l 1) cs ce replacement)))
-
+  (ieach^ [[hl hn hle hne]
+           (diff prev text d-opts)
+           l
+           (hunk2lines hl hn)
+           [cs ce replacement]
+           (dl2bst-multi (. prevLines l) (. textLines l))]
+          (set-line-text buf (- l 1) cs ce replacement)))
 
 {: buf-apply-diff}
+

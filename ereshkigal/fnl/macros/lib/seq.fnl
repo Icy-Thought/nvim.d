@@ -13,9 +13,7 @@
   (?. xs (length xs)))
 
 (λ any? [pred xs]
-  (accumulate [any? false
-               _ v (ipairs xs)
-               :until any?]
+  (accumulate [any? false _ v (ipairs xs) :until any?]
     (pred v)))
 
 (λ all? [pred xs]
@@ -26,20 +24,17 @@
 
 (λ flatten [x ?levels]
   (assert (tbl? x) "expected tbl for x")
-  (assert (or (nil? ?levels) (num? ?levels)) "expected number or nil for levels")
+  (assert (or (nil? ?levels) (num? ?levels))
+          "expected number or nil for levels")
   (if (or (nil? ?levels) (> ?levels 0))
-    (accumulate [output []
-                 _ v (ipairs x)]
-      (if (tbl? v)
-        (icollect [_ v (ipairs (flatten v (if (nil? ?levels) nil (- ?levels 1)))) :into output] v)
-        (doto output (table.insert v))))
-    x))
+      (accumulate [output [] _ v (ipairs x)]
+        (if (tbl? v)
+            (icollect [_ v (ipairs (flatten v
+                                            (if (nil? ?levels) nil
+                                                (- ?levels 1)))) :into output]
+              v)
+            (doto output (table.insert v))))
+      x))
 
-{: empty?
- : first
- : second
- : last
- : any?
- : all?
- : contains?
- : flatten}
+{: empty? : first : second : last : any? : all? : contains? : flatten}
+

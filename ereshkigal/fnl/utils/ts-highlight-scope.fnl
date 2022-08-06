@@ -1,6 +1,6 @@
 (local locals (require :nvim-treesitter.locals))
 (local ts-utils (require :nvim-treesitter.ts_utils))
-(local ns (vim.api.nvim_create_namespace "ts-highlight-scope"))
+(local ns (vim.api.nvim_create_namespace :ts-highlight-scope))
 
 (fn buf-augroup [buf]
   (string.format "ts-highlight-scope-%d" buf))
@@ -40,3 +40,4 @@
   (vim.api.nvim_del_augroup_by_name (buf-augroup buf)))
 
 {: attach : detach}
+

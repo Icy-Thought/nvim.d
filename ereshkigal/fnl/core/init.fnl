@@ -1,6 +1,6 @@
 (require-macros :macros.event)
 
-;; Disable several built-in Neovim plugins + unneeded providers
+;; Built-in Neovim plugins to be disabled
 (let [built-ins [:2html_plugin
                  :getscript
                  :getscriptPlugin
@@ -20,31 +20,33 @@
                  :vimball
                  :vimballPlugin
                  :zip
-                 :zipPlugin]
-      providers [:perl
-                 :node
-                 ;; :python
-                 ;; :python3
-                 :ruby]]
+                 :zipPlugin]]
   (each [_ v (ipairs built-ins)]
     (let [plugin (.. :loaded_ v)]
-      (tset vim.g plugin 1)))
+      (tset vim.g plugin 1))))
+
+;; Built-in Neovim providers to be disabled
+;; :python :python3
+(let [providers [:perl :node :ruby]]
   (each [_ v (ipairs providers)]
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
 
 ;; make sure packer is all ready to go
-(let [compiled? (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
+(let [compiled? (= (vim.fn.filereadable (.. (vim.fn.stdpath :config)
+                                            :/lua/packer_compiled.lua))
+                   1)
       load-compiled #(require :packer_compiled)]
- (if compiled?
-     (load-compiled)
-     (. (require :packer) :sync)))
+  (if compiled?
+      (load-compiled)
+      (. (require :packer) :sync)))
 
 ;; Initalize packer
 (require :core.packer)
 
-;; colorscheme
+;; Our beloved colorschemes
 (import-macros {: colorscheme} :macros.highlight)
+
 (colorscheme catppuccin)
 ;; (colorscheme oxocarbon)
 
@@ -53,3 +55,4 @@
 (require :core.events)
 (require :keymaps.basics)
 (require :core.neovide)
+

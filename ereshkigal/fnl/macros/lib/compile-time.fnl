@@ -1,6 +1,5 @@
 (local {: ->str} (require :macros.lib.types))
-(local {: first
-        : second} (require :macros.lib.seq))
+(local {: first : second} (require :macros.lib.seq))
 (local {: djb2} (require :macros.lib.crypt))
 
 (λ expr->str [expr]
@@ -10,21 +9,19 @@
   "Checks if `x` is a function definition.
    Cannot check if a symbol is a function in compile time."
   (and (list? x)
-       (or (= 'fn (first x))
-           (= 'hashfn (first x))
-           (= 'lambda (first x))
-           (= 'partial (first x)))))
+       (or (= `fn (first x)) (= `hashfn (first x)) (= `lambda (first x))
+           (= `partial (first x)))))
 
 (fn quoted? [x]
   "Check if `x` is a list that begins with `quote`."
-  (and (list? x)
-       (= 'quote (first x))))
+  (and (list? x) (= `quote (first x))))
 
 (λ quoted->fn [expr]
   "Converts an expression like `(quote (+ 1 1))` into `(fn [] (+ 1 1))`."
   (assert-compile (quoted? expr) "expected quoted expression for expr" expr)
   (let [non-quoted (second expr)]
-    `(fn [] ,non-quoted)))
+    `(fn []
+       ,non-quoted)))
 
 (λ quoted->str [expr]
   "Converts a quoted expression like `(quote (+ 1 1))` into an string with its shorthand form."
@@ -36,9 +33,9 @@
   "Converts a list of expressions into either an expression - if only one
    expression is in the list - or a do-expression containing the expressions."
   (if (> (length exprs) 1)
-    `(do
-       ,(unpack exprs))
-    (first exprs)))
+      `(do
+         ,(unpack exprs))
+      (first exprs)))
 
 (λ gensym-checksum [x ?options]
   "Generates a new symbol from the checksum of the object passed as a parameter
@@ -64,3 +61,4 @@
  : expand-exprs
  : gensym-checksum
  : vlua}
+

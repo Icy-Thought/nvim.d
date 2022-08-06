@@ -1,7 +1,7 @@
 (var config-opts {})
 
 (local defaults {:enabled true
-                 :mode "smart"
+                 :mode :smart
                  :trail_highlight true
                  :trail_highlight_group :Whitespace
                  :forceBalance false
@@ -13,32 +13,30 @@
                  :schemeSexpComments false
                  :janetLongStrings false})
 
-(local ft-opts {:lisp {:lispVlineSymbols true
-                :lispBlockComments true}
-                :scheme {:lispVlineSymbols true
-                         :lispBlockComments true}
-                :janet {:commentChar "#"
-                        :janetLongStrings true}
+(local ft-opts {:lisp {:lispVlineSymbols true :lispBlockComments true}
+                :scheme {:lispVlineSymbols true :lispBlockComments true}
+                :janet {:commentChar "#" :janetLongStrings true}
                 :yuck {:stringDelimiters ["\"" "'" "`"]}})
 
-(local scoped-opts* {:mode "mode"
-                     :enabled "enabled"
-                     :trail_highlight "trail_highlight"
-                     :trail_highlight_group "trail_highlight_group"
-                     :force_balance "forceBalance"
-                     :comment_char "commentChar"
-                     :string_delimiters "stringDelimiters"
-                     :lisp_vline_symbols "lispVlineSymbols"
-                     :lisp_block_comments "lispBlockComments"
-                     :guile_block_comments "guileBlockComments"
-                     :scheme_sexp_comments "schemeSexpComments"
-                     :janet_long_strings "janetLongStrings"})
+(local scoped-opts* {:mode :mode
+                     :enabled :enabled
+                     :trail_highlight :trail_highlight
+                     :trail_highlight_group :trail_highlight_group
+                     :force_balance :forceBalance
+                     :comment_char :commentChar
+                     :string_delimiters :stringDelimiters
+                     :lisp_vline_symbols :lispVlineSymbols
+                     :lisp_block_comments :lispBlockComments
+                     :guile_block_comments :guileBlockComments
+                     :scheme_sexp_comments :schemeSexpComments
+                     :janet_long_strings :janetLongStrings})
 
 (local scoped-opts (collect [k v (pairs scoped-opts*)]
-                     (.. :parinfer_ k) v))
+                     (.. :parinfer_ k)
+                     v))
 
 (fn extend [base extension ...]
-  (if (= 0 (select :# ...)) (vim.tbl_extend :force base (or extension {}))
+  (if (= 0 (select "#" ...)) (vim.tbl_extend :force base (or extension {}))
       (= nil extension) (extend base ...)
       (extend (extend base extension) ...)))
 
@@ -61,12 +59,8 @@
 
 (fn get-buf-options [buf config]
   (let [ft (vim.api.nvim_buf_get_option buf :filetype)]
-    (extend defaults
-            config-opts
-            config
-            (or (. ft-opts ft) {})
-            (get-global-vars)
-            (get-buffer-vars buf))))
+    (extend defaults config-opts config (or (. ft-opts ft) {})
+            (get-global-vars) (get-buffer-vars buf))))
 
 (fn setup [config]
   (set config-opts (or config {})))
@@ -75,12 +69,12 @@
   (tset config-opts opt v))
 
 (fn update-option [opt f]
-  (tset config-opts opt
-        (f (. (get-configured) opt))))
+  (tset config-opts opt (f (. (get-configured) opt))))
 
-{:get-options get-options
+{: get-options
  :get_options get-options
- :get-buf-options get-buf-options
+ : get-buf-options
  :get_buf_options get-buf-options
  : update-option
  : setup}
+

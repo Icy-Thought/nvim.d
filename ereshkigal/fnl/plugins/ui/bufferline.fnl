@@ -27,32 +27,24 @@
                   :sort_by :id}
         :highlights {:fill {:guifg {:attribute :fg :highlight "#ff0000"}
                             :guibg {:attribute :bg :highlight :TabLine}}
-                     :background {:guifg {:attribute :fg
-                                     :highlight :TabLine}
-                                  :guibg {:attribute :bg
-                                          :highlight :TabLine}}
+                     :background {:guifg {:attribute :fg :highlight :TabLine}
+                                  :guibg {:attribute :bg :highlight :TabLine}}
                      :buffer_visible {:guifg {:attribute :fg
                                               :highlight :TabLine}
                                       :guibg {:attribute :bg
                                               :highlight :TabLine}}
-                     :close_button {:guifg {:attribute :fg
-                                            :highlight :TabLine}
-                                    :guibg {:attribute :bg
-                                            :highlight :TabLine}}
+                     :close_button {:guifg {:attribute :fg :highlight :TabLine}
+                                    :guibg {:attribute :bg :highlight :TabLine}}
                      :close_button_visible {:guifg {:attribute :fg
                                                     :highlight :TabLine}
                                             :guibg {:attribute :bg
                                                     :highlight :TabLine}}
-                     :tab_selected {:guifg {:attribute :fg
-                                            :highlight :Normal}
-                                    :guibg {:attribute :bg
-                                            :highlight :Normal}}
+                     :tab_selected {:guifg {:attribute :fg :highlight :Normal}
+                                    :guibg {:attribute :bg :highlight :Normal}}
                      :tab {:guifg {:attribute :fg :highlight :TabLine}
                            :guibg {:attribute :bg :highlight :TabLine}}
-                     :tab_close {:guifg {:attribute :fg
-                                         :highlight :TabLineSel}
-                                 :guibg {:attribute :bg
-                                         :highlight :Normal}}
+                     :tab_close {:guifg {:attribute :fg :highlight :TabLineSel}
+                                 :guibg {:attribute :bg :highlight :Normal}}
                      :duplicate_selected {:guifg {:attribute :fg
                                                   :highlight :TabLineSel}
                                           :guibg {:attribute :bg
@@ -63,15 +55,11 @@
                                          :guibg {:attribute :bg
                                                  :highlight :TabLine}
                                          :gui :italic}
-                     :duplicate {:guifg {:attribute :fg
-                                         :highlight :TabLine}
-                                 :guibg {:attribute :bg
-                                         :highlight :TabLine}
+                     :duplicate {:guifg {:attribute :fg :highlight :TabLine}
+                                 :guibg {:attribute :bg :highlight :TabLine}
                                  :gui :italic}
-                     :modified {:guifg {:attribute :fg
-                                        :highlight :TabLine}
-                                :guibg {:attribute :bg
-                                        :highlight :TabLine}}
+                     :modified {:guifg {:attribute :fg :highlight :TabLine}
+                                :guibg {:attribute :bg :highlight :TabLine}}
                      :modified_selected {:guifg {:attribute :fg
                                                  :highlight :Normal}
                                          :guibg {:attribute :bg
@@ -80,10 +68,8 @@
                                                 :highlight :TabLine}
                                         :guibg {:attribute :bg
                                                 :highlight :TabLine}}
-                     :separator {:guifg {:attribute :bg
-                                         :highlight :TabLine}
-                                 :guibg {:attribute :bg
-                                         :highlight :TabLine}}
+                     :separator {:guifg {:attribute :bg :highlight :TabLine}
+                                 :guibg {:attribute :bg :highlight :TabLine}}
                      :separator_selected {:guifg {:attribute :bg
                                                   :highlight :Normal}
                                           :guibg {:attribute :bg
@@ -92,3 +78,4 @@
                                                   :highlight :LspDiagnosticsDefaultHint}
                                           :guibg {:attribute :bg
                                                   :highlight :Normal}}}})
+

@@ -1,10 +1,7 @@
 (local {: ->str : nil?} (require :macros.lib.types))
 (local {: begins-with?} (require :macros.lib.string))
-(local {: quoted? : fn?
-        : quoted->fn
-        : gensym-checksum
-        : expand-exprs
-        : vlua} (require :macros.lib.compile-time))
+(local {: quoted? : fn? : quoted->fn : gensym-checksum : expand-exprs : vlua}
+       (require :macros.lib.compile-time))
 
 (λ set! [name ?value]
   "Set a vim option using the vim.opt.<name> API.
@@ -24,23 +21,27 @@
                   (not (begins-with? :no name))
                   ?value)
         value (if (quoted? value)
-                (quoted->fn value)
-                value)
+                  (quoted->fn value)
+                  value)
         name (if (and (nil? ?value) (begins-with? :no name))
-               (name:match "^no(.+)$")
-               name)
-        exprs (if (fn? value)
-                [`(tset _G ,(->str (gensym-checksum value {:prefix "__"})) ,value)]
-                [])
+                 (name:match "^no(.+)$")
+                 name)
+        exprs (if (fn? value) [`(tset _G
+                                      ,(->str (gensym-checksum value
+                                                               {:prefix "__"}))
+                                      ,value)] [])
         value (if (fn? value)
-                (vlua (gensym-checksum value {:prefix "__"}))
-                value)
+                  (vlua (gensym-checksum value {:prefix "__"}))
+                  value)
         exprs (doto exprs
-                    (table.insert (match (name:sub -1)
-                                    "+" `(: (. vim.opt ,(name:sub 1 -2)) :append ,value)
-                                    "-" `(: (. vim.opt ,(name:sub 1 -2)) :remove ,value)
-                                    "^" `(: (. vim.opt ,(name:sub 1 -2)) :prepend ,value)
-                                    _ `(tset vim.opt ,name ,value))))]
+                (table.insert (match (name:sub -1)
+                                "+" `(: (. vim.opt ,(name:sub 1 -2)) :append
+                                        ,value)
+                                "-" `(: (. vim.opt ,(name:sub 1 -2)) :remove
+                                        ,value)
+                                "^" `(: (. vim.opt ,(name:sub 1 -2)) :prepend
+                                        ,value)
+                                _ `(tset vim.opt ,name ,value))))]
     (expand-exprs exprs)))
 
 (λ local-set! [name ?value]
@@ -61,24 +62,28 @@
                   (not (begins-with? :no name))
                   ?value)
         value (if (quoted? value)
-                (quoted->fn value)
-                value)
+                  (quoted->fn value)
+                  value)
         name (if (and (nil? ?value) (begins-with? :no name))
-               (name:match "^no(.+)$")
-               name)
-        exprs (if (fn? value)
-                [`(tset _G ,(->str (gensym-checksum value {:prefix "__"})) ,value)]
-                [])
+                 (name:match "^no(.+)$")
+                 name)
+        exprs (if (fn? value) [`(tset _G
+                                      ,(->str (gensym-checksum value
+                                                               {:prefix "__"}))
+                                      ,value)] [])
         value (if (fn? value)
-                (vlua (gensym-checksum value {:prefix "__"}))
-                value)
+                  (vlua (gensym-checksum value {:prefix "__"}))
+                  value)
         exprs (doto exprs
-                    (table.insert (match (name:sub -1)
-                                    "+" `(: (. vim.opt_local ,(name:sub 1 -2)) :append ,value)
-                                    "-" `(: (. vim.opt_local ,(name:sub 1 -2)) :remove ,value)
-                                    "^" `(: (. vim.opt_local ,(name:sub 1 -2)) :prepend ,value)
-                                    _ `(tset vim.opt_local ,name ,value))))]
+                (table.insert (match (name:sub -1)
+                                "+" `(: (. vim.opt_local ,(name:sub 1 -2))
+                                        :append ,value)
+                                "-" `(: (. vim.opt_local ,(name:sub 1 -2))
+                                        :remove ,value)
+                                "^" `(: (. vim.opt_local ,(name:sub 1 -2))
+                                        :prepend ,value)
+                                _ `(tset vim.opt_local ,name ,value))))]
     (expand-exprs exprs)))
 
-{: set!
- : local-set!}
+{: set! : local-set!}
+

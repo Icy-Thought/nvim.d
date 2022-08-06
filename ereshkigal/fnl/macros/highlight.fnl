@@ -52,9 +52,9 @@
   (assert-compile (tbl? attributes) "expected table for attributes" attributes)
   (assert-compile (tbl? colors) "expected colors for colors" colors)
   (let [name (->str name)
-        definition (collect [_ attr (ipairs attributes)
-                             :into colors]
-                     (->str attr) true)]
+        definition (collect [_ attr (ipairs attributes) :into colors]
+                     (->str attr)
+                     true)]
     `(vim.api.nvim_set_hl 0 ,name ,definition)))
 
 (λ link! [new to old]
@@ -66,6 +66,5 @@
         old (->str old)]
     `(vim.api.nvim_set_hl 0 ,new {:link ,old})))
 
-{: colorscheme
- : custom-set-face!
- : link!}
+{: colorscheme : custom-set-face! : link!}
+

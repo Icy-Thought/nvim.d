@@ -1,18 +1,26 @@
 (local {: ->str : str? : nil? : tbl?} (require :macros.lib.types))
-(local {: fn? : quoted? : quoted->fn : quoted->str} (require :macros.lib.compile-time))
+(local {: fn? : quoted? : quoted->fn : quoted->str}
+       (require :macros.lib.compile-time))
 
 (λ shared-command! [api-function name command ?options]
-  (assert-compile (sym? api-function) "expected symbol for api-function" api-function)
+  (assert-compile (sym? api-function) "expected symbol for api-function"
+                  api-function)
   (assert-compile (sym? name) "expected symbol for name" name)
-  (assert-compile (or (str? command) (sym? command) (fn? command) (quoted? command)) "expected string, symbol, function or quoted expression for command" command)
-  (assert-compile (or (nil? ?options) (tbl? ?options)) "expected table for options" ?options)
+  (assert-compile (or (str? command) (sym? command) (fn? command)
+                      (quoted? command))
+                  "expected string, symbol, function or quoted expression for command"
+                  command)
+  (assert-compile (or (nil? ?options) (tbl? ?options))
+                  "expected table for options" ?options)
   (let [name (->str name)
         options (or ?options {})
         options (if (nil? options.desc)
-                  (doto options (tset :desc (if (quoted? command) (quoted->str command)
-                                              (str? command) command
-                                              (view command))))
-                  options)
+                    (doto options
+                          (tset :desc
+                                (if (quoted? command) (quoted->str command)
+                                    (str? command) command
+                                    (view command))))
+                    options)
         command (if (quoted? command) (quoted->fn command) command)]
     `(,api-function ,name ,command ,options)))
 
@@ -37,7 +45,7 @@
                                      {:bang true
                                       :desc \"This is a description\"})
   ```"
-  (shared-command! 'vim.api.nvim_create_user_command name command ?options))
+  (shared-command! `vim.api.nvim_create_user_command name command ?options))
 
 (λ local-command! [name command ?options]
   "Create a new user command using the vim.api.nvim_buf_create_user_command API.
@@ -60,7 +68,7 @@
                                          {:bang true
                                           :desc \"This is a description\"})
   ```"
-  (shared-command! 'vim.api.nvim_buf_create_user_command name command ?options))
+  (shared-command! `vim.api.nvim_buf_create_user_command name command ?options))
 
-{: command!
- : local-command!}
+{: command! : local-command!}
+

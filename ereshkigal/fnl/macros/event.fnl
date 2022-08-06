@@ -1,16 +1,7 @@
-(local {: all?
-        : first} (require :macros.lib.seq))
-
-(local {: ->str
-        : nil?
-        : tbl?
-        : str?} (require :macros.lib.types))
-
-(local {: fn?
-        : quoted?
-        : quoted->fn
-        : quoted->str
-        : expand-exprs} (require :macros.lib.compile-time))
+(local {: all? : first} (require :macros.lib.seq))
+(local {: ->str : nil? : tbl? : str?} (require :macros.lib.types))
+(local {: fn? : quoted? : quoted->fn : quoted->str : expand-exprs}
+       (require :macros.lib.compile-time))
 
 (λ autocmd! [event pattern command ?options]
   "Create an autocommand using the nvim_create_autocmd API.
@@ -38,32 +29,45 @@
                                  :group \"custom\"
                                  :desc \"This is a description\"})
   ```"
-  (assert-compile (or (sym? event) (and (tbl? event) (all? #(sym? $) event)) "expected symbol or list of symbols for event" event))
-  (assert-compile (or (sym? pattern) (and (tbl? pattern) (all? #(sym? $) pattern)) "expected symbol or list of symbols for pattern" pattern))
-  (assert-compile (or (str? command) (sym? command) (fn? command) (quoted? command)) "expected string, symbol, function or quoted expression for command" command)
-  (assert-compile (or (nil? ?options) (tbl? ?options)) "expected table for options" ?options)
+  (assert-compile (or (sym? event) (and (tbl? event) (all? #(sym? $) event))
+                      "expected symbol or list of symbols for event" event))
+  (assert-compile (or (sym? pattern)
+                      (and (tbl? pattern) (all? #(sym? $) pattern))
+                      "expected symbol or list of symbols for pattern" pattern))
+  (assert-compile (or (str? command) (sym? command) (fn? command)
+                      (quoted? command))
+                  "expected string, symbol, function or quoted expression for command"
+                  command)
+  (assert-compile (or (nil? ?options) (tbl? ?options))
+                  "expected table for options" ?options)
   (let [event (if (and (tbl? event) (not (sym? event)))
-                (icollect [_ v (ipairs event)] (->str v))
-                (->str event))
+                  (icollect [_ v (ipairs event)]
+                    (->str v))
+                  (->str event))
         pattern (if (and (tbl? pattern) (not (sym? pattern)))
-                  (icollect [_ v (ipairs pattern)] (->str v))
-                  (->str pattern))
+                    (icollect [_ v (ipairs pattern)]
+                      (->str v))
+                    (->str pattern))
         options (or ?options {})
         options (if (nil? options.buffer)
-                  (if (= "<buffer>" pattern)
-                    (doto options (tset :buffer 0))
-                    (doto options (tset :pattern pattern)))
-                  options)
+                    (if (= :<buffer> pattern)
+                        (doto options (tset :buffer 0))
+                        (doto options (tset :pattern pattern)))
+                    options)
         options (if (str? command)
-                  (doto options (tset :command command))
-                  (doto options (tset :callback (if (quoted? command)
-                                                  (quoted->fn command)
-                                                  command))))
+                    (doto options (tset :command command))
+                    (doto options
+                      (tset :callback
+                            (if (quoted? command)
+                                (quoted->fn command)
+                                command))))
         options (if (nil? options.desc)
-                  (doto options (tset :desc (if (quoted? command) (quoted->str command)
-                                              (str? command) command
-                                              (view command))))
-                  options)]
+                    (doto options
+                      (tset :desc
+                            (if (quoted? command) (quoted->str command)
+                                (str? command) command
+                                (view command))))
+                    options)]
     `(vim.api.nvim_create_autocmd ,event ,options)))
 
 (λ augroup! [name ...]
@@ -84,20 +88,22 @@
      (autocmd! Filetype *.py '(print \"Hello World\") {:group \"a-nice-group\"})
      (autocmd! Filetype *.sh '(print \"Hello World\") {:group \"a-nice-group\"}))
   ```"
-  (assert-compile (or (str? name) (sym? name)) "expected string or symbol for name" name)
-  (assert-compile (all? #(and (list? $) (or (= 'clear! (first $))
-                                            (= 'autocmd! (first $)))) [...]) "expected autocmd exprs for body" ...)
-  (expand-exprs
-    (let [name (->str name)]
-      (icollect [_ expr (ipairs [...])
-                 :into [`(vim.api.nvim_create_augroup ,name {:clear false})]]
-        (if (= 'autocmd! (first expr))
-          (let [[_ event pattern command ?options] expr
-                options (or ?options {})
-                options (doto options (tset :group name))]
-            `(autocmd! ,event ,pattern ,command ,options))
-          (let [[_ ?options] expr]
-            `(clear! ,name ,?options)))))))
+  (assert-compile (or (str? name) (sym? name))
+                  "expected string or symbol for name" name)
+  (assert-compile (all? #(and (list? $)
+                              (or (= `clear! (first $)) (= `autocmd! (first $))))
+                        [...])
+                  "expected autocmd exprs for body" ...)
+  (expand-exprs (let [name (->str name)]
+                  (icollect [_ expr (ipairs [...]) :into [`(vim.api.nvim_create_augroup ,name
+                                                                                        {:clear false})]]
+                    (if (= `autocmd! (first expr))
+                        (let [[_ event pattern command ?options] expr
+                              options (or ?options {})
+                              options (doto options (tset :group name))]
+                          `(autocmd! ,event ,pattern ,command ,options))
+                        (let [[_ ?options] expr]
+                          `(clear! ,name ,?options)))))))
 
 (λ clear! [name ?options]
   "Clears an augroup using the nvim_clear_autocmds API.
@@ -111,13 +117,14 @@
    ```fennel
    (vim.api.nvim_clear_autocmds {:group \"some-group\"})
   ```"
-  (assert-compile (or (str? name) (sym? name)) "expected string or symbol for name" name)
-  (assert-compile (or (nil? ?options) (tbl? ?options)) "expected table for options" ?options)
+  (assert-compile (or (str? name) (sym? name))
+                  "expected string or symbol for name" name)
+  (assert-compile (or (nil? ?options) (tbl? ?options))
+                  "expected table for options" ?options)
   (let [name (->str name)
         options (or ?options {})
         options (doto options (tset :group name))]
     `(vim.api.nvim_clear_autocmds ,options)))
 
-{: autocmd!
- : augroup!
- : clear!}
+{: autocmd! : augroup! : clear!}
+

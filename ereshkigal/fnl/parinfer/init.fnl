@@ -8,7 +8,7 @@
 (local buf-apply-diff incr-bst.buf-apply-diff)
 (local (t/cat t/ins) (values table.concat table.insert))
 (local (json split cmd) (values vim.json vim.split vim.cmd))
-(local ns (vim.api.nvim_create_namespace "parinfer"))
+(local ns (vim.api.nvim_create_namespace :parinfer))
 
 (local state {})
 
@@ -37,22 +37,19 @@
                        :TextChangedI
                        :TextChangedP])
 
-(local cursor-events [:BufEnter
-                      :WinEnter])
+(local cursor-events [:BufEnter :WinEnter])
 
 (fn notify-error [buf request res]
-  (vim.notify
-    (t/cat [(.. "[Parinfer] error in buffer " buf)
-            (json.encode (or (?. res :error) {}))
-            (json.encode request)
-            (json.encode (or res {}))]
-           "\n")
-    vim.log.levels.ERROR))
+  (vim.notify (t/cat [(.. "[Parinfer] error in buffer " buf)
+                      (json.encode (or (?. res :error) {}))
+                      (json.encode request)
+                      (json.encode (or res {}))] "\n")
+              vim.log.levels.ERROR))
 
 ;; creates parinfennel augroup if necessary & stores id in state
 (fn ensure-augroup []
   (when (= nil state.augroup)
-    (tset state :augroup (create_augroup "parinfennel" {:clear true}))))
+    (tset state :augroup (create_augroup :parinfennel {:clear true}))))
 
 ;; deletes parinfennel augroup if it exists
 (fn del-augroup []
@@ -62,16 +59,15 @@
 
 ;; creates an autocmd in `parinfennel` group
 (fn autocmd [events opts]
-  (create_autocmd events (extend-keep opts {:group "parinfennel"})))
+  (create_autocmd events (extend-keep opts {:group :parinfennel})))
 
 ;; shorthand for attaching a callback to a buffer
 (fn buf-autocmd [buf events func]
-  (t/ins (. state buf :autocmds)
-         (autocmd events {:callback func :buffer buf})))
+  (t/ins (. state buf :autocmds) (autocmd events {:callback func :buffer buf})))
 
 ;; expands autocmd buffer argument and converts to a number
 (fn abuf []
-  (tonumber (expand "<abuf>")))
+  (tonumber (expand :<abuf>)))
 
 ;; highlight 'parenTrails' that are being handled by parinfer
 (fn handle-trails [group]
@@ -120,8 +116,11 @@
 ;; creates a function that refreshes the state of
 ;; buf's cursor, text, and changedtick
 (fn refresher [buf]
-  (let [ref-t (refresh-text buf) ref-c (refresh-cursor buf)]
-    #(do (ref-t) (ref-c))))
+  (let [ref-t (refresh-text buf)
+        ref-c (refresh-cursor buf)]
+    #(do
+       (ref-t)
+       (ref-c))))
 
 ;; make a process-buffer function with enclosed settings
 (fn make-processor [buf mode buf-opts]
@@ -139,14 +138,14 @@
         refresh-cursor (refresh-cursor buf)
         refresh-text (refresh-text buf)
         refresh-changedtick (refresh-changedtick buf)
-        trails-fn (when trail_highlight (handle-trails trail_highlight_group))]
-
+        trails-fn (when trail_highlight
+                    (handle-trails trail_highlight_group))]
     (fn process []
       (when (not= bufstate.changedtick (buf_get_changedtick buf))
         (let [(cl cx) (get-cursor)
               (text lines) (get-buf-content buf)
-              req {:mode mode
-                   :text text
+              req {: mode
+                   : text
                    :options {: commentChar
                              : stringDelimiters
                              : forceBalance
@@ -165,11 +164,11 @@
               (do
                 (when (not= res.text text)
                   (cmd "silent! undojoin")
-                  (buf-apply-diff
-                    buf text lines res.text (split res.text "\n")))
+                  (buf-apply-diff buf text lines res.text (split res.text "\n")))
                 (set-cursor res.cursorLine res.cursorX)
                 (tset bufstate :text res.text)
-                (when (not= nil trails-fn) (trails-fn buf res.parenTrails)))
+                (when (not= nil trails-fn)
+                  (trails-fn buf res.parenTrails)))
               (do
                 (notify-error buf req res)
                 (tset bufstate :error res.error)
@@ -223,20 +222,21 @@
 ;; :ParinferSetup as well as the main entry-point of this module
 ;; sets up autocmds to initialize new buffers
 (fn setup! [conf]
-  (when conf (opts-setup conf))
+  (when conf
+    (opts-setup conf))
   (ensure-augroup)
   (autocmd :FileType {:callback initialize-buffer
-                      :pattern ["clojure"
-                                "scheme"
-                                "lisp"
-                                "racket"
-                                "hy"
-                                "fennel"
-                                "janet"
-                                "carp"
-                                "wast"
-                                "yuck"
-                                "dune"]}))
+                      :pattern [:clojure
+                                :scheme
+                                :lisp
+                                :racket
+                                :hy
+                                :fennel
+                                :janet
+                                :carp
+                                :wast
+                                :yuck
+                                :dune]}))
 
 ;; :ParinferCleanup
 ;; delete parinfennel augroup which contains the init callback & all processors
@@ -267,9 +267,7 @@
 ;;; if parinfer-rust is active commands should start with :ParinferFnl,
 ;; otherwise they just start with :Parinfer
 (fn cmd-str [cmd-name]
-  (.. (if (= 1 (vim.fn.exists "g:parinfer_enabled"))
-          :ParinferFnl
-          :Parinfer)
+  (.. (if (= 1 (vim.fn.exists "g:parinfer_enabled")) :ParinferFnl :Parinfer)
       cmd-name))
 
 (fn parinfer-command! [s f opts]
@@ -294,3 +292,4 @@
  :detach_current_buf detach-current-buf!
  :refresh_current_buf refresh-current-buf!
  :toggle_trails toggle-trails!}
+

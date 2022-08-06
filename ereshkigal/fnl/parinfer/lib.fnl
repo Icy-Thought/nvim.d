@@ -4,12 +4,11 @@
 (local get_runtime_file vim.api.nvim_get_runtime_file)
 
 (fn resolve-lib []
-  (let [libname
-        (match ffi.os
-          "OSX" "libparinfer_rust.dylib"
-          "Windows" "parinfer_rust.dll"
-          _ "libparinfer_rust.so")]
-    (get_runtime_file (.. "target/release/" libname) false)))
+  (let [libname (match ffi.os
+                  :OSX :libparinfer_rust.dylib
+                  :Windows :parinfer_rust.dll
+                  _ :libparinfer_rust.so)]
+    (get_runtime_file (.. :target/release/ libname) false)))
 
 (fn runner [parinfer]
   (fn run [request]
@@ -20,17 +19,19 @@
         (json-decode))))
 
 (fn load-lib []
-  (let [[lib-path] (resolve-lib)] lib-path))
+  (let [[lib-path] (resolve-lib)]
+    lib-path))
 
 (fn load-parinfer [lib-path]
   (if (= nil lib-path)
       (vim.notify "Could not load parinfer library" vim.log.levels.ERROR)
-      (do (ffi.cdef "char *run_parinfer(const char *json);")
-          (let [ns (ffi.load lib-path)]
-            {:interface ns :run (runner ns)}))))
+      (do
+        (ffi.cdef "char *run_parinfer(const char *json);")
+        (let [ns (ffi.load lib-path)]
+          {:interface ns :run (runner ns)}))))
 
 (fn parinfer-rust-loaded? []
-  (< 0 (length (get_runtime_file "target/release/*parinfer_rust.*" true))))
+  (< 0 (length (get_runtime_file :target/release/*parinfer_rust.* true))))
 
 (fn setup []
   (when (and (= 0 (vim.fn.exists "g:parinfer_dont_load_rust"))
@@ -39,3 +40,4 @@
   (-> (load-lib) (load-parinfer)))
 
 (setup)
+

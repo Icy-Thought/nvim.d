@@ -1,12 +1,6 @@
-(local {: ->str
-        : nil?
-        : str?
-        : tbl?} (require :macros.lib.types))
-
-(local {: fn?
-        : quoted?
-        : quoted->fn
-        : quoted->str} (require :macros.lib.compile-time))
+(local {: ->str : nil? : str? : tbl?} (require :macros.lib.types))
+(local {: fn? : quoted? : quoted->fn : quoted->str}
+       (require :macros.lib.compile-time))
 
 (λ map! [[modes] lhs rhs ?options]
   "Add a new mapping using the vim.keymap.set API.
@@ -36,15 +30,21 @@
   ```"
   (assert-compile (sym? modes) "expected symbol for modes" modes)
   (assert-compile (str? lhs) "expected string for lhs" lhs)
-  (assert-compile (or (str? rhs) (sym? rhs) (fn? rhs) (quoted? rhs)) "expected string, symbol, function or quoted expression for rhs" rhs)
-  (assert-compile (or (nil? ?options) (tbl? ?options)) "expected table for options" ?options)
-  (let [modes (icollect [char (string.gmatch (->str modes) ".")] char)
+  (assert-compile (or (str? rhs) (sym? rhs) (fn? rhs) (quoted? rhs))
+                  "expected string, symbol, function or quoted expression for rhs"
+                  rhs)
+  (assert-compile (or (nil? ?options) (tbl? ?options))
+                  "expected table for options" ?options)
+  (let [modes (icollect [char (string.gmatch (->str modes) ".")]
+                char)
         options (or ?options {})
         options (if (nil? options.desc)
-                  (doto options (tset :desc (if (quoted? rhs) (quoted->str rhs)
-                                              (str? rhs) rhs
-                                              (view rhs))))
-                  options)
+                    (doto options
+                      (tset :desc
+                            (if (quoted? rhs) (quoted->str rhs)
+                                (str? rhs) rhs
+                                (view rhs))))
+                    options)
         rhs (if (quoted? rhs) (quoted->fn rhs) rhs)]
     `(vim.keymap.set ,modes ,lhs ,rhs ,options)))
 
@@ -76,11 +76,14 @@
   ```"
   (assert-compile (sym? modes) "expected symbol for modes" modes)
   (assert-compile (str? lhs) "expected string for lhs" lhs)
-  (assert-compile (or (str? rhs) (sym? rhs) (fn? rhs) (quoted? rhs)) "expected string, symbol, function or quoted expression for rhs" rhs)
-  (assert-compile (or (nil? ?options) (tbl? ?options)) "expected table for options" ?options)
+  (assert-compile (or (str? rhs) (sym? rhs) (fn? rhs) (quoted? rhs))
+                  "expected string, symbol, function or quoted expression for rhs"
+                  rhs)
+  (assert-compile (or (nil? ?options) (tbl? ?options))
+                  "expected table for options" ?options)
   (let [options (or ?options {})
         options (doto options (tset :buffer 0))]
     (map! [modes] lhs rhs options)))
 
-{: map!
- : buf-map!}
+{: map! : buf-map!}
+
