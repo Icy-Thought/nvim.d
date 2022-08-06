@@ -17,4 +17,3 @@
 
 (local category {:t {:name :Terminal}})
 ((. (require :which-key) :register) category)
-

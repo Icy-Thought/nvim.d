@@ -68,4 +68,3 @@
 (map! [t] :<C-j> "<C-\\><C-N><C-w>j" {:silent true})
 (map! [t] :<C-k> "<C-\\><C-N><C-w>k" {:silent true})
 (map! [t] :<C-l> "<C-\\><C-N><C-w>l" {:silent true})
-

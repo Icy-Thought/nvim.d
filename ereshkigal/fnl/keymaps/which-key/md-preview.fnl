@@ -11,4 +11,3 @@
 
 (local category {:m {:name "Markdown Preview"}})
 ((. (require :which-key) :register) category)
-

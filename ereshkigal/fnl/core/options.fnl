@@ -82,7 +82,6 @@
 
 ;; Maintainging a healthier <tab>
 (set! expandtab)
-(set! showtabline 2)
 (set! shiftround)
 (set! shiftwidth 4)
 (set! softtabstop 4)

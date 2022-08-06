@@ -22,5 +22,8 @@
     (ext 0) (tbl_extend :keep base ext)
     (ext _) (extend-keep (extend-keep base ext) ...)))
 
-{: sriapi : extend : extend-keep :reverse-ipairs sriapi :extend-force extend}
-
+{: sriapi
+ : extend
+ : extend-keep
+ :reverse-ipairs sriapi
+ :extend-force extend}

@@ -85,5 +85,5 @@
                                 _ `(tset vim.opt_local ,name ,value))))]
     (expand-exprs exprs)))
 
-{: set! : local-set!}
-
+{: set!
+ : local-set!}

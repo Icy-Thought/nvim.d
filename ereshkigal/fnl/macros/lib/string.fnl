@@ -5,4 +5,3 @@
   (->bool (str:match (.. "^" chars))))
 
 {: begins-with?}
-

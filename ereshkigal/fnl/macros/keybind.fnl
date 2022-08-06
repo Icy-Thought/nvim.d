@@ -85,5 +85,5 @@
         options (doto options (tset :buffer 0))]
     (map! [modes] lhs rhs options)))
 
-{: map! : buf-map!}
-
+{: map!
+ : buf-map!}

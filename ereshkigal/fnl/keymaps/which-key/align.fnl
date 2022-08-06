@@ -28,4 +28,3 @@
       (fn []
         (ALG.operator ALG.align_to_char {:reverse true}))
       {:noremap true :silent true :desc "Align paragraph to 1 Char"})
-

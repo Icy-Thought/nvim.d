@@ -36,5 +36,11 @@
             (doto output (table.insert v))))
       x))
 
-{: empty? : first : second : last : any? : all? : contains? : flatten}
-
+{: empty?
+ : first
+ : second
+ : last
+ : any?
+ : all?
+ : contains?
+ : flatten}

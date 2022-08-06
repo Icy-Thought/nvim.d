@@ -126,5 +126,6 @@
         options (doto options (tset :group name))]
     `(vim.api.nvim_clear_autocmds ,options)))
 
-{: autocmd! : augroup! : clear!}
-
+{: autocmd!
+ : augroup!
+ : clear!}

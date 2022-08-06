@@ -55,4 +55,3 @@
 (require :core.events)
 (require :keymaps.basics)
 (require :core.neovide)
-

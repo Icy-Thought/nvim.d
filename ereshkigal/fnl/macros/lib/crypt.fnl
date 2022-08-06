@@ -8,4 +8,3 @@
     (bit.tohex hash)))
 
 {: djb2}
-

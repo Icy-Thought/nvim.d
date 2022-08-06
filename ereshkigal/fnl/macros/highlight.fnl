@@ -66,5 +66,6 @@
         old (->str old)]
     `(vim.api.nvim_set_hl 0 ,new {:link ,old})))
 
-{: colorscheme : custom-set-face! : link!}
-
+{: colorscheme
+ : custom-set-face!
+ : link!}

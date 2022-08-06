@@ -62,4 +62,3 @@
                      :l [:<c-w>l "Displace Right"]}})
 
 (wk.register mappings opts)
-

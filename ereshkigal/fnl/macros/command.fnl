@@ -70,5 +70,5 @@
   ```"
   (shared-command! `vim.api.nvim_buf_create_user_command name command ?options))
 
-{: command! : local-command!}
-
+{: command!
+ : local-command!}

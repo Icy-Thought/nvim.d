@@ -83,4 +83,3 @@
 (buf-map! [n] "]E" (fn []
                      (saga-err-jump! :next)) ;; TODO:
           {:noremap true :silent true :desc "Jump to next Err"})
-

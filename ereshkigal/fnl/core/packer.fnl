@@ -38,11 +38,17 @@
 
 ;; ----------===[ Core-Deps ]===----------
 (use-package! :wbthomason/packer.nvim)
-(use-package! :nvim-lua/plenary.nvim {:module :plenary})
+
+(use-package! :nvim-lua/plenary.nvim
+              {:module :plenary})
 
 ;; ----------===[ Lisp-Conf ]===----------
-(use-package! :rktjmp/hotpot.nvim {:branch :nightly})
-(use-package! :eraserhd/parinfer-rust {:opt true :run "cargo build --release"})
+(use-package! :rktjmp/hotpot.nvim
+              {:branch :nightly})
+
+(use-package! :eraserhd/parinfer-rust
+              {:opt true
+              :run "cargo build --release"})
 
 (use-package! :Olical/conjure
               {:branch :develop
@@ -50,9 +56,11 @@
                :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
 
 ;; ----------===[ Aesthetics ]===----------
-(use-package! :kyazdani42/nvim-web-devicons {:module :nvim-web-devicons})
+(use-package! :kyazdani42/nvim-web-devicons
+              {:module :nvim-web-devicons})
 
-(use-package! :shaunsingh/oxocarbon.nvim {:run :./install.sh})
+;; (use-package! :shaunsingh/oxocarbon.nvim
+;;               {:run :./install.sh})
 
 (use-package! :catppuccin/nvim
               {:as :catppuccin
@@ -62,13 +70,18 @@
 ;; (use-package! :themercorp/themer.lua {:config (load-theme themer)})
 
 (use-package! :akinsho/bufferline.nvim
-              {:event :VimEnter :config (load-file ui.bufferline)})
+              {:config (load-file ui.bufferline)
+               :setup (fn []
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :bufferline.nvim))})
 
 (use-package! :feline-nvim/feline.nvim
-              {:event :VimEnter :config (load-file ui.feline)})
+              {:event :VimEnter
+               :config (load-file ui.feline)})
 
 (use-package! :glepnir/dashboard-nvim
-              {:event :BufWinEnter :config (load-file ui.dashboard)})
+              {:event :BufWinEnter
+               :config (load-file ui.dashboard)})
 
 (use-package! :gelguy/wilder.nvim
               {:run :UpdateRemotePlugins
@@ -98,22 +111,28 @@
                :cmd :NvimTreeToggle
                :config (call-setup nvim-tree)})
 
-;; (use-package! :folke/which-key.nvim {:event :VimEnter
-;;                                      :config [(load-file toolbox.which-key)
-;;                                               (load-keymap which-key)]})
+;; (use-package! :folke/which-key.nvim
+;;               {:event :VimEnter
+;;                :config [(load-file toolbox.which-key)
+;;                (load-keymap which-key)]})
 
 (use-package! :anuvyklack/hydra.nvim
-              {:keys :<space> :config (load-keymap hydra.options)})
+              {:keys :<space>
+               :config (load-keymap hydra.options)})
 
-(use-package! :akinsho/nvim-toggleterm.lua {:config [(call-setup toggleterm)]})
-; (load-keymap hydra.toggleterm)
+(use-package! :akinsho/nvim-toggleterm.lua
+              {:config [(call-setup toggleterm)]})
+               ;; (load-keymap hydra.toggleterm)
 
 (use-package! :TimUntersberger/neogit
-              {:cmd :Neogit :event :VimEnter :config (call-setup neogit)})
+              {:cmd :Neogit
+               :event :VimEnter
+               :config (call-setup neogit)})
 
 (use-package! :lewis6991/gitsigns.nvim
               {:ft :gitcommit
-               :config [(call-setup gitsigns) (load-keymap hydra.gitsigns)]
+               :config [(call-setup gitsigns)
+                        (load-keymap hydra.gitsigns)]
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-gitsigns)))})
 
@@ -121,30 +140,34 @@
 (use-package! :Vonr/align.nvim
               {;; :config (load-keymap hydra.align)
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :align.nvim))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :align.nvim))})
 
 (use-package! :numToStr/Comment.nvim
               {:config (call-setup Comment)
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :Comment.nvim))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :Comment.nvim))})
 
 (use-package! :windwp/nvim-autopairs
-              {:event :InsertEnter
-               :config (load-file editor.autopairs)
+              {:config (load-file editor.autopairs)
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :nvim-autopairs))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :nvim-autopairs))})
 
 (use-package! :lukas-reineke/indent-blankline.nvim
               {:after :nvim-treesitter
                :config (load-file editor.blankline)
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :indent-blankline.nvim))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :indent-blankline.nvim))})
 
 (use-package! :ggandor/leap.nvim
               {:config (fn []
                          ((. (require :leap) :set_default_keymaps)))
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :leap.nvim))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :leap.nvim))})
 
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
@@ -153,7 +176,8 @@
                :config [(load-file editor.treesitter)
                         (load-keymap hydra.treesitter)]
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :nvim-treesitter))
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :nvim-treesitter))
                :requires [(pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})
                           (pack :nvim-treesitter/nvim-treesitter-textobjects
@@ -163,7 +187,8 @@
               {:opt true
                :config (call-setup matchparen)
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :matchparen.nvim))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :matchparen.nvim))})
 
 (use-package! :nvim-neorg/neorg
               {:config (load-file editor.neorg)
@@ -174,16 +199,19 @@
               {:opt true
                :config (call-setup colorizer)
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :nvim-colorizer.lua))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :nvim-colorizer.lua))})
 
 (use-package! :kevinhwang91/nvim-ufo
               {:requires [(pack :kevinhwang91/promise-async)]
                :config (load-file editor.folding)
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :nvim-ufo))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :nvim-ufo))})
 
 (use-package! :Pocco81/true-zen.nvim
-              {:cmd :TZAtaraxis :config (call-setup true-zen)})
+              {:cmd :TZAtaraxis
+               :config (call-setup true-zen)})
 
 (use-package! :iamcco/markdown-preview.nvim
               {:run (fn []
@@ -196,12 +224,13 @@
 ;; ----------===[ Language Server Protocol (LSP) ]===----------
 (use-package! "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
               {:after :nvim-lspconfig
-              :config (call-setup lsp_lines)})
+               :config (call-setup lsp_lines)})
 
 (use-package! :neovim/nvim-lspconfig
               {:opt true
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :nvim-lspconfig))
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :nvim-lspconfig))
                :config (load-file completion.lspconfig)})
 
 (use-package! :williamboman/mason.nvim
@@ -237,7 +266,8 @@
 (use-package! :mhartington/formatter.nvim
               {:config (load-file completion.formatter)
                :setup (fn []
-                        ((. (require :utils.lazy-load) :load-on-file-open!) :formatter.nvim))})
+                        ((. (require :utils.lazy-load) :load-on-file-open!)
+                         :formatter.nvim))})
 
 ;; (use-package! :zbirenbaum/copilot.lua {:after :nvim-cmp
 ;;                                        :requires [(pack :zbirenbaum/copilot-cmp)]
@@ -245,12 +275,13 @@
 
 ;; ----------===[ LSP-Lang Specific Conf ]===----------
 (use-package! :saecki/crates.nvim
-              {:event ["BufRead Cargo.toml"] :config (call-setup crates)})
+              {:event ["BufRead Cargo.toml"]
+               :config (call-setup crates)})
 
 (use-package! :simrat39/rust-tools.nvim
               {:ft :rust
                :branch :modularize_and_inlay_rewrite
-               :config [(call-setup rust) (load-keymap hydra.rust)]})
+               :config [(call-setup rust)
+                        (load-keymap hydra.rust)]})
 
 (unpack!)
-

@@ -16,4 +16,3 @@
 (tset vim.g :neovide_cursor_vfx_particle_density 5)
 (tset vim.g :neovide_cursor_vfx_particle_lifetime 1.2)
 (tset vim.g :neovide_cursor_vfx_particle_speed 20)
-
