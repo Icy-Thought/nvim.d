@@ -32,7 +32,31 @@
     (t lines))
 
   (local auto-snippets
-         [(s ".." [(t "\\cdot ") (i 0)])
+         [(s {:trig "([^%s]*[^%)])//" :regTrig true}
+             [(d 1 (fn [_ snip]
+                     (let [selected (. snip.env.TM_SELECTED_TEXT 1)]
+                       (if selected
+                           (sn nil [(t "\\frac{")
+                                    (t selected)
+                                    (t "}{")
+                                    (i 1)
+                                    (t "}")])
+                           (do
+                             (f (fn [_ snip]
+                                  (.. "Captured Text: " (. snip.captures 1) ".")))
+                             (if (= (. snip.captures 1) " ")
+                                 (sn nil [(t "\\frac{")
+                                          (i 1)
+                                          (t "}{")
+                                          (i 2)
+                                          (t "}")])
+                                 (sn nil [(t "\\frac{")
+                                          (t (. snip.captures 1))
+                                          (t "}{")
+                                          (i 1)
+                                          (t "}")])))))))
+              (i 0)])
+          (s ".." [(t "\\cdot ") (i 0)])
           (s "..." [(t "\\ldots ") (i 0)])
           (s "~=" [(t "\\approx ") (i 0)])
           (s "!=" [(t "\\neq ") (i 0)])
@@ -66,8 +90,7 @@
           (s :UU [(t "\\cup ") (i 0)])
           (s {:trig :transp :wordTrig false} [(t "^{\\intercal} ") (i 0)])
           (s {:trig :inv :wordTrig false} [(t "^{-1} ") (i 0)])
-          (s {:trig "__" :wordTrig false}
-             [(t "_{") (i 1) (t "} ") (i 0)])
+          (s {:trig "__" :wordTrig false} [(t "_{") (i 1) (t "} ") (i 0)])
           (s {:trig ">>" :wordTrig false} [(t "\\gg ") (i 0)])
           (s {:trig "<<" :wordTrig false} [(t "\\ll ") (i 0)])
           (s :sin [(t "\\sin(") (i 1 :x) (t ") ") (i 0)])
