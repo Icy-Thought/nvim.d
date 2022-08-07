@@ -1,5 +1,4 @@
 (local {: str?
-
         : ->str} (require :macros.lib.types))
 
 (local {: config} (require :luasnip))
@@ -20,5 +19,5 @@
 (lazy_load)
 
 ;; Load custom defined snippets
-(require "snippets.tex")
-(require "snippets.tex-math")
+(require :snippets.tex)
+(require :snippets.tex-math)

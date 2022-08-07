@@ -76,21 +76,19 @@
                   :<Tab> (mapping (fn [fallback]
                                     (if (visible)
                                         (select_next_item)
-                                        (has-words-before) (complete)
+                                        (expand_or_jumpable)
+                                        (expand_or_jump)
+                                        (has-words-before)
+                                        (vim.fn.feedkeys (replace-termcodes :<Tab>) :n)
                                         (fallback)))
                                   [:i :s])
                   :<S-Tab> (mapping (fn [fallback]
                                       (if (visible)
                                           (select_prev_item)
+                                          (jumpable -1)
+                                          (jump -1)
                                           (fallback)))
-                                    [:i :s])
-                  :<C-h> (mapping (fn [fallback]
-                                    (if (jumpable -1)
-                                        (fallback))))
-                  :<C-l> (mapping (fn [fallback]
-                                    (if (expand_or_jumpable)
-                                        (expand_or_jump)
-                                        (fallback))))}
+                                    [:i :s])}
         :sources [{:name :nvim_lsp}
                   {:name :luasnip}
                   {:name :path}
