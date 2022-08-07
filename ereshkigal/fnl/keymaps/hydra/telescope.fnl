@@ -33,11 +33,11 @@
                 [:p (cmd "Telescope projects") {:desc :projects}]
                 [:p (fn []
                       ((. (. (. (require :telescope) :extensions) :project) :project) {:display_type :full}))
-                    {:desc :projects}
+                    {:desc :projects}]
                  ["/" (cmd "Telescope current_buffer_fuzzy_find") {:desc "search in file"}]
                  ["?" (cmd "Telescope search_history") {:desc "search history"}]
                  [";" (cmd "Telescope command_history") {:desc "command-line history"}]
                  [:c (cmd "Telescope commands") {:desc "execute command"}]
                  [:u (cmd "silent! %foldopen! | UndotreeToggle") {:desc :undotree}]
                  [:<Enter> (cmd :NvimTreeToggle) {:exit true :desc "NvimTree"}]
-                 [:<Esc> nil {:exit true :nowait true}]]]})
+                 [:<Esc> nil {:exit true :nowait true}]]})
