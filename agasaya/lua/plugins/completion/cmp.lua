@@ -1,9 +1,14 @@
 local cmp = require("cmp")
 local ls = require("luasnip")
 
-local check_backspace = function()
+local has_words_before = function()
     local col = vim.fn.col(".") - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+    local ln = vim.fn.getline(".")
+    return ((col == 0) or string.match(string.sub(ln, col, col), "%s"))
+end
+
+local replace_termcodes = function(code)
+    return vim.api.nvim_replace_termcodes(code, true, true, true)
 end
 
 --   פּ ﯟ   and other well-designed icons
@@ -57,12 +62,10 @@ cmp.setup({
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif ls.expandable() then
-                ls.expand()
             elseif ls.expand_or_jumpable() then
                 ls.expand_or_jump()
-            elseif check_backspace() then
-                fallback()
+            elseif has_words_before() then
+                return vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
             else
                 fallback()
             end
