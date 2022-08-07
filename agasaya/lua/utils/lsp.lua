@@ -1,10 +1,17 @@
 local lsputils = {}
 
 -- Add additional capabilities supported by nvim-cmp
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local function make_capabilities()
+    local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+    if not ok then
+        return nil
+    end
 
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local updated_capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+
+    return updated_capabilities
+end
 
 local enhance_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -15,8 +22,8 @@ local enhance_attach = function(client, bufnr)
 end
 
 function lsputils.init()
-    on_attach = enhance_attach
-    capabilities = capabilities
+    on_attach = enhance_attach()
+    capabilities = make_capabilities()
 end
 
 return lsputils
