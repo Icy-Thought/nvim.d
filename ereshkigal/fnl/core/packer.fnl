@@ -209,7 +209,7 @@
                         ((. (require :utils.lazy-load) :load-on-file-open!)
                          :nvim-ufo))})
 
-(use-package! :Pocco81/true-zen.nvim
+(use-package! :Pocco81/TrueZen.nvim
               {:cmd :TZAtaraxis
                :config (call-setup true-zen)})
 
@@ -254,7 +254,7 @@
                                 {:event :InsertEnter
                                  :wants :friendly-snippets
                                  :config (load-file completion.luasnip)
-                                 :requires [(pack :rafamadriz/friendly-snippets)]})]})
+                                 :requires [(pack :Icy-Thought/friendly-snippets)]})]})
 
 (use-package! :glepnir/lspsaga.nvim
               {:branch :main
