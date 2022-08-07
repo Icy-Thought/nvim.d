@@ -4,6 +4,8 @@
 (local {: setup
         : mapping
         : visible
+        : select_prev_item
+        : select_next_item
         : complete
         :config {: compare
                  : disable
@@ -73,13 +75,13 @@
                   :<C-e> (mapping.close)
                   :<Tab> (mapping (fn [fallback]
                                     (if (visible)
-                                        (mapping.select_next_item)
-                                        (has-words-before)
+                                        (select_next_item)
+                                        (has-words-before) (complete)
                                         (fallback)))
                                   [:i :s])
                   :<S-Tab> (mapping (fn [fallback]
                                       (if (visible)
-                                          (mapping.select_prev_item)
+                                          (select_prev_item)
                                           (fallback)))
                                     [:i :s])
                   :<C-h> (mapping (fn [fallback]
