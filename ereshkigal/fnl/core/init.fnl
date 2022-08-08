@@ -1,57 +1,82 @@
 (require-macros :macros.event)
-
-;; Built-in Neovim plugins to be disabled
-(let [built-ins [:2html_plugin
-                 :getscript
-                 :getscriptPlugin
-                 :gtags
-                 :gzip
-                 :logiPat
-                 :matchit
-                 :matchparen
-                 :netrw
-                 :netrwFileHandlers
-                 :netrwPlugin
-                 :netrwSettings
-                 :rrhelper
-                 :spellfile_plugin
-                 :tar
-                 :tarPlugin
-                 :vimball
-                 :vimballPlugin
-                 :zip
-                 :zipPlugin]]
-  (each [_ v (ipairs built-ins)]
-    (let [plugin (.. :loaded_ v)]
-      (tset vim.g plugin 1))))
-
-;; Built-in Neovim providers to be disabled
-;; :python :python3
-(let [providers [:perl :node :ruby]]
-  (each [_ v (ipairs providers)]
-    (let [provider (.. :loaded_ v :_provider)]
-      (tset vim.g provider 0))))
-
-;; make sure packer is all ready to go
-(let [compiled? (= (vim.fn.filereadable (.. (vim.fn.stdpath :config)
-                                            :/lua/packer_compiled.lua))
-                   1)
-      load-compiled #(require :packer_compiled)]
-  (if compiled?
-      (load-compiled)
-      (. (require :packer) :sync)))
-
-;; Initalize packer
-(require :core.packer)
-
-;; Our beloved colorschemes
+(import-macros {: set!} :macros.option)
 (import-macros {: colorscheme} :macros.highlight)
 
-(colorscheme catppuccin)
-;; (colorscheme oxocarbon)
+(λ disable-builtins! []
+   (let [built-ins [:2html_plugin
+                    :getscript
+                    :getscriptPlugin
+                    :gtags
+                    :gzip
+                    :logiPat
+                    :matchit
+                    :matchparen
+                    :netrw
+                    :netrwFileHandlers
+                    :netrwPlugin
+                    :netrwSettings
+                    :rrhelper
+                    :spellfile_plugin
+                    :tar
+                    :tarPlugin
+                    :vimball
+                    :vimballPlugin
+                    :zip
+                    :zipPlugin]]
+     (each [_ v (ipairs built-ins)]
+       (let [plugin (.. :loaded_ v)]
+         (tset vim.g plugin 1)))))
 
-;; Load remaining core-modules
-(require :core.options)
-(require :core.events)
-(require :keymaps.basics)
-(require :core.neovide)
+(λ disable-providers! []
+   ;; :python :python3
+   (let [providers [:perl :node :ruby]]
+     (each [_ v (ipairs providers)]
+       (let [provider (.. :loaded_ v :_provider)]
+         (tset vim.g provider 0)))))
+
+(λ packer-ready? []
+   (let [compiled? (= (vim.fn.filereadable
+                        (.. (vim.fn.stdpath :config)
+                            :/lua/packer_compiled.lua)) 1)
+                   load-compiled #(require :packer_compiled)]
+     (if compiled?
+         (load-compiled)
+         (. (require :packer) :sync))))
+
+
+(λ is-neovide? []
+   (if vim.g.neovide
+       (do
+         (set! guifont "VictorMono Nerd Font:h9:sb")
+         (let [config {:neovide_no_idle true
+                       :neovide_cursor_antialiasing true
+                       :neovide_cursor_trail_length 0.05
+                       :neovide_cursor_animation_length 0.03
+                       :neovide_cursor_vfx_mode :sonicboom
+                       :neovide_cursor_vfx_opacity 200.0
+                       :neovide_cursor_vfx_particle_density 5.0
+                       :neovide_cursor_vfx_particle_lifetime 1.2
+                       :neovide_cursor_vfx_particle_speed 20.0}]
+           (each [k v (ipairs config)]
+             (tset vim.g k v))))
+       nil))
+
+(λ initialize-core []
+   (disable-builtins!)
+   (disable-providers!)
+
+   (packer-ready?)
+   (require :core.packer)
+
+   ;; require remaining core
+   (require :core.options)
+   (require :core.events)
+   (require :keymaps.basics)
+
+   ;; Neovide settings (when installed)
+   (is-neovide?)
+
+   ;; Apply desired colorscheme
+   (colorscheme catppuccin))
+
+(initialize-core)
