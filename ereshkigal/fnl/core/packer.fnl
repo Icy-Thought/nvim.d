@@ -48,7 +48,7 @@
 
 (use-package! :eraserhd/parinfer-rust
               {:opt true
-              :run "cargo build --release"})
+               :run "cargo build --release"})
 
 (use-package! :Olical/conjure
               {:branch :develop
@@ -118,10 +118,6 @@
 (use-package! :anuvyklack/hydra.nvim
               {:keys :<space>
                :config (load-keymap hydra)})
-                        ;; (load-keymap hydra.md-preview)
-                        ;; (load-keymap hydra.lspsaga)
-                        ;; (load-keymap hydra.toggleterm)
-                        ;; :config (load-keymap hydra.align)
 
 (use-package! :akinsho/nvim-toggleterm.lua
               {:config (call-setup toggleterm)})
@@ -191,9 +187,9 @@
                          :matchparen.nvim))})
 
 (use-package! :nvim-neorg/neorg
-              {:config (load-file editor.neorg)
-               :ft :norg
-               :after :nvim-treesitter})
+              {:ft :norg
+               :after :nvim-treesitter
+               :config (load-file editor.neorg)})
 
 (use-package! :norcalli/nvim-colorizer.lua
               {:opt true
@@ -232,10 +228,12 @@
                :config (load-file completion.lspconfig)})
 
 (use-package! :williamboman/mason.nvim
-              {:cmd mason-cmds :config (load-file completion.mason)})
+              {:cmd mason-cmds
+               :config (load-file completion.mason)})
 
 (use-package! :j-hui/fidget.nvim
-              {:after :nvim-lspconfig :config (call-setup fidget)})
+              {:after :nvim-lspconfig
+               :config (call-setup fidget)})
 
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file completion.cmp)

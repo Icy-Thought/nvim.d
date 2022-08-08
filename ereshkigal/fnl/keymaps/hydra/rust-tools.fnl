@@ -2,20 +2,21 @@
 
 (local rust-hint "
                   Rust
-  _r_: runnables      _m_: expand macro
-  _d_: debugabbles    _c_: open cargo
-  _s_: rustssr        _p_: parent module
-  _h_: hover actions  _w_: reload workspace
-  _D_: open docs      _g_: view create graph
+  _r_: Runnables      _m_: Expand Macro
+  _d_: Debugabbles    _c_: Open Cargo
+  _s_: Rustssr        _p_: Parent Module
+  _h_: Hover Actions  _w_: Reload Workspace
+  _D_: Open Docs      _g_: View (Create) Graph
 ^
-  _i_: Toggle Inlay Hints     _q_: Exit
+  _i_: Toggle Inlay Hints     _q_: Quit!
 ")
 
 (Hydra {:name :Rust
         :hint rust-hint
         :config {:color :red
                  :invoke_on_body true
-                 :hint {:position :middle :border :solid}}
+                 :hint {:position :middle
+                        :border :rounded}}
         :mode :n
         :body :<Leader>r
         :heads [[:r (fn []

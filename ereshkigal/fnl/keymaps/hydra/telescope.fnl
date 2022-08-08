@@ -2,16 +2,16 @@
 (local {: cmd} (require :hydra.keymap-util))
 
 (local telescope-hint "
-                    _f_: files       _m_: marks
-     🭇🬭🬭🬭🬭🬭🬭🬭🬭🬼     _o_: old files   _g_: live grep
-    🭉🭁🭠🭘    🭣🭕🭌🬾    _p_: projects    _/_: search in file
+                    _f_: Files          _m_: Marks
+     🭇🬭🬭🬭🬭🬭🬭🬭🬭🬼     _o_: Old Files      _g_: Live Grep
+    🭉🭁🭠🭘    🭣🭕🭌🬾    _p_: Projects       _/_: Search in File
     🭅█ ▁     █🭐
-    ██🬿      🭊██    _r_: resume      _u_: undotree
-   🭋█🬝🮄🮄🮄🮄🮄🮄🮄🮄🬆█🭀   _h_: vim help    _c_: execute command
-   🭤🭒🬺🬹🬱🬭🬭🬭🬭🬵🬹🬹🭝🭙   _k_: keymaps     _;_: commands history
-                    _O_: options     _?_: search history
+    ██🬿      🭊██    _r_: Resume         _u_: Undo-tree
+   🭋█🬝🮄🮄🮄🮄🮄🮄🮄🮄🬆█🭀   _h_: Vim Help       _c_: Execute Command
+   🭤🭒🬺🬹🬱🬭🬭🬭🬭🬵🬹🬹🭝🭙   _k_: Keymaps        _;_: Commands History
+                    _O_: Options        _?_: Search History
    ^
-                    _<Enter>_: Telescope           _<Esc>_
+                    _<Enter>_: Telescope           _q_: Quit!
 ")
 
 (Hydra {:name :Telescope
@@ -32,12 +32,13 @@
                 [:r (cmd "Telescope resume")]
                 [:p (cmd "Telescope projects") {:desc :projects}]
                 [:p (fn []
-                      ((. (. (. (require :telescope) :extensions) :project) :project) {:display_type :full}))
+                      ((. (. (. (require :telescope) :extensions) :project)
+                          :project) {:display_type :full}))
                     {:desc :projects}]
-                 ["/" (cmd "Telescope current_buffer_fuzzy_find") {:desc "search in file"}]
-                 ["?" (cmd "Telescope search_history") {:desc "search history"}]
-                 [";" (cmd "Telescope command_history") {:desc "command-line history"}]
-                 [:c (cmd "Telescope commands") {:desc "execute command"}]
-                 [:u (cmd "silent! %foldopen! | UndotreeToggle") {:desc :undotree}]
-                 [:<Enter> (cmd :NvimTreeToggle) {:exit true :desc "NvimTree"}]
-                 [:<Esc> nil {:exit true :nowait true}]]})
+                ["/" (cmd "Telescope current_buffer_fuzzy_find") {:desc "search in file"}]
+                ["?" (cmd "Telescope search_history") {:desc "search history"}]
+                [";" (cmd "Telescope command_history") {:desc "command-line history"}]
+                [:c (cmd "Telescope commands") {:desc "execute command"}]
+                [:u (cmd "silent! %foldopen! | UndotreeToggle") {:desc :undotree}]
+                [:<Enter> (cmd :NvimTreeToggle) {:exit true :desc "NvimTree"}]
+                [:q nil {:exit true :nowait true}]]})

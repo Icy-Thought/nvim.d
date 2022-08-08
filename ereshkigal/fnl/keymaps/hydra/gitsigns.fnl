@@ -17,15 +17,15 @@
           : blame_line
           : show} (require :gitsigns))
   (local git-hint "
-                    Git
+                      Git
 
-    _J_: next hunk     _d_: show deleted
-    _K_: prev hunk     _u_: undo last stage
-    _s_: stage hunk    _/_: show base file
-    _p_: preview hunk  _S_: stage buffer
-    _b_: blame line    _B_: blame show full
+    _J_: Next Hunk        _d_: Show Deleted
+    _K_: Prev Hunk        _u_: Undo Last Stage
+    _s_: Stage Hunk       _/_: Show Base File
+    _p_: Preview Hunk     _S_: Stage Buffer
+    _b_: Blame Line       _B_: Blame Show Full
   ^
-    _<Enter>_: Neogit         _q_: Exit
+    _<Enter>_: Neogit                _q_: Quit!
   ")
 
   (Hydra {:name :Git
@@ -35,7 +35,8 @@
           :config {:buffer bufnr
                    :color :red
                    :invoke_on_body true
-                   :hint {:border :solid :position :middle}
+                   :hint {:position :middle
+                          :border :rounded}
                    :on_key (fn []
                              (vim.wait 50))
                    :on_enter (fn []
