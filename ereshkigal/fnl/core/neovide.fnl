@@ -1,7 +1,7 @@
 (import-macros {: set!} :macros.option)
 
 ;; Apply GUI-font to Neovide
-(set! guifont "Liga SFMono Nerd Font:h15")
+(set! guifont "VictorMono Nerd Font:h9:sb")
 
 ;; general
 (tset vim.g :neovide_refresh_rate 120)
