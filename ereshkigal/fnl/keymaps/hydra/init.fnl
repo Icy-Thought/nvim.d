@@ -1,26 +1,30 @@
+;; Copyright (c) 2022 Jaawerth. All Rights Reserved.
+
 (local {: tbl?
         : ->str} (require :macros.lib.types))
 
-;; Work in progress
-;; TODO: require `keymap.hydra.X` only if X has been installed.
-;; (X = plugin)
+;; bind vim.api and vim.fn for convenience, and rebind _G.vim as a local
+(local {:api va :fn vf &as vim} _G.vim)
+(local {:nvim_err_writeln echoerr} va)
 
-(λ plugin-exists? [status-ok? plugin-name]
-  (if [(package.loaded plugin-name) tbl?]
-      plugin-name nil))
+(λ module-loaded? [mod-name]
+  "If module has already loaded, returns:
+  (values mod-name (. package.loaded mod-name)); else nil"
+  (match (. package.loaded mod-name)
+    mod (values mod-name mod)))
 
-(λ load-hydra [file]
-   (if (not= plugin-exists? nil)
-       (let [file (->str file)]
-         (require (.. :keymap.hydra. file)))
-       (print "Failed to load keymap.")))
+(λ load-hydra! [file]
+   (if (module-loaded? file)
+     (require (.. "keymaps.hydra." (tostring file)))
+     (echoerr (: "Failed to load keymap \"%s\": hydra not loaded" :format file))))
 
-(local plugin-bindings [:gitsigns
-                        :rust-tools
-                        :telescope
-                        :nvim-treesitter])
+;; Load hydra keymaps
+(let [plugin-bindings [:gitsigns
+                       :rust-tools
+                       :telescope
+                       :nvim-treesitter]]
+  (each [_ keymap (ipairs plugin-bindings)]
+    (load-hydra! keymap)))
 
-(each [keymap (plugin-bindings)]
-  (load-hydra keymap))
-
-(load-hydra :options)
+;; Require our non-plugin dependent mappings
+(require :keymaps.hydra.options)

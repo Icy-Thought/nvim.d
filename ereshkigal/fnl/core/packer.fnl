@@ -117,11 +117,7 @@
 
 (use-package! :anuvyklack/hydra.nvim
               {:keys :<space>
-               :config [(load-keymap hydra.options)
-                        (load-keymap hydra.gitsigns)
-                        (load-keymap hydra.telescope)
-                        (load-keymap hydra.treesitter)
-                        (load-keymap hydra.rust)]})
+               :config (load-keymap hydra)})
                         ;; (load-keymap hydra.md-preview)
                         ;; (load-keymap hydra.lspsaga)
                         ;; (load-keymap hydra.toggleterm)

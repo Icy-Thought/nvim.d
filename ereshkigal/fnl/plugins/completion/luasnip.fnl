@@ -1,6 +1,3 @@
-(local {: str?
-        : ->str} (require :macros.lib.types))
-
 (local {: config} (require :luasnip))
 
 (local {: choiceNode
