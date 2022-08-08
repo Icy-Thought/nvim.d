@@ -6,8 +6,8 @@
 (set db.custom_header (vim.fn.systemlist
                  (.. "cat " config-dir :/dasHead.txt)))
 
-(set db.custom_center [{:icon "  "
-                 :desc "Switch Colorscheme                           "
+(set db.custom_center [{:icon "   "
+                 :desc "Switch Colorscheme                          "
                  :shortcut "SPC s c"
                  :action "Telescope colorscheme"}
 
