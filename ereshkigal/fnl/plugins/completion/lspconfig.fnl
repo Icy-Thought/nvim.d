@@ -55,33 +55,12 @@
 (vim.cmd "command! -nargs=0 LspRestart call v:lua.reload_lsp()")
 
 ;; (Init) Language-server with pre-defined configurations
-;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 (local server-noconf [:clojure_lsp
-                      :pyright])
+                      :pyright
+                      :rust_analyzer])
 
 ;; (Init) Language-servers with our custom conf
-(local join lsputil.path.join)
-(local file? lsputil.path.is_file)
-(local dir? lsputil.path.is_dir)
-
-(λ parent-that-matches [fun]
-  #(lsputil.search_ancestors $ fun))
-
-(local known-lua-root-paths
-  {:/usr/share/awesome/lib true})
-
-(λ lua-root-path? [path]
-  (or (. known-lua-root-paths path)
-      (dir? (join path ".git"))
-      (dir? (join path "spec"))
-      (file? (join path ".luarc.json"))
-      (file? (join path ".luacov"))
-      (file? (join path ".luacheckrc"))
-      (file? (join path ".stylua.toml"))))
-
-(λ full-path-to-current-file []
-  (vim.fn.fnamemodify (vim.fn.expand "%") ":p"))
-
+;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 (local lang-settings
        {:clangd {:cmd ["clangd"
                        "--background-index"
@@ -92,15 +71,10 @@
         :hls {:cmd ["haskell-language-server-wrapper"
                     "--lsp"]}
 
-        :sumneko_lua {:root_dir (parent-that-matches lua-root-path?)
-                      :settings {:Lua {:completion {:callSnippet "Replace"}
-                                       :telemetry {:enable false}
-                                       :diagnostics {:disable ["ambiguity-1"]}}}}
-
-        :rust_analyzer {:settings {:rust-analyzer {:assist {:importGranularity :module
-                                                            :importPrefix :self}
-                                                   :cargo {:loadOutDirsFromCheck true}
-                                                   :procMacro {:enable true}}}}
+        :sumneko_lua {:settings {:Lua {:completion {:callSnippet "Replace"}
+                                       :diagnostics {:disable [:vim]}
+                                       :workspace {:library (vim.api.nvim_get_runtime_file "" true)}
+                                       :telemetry {:enable false}}}}
 
         :texlab {:log_level vim.lsp.protocol.MessageType.Log
                  :settings {:texlab {:auxDirectory :build

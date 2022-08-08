@@ -277,6 +277,10 @@
 (use-package! :simrat39/rust-tools.nvim
               {:ft :rust
                :branch :modularize_and_inlay_rewrite
-               :config (call-setup rust)})
+               :config (call-setup rust-tools)})
+
+;; (use-package! :simrat39/flutter-tools.nvim
+;;               {:ft :dart
+;;                :config (call-setup flutter-tools)})
 
 (unpack!)
