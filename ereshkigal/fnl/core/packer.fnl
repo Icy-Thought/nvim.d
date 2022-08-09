@@ -83,12 +83,6 @@
               {:event :BufWinEnter
                :config (load-file ui.dashboard)})
 
-(use-package! :gelguy/wilder.nvim
-              {:run :UpdateRemotePlugins
-               :event :CmdlineEnter
-               :requires [(pack :romgrk/fzy-lua-native)]
-               :config (load-file ui.wilder)})
-
 ;; ----------===[ Toolbox ]===----------
 (use-package! :nvim-lua/telescope.nvim
               {:cmd :Telescope
@@ -135,7 +129,7 @@
 
 ;; ----------===[ Editor ]===----------
 (use-package! :Vonr/align.nvim
-              {:after :nvim-cmp
+              {:after :nvim-lspconfig
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-on-file-open!)
                          :align.nvim))})
@@ -238,8 +232,9 @@
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file completion.cmp)
                :wants :LuaSnip
-               :event :InsertEnter
+               :event :VimEnter
                :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
+                          (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
                           (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
                           (pack :PaterJason/cmp-conjure {:after :conjure})
