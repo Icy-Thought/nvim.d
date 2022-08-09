@@ -22,9 +22,10 @@
 ;; Load hydra keymaps
 (let [plugin-bindings [:align
                        :gitsigns
+                       :lspsaga
+                       :nvim-treesitter
                        :rust-tools
                        :telescope
-                       :nvim-treesitter
                        :toggleterm]]
   (each [_ keymap (ipairs plugin-bindings)]
     (load-hydra! keymap)))

@@ -12,7 +12,7 @@
 
 (Hydra {:name :toggle-term
         :hint terminal-hint
-        :config {:color :blue
+        :config {:color :teal
                  :invoke_on_body true
                  :hint {:position :middle
                         :border :rounded}}
