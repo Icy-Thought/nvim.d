@@ -1,9 +1,9 @@
 (local {: extend-keep} (require :macros.lib.sriapi))
 
-(local incr-bst (require :parinfer.incremental-change))
-(local {:run run-parinfer} (require :parinfer.lib))
+(local incr-bst (require :modules.parinfer.incremental-change))
+(local {:run run-parinfer} (require :modules.parinfer.lib))
 (local {: get-options : get-buf-options : update-option :setup opts-setup}
-       (require :parinfer.options))
+       (require :modules.parinfer.options))
 
 (local buf-apply-diff incr-bst.buf-apply-diff)
 (local (t/cat t/ins) (values table.concat table.insert))

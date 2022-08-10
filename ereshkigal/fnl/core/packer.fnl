@@ -129,7 +129,7 @@
 
 ;; ----------===[ Editor ]===----------
 (use-package! :Vonr/align.nvim
-              {:after :nvim-lspconfig
+              {:after :nvim-cmp
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-on-file-open!)
                          :align.nvim))})

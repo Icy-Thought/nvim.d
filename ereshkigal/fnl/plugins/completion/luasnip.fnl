@@ -16,5 +16,9 @@
 (lazy_load)
 
 ;; Load custom defined snippets
-(require :snippets.tex)
-(require :snippets.tex-math)
+;; (local snippet-dir (.. (vim.fn.stdpath :config) :/snippets))
+
+(local snippet-dir :plugins.completion.snippets.)
+
+(require (.. snippet-dir :tex))
+(require (.. snippet-dir :tex-math))

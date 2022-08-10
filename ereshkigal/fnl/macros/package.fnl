@@ -73,7 +73,7 @@
   ```"
   (assert-compile (sym? file) "expected symbol for theme-file" file)
   (let [file (->str file)]
-    `#(require (.. :themes. ,file))))
+    `#(require (.. :plugins.theme. ,file))))
 
 (λ load-keymap [file]
   "Configure plugin-specific keybindings by defining the desired binding in the
