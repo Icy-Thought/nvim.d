@@ -141,7 +141,8 @@
                          :Comment.nvim))})
 
 (use-package! :windwp/nvim-autopairs
-              {:config (load-file editor.autopairs)
+              {:after :nvim-cmp
+               :config (load-file editor.autopairs)
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-on-file-open!)
                          :nvim-autopairs))})

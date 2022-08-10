@@ -18,7 +18,7 @@
 ;; Load custom defined snippets
 ;; (local snippet-dir (.. (vim.fn.stdpath :config) :/snippets))
 
-(local snippet-dir :plugins.completion.snippets.)
+(local snippet-dir :plugins.completion.my-snippets.)
 
 (require (.. snippet-dir :tex))
 (require (.. snippet-dir :tex-math))
