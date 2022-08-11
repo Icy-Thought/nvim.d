@@ -194,7 +194,8 @@
                          :nvim-colorizer.lua))})
 
 (use-package! :kevinhwang91/nvim-ufo
-              {:requires [(pack :kevinhwang91/promise-async)]
+              {:after :nvim-treesitter
+               :requires [(pack :kevinhwang91/promise-async)]
                :config (load-file editor.folding)
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-on-file-open!)
