@@ -44,7 +44,6 @@
 (use-package! :nvim-lua/plenary.nvim
               {:module :plenary})
 
-;; testing
 ;; (use-package! :stevearc/profile.nvim
 ;;               {:config (load-file toolbox.profile)})
 
@@ -193,12 +192,13 @@
                :after :nvim-treesitter
                :config (load-file editor.neorg)})
 
-(use-package! :norcalli/nvim-colorizer.lua
+
+(use-package! :brenoprata10/nvim-highlight-colors
               {:opt true
-               :config (call-setup colorizer)
+               :config (call-setup nvim-highlight-colors)
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-on-file-open!)
-                         :nvim-colorizer.lua))})
+                         :nvim-highlight-colors))})
 
 (use-package! :kevinhwang91/nvim-ufo
               {:after :nvim-treesitter

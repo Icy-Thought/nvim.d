@@ -71,10 +71,8 @@
 
 (map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
 
-
-;;
+;; Hotpot -> Evaluate highlighted block with `<Visual>hr`
 (local reflect-session {:id nil :mode :compile})
-
 (fn new-or-attach-reflect []
   (let [reflect (require :hotpot.api.reflect)
                 with-session-id
@@ -83,11 +81,11 @@
                       ;; session id already exists, so we can just pass
                       ;; it to whatever needs it
                       (f reflect-session.id))
+
                     (fn [f]
-                      ;; session id does not exist, so we need to create
-                      ;; an output buffer first then we can pass the
-                      ;; session id on, and finally hook up the output
-                      ;; buffer to a window
+                      ;; session id does not exist, so we need to create an
+                      ;; output buffer first then we can pass the session id on,
+                      ;; and finally hook up the output buffer to a window
                       (let [buf (vim.api.nvim_create_buf true true)
                                 id (reflect.attach-output buf)]
                         (set reflect-session.id id)

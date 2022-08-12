@@ -6,22 +6,27 @@
    (assert-compile (sym? api-function) "expected symbol for api-function"
                    api-function)
    (assert-compile (sym? name) "expected symbol for name" name)
-   (assert-compile (or (str? command) (sym? command) (fn? command)
+   (assert-compile (or (str? command)
+                       (sym? command)
+                       (fn? command)
                        (quoted? command))
                    "expected string, symbol, function or quoted expression for command"
                    command)
-   (assert-compile (or (nil? ?options) (tbl? ?options))
+   (assert-compile (or (nil? ?options)
+                       (tbl? ?options))
                    "expected table for options" ?options)
    (let [name (->str name)
          options (or ?options {})
          options (if (nil? options.desc)
                      (doto options
-                           (tset :desc
-                                 (if (quoted? command) (quoted->str command)
-                                     (str? command) command
-                                     (view command))))
+                       (tset :desc
+                             (if (quoted? command)
+                                 (quoted->str command)
+                                 (str? command) command
+                                 (view command))))
                      options)
-         command (if (quoted? command) (quoted->fn command) command)]
+         command (if (quoted? command)
+                     (quoted->fn command) command)]
      `(,api-function ,name ,command ,options)))
 
 (λ command! [name command ?options]
