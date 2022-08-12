@@ -49,4 +49,6 @@
 
 ;; Limit char-width = 80 chars
 (augroup! character-width-limit
-          (autocmd! FileType "markdown,norg" '(set! textwidth 80)))
+          (autocmd! FileType "markdown,norg" '(if (not vim.g.neovide)
+                                                  (set! textwidth 80)
+                                                  (set! textwidth 120))))

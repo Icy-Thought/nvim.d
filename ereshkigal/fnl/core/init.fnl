@@ -36,7 +36,7 @@
 (λ is-neovide? []
    (if vim.g.neovide
        (do
-         (set! guifont "VictorMono Nerd Font:h9:sb")
+         (set! guifont "VictorMono Nerd Font:h9:b")
 
          ;; lua settings == not recognized by neovide???
          (let [config ["neovide_no_idle = v:true"
@@ -55,7 +55,8 @@
    (disable-builtins!)
    (disable-providers!)
 
-   ;; Call forward installed plugins
+   ;; Call forward Packer + installed plugins
+   (require :core.packer)
    (require :packer_compiled)
 
    ;; Require remaining core
