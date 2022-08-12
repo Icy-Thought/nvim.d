@@ -39,6 +39,9 @@
     (tset vim.g :catppuccin_flavour :latte))
 
 ;; Auto-compile Catppuccin after PackerCompile
-;; (require-macros :macros.event)
-;; (augroup! colorscheme-compile
-;;     (autocmd! User :PackerCompileDone (vim.cmd :CatppuccinCompile)))
+(require-macros :macros.event)
+
+(augroup! compile-theme
+          (autocmd! BufWritePost [:plugins.fnl :catppuccin.fnl]
+                    (fn []
+                      (vim.cmd :PackerCompile))))

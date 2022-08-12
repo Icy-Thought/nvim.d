@@ -30,22 +30,30 @@
                                  :group \"custom\"
                                  :desc \"This is a description\"})
    ```"
-   (assert-compile (or (sym? event) (and (tbl? event) (all? #(sym? $) event))
+   (assert-compile (or (sym? event)
+                       (and (tbl? event)
+                            (all? #(sym? $) event))
                        "expected symbol or list of symbols for event" event))
    (assert-compile (or (sym? pattern)
-                       (and (tbl? pattern) (all? #(sym? $) pattern))
+                       (and (tbl? pattern)
+                            (all? #(sym? $) pattern))
                        "expected symbol or list of symbols for pattern" pattern))
-   (assert-compile (or (str? command) (sym? command) (fn? command)
+   (assert-compile (or (str? command)
+                       (sym? command)
+                       (fn? command)
                        (quoted? command))
                    "expected string, symbol, function or quoted expression for command"
                    command)
-   (assert-compile (or (nil? ?options) (tbl? ?options))
+   (assert-compile (or (nil? ?options)
+                       (tbl? ?options))
                    "expected table for options" ?options)
-   (let [event (if (and (tbl? event) (not (sym? event)))
+   (let [event (if (and (tbl? event)
+                        (not (sym? event)))
                    (icollect [_ v (ipairs event)]
                      (->str v))
                    (->str event))
-         pattern (if (and (tbl? pattern) (not (sym? pattern)))
+         pattern (if (and (tbl? pattern)
+                          (not (sym? pattern)))
                      (icollect [_ v (ipairs pattern)]
                        (->str v))
                      (->str pattern))
@@ -65,7 +73,8 @@
          options (if (nil? options.desc)
                      (doto options
                        (tset :desc
-                             (if (quoted? command) (quoted->str command)
+                             (if (quoted? command)
+                                 (quoted->str command)
                                  (str? command) command
                                  (view command))))
                      options)]
@@ -89,10 +98,12 @@
      (autocmd! Filetype *.py '(print \"Hello World\") {:group \"a-nice-group\"})
      (autocmd! Filetype *.sh '(print \"Hello World\") {:group \"a-nice-group\"}))
    ```"
-   (assert-compile (or (str? name) (sym? name))
+   (assert-compile (or (str? name)
+                       (sym? name))
                    "expected string or symbol for name" name)
    (assert-compile (all? #(and (list? $)
-                               (or (= `clear! (first $)) (= `autocmd! (first $))))
+                               (or (= `clear! (first $))
+                                   (= `autocmd! (first $))))
                          [...])
                    "expected autocmd exprs for body" ...)
    (expand-exprs (let [name (->str name)]
@@ -119,9 +130,11 @@
    ```fennel
    (vim.api.nvim_clear_autocmds {:group \"some-group\"})
    ```"
-   (assert-compile (or (str? name) (sym? name))
+   (assert-compile (or (str? name)
+                       (sym? name))
                    "expected string or symbol for name" name)
-   (assert-compile (or (nil? ?options) (tbl? ?options))
+   (assert-compile (or (nil? ?options)
+                       (tbl? ?options))
                    "expected table for options" ?options)
    (let [name (->str name)
          options (or ?options {})
