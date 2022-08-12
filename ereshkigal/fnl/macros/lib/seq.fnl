@@ -1,19 +1,29 @@
 (local {: tbl? : nil? : num?} (require :macros.lib.types))
 
 (λ empty? [xs]
+  "Check if given table is empty"
+  (assert-compile (tbl? xs) "expected table for xs" xs)
   (= 0 (length xs)))
 
 (λ first [xs]
-  (?. xs 1))
+  "Get the first element in a list"
+  (assert-compile (tbl? xs) "expected table for xs" xs)
+  (. xs 1))
 
 (λ second [xs]
-  (?. xs 2))
+  "Get the second element in a list"
+  (assert-compile (tbl? xs) "expected table for xs" xs)
+  (. xs 2))
 
 (λ last [xs]
-  (?. xs (length xs)))
+  "Get the last element in a list"
+  (assert-compile (tbl? xs) "expected table for xs" xs)
+  (. xs (length xs)))
 
 (λ any? [pred xs]
-  (accumulate [any? false _ v (ipairs xs) :until any?]
+  (accumulate [any? false
+               _ v (ipairs xs)
+               :until any?]
     (pred v)))
 
 (λ all? [pred xs]
@@ -24,17 +34,14 @@
 
 (λ flatten [x ?levels]
   (assert (tbl? x) "expected tbl for x")
-  (assert (or (nil? ?levels) (num? ?levels))
-          "expected number or nil for levels")
+  (assert (or (nil? ?levels) (num? ?levels)) "expected number or nil for levels")
   (if (or (nil? ?levels) (> ?levels 0))
-      (accumulate [output [] _ v (ipairs x)]
-        (if (tbl? v)
-            (icollect [_ v (ipairs (flatten v
-                                            (if (nil? ?levels) nil
-                                                (- ?levels 1)))) :into output]
-              v)
-            (doto output (table.insert v))))
-      x))
+    (accumulate [output []
+                 _ v (ipairs x)]
+      (if (tbl? v)
+        (icollect [_ v (ipairs (flatten v (if (nil? ?levels) nil (- ?levels 1)))) :into output] v)
+        (doto output (table.insert v))))
+    x))
 
 {: empty?
  : first

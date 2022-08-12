@@ -3,17 +3,17 @@
        (require :macros.lib.compile-time))
 
 (λ map! [[modes] lhs rhs ?options]
-  "Add a new mapping using the vim.keymap.set API.
+   "Add a new mapping using the vim.keymap.set API.
 
    Valid arguments:
-      - modes -> is a sequence containing a symbol, each character of the symbol is
-                 a mode.
-      - lhs -> must be an string.
-      - rhs -> can be an string, a symbol, a function or a quoted expression.
-      - options -> a table of options. Optional. If the :desc option is not specified
-                   it will be inferred.
+        - modes -> is a sequence containing a symbol, each character of the
+                   symbol is a mode.
+        - lhs -> must be an string.
+        - rhs -> can be an string, a symbol, a function or a quoted expression.
+        - options -> a table of options.
+                     Optional. If the :desc option is not specified it will be inferred.
 
-   Example of use:
+   Usage example:
    ```fennel
    (map! [nv] \"<leader>lr\" vim.lsp.references
           {:silent true
@@ -60,7 +60,7 @@
       - options -> a table of options. Optional. If the :desc option is not specified
                    it will be inferred.
 
-   Example of use:
+   Usage example:
    ```fennel
    (map! [nv] \"<leader>lr\" vim.lsp.references
           {:silent true

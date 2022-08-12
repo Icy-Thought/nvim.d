@@ -45,6 +45,7 @@ assert_installed("rktjmp/hotpot.nvim", "nightly")
 
 if pcall(require, "hotpot") then
     require("hotpot").setup({
+        modules = { correlate = true },
         provide_require_fennel = true,
     })
     require("core.init")

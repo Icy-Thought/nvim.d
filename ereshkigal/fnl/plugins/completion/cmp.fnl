@@ -7,9 +7,7 @@
         : select_prev_item
         : select_next_item
         : complete
-        :config {: compare
-                 : disable
-                 : sources
+        :config {: sources
                  :window {: bordered}}
         :ItemField {:Kind kind
                     :Abbr abbr
@@ -17,8 +15,6 @@
         :SelectBehavior {:Insert insert-behavior
                          :Select select-behavior}} (require :cmp))
 
-(local types (require :cmp.types))
-(local under-compare (require :cmp-under-comparator))
 (local {: lsp_expand
         : expand_or_jump
         : expand_or_jumpable
@@ -62,8 +58,7 @@
   (vim.api.nvim_replace_termcodes code true true true))
 
 ;;; cmp-setup
-(setup {:preselect types.cmp.PreselectMode.None
-        :experimental {:ghost_text true}
+(setup {:experimental {:ghost_text true}
         :window {:completion (bordered)
                  :documentation (bordered)}
         :snippet {:expand (fn [args]
@@ -96,23 +91,15 @@
                   {:name :buffer :option {:keyword_pattern "\\k\\+"}}
                   {:name :conjure}
                   {:name :crates}]
-        :sorting {:comparators [compare.offset
-                                compare.exact
-                                compare.score
-                                under-compare.under
-                                compare.kind
-                                compare.sort_text
-                                compare.length
-                                compare.order]}
         :formatting {:fields [:kind :abbr :menu]
                      :format (fn [_ vim-item]
                                (set vim-item.menu vim-item.kind)
                                (set vim-item.kind (. icons vim-item.kind))
-                               vim-item)}})
+                               vim-item)}}
 
-(setup.cmdline "/" {:mapping (mapping.preset.cmdline)
-                    :sources [{:name :buffer}]})
+  (setup.cmdline "/" {:mapping (mapping.preset.cmdline)
+                      :sources [{:name :buffer}]})
 
-(setup.cmdline ":" {:mapping (mapping.preset.cmdline)
-                    :sources (sources [{:name :path}
-                                       {:name :cmdline}])})
+  (setup.cmdline ":" {:mapping (mapping.preset.cmdline)
+                      :sources (sources [{:name :path}
+                                         {:name :cmdline}])}))

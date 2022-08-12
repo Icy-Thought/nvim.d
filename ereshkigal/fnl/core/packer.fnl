@@ -1,6 +1,8 @@
 (require-macros :macros.package)
 
 ;; Setup packer
+(packadd! packer.nvim)
+
 (let [packer (require :packer)]
   (packer.init {:git {:clone_timeout 300}
                 :profile {:enable true}
@@ -41,6 +43,10 @@
 
 (use-package! :nvim-lua/plenary.nvim
               {:module :plenary})
+
+;; testing
+;; (use-package! :stevearc/profile.nvim
+;;               {:config (load-file toolbox.profile)})
 
 ;; ----------===[ Lisp-Conf ]===----------
 (use-package! :rktjmp/hotpot.nvim
@@ -155,7 +161,8 @@
                          :indent-blankline.nvim))})
 
 (use-package! :ggandor/leap.nvim
-              {:config (fn []
+              {:opt true
+               :config (fn []
                          ((. (require :leap) :set_default_keymaps)))
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-on-file-open!)
@@ -163,7 +170,7 @@
 
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
-               :cmd treesitter_cmds
+               :cmd treesitter-cmds
                :module :nvim-treesitter
                :config (load-file editor.treesitter)
                :setup (fn []
@@ -225,7 +232,7 @@
 
 (use-package! :williamboman/mason.nvim
               {:cmd mason-cmds
-               :config (load-file completion.mason)})
+               :config (call-setup completion.mason)})
 
 (use-package! :j-hui/fidget.nvim
               {:after :nvim-lspconfig
@@ -233,21 +240,26 @@
 
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file completion.cmp)
-               :wants :LuaSnip
-               :event :VimEnter
-               :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
-                          (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
-                          (pack :PaterJason/cmp-conjure {:after :conjure})
-                          (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
-                          (pack :lukas-reineke/cmp-under-comparator
-                                {:module :cmp-under-comparator})
+               :after :friendly-snippets
+               :requires [(pack :hrsh7th/cmp-path
+                                {:after :cmp-buffer})
+                          (pack :hrsh7th/cmp-buffer
+                                {:after :cmp-nvim-lsp})
+                          (pack :hrsh7th/cmp-nvim-lsp
+                                {:after :cmp_luasnip})
+                          (pack :hrsh7th/cmp-cmdline
+                                {:after :cmp-nvim-lsp})
+                          (pack :PaterJason/cmp-conjure
+                                {:after :conjure})
+                          (pack :saadparwaiz1/cmp_luasnip
+                                {:after :LuaSnip})
+                          (pack :Icy-Thought/friendly-snippets
+                                {:module [:cmp :cmp_nvim_lsp]
+                                 :event [:InsertEnter :CmdlineEnter]})
                           (pack :L3MON4D3/LuaSnip
-                                {:event :InsertEnter
+                                {:event [:InsertEnter :CmdlineEnter]
                                  :wants :friendly-snippets
-                                 :config (load-file completion.luasnip)
-                                 :requires [(pack :Icy-Thought/friendly-snippets)]})]})
+                                 :config (load-file completion.luasnip)})]})
 
 (use-package! :glepnir/lspsaga.nvim
               {:branch :main

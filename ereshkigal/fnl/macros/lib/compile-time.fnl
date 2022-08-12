@@ -3,11 +3,11 @@
 (local {: djb2} (require :macros.lib.crypt))
 
 (λ expr->str [expr]
-  `(macrodebug ,expr nil))
+   `(macrodebug ,expr nil))
 
 (fn fn? [x]
   "Checks if `x` is a function definition.
-   Cannot check if a symbol is a function in compile time."
+  Cannot check if a symbol is a function in compile time."
   (and (list? x)
        (or (= `fn (first x)) (= `hashfn (first x)) (= `lambda (first x))
            (= `partial (first x)))))
@@ -24,14 +24,15 @@
        ,non-quoted)))
 
 (λ quoted->str [expr]
-  "Converts a quoted expression like `(quote (+ 1 1))` into an string with its shorthand form."
+  "Converts a quoted expression like `(quote (+ 1 1))` into an string with its
+  shorthand form."
   (assert-compile (quoted? expr) "expected quoted expression for expr" expr)
   (let [non-quoted (second expr)]
     (.. "'" (view non-quoted))))
 
 (λ expand-exprs [exprs]
   "Converts a list of expressions into either an expression - if only one
-   expression is in the list - or a do-expression containing the expressions."
+  expression is in the list - or a do-expression containing the expressions."
   (if (> (length exprs) 1)
       `(do
          ,(unpack exprs))
@@ -39,10 +40,9 @@
 
 (λ gensym-checksum [x ?options]
   "Generates a new symbol from the checksum of the object passed as a parameter
-   after it is casted into an string using the `view` function.
-   You can also pass a prefix or a suffix into the options optional table.
-   This function depends on the djb2 hash function.
-  "
+  after it is casted into an string using the `view` function. You can also
+  pass a prefix or a suffix into the options optional table. This function
+  depends on the djb2 hash function. "
   (let [options (or ?options {})
         prefix (or options.prefix "")
         suffix (or options.suffix "")]

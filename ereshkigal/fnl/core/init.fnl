@@ -28,8 +28,7 @@
          (tset vim.g plugin 1)))))
 
 (λ disable-providers! []
-   ;; :python :python3
-   (let [providers [:perl :node :ruby]]
+   (let [providers [:perl :node :ruby :python :python3]]
      (each [_ v (ipairs providers)]
        (let [provider (.. :loaded_ v :_provider)]
          (tset vim.g provider 0)))))

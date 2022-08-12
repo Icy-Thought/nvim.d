@@ -47,17 +47,10 @@
 
 ;; vim.diagnostic integration
 (fn get-lsp-diagnostic []
-  (local buf-clients (vim.lsp.buf_get_clients 0))
-  (local next next)
-  (when (= (next buf-clients) nil)
-    (lua "return \"\""))
+  (when (not (rawget vim :lsp)))
+  (lua "return \"\""))
 
-  (local diagnostics (vim.diagnostic.get 0))
   (local count [0 0 0 0])
-
-  (each [_ diagnostic (ipairs diagnostics)]
-    (tset count diagnostic.severity (+ (. count diagnostic.severity) 1)))
-
   (local result {:errors (. count vim.diagnostic.severity.ERROR)
                  :warnings (. count vim.diagnostic.severity.WARN)
                  :info (. count vim.diagnostic.severity.INFO)
@@ -68,25 +61,24 @@
 
 ;; Normally we would have an inactive and a short section as well, but since we have a global statusline now I removed them
 (global Statusline {})
-(set Statusline.statusline (fn []
-                             (table.concat [(color)
-                                            (: (string.format " %s "
-                                                              (. modes
-                                                                 (. (vim.api.nvim_get_mode)
-                                                                    :mode)))
-                                               :upper)
-                                            "%#StatusLine#"
-                                            " %f "
-                                            "%#StatusPosition#"
-                                            (get-git-status)
-                                            "%="
-                                            (get-lsp-diagnostic)
-                                            "%#StatusPosition#"
-                                            " %l:%c "])))
+(set Statusline.statusline
+     (fn []
+       (table.concat [(color)
+                      (: (string.format " %s "
+                                        (. modes (. (vim.api.nvim_get_mode) :mode))) :upper)
+                      "%#StatusLine#"
+                      " %f "
+                      "%#StatusPosition#"
+                      (get-git-status)
+                      "%="
+                      (get-lsp-diagnostic)
+                      "%#StatusPosition#"
+                      " %l:%c "])))
 
-(set Statusline.winbar (fn []
-                         (table.concat ["%#WinBar#"
-                                        " %f "])))
+(set Statusline.winbar
+     (fn []
+       (table.concat ["%#WinBar#"
+                      " %f "])))
 
 (set! winbar "%!v:lua.Statusline.winbar()")
 (set! statusline "%!v:lua.Statusline.statusline()")
