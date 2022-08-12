@@ -54,14 +54,9 @@
 (vim.cmd "command! -nargs=0 LspLog call v:lua.open_lsp_log()")
 (vim.cmd "command! -nargs=0 LspRestart call v:lua.reload_lsp()")
 
-;; (Init) Language-server with pre-defined configurations
-(local server-noconf [:clojure_lsp
-                      :pyright
-                      :rust_analyzer])
-
 ;; (Init) Language-servers with our custom conf
 ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-(local lang-settings
+(local lsp-settings
        {:clangd {:cmd ["clangd"
                        "--background-index"
                        "--suggest-missing-includes"
@@ -95,11 +90,23 @@
                                      :formatterLineLength 80
                                      :latexFormatter :texlab}}}})
 
-;; Default lsp-setup for our beloved language-servers
-(each [_ server (ipairs server-noconf)]
+;; (Init) Language-server protocol
+(local lsp-servers
+       [;; No-Conf language servers
+        :clojure_lsp
+        :pyright
+        :rust_analyzer
+
+        ;; Confed language servers
+        :clangd
+        :hls
+        :sumneko_lua
+        :texlab])
+
+(each [_ server (ipairs lsp-servers)]
   ((. lspconfig server :setup)
-   (doto (or (. lang-settings server)
-             {})
+   (doto
+     (or (. lsp-settings server) {})
      (tset :capabilities capabilities)
      (tset :on_attach on-attach)
      (tset :flags {:debounce_text_changes 150}))))
