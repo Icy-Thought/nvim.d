@@ -13,7 +13,7 @@
            :severity_sort true
            :signs {:severity {:min severity.INFO}}
            :underline true
-           :virtual_text false ;; handled by lsp_lines
+           :virtual_text true
            :update_in_insert true})
 
   (sign_define :DiagnosticSignError
@@ -74,18 +74,18 @@
         :texlab {:log_level vim.lsp.protocol.MessageType.Log
                  :settings {:texlab {:auxDirectory :build
                                      :build {:executable :tectonic
-                                     :args ["-X"
-                                            "compile"
-                                            "%f"
-                                            "--synctex"]}
-                            :forwardSearch {:executable :sioyek
-                                            :args ["--reuse-instance"
-                                                   "--forward-search-file '%b'"
-                                                   "--forward-search-line %n"
-                                                   "--inverse-search"
-                                                   "'nvim --headless -es --cmd %l:%f'"]}
-                            :chktex {:onEdit false
-                                     :onOpenAndSave true}
+                                             :args ["-X"
+                                                    "compile"
+                                                    "%f"
+                                                    "--synctex"]}
+                                     :forwardSearch {:executable :sioyek
+                                                     :args ["--reuse-instance"
+                                                            "--forward-search-file '%b'"
+                                                            "--forward-search-line %n"
+                                                            "--inverse-search"
+                                                            "'nvim --headless -es --cmd %l:%f'"]}
+                                     :chktex {:onEdit false
+                                              :onOpenAndSave true}
                                      :diagnosticsDelay 100
                                      :formatterLineLength 80
                                      :latexFormatter :texlab}}}})
