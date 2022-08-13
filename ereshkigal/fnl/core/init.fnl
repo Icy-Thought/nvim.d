@@ -33,7 +33,7 @@
        (let [provider (.. :loaded_ v :_provider)]
          (tset vim.g provider 0)))))
 
-(λ is-neovide? []
+(λ init-neovide []
    (if vim.g.neovide
        (do
          (set! guifont "VictorMono Nerd Font:h9:b")
@@ -65,9 +65,11 @@
    (require :keymaps.basics)
 
    ;; Neovide settings (when installed)
-   (is-neovide?)
+   (init-neovide)
 
    ;; Apply desired colorscheme
-   (colorscheme catppuccin))
+   (if vim.g.neovide
+       (colorscheme oxocarbon)
+       (colorscheme catppuccin)))
 
 (initialize-core)

@@ -34,9 +34,7 @@
                                   :nvimtree {:enabled true :show_root true}
                                   :which_key true}})
 
-(if (not vim.g.neovide)
-    (tset vim.g :catppuccin_flavour :mocha)
-    (tset vim.g :catppuccin_flavour :latte))
+(set vim.g.catppuccin_flavour :mocha)
 
 ;; Auto-compile Catppuccin after PackerCompile
 (require-macros :macros.event)

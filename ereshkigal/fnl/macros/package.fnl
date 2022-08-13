@@ -121,32 +121,6 @@
      `(λ []
          ((. (require ,name) :setup)))))
 
-(λ unpack! []
-   "Initializes the plugin manager with the plugins previously declared and
-   their respective options."
-   (let [packs (icollect [_ v (ipairs _G.ereshkigal/plugins)] `(use ,v))
-               rocks (icollect [_ v (ipairs _G.ereshkigal/rock)] `(use_rocks ,v))
-               use-sym (sym :use)]
-     (tset _G :ereshkigal/plugins [])
-     (tset _G :ereshkigal/rock [])
-     `((. (require :packer) :startup)
-       (fn [,use-sym]
-         ,(unpack (icollect [_ v (ipairs packs) :into rocks] v))))))
-
-(λ packadd! [package]
-   "Loads a package using the vim.api.nvim_cmd API.
-
-   Valid Arguments:
-   - package -> a symbol.
-
-   Usage example:
-   ```fennel
-   (packadd! packer.nvim)
-   ```"
-   (assert-compile (sym? package) "expected symbol for package" package)
-   (let [package (->str package)]
-     `(vim.api.nvim_cmd {:cmd :packadd :args [,package]} {})))
-
 (λ after! [name tb]
    "Configures a plugin after applying initial plug-conf:
 
@@ -162,6 +136,32 @@
    (assert-compile (tbl? tb) "expected symbol for tb" tb)
    (let [name (->str name)]
      `((. (require ,name) :setup) tb)))
+
+(λ packadd! [package]
+   "Loads a package using the vim.api.nvim_cmd API.
+
+   Valid Arguments:
+   - package -> a symbol.
+
+   Usage example:
+   ```fennel
+   (packadd! packer.nvim)
+   ```"
+   (assert-compile (sym? package) "expected symbol for package" package)
+   (let [package (->str package)]
+     `(vim.api.nvim_cmd {:cmd :packadd :args [,package]} {})))
+
+(λ unpack! []
+   "Initializes the plugin manager with the plugins previously declared and
+   their respective options."
+   (let [packs (icollect [_ v (ipairs _G.ereshkigal/plugins)] `(use ,v))
+               rocks (icollect [_ v (ipairs _G.ereshkigal/rock)] `(use_rocks ,v))
+               use-sym (sym :use)]
+     (tset _G :ereshkigal/plugins [])
+     (tset _G :ereshkigal/rock [])
+     `((. (require :packer) :startup)
+       (fn [,use-sym]
+         ,(unpack (icollect [_ v (ipairs packs) :into rocks] v))))))
 
 {: rock
  : pack

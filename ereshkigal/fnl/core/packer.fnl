@@ -18,25 +18,36 @@
                           :removed_sym ""
                           :moved_sym ""
                           :open_fn (λ open_fn []
-                                     (local {: float} (require :packer.util))
-                                     (float {:border :rounded}))}}))
+                                      (local {: float} (require :packer.util))
+                                      (float {:border :rounded}))}}))
 
 ;; Defining several local's for ease-of-use:
-(local lisp-ft [:fennel :clojure :lisp :racket :scheme])
+(local conjure-ft
+       [:fennel
+        :clojure
+        :lisp
+        :racket
+        :scheme
+        :rust
+        :janet
+        :lua
+        :guile])
 
-(local treesitter-cmds [:TSInstall
-                        :TSBufEnable
-                        :TSBufDisable
-                        :TSEnable
-                        :TSDisable
-                        :TSModuleInfo])
+(local treesitter-cmds
+       [:TSInstall
+        :TSBufEnable
+        :TSBufDisable
+        :TSEnable
+        :TSDisable
+        :TSModuleInfo])
 
-(local mason-cmds [:Mason
-                   :MasonInstall
-                   :MasonInstallAll
-                   :MasonUninstall
-                   :MasonUninstallAll
-                   :MasonLog])
+(local mason-cmds
+       [:Mason
+        :MasonInstall
+        :MasonInstallAll
+        :MasonUninstall
+        :MasonUninstallAll
+        :MasonLog])
 
 ;; ----------===[ Core-Deps ]===----------
 (use-package! :wbthomason/packer.nvim)
@@ -57,15 +68,15 @@
 
 (use-package! :Olical/conjure
               {:branch :develop
-               :ft lisp-ft
+               :ft conjure-ft
                :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
 
 ;; ----------===[ Aesthetics ]===----------
 (use-package! :kyazdani42/nvim-web-devicons
               {:module :nvim-web-devicons})
 
-;; (use-package! :shaunsingh/oxocarbon.nvim
-;;               {:run :./install.sh})
+(use-package! :shaunsingh/oxocarbon.nvim
+              {:run :./install.sh})
 
 (use-package! :catppuccin/nvim
               {:as :catppuccin
@@ -167,9 +178,10 @@
                         ((. (require :utils.lazy-load) :load-on-file-open!)
                          :leap.nvim))})
 
+
 (use-package! :nvim-treesitter/nvim-treesitter
-              {:run ":TSUpdate"
-               :cmd treesitter-cmds
+              {:cmd treesitter-cmds
+               :run ":TSUpdate"
                :module :nvim-treesitter
                :config (load-file editor.treesitter)
                :setup (fn []
@@ -279,7 +291,6 @@
 
 (use-package! :simrat39/rust-tools.nvim
               {:ft :rust
-               :branch :modularize_and_inlay_rewrite
                :config (call-setup rust-tools)})
 
 ;; (use-package! :simrat39/flutter-tools.nvim
