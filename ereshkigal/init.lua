@@ -1,18 +1,20 @@
--- A function that applies passes the output of string.format to the print
--- function
----@param string string #template string
 local function fprint(string, ...)
     print(string.format(string, ...))
 end
 
--- A function that verifies if the plugin passed as a parameter has been installed,
--- if it isn't it will be installed
----@param plugin string #the plugin, must follow the format `username/repository`
----@param branch string? #the branch of the plugin
-local function assert_installed(plugin, branch)
+local function plugin_status(status)
+    if status ~= nil then
+        return "opt/"
+    else
+        return "start/"
+    end
+end
+
+local function assert_installed(plugin, branch, status)
     local _, _, plugin_name = string.find(plugin, [[%S+/(%S+)]])
     local plugin_path = vim.fn.stdpath("data")
-        .. "/site/pack/packer/start/"
+        .. "/site/pack/packer/"
+        .. plugin_status(status)
         .. plugin_name
     if vim.fn.empty(vim.fn.glob(plugin_path)) ~= 0 then
         fprint(
@@ -26,7 +28,7 @@ local function assert_installed(plugin, branch)
                 "clone",
                 "https://github.com/" .. plugin,
                 "--branch",
-		branch,
+                branch,
                 plugin_path,
             })
         else
@@ -40,7 +42,7 @@ local function assert_installed(plugin, branch)
     end
 end
 
-assert_installed("wbthomason/packer.nvim")
+assert_installed("wbthomason/packer.nvim", nil, true)
 assert_installed("rktjmp/hotpot.nvim", "nightly")
 
 if pcall(require, "hotpot") then
@@ -50,5 +52,5 @@ if pcall(require, "hotpot") then
     })
     require("core.init")
 else
-    print("Failed to require hotpot.")
+    print("Failed to require Hotpot")
 end

@@ -33,6 +33,18 @@
        (let [provider (.. :loaded_ v :_provider)]
          (tset vim.g provider 0)))))
 
+(λ load-packer []
+   (let [compiled?
+          (= (vim.fn.filereadable
+               (.. (vim.fn.stdpath :config)
+                   "/lua/packer_compiled.lua")) 1)
+          load-compiled #(require :packer_compiled)]
+     (if compiled?
+         (load-compiled)
+         (do
+           (require :core.packer)
+           (. (require :packer) :sync)))))
+
 (λ init-neovide []
    (if vim.g.neovide
        (do
@@ -56,11 +68,11 @@
    (disable-providers!)
 
    ;; Call forward Packer + installed plugins
-   (require :core.packer)
-   (require :packer_compiled)
+   (load-packer)
 
    ;; Require remaining core
    (require :core.options)
+   (require :core.commands)
    (require :core.events)
    (require :keymaps.basics)
 

@@ -50,7 +50,8 @@
         :MasonLog])
 
 ;; ----------===[ Core-Deps ]===----------
-(use-package! :wbthomason/packer.nvim)
+(use-package! :wbthomason/packer.nvim
+              {:opt true})
 
 (use-package! :nvim-lua/plenary.nvim
               {:module :plenary})
