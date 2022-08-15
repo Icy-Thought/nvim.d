@@ -16,14 +16,14 @@
            :virtual_text true
            :update_in_insert true})
 
-  (sign_define :DiagnosticSignError
-               {:text "" :texthl :DiagnosticSignError})
-  (sign_define :DiagnosticSignWarn
-               {:text "" :texthl :DiagnosticSignWarn})
   (sign_define :DiagnosticSignInfo
-               {:text "" :texthl :DiagnosticSignInfo})
+               {:text " " :texthl :DiagnosticSignInfo})
   (sign_define :DiagnosticSignHint
-               {:text "" :texthl :DiagnosticSignHint}))
+               {:text " " :texthl :DiagnosticSignHint})
+  (sign_define :DiagnosticSignWarn
+               {:text " " :texthl :DiagnosticSignWarn})
+  (sign_define :DiagnosticSignError
+               {:text " " :texthl :DiagnosticSignError}))
 
 ;;; Minor UI-improvements
 (let [{: with : handlers} vim.lsp]
@@ -105,8 +105,7 @@
 
 (each [_ server (ipairs lsp-servers)]
   ((. lspconfig server :setup)
-   (doto
-     (or (. lsp-settings server) {})
+   (doto (or (. lsp-settings server) {})
      (tset :capabilities capabilities)
      (tset :on_attach on-attach)
      (tset :flags {:debounce_text_changes 150}))))
