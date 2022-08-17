@@ -10,3 +10,6 @@
 (command! PackerInstall "lua require('core.packer') require('packer').install()")
 (command! PackerUpdate "lua require('core.packer') require('packer').update()")
 (command! PackerCompile "lua require('core.packer') require('packer').compile()")
+
+;; Emacs-like  scratch feature
+(command! Scratch "lua require('utils.scratch').scratch()")

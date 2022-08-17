@@ -34,16 +34,8 @@
          (tset vim.g provider 0)))))
 
 (λ load-packer []
-   (let [compiled?
-          (= (vim.fn.filereadable
-               (.. (vim.fn.stdpath :config)
-                   "/lua/packer_compiled.lua")) 1)
-          load-compiled #(require :packer_compiled)]
-     (if compiled?
-         (load-compiled)
-         (do
-           (require :core.packer)
-           (. (require :packer) :sync)))))
+   (if (= (vim.fn.filereadable (.. (vim.fn.stdpath :config) "/lua/packer_compiled.lua")) 1)
+       (require :packer_compiled)))
 
 (λ init-neovide []
    (if vim.g.neovide

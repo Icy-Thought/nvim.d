@@ -7,7 +7,7 @@
         : snippet_node
         : text_node} (require :luasnip))
 
-(local {: in-mathzone?} (require :utils.math-mode))
+(local {: in-mathzone?} (require :utils.treesitter.math-mode))
 
 (fn math-snippet [lang snips opts]
   (each [_ v (pairs snips)]
