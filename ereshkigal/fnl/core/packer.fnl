@@ -84,6 +84,9 @@
                :run :CatppuccinCompile
                :config (load-theme catppuccin)})
 
+(use-package! :folke/tokyonight.nvim
+              {:branch :main})
+
 ;; (use-package! :themercorp/themer.lua {:config (load-theme themer)})
 
 (use-package! :romgrk/barbar.nvim
@@ -158,7 +161,7 @@
                          :Comment.nvim))})
 
 (use-package! :windwp/nvim-autopairs
-              {:after :nvim-cmp
+              {:event :InsertEnter
                :config (load-file editor.autopairs)
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-on-file-open!)
