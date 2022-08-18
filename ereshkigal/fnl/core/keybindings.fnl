@@ -34,10 +34,6 @@
 (map! [n] :<C-Left> "<CMD>vertical resize -2<CR>" {:noremap true :silent true})
 (map! [n] :<C-Right> "<CMD>vertical resize +2<CR>" {:noremap true :silent true})
 
-;; Navigate buffers
-(map! [n] :<S-l> :<CMD>bnext<CR> {:noremap true :silent true})
-(map! [n] :<S-h> :<CMD>bprevious<CR> {:noremap true :silent true})
-
 ;; Move text up and down
 (map! [n] :<A-j> "<Esc>:m .+1<CR>==gi" {:noremap true :silent true})
 (map! [n] :<A-k> "<Esc>:m .-2<CR>==gi" {:noremap true :silent true})
@@ -71,7 +67,9 @@
 
 (map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
 
-;; Hotpot -> Evaluate highlighted block with `<Visual>hr`
+
+;; -------===[ Hotpot ]===-------
+;; Evaluate highlighted block with `<Visual>hr`
 (local reflect-session {:id nil :mode :compile})
 (fn new-or-attach-reflect []
   (let [reflect (require :hotpot.api.reflect)

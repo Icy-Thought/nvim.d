@@ -86,11 +86,11 @@
 
 ;; (use-package! :themercorp/themer.lua {:config (load-theme themer)})
 
-(use-package! :akinsho/bufferline.nvim
-              {:config (load-file ui.bufferline)
+(use-package! :romgrk/barbar.nvim
+              {:config (load-file ui.barbar)
                :setup (fn []
                         ((. (require :utils.lazy-load) :load-on-file-open!)
-                         :bufferline.nvim))})
+                         :barbar.nvim))})
 
 (use-package! :feline-nvim/feline.nvim
               {:event :VimEnter
@@ -190,6 +190,8 @@
                          :nvim-treesitter))
                :requires [(pack :nvim-treesitter/playground
                                 {:cmd :TSPlayground})
+                          (pack :p00f/nvim-ts-rainbow
+                                {:after :nvim-treesitter})
                           (pack :nvim-treesitter/nvim-treesitter-textobjects
                                 {:after :nvim-treesitter})]})
 
@@ -250,18 +252,12 @@
 (use-package! :hrsh7th/nvim-cmp
               {:config (load-file completion.cmp)
                :after :friendly-snippets
-               :requires [(pack :hrsh7th/cmp-path
-                                {:after :cmp-buffer})
-                          (pack :hrsh7th/cmp-buffer
-                                {:after :cmp-nvim-lsp})
-                          (pack :hrsh7th/cmp-nvim-lsp
-                                {:after :cmp_luasnip})
-                          (pack :hrsh7th/cmp-cmdline
-                                {:after :cmp-nvim-lsp})
-                          (pack :PaterJason/cmp-conjure
-                                {:after :conjure})
-                          (pack :saadparwaiz1/cmp_luasnip
-                                {:after :LuaSnip})
+               :requires [(pack :hrsh7th/cmp-path {:after :cmp-buffer})
+                          (pack :hrsh7th/cmp-buffer {:after :cmp-nvim-lsp})
+                          (pack :hrsh7th/cmp-nvim-lsp {:after :cmp_luasnip})
+                          (pack :hrsh7th/cmp-cmdline {:after :cmp-nvim-lsp})
+                          (pack :PaterJason/cmp-conjure {:after :conjure})
+                          (pack :saadparwaiz1/cmp_luasnip {:after :LuaSnip})
                           (pack :Icy-Thought/friendly-snippets
                                 {:module [:cmp :cmp_nvim_lsp]
                                  :event [:InsertEnter :CmdlineEnter]})

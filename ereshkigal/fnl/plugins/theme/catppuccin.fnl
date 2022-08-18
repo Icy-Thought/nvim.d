@@ -20,19 +20,23 @@
                                                             :hints [:underline]
                                                             :warnings [:underline]
                                                             :information [:underline]}}
-                                  :bufferline true
+                                  :bufferline false
+                                  :barbar true
+                                  :cmp true
                                   :dashboard true
+                                  ;; :dap {:enabled true
+                                  ;;       :enable_ui true}
                                   :gitgutter false
                                   :gitsigns true
                                   :indent_blankline {:enabled true
                                                      :colored_indent_levels true}
                                   :lsp_saga true
-                                  :lsp_trouble true
                                   :markdown true
                                   :neogit true
+                                  :nvimtree {:enabled true
+                                             :show_root true}
                                   :telescope true
-                                  :nvimtree {:enabled true :show_root true}
-                                  :which_key true}})
+                                  :ts_rainbow true}})
 
 (set vim.g.catppuccin_flavour :mocha)
 

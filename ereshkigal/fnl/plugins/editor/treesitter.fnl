@@ -21,20 +21,13 @@
                      :files [:src/parser.c]
                      :branch :main}})
 
-;; WIP highlight/parse only buffer scope
-(ts.define_modules
-  {:ereshkigal-ts
-   {:highlight_scope {:module_path :utils.ts-highlight-scope
-                      :enable false
-                      :disable []
-                      :is_supported tsq.has_locals}}})
-
 ;; Initialize Treesitter
 (setup {:ensure_installed :all
         :ignore_install [:phpdoc :norg]
         :highlight {:enable true :use_languagetree true}
         :indent {:enable true}
-        :ereshkigal-ts {:highlight_scope {:enable true}}
+        :rainbow {:enable true
+                  :extended_mode true}
         :incremental_selection {:enable true
                                 :keymaps {:init_selection :gnn
                                           :node_incremental :grn

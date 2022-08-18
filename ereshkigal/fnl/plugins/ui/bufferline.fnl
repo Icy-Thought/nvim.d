@@ -1,3 +1,5 @@
+(import-macros {: map!} :macros.keybind)
+
 (local {: setup} (require :bufferline))
 
 (setup {:options {:numbers :none
@@ -15,9 +17,9 @@
                   :max_prefix_length 15
                   :tab_size 18
                   :diagnostics false
-                  :offsets [{:filetype 
-                             :NvimTree 
-                             :text "" 
+                  :offsets [{:filetype
+                             :NvimTree
+                             :text ""
                              :padding 1}]
                   :show_buffer_icons true
                   :show_buffer_close_icons true
@@ -28,3 +30,7 @@
                   :enforce_regular_tabs true
                   :always_show_bufferline true
                   :sort_by :id}})
+
+;; Navigate buffers
+(map! [n] :<S-l> :<CMD>bnext<CR> {:noremap true :silent true})
+(map! [n] :<S-h> :<CMD>bprevious<CR> {:noremap true :silent true})

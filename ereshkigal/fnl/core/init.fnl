@@ -74,7 +74,7 @@
    (require :core.options)
    (require :core.commands)
    (require :core.events)
-   (require :keymaps.basics)
+   (require :core.keybindings)
 
    ;; Neovide settings (when installed)
    (init-neovide)

@@ -7,10 +7,10 @@
 (set vim.g.sqlite_clib_path (. vim.env :SQLITE_PATH))
 
 ;; Faster refresh-rate + Gitsigns
+(set! lazyredraw)
 (set! updatetime 200)
 (set! timeoutlen 500)
 (set! ttimeoutlen 0)
-(set! redrawtime 1500)
 
 ;; General UI-Conf
 (set! cmdheight 1)
