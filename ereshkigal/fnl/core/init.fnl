@@ -1,5 +1,6 @@
 (require-macros :macros.event)
 (import-macros {: set!} :macros.option)
+(import-macros {: let!} :macros.variable)
 (import-macros {: colorscheme} :macros.highlight)
 
 (λ disable-builtins! []
@@ -82,6 +83,8 @@
    ;; Apply desired colorscheme
    (if vim.g.neovide
        (colorscheme oxocarbon)
-       (colorscheme catppuccin)))
+       (do
+         (let! tokyonight_style :night)
+         (colorscheme tokyonight))))
 
 (initialize-core)

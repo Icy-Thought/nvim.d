@@ -79,10 +79,10 @@
 (use-package! :shaunsingh/oxocarbon.nvim
               {:run :./install.sh})
 
-(use-package! :catppuccin/nvim
-              {:as :catppuccin
-               :run :CatppuccinCompile
-               :config (load-theme catppuccin)})
+;; (use-package! :catppuccin/nvim
+;;               {:as :catppuccin
+;;                :run :CatppuccinCompile
+;;                :config (load-theme catppuccin)})
 
 (use-package! :folke/tokyonight.nvim
               {:branch :main})
@@ -97,7 +97,8 @@
 
 (use-package! :feline-nvim/feline.nvim
               {:event :VimEnter
-               :config (load-file ui.feline)})
+               ;; :config (load-file ui.feline)})
+               :config (call-setup feline)})
 
 (use-package! :glepnir/dashboard-nvim
               {:event :BufWinEnter
