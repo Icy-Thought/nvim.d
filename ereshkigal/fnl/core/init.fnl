@@ -85,6 +85,8 @@
        (colorscheme oxocarbon)
        (do
          (let! tokyonight_style :night)
+         (let! tokyonight_transparent true)
+         (let! tokyonight_transparent_sidebar true)
          (colorscheme tokyonight))))
 
 (initialize-core)

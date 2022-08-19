@@ -4,3 +4,6 @@
 (catppuccin.setup {})
 
 (setup {:components (catppuccin.get)})
+
+;; TODO
+;; General look -> pull colors from used theme!
