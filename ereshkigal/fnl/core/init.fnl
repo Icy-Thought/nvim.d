@@ -51,9 +51,9 @@
        (do
          (set! guifont "VictorMono Nerd Font:h9:b")
 
-         ;; lua settings == not recognized by neovide???
+         ;; WARN: lua settings != recognized by neovide (???)
          (let [config ["neovide_no_idle = v:true"
-                       ;; "neovide_transparency = 0.85"
+                       "neovide_transparency = 0.85"
                        "neovide_cursor_antialiasing = v:true"
                        "neovide_cursor_trail_length = 0.05"
                        "neovide_cursor_animation_length = 0.03"

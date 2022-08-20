@@ -94,8 +94,10 @@
 (local lsp-servers
        [;; No-Conf language servers
         :clojure_lsp
+        :julials
         :pyright
         :rust_analyzer
+        ;; :r_language_server
 
         ;; Confed language servers
         :clangd
