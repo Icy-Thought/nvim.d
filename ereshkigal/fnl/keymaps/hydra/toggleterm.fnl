@@ -17,7 +17,7 @@
                  :hint {:position :middle
                         :border :rounded}}
         :mode :n
-        :body :<Leader>x
+        :body :<Leader>t
         :heads [[:v (cmd "ToggleTerm size=80 direction=vertical")
                     {:desc "launch vertical terminal"}]
                 [:f (cmd "ToggleTerm direction=float")]
