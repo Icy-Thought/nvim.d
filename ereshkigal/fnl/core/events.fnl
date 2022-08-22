@@ -9,11 +9,18 @@
 (augroup! follow-buffer-dir
           (autocmd! BufEnter * "silent! lcd %:p:h"))
 
+;; Create dir on save if != existent
+(augroup! auto-create-dir
+          (autocmd! BufWritePre * (fn [ctx]
+                                    (vim.fn.mkdir
+                                      (vim.fn.fnamemodify ctx.file ":p:h")
+                                      :p))))
+
 ;; Restore cursor on exit
 (augroup! restore-cursor-on-exit
           (autocmd! VimLeave * '(set! guicursor ["a:ver100-blinkon0"])))
 
-;; Auto move to the location of the last edit (TODO)
+;; Auto move to the location of the last edit
 (augroup! last-nvimtree-close
          (autocmd! BufEnter * (fn []
                                 (when (and (and (not (: (vim.fn.expand "%:p") :match :.git))
@@ -21,7 +28,6 @@
                                            (<= (vim.fn.line "'\"") (vim.fn.line "$")))
                                   (vim.cmd "normal! g'\"")
                                   (vim.cmd "normal zz")))))
-
 
 ;; Force write shada on nvim-exit
 (augroup! force-write-shada
