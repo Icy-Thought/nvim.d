@@ -24,12 +24,7 @@
         lua require('nvim-autopairs').setup()
       ''
     ];
-
-    extraPackages = [
-      pkgs.texlab
-      pkgs.vale
-    ];
-
+    extraPackages = with pkgs; [texlab vale];
     plugins = pkgs.callPackage "${nvimDir}/niflheim/plugins.nix" plugins;
 
     home.configFile."nvim/lua/my-snippets" = {
