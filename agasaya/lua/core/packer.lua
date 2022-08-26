@@ -87,7 +87,8 @@ return packer.startup(function(use)
             "nvim-telescope/telescope-project.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
         },
-        config = [[ prequire('modules.toolbox.telescope') ]],
+        config = [[ prequire('modules.toolbox.telescope')
+                    prequire('keymaps.hydra.telescope') ]],
     })
     use({
         "kyazdani42/nvim-tree.lua",
@@ -122,7 +123,8 @@ return packer.startup(function(use)
         "lewis6991/gitsigns.nvim",
         ft = "gitcommit",
         event = "BufReadPost",
-        config = [[ prequire('gitsigns', {}) ]],
+        config = [[ prequire('gitsigns', {})
+                    prequire('keymaps.hydra.gitsigns') ]],
     })
 
     -------===[ Editor ]===-------
