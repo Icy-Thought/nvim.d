@@ -123,7 +123,7 @@ cmp.setup({
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = "cmdline", keyword_length = 3 },
+        { name = "cmdline" },
     },
 })
 
