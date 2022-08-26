@@ -74,7 +74,7 @@ end
 
 -- (Init) Language-servers with our custom conf
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-local server_conf = {
+local enabled_servers = {
     clangd = {
         cmd = {
             "clangd",
@@ -90,7 +90,8 @@ local server_conf = {
             "--lsp",
         },
     },
-
+    pyright = {},
+    rust_analyzer = {},
     sumneko_lua = {
         settings = {
             Lua = {
@@ -140,21 +141,9 @@ local server_conf = {
     },
 }
 
-local lsp_servers = {
-    -- No-Conf LSP
-    "pyright",
-    "rust_analyzer",
-
-    -- Configured LSP-Servers
-    "clangd",
-    "hls",
-    "sumneko_lua",
-    "texlab",
-}
-
-for _, server in pairs(lsp_servers) do
+local initialize_lsp = function()
     -- Our default LSP-Server configurations
-    local config = {
+    local default_config = {
         on_attach = enhance_attach,
         capabilities = capabilities,
         flags = {
@@ -162,10 +151,12 @@ for _, server in pairs(lsp_servers) do
         },
     }
 
-    if server_configs[server] ~= nil then
-        config = vim.tbl_deep_extend("force", config, server_configs[server])
-    end
+    for server, config in pairs(enabled_servers) do
+        config = vim.tbl_deep_extend("force", default_config, config)
 
-    -- Call the setup method
-    lspconfig[server].setup(config)
+        -- Call the setup method
+        lspconfig[server].setup(config)
+    end
 end
+
+initialize_lsp()

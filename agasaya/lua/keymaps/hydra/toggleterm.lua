@@ -3,6 +3,7 @@ local cmd = require("hydra.keymap-util").cmd
 
 local hint = [[
                   Toggle-Term
+
   _v_: Vertical                _t_: Tabbed
   _f_: Float                   _p_: Python-Env
 ^
@@ -44,7 +45,7 @@ Hydra({
             { desc = "Launch Terminal in Py Env" },
         },
         {
-            "t",
+            "<Enter>",
             cmd("ToggleTerm size=10 direction=horizontal"),
             { desc = "Launch horizontal terminal" },
         },

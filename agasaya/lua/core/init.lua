@@ -75,7 +75,7 @@ end
 
 local function apply_colorscheme()
     if vim.g.neovide then
-        vim.cmd("colorscheme oxocarbon")
+        vim.cmd("colorscheme oxocarbon-lua")
     else
         -- Apply proper transparency
         vim.g.tokyonight_style = "night"

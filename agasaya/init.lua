@@ -14,8 +14,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
     vim.cmd([[packadd packer.nvim]])
 end
 
--- Require Agasaya
-require("core")
-
 -- Point Nvim to correct sqlite path
 vim.g.sqlite_clib_path = vim.env["SQLITE_PATH"]
+
+-- Require Agasaya
+require("core")

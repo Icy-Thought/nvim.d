@@ -50,7 +50,8 @@ return packer.startup(function(use)
     })
 
     use({ "folke/tokyonight.nvim", branch = "main" })
-    use({ "shaunsingh/oxocarbon.nvim", run = "./install.sh" })
+    use("B4mbus/oxocarbon-lua.nvim")
+    -- use({ "shaunsingh/oxocarbon.nvim", run = "./install.sh" })
     -- use({
     --     "catppuccin/nvim",
     --     as = "catppuccin",
@@ -60,7 +61,7 @@ return packer.startup(function(use)
     use({
         "romgrk/barbar.nvim",
         event = "VimEnter",
-        config = [[ prequire('modules.ui.barbar') ]],
+        config = [[ prequire('bufferline', {}) ]],
     })
     use({
         "feline-nvim/feline.nvim",
@@ -104,7 +105,7 @@ return packer.startup(function(use)
         "anuvyklack/hydra.nvim",
         event = "VimEnter",
         keys = "<space>",
-        config = [[ prequire('keymaps.hydra.basics') ]],
+        config = [[ prequire('keymaps.hydra.options') ]],
     })
     use({
         "akinsho/nvim-toggleterm.lua",
@@ -195,7 +196,7 @@ return packer.startup(function(use)
     -------===[ Language Server Protocol (LSP) ]===-------
     use({
         "neovim/nvim-lspconfig",
-        -- opt = true,
+        opt = true,
         event = "BufReadPre",
         config = [[ prequire('modules.completion.lspconfig') ]],
     })
@@ -206,7 +207,7 @@ return packer.startup(function(use)
     use({
         "j-hui/fidget.nvim",
         after = "nvim-lspconfig",
-        config = [[ prequire('fidget'), {} ]],
+        config = [[ prequire('fidget', {}) ]],
     })
     use({
         "glepnir/lspsaga.nvim",
@@ -229,7 +230,7 @@ return packer.startup(function(use)
     })
     use({
         "hrsh7th/nvim-cmp",
-        after = { "LuaSnip" },
+        after = "friendly-snippets",
         requires = {
             { "hrsh7th/cmp-path", after = "cmp-buffer" },
             { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
