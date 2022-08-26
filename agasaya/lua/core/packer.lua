@@ -195,14 +195,14 @@ return packer.startup(function(use)
 
     -------===[ Language Server Protocol (LSP) ]===-------
     use({
-        "neovim/nvim-lspconfig",
-        opt = true,
-        event = "BufReadPre",
-        config = [[ prequire('modules.completion.lspconfig') ]],
-    })
-    use({
         "williamboman/mason.nvim",
         config = [[ prequire('mason', {}) ]],
+    })
+    use({
+        "neovim/nvim-lspconfig",
+        module = "lspconfig",
+        event = "BufReadPre",
+        config = [[ prequire('modules.completion.lspconfig') ]],
     })
     use({
         "j-hui/fidget.nvim",
@@ -262,6 +262,7 @@ return packer.startup(function(use)
     use({
         "saecki/crates.nvim",
         event = "BufRead Cargo.toml",
+        after = "nvim-lspconfig",
         config = [[ prequire('crates', {}) ]],
     })
     use({

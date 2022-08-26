@@ -38,14 +38,13 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-function _G.reload_lsp()
+local function reload_lsp()
     vim.lsp.stop_client(vim.lsp.get_active_clients())
-    vim.cmd([[edit]])
+    return vim.cmd("edit")
 end
-
-function _G.open_lsp_log()
+local function open_lsp_log()
     local path = vim.lsp.get_log_path()
-    vim.cmd("edit " .. path)
+    return vim.cmd(("edit " .. path))
 end
 
 vim.cmd("command! -nargs=0 LspLog call v:lua.open_lsp_log()")
