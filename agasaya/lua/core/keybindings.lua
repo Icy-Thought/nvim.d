@@ -3,16 +3,23 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 
--- Modes
---   Normal_Mode = "n",
---   Insert_Mode = "i",
---   Visual_Mode = "v",
---   Visual_Block_Mode = "x",
---   Terminal_Mode = "t",
---   Command_Mode = "c",
+--------===[ Modes ]===--------
+-- -> Normal_Mode        = "n",
+-- -> Insert_Mode        = "i",
+-- -> Visual_Mode        = "v",
+-- -> Visual_Block_Mode  = "x",
+-- -> Terminal_Mode      = "t",
+-- -> Command_Mode       = "c",
 
 local def_basics = {
     -------===[ Normal Mode ]===-------
+    -- <Esc> -> disable highlight
+    ["n|<Esc>"] = map_cr("noh"),
+
+    -- Quicker access to `:`
+    ["n|;"] = map_cmd(":"),
+
+    -- Ctrl + s -> save current buffer
     ["n|<C-s>"] = map_cu("write"):with_noremap(),
 
     -- Better window navigation
@@ -27,9 +34,17 @@ local def_basics = {
     ["n|<C-Left>"] = map_cr("vertical resize -2"):with_noremap():with_silent(),
     ["n|<C-Right>"] = map_cr("vertical resize +2"):with_noremap():with_silent(),
 
-    -- Navigate buffers
-    ["n|<S-l>"] = map_cr("bnext"):with_noremap(),
-    ["n|<S-h>"] = map_cr("bprevious"):with_noremap(),
+    -- (Barbar.nvim) buffer navigation
+    ["n|<S-l>"] = map_cr("BufferPrevious"):with_noremap(),
+    ["n|<S-h>"] = map_cr("BufferNext"):with_noremap(),
+
+    -- (Barbar.nvim) Re-order buffers -> previous || next
+    ["n|<S-<>"] = map_cmd("BufferMovePrevious"):with_noremap():with_silent(),
+    ["n|<S->>"] = map_cmd("BufferMoveNext"):with_noremap():with_silent(),
+
+    -- (Barbar.nvim) Pin/Unpin current buffer
+    ["n|<S-p>"] = map_cmd("BufferPin"):with_noremap():with_silent(),
+    ["n|<S-c>"] = map_cmd("BufferClose"):with_noremap():with_silent(),
 
     -- Move text up and down
     ["n|<A-j>"] = map_cmd("<Esc>:m .+1<CR>==gi"):with_noremap(),

@@ -53,6 +53,18 @@ require("catppuccin").setup({
     },
 })
 
--- Apply colorscheme
+-- Our desired Catppuccin flavour:
 vim.g.catppuccin_flavour = "mocha"
-vim.cmd("colorscheme catppuccin")
+
+-- Compile Catppuccin on `PackerCompile`
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd("User", {
+    pattern = "PackerCompileDone",
+    callback = function()
+        vim.cmd("CatppuccinCompile")
+        vim.defer_fn(function()
+            vim.cmd("colorscheme catppuccin")
+        end, 0) -- Defered for live reloading
+    end,
+})

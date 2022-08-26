@@ -100,16 +100,15 @@ cmp.setup({
         end,
     },
     sources = {
-        { name = "luasnip" },
         { name = "nvim_lsp" },
-        { name = "buffer" },
+        { name = "luasnip" },
+        {
+            name = "buffer",
+            option = { keyword_pattern = "\\k\\+" },
+        },
         { name = "nvim_lua" },
         { name = "path" },
         -- { name = "copilot" },
-    },
-    confirm_opts = {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
     },
     window = {
         completion = cmp.config.window.bordered(),
@@ -118,5 +117,33 @@ cmp.setup({
     experimental = {
         ghost_text = false,
         native_menu = false,
+    },
+})
+
+cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = "cmdline", keyword_length = 3 },
+    },
+})
+
+cmp.setup.cmdline("/", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = "buffer" },
+    },
+})
+
+cmp.setup.cmdline(":%s/", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = "buffer" },
+    },
+})
+
+cmp.setup.cmdline(":'<,'>s/", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = "buffer" },
     },
 })

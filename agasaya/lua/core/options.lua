@@ -1,5 +1,6 @@
 local vim_goptions = function()
     local goptions = {
+        background = "dark",
         cmdheight = 1,
         conceallevel = 0,
         fileencoding = "UTF-8",
@@ -7,6 +8,7 @@ local vim_goptions = function()
         laststatus = 2,
         pumheight = 15,
         showtabline = 2,
+        termguicolors = true,
     }
 
     for k, v in pairs(goptions) do
@@ -42,6 +44,7 @@ local vim_options = function()
         incsearch = true,
         infercase = true,
         iskeyword = { "-" },
+        lazyredraw = true,
         linebreak = true,
         list = true,
         listchars = {
@@ -57,7 +60,6 @@ local vim_options = function()
         mouse = "a",
         number = true,
         numberwidth = 4,
-        redrawtime = 1500,
         relativenumber = true,
         scrolloff = 8,
         sessionoptions = { "curdir", "help", "tabpages", "winsize" },
@@ -77,7 +79,6 @@ local vim_options = function()
         splitright = true,
         startofline = false,
         swapfile = false,
-        termguicolors = true,
         timeout = true,
         timeoutlen = 500,
         ttimeout = true,

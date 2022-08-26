@@ -47,6 +47,7 @@ require("neorg").setup({
                 zen_mode = "truezen",
             },
         },
+        ["core.export"] = {},
         ["core.norg.qol.toc"] = {
             config = {
                 default_toc_mode = "split",

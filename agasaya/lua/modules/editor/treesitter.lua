@@ -14,7 +14,7 @@ require("nvim-treesitter.configs").setup({
                 vim.api.nvim_call_function("getfsize", { buf_name })
             return file_size > 256 * 1024
         end,
-        use_languagetree = false,
+        use_languagetree = true,
     },
     indent = { enable = true },
     incremental_selection = {
