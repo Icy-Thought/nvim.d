@@ -10,7 +10,6 @@ require("neorg").setup({
             config = {
                 markup_preset = "dimmed",
                 icon_preset = "diamond",
-                dim_code_blocks = true,
             },
         },
         ["core.norg.dirman"] = {
