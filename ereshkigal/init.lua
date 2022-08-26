@@ -3,10 +3,10 @@ local function fprint(string, ...)
 end
 
 local function plugin_status(status)
-    if status ~= nil then
-        return "opt/"
-    else
+    if not status then
         return "start/"
+    else
+        return "opt/"
     end
 end
 
@@ -16,13 +16,13 @@ local function assert_installed(plugin, branch, status)
         .. "/site/pack/packer/"
         .. plugin_status(status)
         .. plugin_name
-    if vim.fn.empty(vim.fn.glob(plugin_path)) ~= 0 then
+    if vim.fn.empty(vim.fn.glob(plugin_path)) > 0 then
         fprint(
             "Couldn't find '%s'. Cloning a new copy to %s",
             plugin_name,
             plugin_path
         )
-        if branch ~= nil then
+        if branch > 0 then
             vim.fn.system({
                 "git",
                 "clone",
