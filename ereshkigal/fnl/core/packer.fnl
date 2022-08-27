@@ -63,10 +63,6 @@
 (use-package! :rktjmp/hotpot.nvim
               {:branch :nightly})
 
-(use-package! :eraserhd/parinfer-rust
-              {:opt true
-               :run "cargo build --release"})
-
 (use-package! :Olical/conjure
               {:branch :develop
                :ft conjure-ft

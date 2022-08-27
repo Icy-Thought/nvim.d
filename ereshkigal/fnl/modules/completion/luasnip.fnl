@@ -14,7 +14,7 @@
 ((. (require :luasnip.loaders.from_vscode) :lazy_load))
 
 ;; Load custom defined snippets
-(local snippet-dir :plugins.completion.my-snippets.)
+(local snippet-dir :modules.completion.my-snippets.)
 
 (require (.. snippet-dir :tex))
 (require (.. snippet-dir :tex-math))

@@ -47,7 +47,7 @@
 
 ;; make life easier
 (λ load-file [file]
-   "Configure a plugin by loading a file from the `plugins/` directory.
+   "Configure a plugin by loading a file from the `modules/` directory.
 
    Valid arguements:
      - file -> a symbol
@@ -58,7 +58,7 @@
    ```"
    (assert-compile (sym? file) "expected symbol for file" file)
    (let [file (->str file)]
-     `#(require (.. :plugins. ,file))))
+     `#(require (.. :modules. ,file))))
 
 (λ load-theme [file]
    "Configure theme-specific settings provided by the theme-plugin itself by
@@ -73,7 +73,7 @@
    ```"
    (assert-compile (sym? file) "expected symbol for theme-file" file)
    (let [file (->str file)]
-     `#(require (.. :plugins.theme. ,file))))
+     `#(require (.. :modules.theme. ,file))))
 
 (λ load-keymap [file]
    "Configure plugin-specific keybindings by defining the desired binding in the
@@ -104,7 +104,7 @@
    ```"
    (assert-compile (sym? lang) "expected symbol for lang" lang)
    (let [lang (->str lang)]
-     `#(require (.. :plugins.completion.server. ,lang))))
+     `#(require (.. :modules.completion.server. ,lang))))
 
 (λ call-setup [name]
    "Configures a plugin by calling its setup function.

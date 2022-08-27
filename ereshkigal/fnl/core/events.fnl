@@ -36,11 +36,6 @@
                                      (vim.cmd :wshada!)
                                      (vim.cmd :wviminfo!)))))
 
-;; require custom parinfer plugin on InsertEnter
-;; hence why parinfer-rust is added in /opt (we just use it to build the dylib)
-(augroup! parinfer
-          (autocmd! InsertEnter * '(require :plugins.editor.parinfer)))
-
 ;; Close Nvim-Tree if == last window
 (augroup! last-nvimtree-close
          (autocmd! BufEnter * (fn []
