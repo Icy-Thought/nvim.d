@@ -35,16 +35,16 @@ local def_basics = {
     ["n|<C-Right>"] = map_cr("vertical resize +2"):with_noremap():with_silent(),
 
     -- (Barbar.nvim) buffer navigation
-    ["n|<S-l>"] = map_cr("BufferPrevious"):with_noremap(),
-    ["n|<S-h>"] = map_cr("BufferNext"):with_noremap(),
+    ["n|<S-l>"] = map_cr("BufferLineCyclePrev"):with_noremap(),
+    ["n|<S-h>"] = map_cr("BufferLineCycleNext"):with_noremap(),
 
     -- (Barbar.nvim) Re-order buffers -> previous || next
-    ["n|<S-<>"] = map_cmd("BufferMovePrevious"):with_noremap():with_silent(),
-    ["n|<S->>"] = map_cmd("BufferMoveNext"):with_noremap():with_silent(),
+    ["n|<S-<>"] = map_cmd("BufferLineMovePrev"):with_noremap():with_silent(),
+    ["n|<S->>"] = map_cmd("BufferLineMoveNext"):with_noremap():with_silent(),
 
     -- (Barbar.nvim) Pin/Unpin current buffer
-    ["n|<S-p>"] = map_cmd("BufferPin"):with_noremap():with_silent(),
-    ["n|<S-c>"] = map_cmd("BufferClose"):with_noremap():with_silent(),
+    ["n|<S-p>"] = map_cmd("BufferLineTogglePin"):with_noremap():with_silent(),
+    ["n|<S-c>"] = map_cmd("BufferlineCloseButton"):with_noremap():with_silent(),
 
     -- Move text up and down
     ["n|<A-j>"] = map_cmd("<Esc>:m .+1<CR>==gi"):with_noremap(),
