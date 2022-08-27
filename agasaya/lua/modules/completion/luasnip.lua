@@ -5,8 +5,26 @@ local types = require("luasnip.util.types")
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- Load custom lua-snippets
-require("snippets.tex")
-require("snippets.tex_math")
+local load_custom_snippets = function()
+    local snippets = vim.fn.stdpath("config") .. "/snippets/*lua"
+    local paths = vim.split(vim.fn.glob(snippets), "\n")
+
+    --After saving a luasnip file reload it
+    vim.api.nvim_create_autocmd("BufWritePost", {
+        callback = function()
+            dofile(vim.fn.expand("%"))
+            require("cmp_luasnip").clear_cache() --reload the cmp source
+        end,
+        pattern = paths,
+    })
+
+    for _, v in ipairs(paths) do
+        dofile(v)
+    end
+end
+
+-- Now we load our snippets:
+load_custom_snippets()
 
 ls.config.set_config({
     delete_check_events = "TextChangedI",
