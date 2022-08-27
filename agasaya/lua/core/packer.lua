@@ -88,7 +88,7 @@ return packer.startup(function(use)
             "nvim-telescope/telescope-ui-select.nvim",
         },
         config = [[ prequire('modules.toolbox.telescope')
-                    prequire('keymaps.hydra.telescope') ]],
+                    prequire('keymaps.telescope') ]],
     })
     use({
         "kyazdani42/nvim-tree.lua",
@@ -96,22 +96,16 @@ return packer.startup(function(use)
         cmd = "NvimTreeToggle",
         config = [[ prequire('nvim-tree', {}) ]],
     })
-    -- use({
-    --     "folke/which-key.nvim",
-    --     event = "VimEnter",
-    --     config = [[ prequire('modules.toolbox.which-key')
-    --                 prequire('keymaps.which-key') ]],
-    -- })
     use({
         "anuvyklack/hydra.nvim",
         event = "VimEnter",
         keys = "<space>",
-        config = [[ prequire('keymaps.hydra.options') ]],
+        config = [[ prequire('keymaps.options') ]],
     })
     use({
         "akinsho/nvim-toggleterm.lua",
         config = [[ prequire('toggleterm', {})
-                    prequire('keymaps.hydra.toggleterm') ]],
+                    prequire('keymaps.toggleterm') ]],
     })
     use({
         "TimUntersberger/neogit",
@@ -124,14 +118,14 @@ return packer.startup(function(use)
         ft = "gitcommit",
         event = "BufReadPost",
         config = [[ prequire('gitsigns', {})
-                    prequire('keymaps.hydra.gitsigns') ]],
+                    prequire('keymaps.gitsigns') ]],
     })
 
     -------===[ Editor ]===-------
     use({
         "Vonr/align.nvim",
         event = "BufReadPost",
-        config = [[ prequire('keymaps.hydra.align') ]],
+        config = [[ prequire('keymaps.align') ]],
     })
     use({
         "numToStr/Comment.nvim",
@@ -192,7 +186,7 @@ return packer.startup(function(use)
         end,
         ft = { "markdown" },
         config = [[ prequire('modules.editor.md-preview')
-                    prequire('keymaps.hydra.md-preview') ]],
+                    prequire('keymaps.md-preview') ]],
     })
 
     -------===[ Language Server Protocol (LSP) ]===-------
@@ -216,7 +210,7 @@ return packer.startup(function(use)
         branch = "main",
         after = "nvim-lspconfig",
         config = [[ prequire('modules.completion.lspsaga')
-                    prequire('keymaps.hydra.lspsaga') ]],
+                    prequire('keymaps.lspsaga') ]],
     })
     use({
         "rcarriga/nvim-dap-ui",

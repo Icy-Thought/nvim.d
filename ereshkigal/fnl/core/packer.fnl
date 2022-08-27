@@ -83,8 +83,6 @@
 (use-package! :folke/tokyonight.nvim
               {:branch :main})
 
-;; (use-package! :themercorp/themer.lua {:config (load-theme themer)})
-
 (use-package! :romgrk/barbar.nvim
               {:config (load-file ui.barbar)
                :setup (fn []
@@ -120,11 +118,6 @@
               {:tag :nightly
                :cmd :NvimTreeToggle
                :config (call-setup nvim-tree)})
-
-;; (use-package! :folke/which-key.nvim
-;;               {:event :VimEnter
-;;                :config [(load-file toolbox.which-key)
-;;                (load-keymap which-key)]})
 
 (use-package! :anuvyklack/hydra.nvim
               {:keys :<space>

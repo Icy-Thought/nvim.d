@@ -16,7 +16,7 @@
 
 (λ load-hydra! [file]
    (if (module-loaded? file)
-     (require (.. "keymaps.hydra." (tostring file)))
+     (require (.. "keymaps." (tostring file)))
      (echoerr (: "Failed to load keymap \"%s\": hydra not loaded" :format file))))
 
 ;; Load hydra keymaps
@@ -31,4 +31,4 @@
     (load-hydra! keymap)))
 
 ;; Require our non-plugin dependent mappings
-(require :keymaps.hydra.options)
+(require :keymaps.options)
