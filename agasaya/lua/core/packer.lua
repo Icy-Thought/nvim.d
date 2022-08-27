@@ -59,9 +59,9 @@ return packer.startup(function(use)
     --     config = [[ prequire('themes.catppuccin') ]],
     -- })
     use({
-        "romgrk/barbar.nvim",
+        "akinsho/bufferline.nvim",
         event = "VimEnter",
-        config = [[ prequire('bufferline', {}) ]],
+        config = [[ prequire('modules.ui.bufferline') ]],
     })
     use({
         "feline-nvim/feline.nvim",
