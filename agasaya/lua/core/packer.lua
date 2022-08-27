@@ -203,7 +203,7 @@ return packer.startup(function(use)
     use({
         "neovim/nvim-lspconfig",
         module = "lspconfig",
-        event = "BufReadPre",
+        event = "InsertEnter",
         config = [[ prequire('modules.completion.lspconfig') ]],
     })
     use({
