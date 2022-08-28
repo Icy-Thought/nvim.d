@@ -82,9 +82,9 @@ function events.load_autocmds()
         pattern = "markdown,norg",
         callback = function()
             if not vim.g.neovide then
-                vim.g.textwidth = "80"
+                vim.o.textwidth = 80
             else
-                vim.g.textwidth = 120
+                vim.o.textwidth = 120
             end
         end,
     })
