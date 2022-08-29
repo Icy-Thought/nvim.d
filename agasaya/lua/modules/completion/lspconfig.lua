@@ -77,6 +77,7 @@ local enabled_servers = {
             "--lsp",
         },
     },
+    rnix = {},
     pyright = {},
     rust_analyzer = {},
     sumneko_lua = {
