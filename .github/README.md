@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./.assets/png/knight-chess.png" alt="Knight (Chess)" width="300" height="300"/>
+  <img src="./assets/png/knight-chess.png" alt="Knight (Chess)" width="300" height="300"/>
 </p>
 
 # Neovim Dotfiles

@@ -1,4 +1,4 @@
-![Ereshkigal](../.assets/png/ereshkigal.png)
+![Ereshkigal](../.github/assets/png/ereshkigal.png)
 
 # Table of Contents
 - [Greetings from NVIM! 🌒](#greetings-from-nvim-)
