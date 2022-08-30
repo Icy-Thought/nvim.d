@@ -14,10 +14,10 @@ local map_cmd = bind.map_cmd
 local def_basics = {
     -------===[ Normal Mode ]===-------
     -- <Esc> -> disable highlight
-    ["n|<Esc>"] = map_cr("noh"),
+    ["n|<Esc>"] = map_cr("noh"):with_noremap():with_silent(),
 
     -- Quicker access to `:`
-    ["n|;"] = map_cmd(":"),
+    ["n|;"] = map_cmd(":"):with_noremap(),
 
     -- Ctrl + s -> save current buffer
     ["n|<C-s>"] = map_cu("write"):with_noremap(),

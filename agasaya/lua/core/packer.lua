@@ -226,22 +226,19 @@ return packer.startup(function(use)
     })
     use({
         "hrsh7th/nvim-cmp",
-        after = "friendly-snippets",
+        wants = "LuaSnip",
+        event = { "InsertEnter", "CmdlineEnter" },
         requires = {
-            { "hrsh7th/cmp-path", after = "cmp-buffer" },
-            { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" },
-            { "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
-            { "hrsh7th/cmp-cmdline", after = "cmp-nvim-lsp" },
-            { "saadparwaiz1/cmp_luasnip", after = { "LuaSnip" } },
-            {
-                "Icy-Thought/friendly-snippets",
-                module = { "cmp", "cmp_nvim_lsp" },
-                event = { "InsertEnter", "CmdlineEnter" },
-            },
+            { "hrsh7th/cmp-path", after = "nvim-cmp" },
+            { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+            { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+            { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp" } },
             {
                 "L3MON4D3/LuaSnip",
                 event = { "InsertEnter", "CmdlineEnter" },
                 wants = "friendly-snippets",
+                requires = { "Icy-Thought/friendly-snippets" },
                 config = [[ prequire('modules.completion.luasnip') ]],
             },
         },
