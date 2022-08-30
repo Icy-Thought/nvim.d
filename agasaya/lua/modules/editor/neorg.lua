@@ -1,11 +1,6 @@
 require("neorg").setup({
     load = {
         ["core.defaults"] = {},
-        ["core.norg.completion"] = {
-            config = {
-                engine = "nvim-cmp",
-            },
-        },
         ["core.norg.concealer"] = {
             config = {
                 markup_preset = "dimmed",
@@ -28,11 +23,6 @@ require("neorg").setup({
         ["core.gtd.base"] = {
             config = {
                 workspace = "GTD",
-            },
-        },
-        ["core.keybinds"] = {
-            config = {
-                default_keybinds = true,
             },
         },
         ["core.norg.journal"] = {
