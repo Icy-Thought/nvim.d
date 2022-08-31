@@ -78,7 +78,7 @@
 ;; (use-package! :catppuccin/nvim
 ;;               {:as :catppuccin
 ;;                :run :CatppuccinCompile
-;;                :config (load-theme catppuccin)})
+;;                :config (load-file ui.catppuccin)})
 
 (use-package! :folke/tokyonight.nvim
               {:branch :main})

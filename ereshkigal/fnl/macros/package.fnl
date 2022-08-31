@@ -60,21 +60,6 @@
    (let [file (->str file)]
      `#(require (.. :modules. ,file))))
 
-(λ load-theme [file]
-   "Configure theme-specific settings provided by the theme-plugin itself by
-   loading the conf-file from the `themes/` director.
-
-   Valid arguements:
-     - file -> a symbol
-
-   Usage example:
-   ```fennel
-   (use-package! :catppuccin/nvim {:config (load-theme catppuccin)})
-   ```"
-   (assert-compile (sym? file) "expected symbol for theme-file" file)
-   (let [file (->str file)]
-     `#(require (.. :modules.theme. ,file))))
-
 (λ load-keymap [file]
    "Configure plugin-specific keybindings by defining the desired binding in the
    `keymaps` directory and later enable/disable those bindings through the
@@ -168,7 +153,6 @@
  : rock!
  : use-package!
  : load-file
- : load-theme
  : load-keymap
  : load-lang
  : call-setup

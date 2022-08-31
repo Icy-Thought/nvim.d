@@ -56,7 +56,7 @@ return packer.startup(function(use)
     --     "catppuccin/nvim",
     --     as = "catppuccin",
     --     run = "CatppuccinCompile",
-    --     config = [[ prequire('themes.catppuccin') ]],
+    --     config = [[ prequire('modules.ui.catppuccin') ]],
     -- })
     use({
         "akinsho/bufferline.nvim",
