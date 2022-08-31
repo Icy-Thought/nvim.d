@@ -41,14 +41,6 @@
         :TSDisable
         :TSModuleInfo])
 
-(local mason-cmds
-       [:Mason
-        :MasonInstall
-        :MasonInstallAll
-        :MasonUninstall
-        :MasonUninstallAll
-        :MasonLog])
-
 ;; ----------===[ Core-Deps ]===----------
 (use-package! :wbthomason/packer.nvim
               {:opt true})
@@ -233,10 +225,6 @@
                         ((. (require :utils.lazy-load) :load-on-file-open!)
                          :nvim-lspconfig))
                :config (load-file completion.lspconfig)})
-
-(use-package! :williamboman/mason.nvim
-              {:cmd mason-cmds
-               :config (call-setup completion.mason)})
 
 (use-package! :j-hui/fidget.nvim
               {:after :nvim-lspconfig

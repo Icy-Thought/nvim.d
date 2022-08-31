@@ -123,6 +123,20 @@ return packer.startup(function(use)
 
     -------===[ Editor ]===-------
     use({
+        "nvim-treesitter/nvim-treesitter",
+        run = "TSUpdate",
+        module = "nvim-treesitter",
+        event = "BufReadPost",
+        requires = {
+            { "nvim-treesitter/playground", cmd = "TSPlayground" },
+            {
+                "nvim-treesitter/nvim-treesitter-textobjects",
+                after = "nvim-treesitter",
+            },
+        },
+        config = [[ prequire('modules.editor.treesitter') ]],
+    })
+    use({
         "Vonr/align.nvim",
         event = "BufReadPost",
         config = [[ prequire('keymaps.align') ]],
@@ -141,20 +155,6 @@ return packer.startup(function(use)
         "lukas-reineke/indent-blankline.nvim",
         after = "nvim-treesitter",
         config = [[ prequire('modules.editor.blankline') ]],
-    })
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        run = "TSUpdate",
-        module = "nvim-treesitter",
-        event = { "BufReadPost", "BufNewFile" },
-        requires = {
-            { "nvim-treesitter/playground", cmd = "TSPlayground" },
-            {
-                "nvim-treesitter/nvim-treesitter-textobjects",
-                after = "nvim-treesitter",
-            },
-        },
-        config = [[ prequire('modules.editor.treesitter') ]],
     })
     use({
         "brenoprata10/nvim-highlight-colors",
@@ -190,10 +190,6 @@ return packer.startup(function(use)
     })
 
     -------===[ Language Server Protocol (LSP) ]===-------
-    use({
-        "williamboman/mason.nvim",
-        config = [[ prequire('mason', {}) ]],
-    })
     use({
         "neovim/nvim-lspconfig",
         module = "lspconfig",
