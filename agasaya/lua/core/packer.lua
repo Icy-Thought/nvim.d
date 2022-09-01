@@ -137,11 +137,16 @@ return packer.startup(function(use)
         module = "nvim-treesitter",
         event = "BufReadPost",
         requires = {
-            { "nvim-treesitter/playground", cmd = "TSPlayground" },
+            { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
             {
                 "nvim-treesitter/nvim-treesitter-textobjects",
                 after = "nvim-treesitter",
             },
+            {
+                "nvim-treesitter/nvim-treesitter-context",
+                after = "nvim-treesitter",
+            },
+            { "nvim-treesitter/playground", cmd = "TSPlayground" },
         },
         config = [[ prequire('modules.editor.treesitter') ]],
     })

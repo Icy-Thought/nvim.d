@@ -1,8 +1,26 @@
-require("nvim-treesitter.configs").setup({
-    ensure_installed = "all",
-    auto_install = true,
-    sync_install = false,
+vim.api.nvim_set_option_value("foldmethod", "expr", {})
+vim.api.nvim_set_option_value("foldexpr", "nvim_treesitter#foldexpr()", {})
 
+require("nvim-treesitter.configs").setup({
+    ensure_installed = {
+        "bash",
+        "c",
+        "comment",
+        "cpp",
+        "css",
+        "fennel",
+        "fish",
+        "haskell",
+        "latex",
+        "ledger",
+        "lua",
+        "make",
+        "markdown",
+        "nix",
+        "python",
+        "rust",
+        "vim",
+    },
     autopairs = { enable = true },
     context_commentstring = { enable = true },
     highlight = {
@@ -25,6 +43,11 @@ require("nvim-treesitter.configs").setup({
             scope_incremental = "gns",
             node_decremental = "gnp",
         },
+    },
+    rainbow = {
+        enable = true,
+        extended_mode = true, -- Highlight non-parentheses delimiters
+        max_file_lines = 1000,
     },
     textobjects = {
         select = {
@@ -79,3 +102,13 @@ require("nvim-treesitter.configs").setup({
         },
     },
 })
+
+local ts_install = require("nvim-treesitter.install")
+local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+
+ts_install.prefer_git = true
+
+for _, p in pairs(parsers) do
+    p.install_info.url =
+        p.install_info.url:gsub("https://github.com/", "git@github.com:")
+end
