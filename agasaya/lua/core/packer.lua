@@ -1,12 +1,12 @@
--- Minor Packer-UI customizations
+-- Required if packer == `opt`
 vim.cmd([[packadd packer.nvim]])
 
+-- Minor Packer-UI customizations
 local packer = require("packer")
 
 packer.init({
     auto_clean = true,
     auto_reload_compiled = true,
-    compile_on_sync = true,
     git = { clone_timeout = 5000 },
     display = {
         working_sym = "ﲊ",
@@ -18,6 +18,15 @@ packer.init({
             return require("packer.util").float({ border = "rounded" })
         end,
     },
+})
+
+-- Compile packer after saving
+vim.api.nvim_create_autocmd("BufWritePost", {
+    group = vim.api.nvim_create_augroup("PackerCompileOnSave", {}),
+    pattern = "packer.lua",
+    callback = function(args)
+        vim.cmd(string.format("source %s | PackerCompile", args.file))
+    end,
 })
 
 -- @Ae-Mc/nvim (GitHub)
@@ -225,11 +234,14 @@ return packer.startup(function(use)
         wants = "LuaSnip",
         event = { "InsertEnter", "CmdlineEnter" },
         requires = {
-            { "hrsh7th/cmp-path", after = "nvim-cmp" },
-            { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+            { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
+            { "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
+            { "hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp" },
+            { "hrsh7th/cmp-path", after = "cmp-nvim-lua" },
+            { "f3fora/cmp-spell", after = "cmp-path" },
+            { "hrsh7th/cmp-buffer", after = "cmp-spell" },
+            { "kdheepak/cmp-latex-symbols", after = "cmp-buffer" },
             { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-            { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp" } },
             {
                 "L3MON4D3/LuaSnip",
                 event = { "InsertEnter", "CmdlineEnter" },

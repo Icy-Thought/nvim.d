@@ -2,50 +2,27 @@ local cmp = require("cmp")
 local ls = require("luasnip")
 
 local has_words_before = function()
-    local col = vim.fn.col(".") - 1
-    local ln = vim.fn.getline(".")
-    return ((col == 0) or string.match(string.sub(ln, col, col), "%s"))
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0
+        and vim.api
+                .nvim_buf_get_lines(0, line - 1, line, true)[1]
+                :sub(col, col)
+                :match("%s")
+            == nil
 end
 
-local replace_termcodes = function(code)
-    return vim.api.nvim_replace_termcodes(code, true, true, true)
+local replace_termcodes = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
-
---   פּ ﯟ   and other well-designed icons
--- More icons to be found at: https://www.nerdfonts.com/cheat-sheet
-local kind_icons = {
-    Text = "",
-    Method = "m",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-}
 
 cmp.setup({
-    snippet = {
-        expand = function(args)
-            ls.lsp_expand(args.body)
-        end,
+    experimental = {
+        ghost_text = false,
+        native_menu = false,
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
     mapping = {
         ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -69,10 +46,7 @@ cmp.setup({
             else
                 fallback()
             end
-        end, {
-            "i",
-            "s",
-        }),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -81,15 +55,42 @@ cmp.setup({
             else
                 fallback()
             end
-        end, {
-            "i",
-            "s",
-        }),
+        end, { "i", "s" }),
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
-            vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+            local lspkind_icons = {
+                Text = "",
+                Method = "m",
+                Function = "",
+                Constructor = "",
+                Field = "",
+                Variable = "",
+                Class = "",
+                Interface = "",
+                Module = "",
+                Property = "",
+                Unit = "",
+                Value = "",
+                Enum = "",
+                Keyword = "",
+                Snippet = "",
+                Color = "",
+                File = "",
+                Reference = "",
+                Folder = "",
+                EnumMember = "",
+                Constant = "",
+                Struct = "",
+                Event = "",
+                Operator = "",
+                TypeParameter = "",
+            }
+
+            -- Load LSP-Kind icons
+            vim_item.kind = string.format("%s", lspkind_icons[vim_item.kind])
+
             vim_item.menu = ({
                 nvim_lsp = "[LSP]",
                 luasnip = "[SNIP]",
@@ -101,23 +102,19 @@ cmp.setup({
         end,
     },
     sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        {
-            name = "buffer",
-            option = { keyword_pattern = "\\k\\+" },
-        },
-        { name = "nvim_lua" },
-        { name = "path" },
         -- { name = "copilot" },
+        { name = "nvim_lsp" },
+        { name = "nvim_lua" },
+        { name = "luasnip" },
+        { name = "path" },
+        { name = "spell" },
+        { name = "buffer" },
+        { name = "latex_symbols" },
     },
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-    experimental = {
-        ghost_text = false,
-        native_menu = false,
+    snippet = {
+        expand = function(args)
+            ls.lsp_expand(args.body)
+        end,
     },
 })
 
@@ -144,7 +141,9 @@ cmp.setup.cmdline(":%s/", {
 
 cmp.setup.cmdline(":'<,'>s/", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = "buffer" },
-    },
+    sources = cmp.config.sources({
+        { name = "path" },
+    }, {
+        { name = "cmdline" },
+    }),
 })

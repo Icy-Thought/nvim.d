@@ -100,7 +100,7 @@ local load_core = function()
 
     require("core.packer")
     require("core.options")
-    require("core.keybindings")
+    require("core.bindings")
     require("core.events")
 
     apply_colorscheme()
