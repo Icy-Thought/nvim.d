@@ -52,11 +52,17 @@ local function make_capabilities()
 end
 
 local enhance_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-    -- Allow formatter.nvim to handle buf-format
-    client.server_capabilities.document_formatting = false
-    client.server_capabilities.document_range_formatting = false
+    if client.server_capabilities.documentFormattingProvider then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = client.config.filetypes,
+            callback = function()
+                vim.lsp.buf.format({
+                    bufnr = bufnr,
+                    async = true,
+                })
+            end,
+        })
+    end
 end
 
 -- (Init) Language-servers with our custom conf

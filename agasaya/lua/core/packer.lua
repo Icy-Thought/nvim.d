@@ -208,7 +208,7 @@ return packer.startup(function(use)
     use({
         "neovim/nvim-lspconfig",
         module = "lspconfig",
-        event = "InsertEnter",
+        event = { "BufRead", "BufWinEnter", "BufNewFile" },
         config = [[ prequire('modules.completion.lspconfig') ]],
     })
     use({
@@ -241,7 +241,7 @@ return packer.startup(function(use)
         event = { "InsertEnter", "CmdlineEnter" },
         requires = {
             { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
-            { "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
+            { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
             { "hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp" },
             { "hrsh7th/cmp-path", after = "cmp-nvim-lua" },
             { "hrsh7th/cmp-buffer", after = "cmp-path" },
