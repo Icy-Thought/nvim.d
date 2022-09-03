@@ -1,6 +1,10 @@
-vim.api.nvim_set_option_value("foldmethod", "expr", {})
-vim.api.nvim_set_option_value("foldexpr", "nvim_treesitter#foldexpr()", {})
+-- Prefer git parsers
+require("nvim-treesitter.install").prefer_git = true
 
+-- Extra parser config
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
+-- Configure Treesitter to our liking
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "bash",
@@ -102,13 +106,3 @@ require("nvim-treesitter.configs").setup({
         },
     },
 })
-
-local ts_install = require("nvim-treesitter.install")
-local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-
-ts_install.prefer_git = true
-
-for _, p in pairs(parsers) do
-    p.install_info.url =
-        p.install_info.url:gsub("https://github.com/", "git@github.com:")
-end

@@ -147,6 +147,16 @@ return packer.startup(function(use)
         config = [[ prequire('modules.editor.treesitter') ]],
     })
     use({
+        "lukas-reineke/indent-blankline.nvim",
+        after = "nvim-treesitter",
+        config = [[ prequire('modules.editor.blankline') ]],
+    })
+    use({
+        "levouh/tint.nvim",
+        after = "nvim-treesitter",
+        config = [[ prequire('tint', {}) ]],
+    })
+    use({
         "Vonr/align.nvim",
         event = "BufReadPost",
         config = [[ prequire('keymaps.align') ]],
@@ -160,11 +170,6 @@ return packer.startup(function(use)
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         config = [[ prequire('modules.editor.autopairs') ]],
-    })
-    use({
-        "lukas-reineke/indent-blankline.nvim",
-        after = "nvim-treesitter",
-        config = [[ prequire('modules.editor.blankline') ]],
     })
     use({
         "brenoprata10/nvim-highlight-colors",
