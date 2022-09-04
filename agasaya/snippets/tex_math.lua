@@ -141,7 +141,14 @@ local general_snippets = {
         t({ "} " }),
         i(0),
     }),
-    s("integral", { t("\\int_{"), i(1), t("}^{"), i(2), t("} "), i(0) }),
+    s("integral", {
+        t("\\int\\displaylimits_{"),
+        i(1),
+        t("}^{"),
+        i(2),
+        t("} "),
+        i(0),
+    }),
 }
 
 add_math_snippets("tex", general_snippets, {})
