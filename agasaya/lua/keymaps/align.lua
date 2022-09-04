@@ -1,6 +1,6 @@
 local Hydra = require("hydra")
 
-local hint = [[
+local align_hint = [[
                     Alignment
 
   _a_: 1 Character          _l_: Lua Pattern
@@ -13,7 +13,7 @@ local ALS = require("align")
 
 Hydra({
     name = "Align",
-    hint = hint,
+    hint = align_hint,
     config = {
         color = "teal",
         invoke_on_body = true,

@@ -1,7 +1,7 @@
 local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
-local normal_hint = [[
+local nSaga_hint = [[
                      Lspsaga (Normal)
   _f_: LSP-Finder                  _r_: Rename Definition
   _a_: Code Action                 _l_: Line Diagnostic
@@ -22,7 +22,7 @@ local signature = require("lspsaga.signaturehelp")
 
 Hydra({
     name = "lspsaga-normal",
-    hint = normal_hint,
+    hint = nSaga_hint,
     config = {
         buffer = bufnr,
         color = "teal",
@@ -130,7 +130,7 @@ local visual_code_action = function()
     return action.range_code_action()
 end
 
-local visual_hint = [[
+local vSaga_hint = [[
              Lspsaga (Visual)
 
   _a_: Code Action
@@ -140,7 +140,7 @@ local visual_hint = [[
 
 Hydra({
     name = "lspsaga-visual",
-    hint = visual_hint,
+    hint = vSaga_hint,
     config = {
         buffer = bufnr,
         color = "teal",

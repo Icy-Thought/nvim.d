@@ -1,7 +1,7 @@
 local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
-local hint = [[
+local term_hint = [[
                   Toggle-Term
 
   _v_: Vertical                _t_: Tabbed
@@ -12,7 +12,7 @@ local hint = [[
 
 Hydra({
     name = "ToggleTerm",
-    hint = hint,
+    hint = term_hint,
     config = {
         color = "teal",
         invoke_on_body = true,

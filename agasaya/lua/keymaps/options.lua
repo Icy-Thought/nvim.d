@@ -1,22 +1,22 @@
 local Hydra = require("hydra")
 
-local hint = [[
+local option_hint = [[
   ^ ^        Options
   ^
-  _v_ %{ve} virtual edit
-  _i_ %{list} invisible characters
-  _s_ %{spell} spell
-  _w_ %{wrap} wrap
+  _a_ Arabic
   _c_ %{cul} cursor line
+  _i_ %{list} invisible characters
   _n_ %{nu} number
-  _r_ %{rnu} relative number
+  _s_ %{spell} spell
+  _v_ %{ve} virtual edit
+  _w_ %{wrap} wrap
   ^
-       ^^^^                _<Esc>_
+       ^^^^                _q_
 ]]
 
 Hydra({
     name = "Options",
-    hint = hint,
+    hint = option_hint, -- TODO arabic button
     config = {
         color = "amaranth",
         invoke_on_body = true,
@@ -29,27 +29,32 @@ Hydra({
     body = "<leader>o",
     heads = {
         {
+            "a",
+            function()
+                if vim.o.arabic then
+                    if vim.g.neovide then
+                        vim.o.guifont = "VictorMono Nerd Font:h9:b"
+                    end
+                    vim.o.arabic = false
+                else
+                    if vim.g.neovide then
+                        vim.o.guifont = "Scheherazade New:h9:b"
+                    end
+                    vim.o.arabic = true
+                end
+            end,
+            { desc = "arabic writing" },
+        },
+        {
             "n",
             function()
-                if vim.o.number == true then
+                if vim.o.number then
                     vim.o.number = false
                 else
                     vim.o.number = true
                 end
             end,
             { desc = "number" },
-        },
-        {
-            "r",
-            function()
-                if vim.o.relativenumber == true then
-                    vim.o.relativenumber = false
-                else
-                    vim.o.number = true
-                    vim.o.relativenumber = true
-                end
-            end,
-            { desc = "relativenumber" },
         },
         {
             "v",
@@ -65,7 +70,7 @@ Hydra({
         {
             "i",
             function()
-                if vim.o.list == true then
+                if vim.o.list then
                     vim.o.list = false
                 else
                     vim.o.list = true
@@ -76,7 +81,7 @@ Hydra({
         {
             "s",
             function()
-                if vim.o.spell == true then
+                if vim.o.spell then
                     vim.o.spell = false
                 else
                     vim.o.spell = true
@@ -87,14 +92,9 @@ Hydra({
         {
             "w",
             function()
-                if vim.o.wrap ~= true then
+                if not vim.o.wrap then
                     vim.o.wrap = true
-                    -- Dealing with word wrap:
-                    -- If cursor is inside very long line in the file than wraps
-                    -- around several rows on the screen, then 'j' key moves you to
-                    -- the next line in the file, but not to the next row on the
-                    -- screen under your previous position as in other editors. These
-                    -- bindings fixes this.
+                    -- Have `word_wrap` behave like `gq`
                     vim.keymap.set("n", "k", function()
                         return vim.v.count > 0 and "k" or "gk"
                     end, { expr = true, desc = "k or gk" })
@@ -120,6 +120,6 @@ Hydra({
             end,
             { desc = "cursor line" },
         },
-        { "<Esc>", nil, { exit = true } },
+        { "q", nil, { exit = true } },
     },
 })

@@ -1,7 +1,7 @@
 local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
-local hint = [[
+local telescope_hint = [[
                  _f_: files       _m_: marks
    🭇🬭🬭🬭🬭🬭🬭🬭🬭🬼    _o_: old files   _g_: live grep
   🭉🭁🭠🭘    🭣🭕🭌🬾   _p_: projects    _/_: search in file
@@ -16,7 +16,7 @@ local hint = [[
 
 Hydra({
     name = "Telescope",
-    hint = hint,
+    hint = telescope_hint,
     config = {
         color = "teal",
         invoke_on_body = true,

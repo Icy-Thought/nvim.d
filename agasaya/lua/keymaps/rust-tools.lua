@@ -1,7 +1,7 @@
 local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
-local hint = [[
+local rust_hint = [[
                   Rust
   _r_: Runnables      _m_: Expand Macro
   _d_: Debugabbles    _c_: Open Cargo
@@ -14,7 +14,7 @@ local hint = [[
 
 Hydra({
     name = "Rust-Tools",
-    hint = hint,
+    hint = rust_hint,
     config = {
         color = "teal",
         invoke_on_body = true,

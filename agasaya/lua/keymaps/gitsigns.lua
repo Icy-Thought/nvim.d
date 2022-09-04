@@ -1,7 +1,7 @@
 local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
-local hint = [[
+local gitsign_hint = [[
                       Git
     _J_: Next Hunk        _d_: Show Deleted
     _K_: Prev Hunk        _u_: Undo Last Stage
@@ -16,7 +16,7 @@ local gitsigns = require("gitsigns")
 
 Hydra({
     name = "Git",
-    hint = hint,
+    hint = gitsign_hint,
     config = {
         buffer = bufnr,
         color = "pink",

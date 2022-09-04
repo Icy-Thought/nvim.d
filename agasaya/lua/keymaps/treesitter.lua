@@ -1,7 +1,7 @@
 local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
-local hint = [[
+local ts_hint = [[
   ^ ^     פּ Visuals
   ^
   _z_: TrueZen Ataraxis
@@ -13,7 +13,7 @@ local hint = [[
 
 Hydra({
     name = "Treesitter",
-    hint = hint,
+    hint = ts_hint,
     config = {
         color = "teal",
         invoke_on_body = true,
