@@ -245,7 +245,6 @@ return packer.startup(function(use)
             { "hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp" },
             { "hrsh7th/cmp-path", after = "cmp-nvim-lua" },
             { "hrsh7th/cmp-buffer", after = "cmp-path" },
-            { "kdheepak/cmp-latex-symbols", after = "cmp-buffer" },
             { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
             {
                 "L3MON4D3/LuaSnip",
