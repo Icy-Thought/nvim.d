@@ -52,9 +52,10 @@ local map_leader = function()
 end
 
 local neovide_config = function()
-    vim.o.guifont = "VictorMono Nerd Font:h9:b"
-
     if vim.g.neovide then
+        vim.cmd("colorscheme oxocarbon-lua")
+        vim.o.guifont = "VictorMono Nerd Font:h9:b"
+
         local settings = {
             -- general
             "neovide_no_idle = v:true",
@@ -79,20 +80,6 @@ local neovide_config = function()
     end
 end
 
-local function apply_colorscheme()
-    if vim.g.neovide then
-        vim.cmd("colorscheme oxocarbon-lua")
-    else
-        -- Apply proper transparency
-        vim.g.tokyonight_style = "night"
-        vim.g.tokyonight_transparent = true
-        vim.g.tokyonight_transparent_sidebar = true
-
-        -- Now we apply our colorscheme
-        vim.cmd("colorscheme tokyonight")
-    end
-end
-
 local load_core = function()
     disable_distribution_plugins()
     map_leader()
@@ -102,8 +89,6 @@ local load_core = function()
     require("core.options")
     require("core.bindings")
     require("core.events")
-
-    apply_colorscheme()
 end
 
 load_core()

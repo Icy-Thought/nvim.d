@@ -58,7 +58,11 @@ return packer.startup(function(use)
         module = "nvim-web-devicons",
     })
 
-    use({ "folke/tokyonight.nvim", branch = "main" })
+    use({
+        "folke/tokyonight.nvim",
+        branch = "main",
+        config = [[ prequire('modules.ui.tokyonight') ]],
+    })
     use("B4mbus/oxocarbon-lua.nvim")
     -- use({ "shaunsingh/oxocarbon.nvim", run = "./install.sh" })
     -- use({
