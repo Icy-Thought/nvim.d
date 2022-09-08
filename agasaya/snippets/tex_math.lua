@@ -48,7 +48,6 @@ local auto_snippets = {
         end),
         i(0),
     }),
-    s("..", { t("\\cdot "), i(0) }),
     s("...", { t("\\ldots "), i(0) }),
     s("~=", { t("\\approx "), i(0) }),
     s("!=", { t("\\neq "), i(0) }),
