@@ -73,7 +73,7 @@ local auto_snippets = {
     s("msrc", { t("\\mathsrc{"), i(1), t("} "), i(0) }),
     s("nabl", { t("\\nabla "), i(0) }),
     s("notin", { t("\\not\\in "), i(0) }),
-    s("ooo", { t("\\infty{"), i(1), t("} "), i(0) }),
+    s("ooo", { t("\\infty "), i(0) }),
     s("set", { t("\\{"), i(1), t("\\}  "), i(0) }),
     s("qq", { t("\\quad "), i(0) }),
     s("xx", { t("\\times "), i(0) }),
@@ -140,6 +140,13 @@ local general_snippets = {
         i(2),
         t({ "} " }),
         i(0),
+    }),
+    s("riemannsum", {
+        t("\\displaystyle\\sum_{k="),
+        i(1, "0"),
+        t("}^{"),
+        i(2, "n"),
+        t("} f(x_{k}) \\times \\Delta x"),
     }),
     s("integral", {
         t("\\int\\displaylimits_{"),
