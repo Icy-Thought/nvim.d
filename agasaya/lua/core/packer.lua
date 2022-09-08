@@ -277,7 +277,8 @@ return packer.startup(function(use)
     use({
         "simrat39/rust-tools.nvim",
         ft = "rust",
-        config = [[ prequire('rust-tools', {}) ]],
+        config = [[ prequire('rust-tools', {})
+                    prequire('keymaps.rust-tools')]],
     })
     -- use({
     --     "simrat39/flutter-tools.nvim",

@@ -3,6 +3,7 @@ local cmd = require("hydra.keymap-util").cmd
 
 local nSaga_hint = [[
                      Lspsaga (Normal)
+
   _f_: LSP-Finder                  _r_: Rename Definition
   _a_: Code Action                 _l_: Line Diagnostic
   _h_: Hover-DOC                   _j_: Preview Diagnostics
@@ -33,7 +34,7 @@ Hydra({
         },
     },
     mode = "n",
-    body = "<leader>l",
+    body = "<Leader>l",
     heads = {
         {
             "f",
@@ -151,7 +152,7 @@ Hydra({
         },
     },
     mode = "v",
-    body = "<leader>l",
+    body = "<Leader>l",
     heads = {
         {
             "a",

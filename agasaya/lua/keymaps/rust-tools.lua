@@ -3,6 +3,7 @@ local cmd = require("hydra.keymap-util").cmd
 
 local rust_hint = [[
                   Rust
+
   _r_: Runnables      _m_: Expand Macro
   _d_: Debugabbles    _c_: Open Cargo
   _s_: Rustssr        _p_: Parent Module
