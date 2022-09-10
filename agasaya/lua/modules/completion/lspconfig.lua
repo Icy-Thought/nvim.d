@@ -83,7 +83,7 @@ local enabled_servers = {
             "--lsp",
         },
     },
-    rnix = {},
+    nil_ls = {}, -- Nix Expression Language
     pyright = {},
     rust_analyzer = {},
     sumneko_lua = {

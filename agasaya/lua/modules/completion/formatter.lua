@@ -1,8 +1,8 @@
 local util = require("formatter.util")
 
-local nixpkgs_fmt = function()
+local alejandra = function()
     return {
-        exe = "nixpkgs-fmt",
+        exe = "alejandra",
         stdin = true,
     }
 end
@@ -72,7 +72,7 @@ require("formatter").setup({
         jsonc = { prettier },
         lua = { stylua },
         markdown = { markdown_cli },
-        nix = { nixpkgs_fmt },
+        nix = { alejandra },
         python = {
             require("formatter.filetypes.python").black,
             require("formatter.filetypes.python").isort,
