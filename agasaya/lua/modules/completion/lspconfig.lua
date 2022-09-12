@@ -84,23 +84,38 @@ local enabled_servers = {
         },
     },
     nil_ls = {}, -- Nix Expression Language
-    pyright = {},
+    pylsp = {
+        settings = {
+            pylsp = {
+                plugins = {
+                    pylint = { enabled = true, executable = "pylint" },
+                    pyflakes = { enabled = false },
+                    pycodestyle = { enabled = false },
+                    pylsp_mypy = {
+                        enabled = true,
+                        live_mode = false,
+                        dmypy = true,
+                        strict = true,
+                        overrides = {
+                            "--disallow-untyped-defs",
+                            "--ignore-missing-imports",
+                            true,
+                        },
+                    },
+                },
+            },
+        },
+    },
     rust_analyzer = {},
     sumneko_lua = {
         settings = {
             Lua = {
-                completion = {
-                    callSnippet = "Replace",
-                },
-                diagnostics = {
-                    disable = { "vim" },
-                },
+                completion = { callSnippet = "Replace" },
+                diagnostics = { disable = { "vim" } },
                 workspace = {
                     library = vim.api.nvim_get_runtime_file("", true),
                 },
-                telemetry = {
-                    enable = false,
-                },
+                telemetry = { enable = false },
             },
         },
     },
