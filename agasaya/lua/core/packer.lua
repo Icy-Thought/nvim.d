@@ -221,6 +221,11 @@ return packer.startup(function(use)
         config = [[ prequire('fidget', {}) ]],
     })
     use({
+        "jose-elias-alvarez/null-ls.nvim",
+        after = "nvim-lspconfig",
+        config = [[ prequire('modules.completion.null-ls') ]],
+    })
+    use({
         "glepnir/lspsaga.nvim",
         branch = "main",
         after = "nvim-lspconfig",
@@ -233,11 +238,6 @@ return packer.startup(function(use)
         config = [[ prequire('dapui', {
             floating = { border = "rounded" }
         }) ]],
-    })
-    use({
-        "mhartington/formatter.nvim",
-        event = "BufWritePre",
-        config = [[ prequire('modules.completion.formatter') ]],
     })
     use({
         "hrsh7th/nvim-cmp",
