@@ -13,14 +13,6 @@ nls.setup({
             filetypes = { "markdown" },
             command = "markdownlint-cli2",
         }),
-        builtins.diagnostics.mypy.with({
-            extra_args = { "--ignore-missing-imports" },
-        }),
-        builtins.diagnostics.pylint.with({
-            diagnostics_postprocess = function(diagnostic)
-                diagnostic.code = diagnostic.message_id
-            end,
-        }),
 
         -------===[ Formatting ]===-------
         builtins.formatting.alejandra,
