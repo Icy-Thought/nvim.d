@@ -19,6 +19,22 @@ local enabled_servers = {
         },
     },
     nil_ls = {}, -- Nix Expression Language
+    pylsp = {
+        settings = {
+            pylsp = {
+                plugins = {
+                    jedi_completion = {
+                        fuzzy = true,
+                        -- eager = true,
+                    },
+                    pycodestyle = {
+                        ignore = { "W391" },
+                        maxLineLength = 100,
+                    },
+                },
+            },
+        },
+    },
     rust_analyzer = {},
     sumneko_lua = {
         settings = {
