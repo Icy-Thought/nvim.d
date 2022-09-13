@@ -32,6 +32,7 @@ end
 
 -- Override border style globally (Rounded)
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     opts = opts or {}
     opts.border = opts.border or "rounded"
@@ -39,19 +40,11 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 -- Boilerplate LSP-Conf
-local function make_capabilities()
-    local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    if not ok then
-        return nil
-    end
+local update_capabilities = require("cmp_nvim_lsp").update_capabilities(
+    vim.lsp.protocol.make_client_capabilities()
+)
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local updated_capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-
-    return updated_capabilities
-end
-
-local enhance_attach = function(client, bufnr)
+local enhanced_attach = function(client, bufnr)
     if client.server_capabilities.documentFormattingProvider then
         vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = client.config.filetypes,
@@ -88,9 +81,13 @@ local enabled_servers = {
         settings = {
             pylsp = {
                 plugins = {
-                    pylint = { enabled = true, executable = "pylint" },
-                    pyflakes = { enabled = false },
+                    autopep8 = { enabled = false },
+                    flake8 = { enabled = false },
+                    jedi_completion = { fuzzy = true, include_params = true },
+                    -- https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
                     pycodestyle = { enabled = false },
+                    pyflakes = { enabled = false },
+                    pylint = { enabled = true, executable = "pylint" },
                     pylsp_mypy = {
                         enabled = true,
                         live_mode = false,
@@ -153,8 +150,8 @@ local enabled_servers = {
 local initialize_lsp = function()
     -- Our default LSP-Server configurations
     local default_config = {
-        on_attach = enhance_attach,
-        capabilities = capabilities,
+        on_attach = enhanced_attach,
+        capabilities = update_capabilities,
         flags = {
             debounce_text_changes = 150,
         },
