@@ -12,12 +12,7 @@ local enabled_servers = {
             "--header-insertion=iwyu",
         },
     },
-    hls = {
-        cmd = {
-            "haskell-language-server-wrapper",
-            "--lsp",
-        },
-    },
+    hls = {},
     nil_ls = {}, -- Nix Expression Language
     pyright = {},
     rust_analyzer = {},
