@@ -28,11 +28,11 @@ Hydra({
     mode = "n",
     body = "<Leader>f",
     heads = {
-        { "f", cmd("Telescope find_files") },
+        { "f", cmd("Telescope file_browser path=%:p:h") },
         { "g", cmd("Telescope live_grep") },
         {
             "o",
-            cmd("Telescope oldfiles"),
+            cmd("lua require('telescope').extensions.frecency.frecency()"),
             { desc = "recently opened files" },
         },
         { "h", cmd("Telescope help_tags"), { desc = "vim help" } },

@@ -39,64 +39,64 @@ Hydra({
         {
             "f",
             cmd("Lspsaga lsp_finder"),
-            { desc = "Lookup code definition + reference" },
+            { desc = "lookup code definition + reference" },
         },
         {
             "a",
             function()
                 action.code_action()
             end,
-            { desc = "Cursor code action" },
+            { desc = "cursor code action" },
         },
         {
             "h",
             function()
                 hover.render_hover_doc()
             end,
-            { desc = "Call forward Hover-DOC" },
+            { desc = "call forward Hover-DOC" },
         },
         {
             "s",
             function()
                 signature.signature_help()
             end,
-            { desc = "Display signature help" },
+            { desc = "display signature help" },
         },
         {
             "d",
             function()
                 rename.rename_lsp()
             end,
-            { desc = "Rename selected definition" },
+            { desc = "rename selected definition" },
         },
-        { "c", cmd("Format"), { desc = "Format current buffer" } },
+        { "c", cmd("Format"), { desc = "format current buffer" } },
         {
             "r",
             function()
                 defintion.preview_definition()
             end,
-            { desc = "Preview item definition" },
+            { desc = "preview item definition" },
         },
         {
             "l",
             function()
                 defintion.show_line_diagnostics()
             end,
-            { desc = "Display line diagnostics" },
+            { desc = "display line diagnostics" },
         },
         {
             "j",
             function()
                 defintion.goto_prev()
             end,
-            { desc = "Goto previous diagnostic" },
+            { desc = "go-to previous diagnostic" },
         },
         {
             "k",
             function()
                 defintion.goto_next()
             end,
-            { desc = "Goto next diagnostic" },
+            { desc = "go-to next diagnostic" },
         },
         {
             "p",
@@ -105,7 +105,7 @@ Hydra({
                     severity = vim.diagnostic.severity.ERROR,
                 })
             end,
-            { desc = "Jump to previous Err." },
+            { desc = "jump to previous err." },
         },
         {
             "n",
@@ -114,12 +114,12 @@ Hydra({
                     severity = vim.diagnostic.severity.ERROR,
                 })
             end,
-            { desc = "Jump to next Err." },
+            { desc = "jump to next err." },
         },
         {
             "<Enter>",
             cmd("FormatWrite"),
-            { exit = true, desc = "Save & Format current buffer!" },
+            { exit = true, desc = "save & format current buffer!" },
         },
         { "q", nil, { exit = true, nowait = true, desc = "exit" } },
     },
@@ -159,7 +159,7 @@ Hydra({
             function()
                 visual_code_action()
             end,
-            { desc = "Apply visual code action" },
+            { desc = "apply visual code action" },
         },
         { "q", nil, { exit = true, nowait = true, desc = "exit" } },
     },

@@ -30,28 +30,28 @@ Hydra({
             function()
                 ALS.align_to_char(1, true)
             end,
-            { desc = "Align selected -> 1 Char" },
+            { desc = "align selected -> 1 char" },
         },
         {
             "d",
             function()
                 ALS.align_to_char(2, true, true)
             end,
-            { desc = "Align selected -> 2 Char" },
+            { desc = "align selected -> 2 char" },
         },
         {
             "w",
             function()
                 ALS.align_to_string(false, true, true)
             end,
-            { desc = "Align selected -> Str" },
+            { desc = "align selected -> str" },
         },
         {
             "l",
             function()
                 ALS.align_to_string(true, true, true)
             end,
-            { desc = "Align selected -> Lua pattern" },
+            { desc = "align selected -> lua pattern" },
         },
         {
             "p",
@@ -61,14 +61,14 @@ Hydra({
                     { is_pattern = false, reverse = true, preview = true }
                 )
             end,
-            { desc = "Align selected paragraph -> Str" },
+            { desc = "align selected paragraph -> str" },
         },
         {
             "c",
             function()
                 ALS.operator(ALS.align_to_char, { reverse = true })
             end,
-            { desc = "Left-Align paragraph -> 1 character" },
+            { desc = "left-align paragraph -> 1 char" },
         },
         { "q", nil, { exit = true, nowait = true, desc = "exit" } },
     },

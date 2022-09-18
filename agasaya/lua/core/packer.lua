@@ -101,7 +101,7 @@ return packer.startup(function(use)
             "nvim-telescope/telescope-ui-select.nvim",
         },
         config = [[ prequire('modules.toolbox.telescope')
-                    prequire('keymaps.telescope') ]],
+                    prequire('keymaps.toolbox.telescope') ]],
     })
     use({
         "kyazdani42/nvim-tree.lua",
@@ -113,12 +113,13 @@ return packer.startup(function(use)
         "anuvyklack/hydra.nvim",
         event = "VimEnter",
         keys = "<space>",
-        config = [[ prequire('keymaps.options') ]],
+        config = [[ prequire('keymaps.main')
+                    prequire('keymaps.options') ]],
     })
     use({
         "akinsho/nvim-toggleterm.lua",
         config = [[ prequire('toggleterm', {})
-                    prequire('keymaps.toggleterm') ]],
+                    prequire('keymaps.toolbox.toggleterm') ]],
     })
     use({
         "TimUntersberger/neogit",
@@ -131,7 +132,7 @@ return packer.startup(function(use)
         ft = "gitcommit",
         event = "BufReadPost",
         config = [[ prequire('gitsigns', {})
-                    prequire('keymaps.gitsigns') ]],
+                    prequire('keymaps.editor.gitsigns') ]],
     })
 
     -------===[ Editor ]===-------
@@ -148,7 +149,8 @@ return packer.startup(function(use)
             { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
             { "nvim-treesitter/playground", cmd = "TSPlayground" },
         },
-        config = [[ prequire('modules.editor.treesitter') ]],
+        config = [[ prequire('modules.editor.treesitter')
+                    prequire('keymaps.editor.treesitter') ]],
     })
     use({
         "lukas-reineke/indent-blankline.nvim",
@@ -163,7 +165,7 @@ return packer.startup(function(use)
     use({
         "Vonr/align.nvim",
         event = "BufReadPost",
-        config = [[ prequire('keymaps.align') ]],
+        config = [[ prequire('keymaps.editor.align') ]],
     })
     use({
         "numToStr/Comment.nvim",
@@ -205,7 +207,7 @@ return packer.startup(function(use)
         end,
         ft = { "markdown" },
         config = [[ prequire('modules.editor.md-preview')
-                    prequire('keymaps.md-preview') ]],
+                    prequire('keymaps.editor.md-preview') ]],
     })
 
     -------===[ Language Server Protocol (LSP) ]===-------
@@ -230,7 +232,7 @@ return packer.startup(function(use)
         branch = "main",
         after = "nvim-lspconfig",
         config = [[ prequire('modules.completion.lspsaga')
-                    prequire('keymaps.lspsaga') ]],
+                    prequire('keymaps.editor.lspsaga') ]],
     })
     use({
         "rcarriga/nvim-dap-ui",
@@ -278,7 +280,7 @@ return packer.startup(function(use)
         "simrat39/rust-tools.nvim",
         ft = "rust",
         config = [[ prequire('rust-tools', {})
-                    prequire('keymaps.rust-tools')]],
+                    prequire('keymaps.editor.rust-tools')]],
     })
     -- use({
     --     "simrat39/flutter-tools.nvim",

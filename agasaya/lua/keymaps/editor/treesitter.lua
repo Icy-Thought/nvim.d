@@ -25,8 +25,8 @@ Hydra({
     mode = { "n", "x" },
     body = "<Leader>z",
     heads = {
-        { "z", cmd("TZAtaraxis"), { desc = "Enable True-Zen Mode" } },
-        { "p", cmd("TSPlayground"), { desc = "Treesitter Playground" } },
+        { "z", cmd("TZAtaraxis"), { desc = "enable true-zen Mode" } },
+        { "p", cmd("TSPlayground"), { desc = "treesitter playground" } },
         {
             "h",
             cmd("TSHighlightCapturesUnderCursor"),

@@ -43,7 +43,7 @@ Hydra({
                     vim.o.arabic = true
                 end
             end,
-            { desc = "arabic writing" },
+            { desc = "arabic writing environment" },
         },
         {
             "n",
