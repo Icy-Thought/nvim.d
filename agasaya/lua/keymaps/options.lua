@@ -3,7 +3,7 @@ local Hydra = require("hydra")
 local option_hint = [[
   ^ ^        Options
   ^
-  _a_ Arabic
+  _a_ %{arabic} Arabic
   _c_ %{cul} cursor line
   _i_ %{list} invisible characters
   _n_ %{nu} number
@@ -23,6 +23,15 @@ Hydra({
         hint = {
             border = "rounded",
             position = "middle",
+            funcs = {
+                arabic = function()
+                    if vim.o.arabic then
+                        return "[x]"
+                    else
+                        return "[ ]"
+                    end
+                end,
+            },
         },
     },
     mode = { "n", "x" },
