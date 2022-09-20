@@ -10,7 +10,6 @@ nls.setup({
     sources = {
         -------===[ Diagnostics ]===-------
         builtins.diagnostics.markdownlint.with({
-            filetypes = { "markdown" },
             command = "markdownlint-cli2",
         }),
 
@@ -18,11 +17,11 @@ nls.setup({
         builtins.formatting.alejandra,
         builtins.formatting.stylua,
         builtins.formatting.stylish_haskell,
-        builtins.formatting.prettier.with({
+        builtins.formatting.rome.with({
+            filetypes = { "markdown", "javascript", "json", "typescript" },
             extra_args = {
-                "--no-semi",
-                "--single-quote",
-                "--jsx-single-quote",
+                "--indent-size 4",
+                "--indent-style space",
             },
         }),
         builtins.formatting.black.with({
