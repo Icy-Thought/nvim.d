@@ -4,22 +4,15 @@ local cmd = require("hydra.keymap-util").cmd
 local nSaga_hint = [[
                      Lspsaga (Normal)
 
-  _f_: LSP-Finder                  _r_: Rename Definition
-  _a_: Code Action                 _l_: Line Diagnostic
-  _h_: Hover-DOC                   _j_: Preview Diagnostics
-  _s_: Signature Help              _k_: Next Diagnostics
-  _d_: Preview Definition          _p_: Previous Error Diagnostic
-  _c_: Format Buffer               _n_: Next Error Diagnostic
+  _f_: LSP-Finder                  _l_: Line Diagnostic
+  _a_: Code Action                 _c_: Cursor Diagnostic
+  _h_: Hover-DOC                   _[_: Preview Diagnostics
+  _r_: Rename Definition           _]_: Next Diagnostics
+  _d_: Peek Definition             _k_: Previous Err. Diagnostic
+  _o_: Outline Buffer              _j_: Next Err. Diagnostic
 ^
-  _<Enter>_: Format + Save Buffer                   _q_: Quit
+  _<Enter>_: Format Buffer                              _q_: Quit
 ]]
-
-local action = require("lspsaga.codeaction")
-local diagnostic = require("lspsaga.diagnostic")
-local definition = require("lspsaga.definition")
-local hover = require("lspsaga.hover")
-local rename = require("lspsaga.rename")
-local signature = require("lspsaga.signaturehelp")
 
 Hydra({
     name = "lspsaga-normal",
@@ -41,125 +34,65 @@ Hydra({
             cmd("Lspsaga lsp_finder"),
             { desc = "lookup code definition + reference" },
         },
-        {
-            "a",
-            function()
-                action.code_action()
-            end,
-            { desc = "cursor code action" },
-        },
-        {
-            "h",
-            function()
-                hover.render_hover_doc()
-            end,
-            { desc = "call forward Hover-DOC" },
-        },
-        {
-            "s",
-            function()
-                signature.signature_help()
-            end,
-            { desc = "display signature help" },
-        },
+        { "a", cmd("Lspsaga code_action"), { desc = "cursor code action" } },
+        { "r", cmd("Lspsaga rename"), { desc = "rename selected definition" } },
         {
             "d",
-            function()
-                rename.rename_lsp()
-            end,
-            { desc = "rename selected definition" },
-        },
-        { "c", cmd("Format"), { desc = "format current buffer" } },
-        {
-            "r",
-            function()
-                defintion.preview_definition()
-            end,
-            { desc = "preview item definition" },
+            cmd("Lspsaga peek_definition"),
+            { desc = "Peek/edit previewed definition" },
         },
         {
             "l",
-            function()
-                defintion.show_line_diagnostics()
-            end,
-            { desc = "display line diagnostics" },
+            cmd("Lspsaga show_line_diagnostics"),
+            { desc = "Display line diagnostics" },
         },
         {
-            "j",
-            function()
-                defintion.goto_prev()
-            end,
-            { desc = "go-to previous diagnostic" },
+            "c",
+            cmd("Lspsaga show_cursor_diagnostics"),
+            { desc = "Display cursor diagnostics" },
+        },
+        {
+            "[",
+            cmd("Lspsaga diagnostic_jump_prev"),
+            { desc = "Jump to previous diagnostic" },
+        },
+        {
+            "]",
+            cmd("Lspsaga diagnostic_jump_nexr"),
+            { desc = "Jump to next diagnostic" },
         },
         {
             "k",
             function()
-                defintion.goto_next()
-            end,
-            { desc = "go-to next diagnostic" },
-        },
-        {
-            "p",
-            function()
-                defintion.goto_prev({
+                require("lspsaga.diagnostic").goto_prev({
                     severity = vim.diagnostic.severity.ERROR,
                 })
             end,
-            { desc = "jump to previous err." },
+            { desc = "Jump to previous Err. diagnostic" },
         },
         {
-            "n",
+            "j",
             function()
-                defintion.goto_next({
+                require("lspsaga.diagnostic").goto_next({
                     severity = vim.diagnostic.severity.ERROR,
                 })
             end,
-            { desc = "jump to next err." },
+            { desc = "Jump to next Err. diagnostic" },
+        },
+        {
+            "o",
+            cmd("LSoutlineToggle"),
+            { desc = "Outline buffer TOC" },
+        },
+        {
+            "h",
+            cmd("Lspsaga hover_doc"),
+            { desc = "Floating documentation window" },
         },
         {
             "<Enter>",
-            cmd("FormatWrite"),
-            { exit = true, desc = "save & format current buffer!" },
-        },
-        { "q", nil, { exit = true, nowait = true, desc = "exit" } },
-    },
-})
-
--- Time to define our visual hydra
-local visual_code_action = function()
-    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
-    return action.range_code_action()
-end
-
-local vSaga_hint = [[
-             Lspsaga (Visual)
-
-  _a_: Code Action
-^
-                                _q_: Quit
-]]
-
-Hydra({
-    name = "lspsaga-visual",
-    hint = vSaga_hint,
-    config = {
-        buffer = bufnr,
-        color = "teal",
-        invoke_on_body = true,
-        hint = {
-            border = "rounded",
-            position = "middle",
-        },
-    },
-    mode = "v",
-    body = "<Leader>l",
-    heads = {
-        {
-            "a",
-            function()
-                visual_code_action()
-            end,
-            { desc = "apply visual code action" },
+            cmd("Format"),
+            { exit = true, desc = "Format current buffer!" },
         },
         { "q", nil, { exit = true, nowait = true, desc = "exit" } },
     },

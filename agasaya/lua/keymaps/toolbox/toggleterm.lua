@@ -49,7 +49,6 @@ Hydra({
             cmd("ToggleTerm size=10 direction=horizontal"),
             { desc = "launch horizontal terminal" },
         },
-
         { "q", nil, { exit = true, nowait = true, desc = "exit" } },
     },
 })
