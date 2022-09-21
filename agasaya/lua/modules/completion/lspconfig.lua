@@ -19,10 +19,14 @@ local enabled_servers = {
     sumneko_lua = {
         settings = {
             Lua = {
-                completion = { callSnippet = "Replace" },
-                diagnostics = { disable = { "vim" } },
+                diagnostics = { globals = { "vim", "packer_plugins" } },
                 workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
+                    library = {
+                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                    },
+                    maxPreload = 100000,
+                    preloadFileSize = 10000,
                 },
                 telemetry = { enable = false },
             },
