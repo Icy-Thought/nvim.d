@@ -27,17 +27,7 @@ require("nvim-treesitter.configs").setup({
     },
     autopairs = { enable = true },
     context_commentstring = { enable = true },
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-        disable = function(_, bufnr)
-            local buf_name = vim.api.nvim_buf_get_name(bufnr)
-            local file_size =
-                vim.api.nvim_call_function("getfsize", { buf_name })
-            return file_size > 256 * 1024
-        end,
-        use_languagetree = true,
-    },
+    highlight = { enable = true, disable = { "vim" } },
     indent = { enable = true },
     incremental_selection = {
         enable = true,
