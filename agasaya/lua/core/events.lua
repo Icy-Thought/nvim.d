@@ -15,8 +15,7 @@ function events.load_autocmds()
     autocmd("BufReadPost", {
         pattern = "*",
         callback = function()
-            if
-                not vim.fn.expand("%:p"):match(".git")
+            if not vim.fn.expand("%:p"):match(".git")
                 and vim.fn.line("'\"") > 1
                 and vim.fn.line("'\"") <= vim.fn.line("$")
             then
@@ -41,8 +40,7 @@ function events.load_autocmds()
     autocmd("BufEnter", {
         pattern = "*",
         callback = function()
-            if
-                vim.fn.winnr("$") == 1
+            if vim.fn.winnr("$") == 1
                 and vim.fn.bufname() == "NvimTree_" .. vim.fn.tabpagenr()
             then
                 vim.cmd("quit")

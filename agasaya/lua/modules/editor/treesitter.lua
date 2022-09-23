@@ -1,11 +1,7 @@
--- Prefer git parsers
-require("nvim-treesitter.install").prefer_git = true
-
--- Extra parser config
-local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-
 -- Configure Treesitter to our liking
 require("nvim-treesitter.configs").setup({
+    autopairs = { enable = true },
+    context_commentstring = { enable = true },
     ensure_installed = {
         "bash",
         "c",
@@ -25,8 +21,6 @@ require("nvim-treesitter.configs").setup({
         "rust",
         "vim",
     },
-    autopairs = { enable = true },
-    context_commentstring = { enable = true },
     highlight = { enable = true, disable = { "vim" } },
     indent = { enable = true },
     incremental_selection = {
