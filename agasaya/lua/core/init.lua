@@ -1,3 +1,5 @@
+local core = {}
+
 local disable_distribution_plugins = function()
     local plugins = {
         "2html_plugin",
@@ -80,7 +82,7 @@ local neovide_config = function()
     end
 end
 
-local load_core = function()
+core.init = function()
     disable_distribution_plugins()
     map_leader()
     neovide_config()
@@ -95,4 +97,4 @@ local load_core = function()
     packer.load_compile()
 end
 
-load_core()
+return core
