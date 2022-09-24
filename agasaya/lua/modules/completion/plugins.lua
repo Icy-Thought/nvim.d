@@ -22,7 +22,6 @@ completion["glepnir/lspsaga.nvim"] = {
 completion["hrsh7th/nvim-cmp"] = {
     module = "cmp",
     event = { "InsertEnter", "CmdlineEnter" },
-    wants = "LuaSnip",
     config = conf.nvim_cmp,
     requires = {
         { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },

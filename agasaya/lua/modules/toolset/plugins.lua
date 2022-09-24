@@ -25,6 +25,17 @@ toolset["TimUntersberger/neogit"] = {
     cmd = "Neogit",
     event = "VimEnter",
     config = conf.neogit,
+    requires = {
+        {
+            "sindrets/diffview.nvim",
+            cmd = {
+                "DiffviewOpen",
+                "DiffviewClose",
+                "DiffviewToggleFiles",
+                "DiffviewFocusFiles",
+            },
+        },
+    },
 }
 
 toolset["nvim-telescope/telescope.nvim"] = {
