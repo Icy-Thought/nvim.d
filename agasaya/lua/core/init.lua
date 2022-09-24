@@ -81,14 +81,16 @@ local neovide_config = function()
 end
 
 local load_core = function()
+    local packer = require("core.packer")
     disable_distribution_plugins()
     map_leader()
     neovide_config()
 
-    require("core.packer")
+    packer.ensure_plugins()
     require("core.options")
     require("core.bindings")
     require("core.events")
+    packer.load_compile()
 end
 
 load_core()

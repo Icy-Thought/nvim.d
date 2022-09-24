@@ -1,295 +1,144 @@
--- Required if packer == `opt`
-vim.cmd([[packadd packer.nvim]])
+local fn, uv, api = vim.fn, vim.loop, vim.api
+local vim_path = vim.fn.stdpath("config")
+local data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
+local modules_dir = vim_path .. "/lua/modules"
+local packer_compiled = data_dir .. "lua/packer_compiled.lua"
+local packer = nil
 
--- Minor Packer-UI customizations
-local packer = require("packer")
+local Packer = {}
+Packer.__index = Packer
 
-packer.init({
-    auto_clean = true,
-    auto_reload_compiled = true,
-    git = { clone_timeout = 5000 },
-    display = {
-        working_sym = "ﲊ",
-        error_sym = "✗",
-        done_sym = "﫟",
-        removed_sym = "",
-        moved_sym = "",
-        open_fn = function()
-            return require("packer.util").float({ border = "rounded" })
-        end,
-    },
-})
+function Packer:load_plugins()
+    self.repos = {}
 
--- Compile packer after saving
-vim.api.nvim_create_autocmd("BufWritePost", {
-    group = vim.api.nvim_create_augroup("PackerCompileOnSave", {}),
-    pattern = "packer.lua",
-    callback = function(args)
-        vim.cmd(string.format("source %s | PackerCompile", args.file))
-    end,
-})
+    local get_plugins_list = function()
+        local list = {}
+        local tmp = vim.split(fn.globpath(modules_dir, "*/plugins.lua"), "\n")
+        for _, f in ipairs(tmp) do
+            list[#list + 1] = f:sub(#modules_dir - 6, -1)
+        end
+        return list
+    end
 
--- @Ae-Mc/nvim (GitHub)
-function _G.prequire(plugin_name, setup)
-    local ok, plugin = pcall(require, plugin_name)
-    if ok then
-        if type(setup) == "function" then
-            setup()
-        elseif type(setup) == "table" then
-            plugin.setup(setup)
-        elseif type(setup) == "string" then
-            plugin.setup(load(setup))
+    local plugins_file = get_plugins_list()
+    for _, m in ipairs(plugins_file) do
+        local repos = require(m:sub(0, #m - 4))
+        for repo, conf in pairs(repos) do
+            self.repos[#self.repos + 1] =
+                vim.tbl_extend("force", { repo }, conf)
         end
     end
 end
 
-return packer.startup(function(use)
-    -------===[ Core ]===-------
-    use({
-        "lewis6991/impatient.nvim",
-        config = [[ require('impatient') ]],
-    })
-    use({ "wbthomason/packer.nvim", opt = true })
-    use({ "nvim-lua/plenary.nvim", module = "plenary" })
-
-    -------===[ Aesthetics ]===-------
-    use({
-        "kyazdani42/nvim-web-devicons",
-        module = "nvim-web-devicons",
-    })
-
-    use({
-        "folke/tokyonight.nvim",
-        branch = "main",
-        config = [[ prequire('modules.ui.tokyonight') ]],
-    })
-    use("B4mbus/oxocarbon-lua.nvim")
-    -- use({ "shaunsingh/oxocarbon.nvim", run = "./install.sh" })
-    -- use({
-    --     "catppuccin/nvim",
-    --     as = "catppuccin",
-    --     run = "CatppuccinCompile",
-    --     config = [[ prequire('modules.ui.catppuccin') ]],
-    -- })
-    use({
-        "akinsho/bufferline.nvim",
-        event = "VimEnter",
-        config = [[ prequire('modules.ui.bufferline') ]],
-    })
-    use({
-        "feline-nvim/feline.nvim",
-        event = "VimEnter",
-        config = [[ prequire('feline', {}) ]],
-    })
-    use({
-        "glepnir/dashboard-nvim",
-        event = "BufWinEnter",
-        config = [[ prequire('modules.ui.dashboard') ]],
-    })
-
-    -------===[ Toolbox ]===-------
-    use({
-        "nvim-telescope/telescope.nvim",
-        requires = {
-            "nvim-telescope/telescope-file-browser.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-            {
-                "nvim-telescope/telescope-frecency.nvim",
-                requires = { "tami5/sqlite.lua" },
-            },
-            "nvim-telescope/telescope-project.nvim",
-            "nvim-telescope/telescope-ui-select.nvim",
-        },
-        config = [[ prequire('modules.toolbox.telescope')
-                    prequire('keymaps.toolbox.telescope') ]],
-    })
-    use({
-        "kyazdani42/nvim-tree.lua",
-        tag = "nightly",
-        cmd = "NvimTreeToggle",
-        config = [[ prequire('nvim-tree', {}) ]],
-    })
-    use({
-        "anuvyklack/hydra.nvim",
-        event = "VimEnter",
-        keys = "<space>",
-        config = [[ prequire('keymaps.main')
-                    prequire('keymaps.options') ]],
-    })
-    use({
-        "akinsho/nvim-toggleterm.lua",
-        config = [[ prequire('toggleterm', {})
-                    prequire('keymaps.toolbox.toggleterm') ]],
-    })
-    use({
-        "TimUntersberger/neogit",
-        cmd = "Neogit",
-        event = "VimEnter",
-        config = [[ prequire('neogit', {}) ]],
-    })
-    use({
-        "lewis6991/gitsigns.nvim",
-        ft = "gitcommit",
-        event = "BufReadPost",
-        config = [[ prequire('gitsigns', {})
-                    prequire('keymaps.editor.gitsigns') ]],
-    })
-
-    -------===[ Editor ]===-------
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        run = "TSUpdate",
-        module = "nvim-treesitter",
-        event = "BufReadPost",
-        requires = {
-            {
-                "nvim-treesitter/nvim-treesitter-textobjects",
-                after = "nvim-treesitter",
-            },
-            { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
-            { "nvim-treesitter/playground", cmd = "TSPlayground" },
-        },
-        config = [[ prequire('modules.editor.treesitter')
-                    prequire('keymaps.editor.treesitter') ]],
-    })
-    use({
-        "lukas-reineke/indent-blankline.nvim",
-        after = "nvim-treesitter",
-        config = [[ prequire('modules.editor.blankline') ]],
-    })
-    use({
-        "levouh/tint.nvim",
-        after = "nvim-treesitter",
-        config = [[ prequire('tint', {}) ]],
-    })
-    use({
-        "Vonr/align.nvim",
-        event = "BufReadPost",
-        config = [[ prequire('keymaps.editor.align') ]],
-    })
-    use({
-        "numToStr/Comment.nvim",
-        event = "BufReadPost",
-        config = [[ prequire('Comment', {}) ]],
-    })
-    use({
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        config = [[ prequire('modules.editor.autopairs') ]],
-    })
-    use({
-        "brenoprata10/nvim-highlight-colors",
-        opt = true,
-        event = "BufReadPost",
-        config = [[ prequire('nvim-highlight-colors', {}) ]],
-    })
-    use({
-        "nvim-neorg/neorg",
-        ft = "norg",
-        after = "nvim-treesitter",
-        config = [[ prequire('modules.editor.neorg') ]],
-    })
-    use({
-        "kevinhwang91/nvim-ufo",
-        after = "nvim-treesitter",
-        requires = { "kevinhwang91/promise-async" },
-        config = [[ prequire('modules.editor.folding') ]],
-    })
-    use({
-        "Pocco81/TrueZen.nvim",
-        event = "BufReadPost",
-        config = [[ prequire('true-zen', {}) ]],
-    })
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = function()
-            vim.fn["mkdp#util#install"]()
-        end,
-        ft = { "markdown" },
-        config = [[ prequire('modules.editor.md-preview')
-                    prequire('keymaps.editor.md-preview') ]],
-    })
-
-    -------===[ Language Server Protocol (LSP) ]===-------
-    use({
-        "neovim/nvim-lspconfig",
-        module = "lspconfig",
-        event = { "BufRead", "BufWinEnter", "BufNewFile" },
-        config = [[ prequire('modules.completion.lspconfig') ]],
-    })
-    use({
-        "j-hui/fidget.nvim",
-        after = "nvim-lspconfig",
-        config = [[ prequire('fidget', {}) ]],
-    })
-    use({
-        "jose-elias-alvarez/null-ls.nvim",
-        after = "nvim-lspconfig",
-        config = [[ prequire('modules.completion.null-ls') ]],
-    })
-    use({
-        "glepnir/lspsaga.nvim",
-        branch = "main",
-        after = "nvim-lspconfig",
-        config = [[ prequire('modules.completion.lspsaga')
-                    prequire('keymaps.editor.lspsaga') ]],
-    })
-    use({
-        "rcarriga/nvim-dap-ui",
-        requires = { "mfussenegger/nvim-dap" },
-        config = [[ prequire('dapui', {
-            floating = { border = "rounded" }
-        }) ]],
-    })
-    use({
-        "hrsh7th/nvim-cmp",
-        wants = "LuaSnip",
-        event = { "InsertEnter", "CmdlineEnter" },
-        requires = {
-            { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
-            { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
-            { "hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp" },
-            { "hrsh7th/cmp-path", after = "cmp-nvim-lua" },
-            { "hrsh7th/cmp-buffer", after = "cmp-path" },
-            { "hrsh7th/cmp-cmdline", after = "cmp-path" },
-            {
-                "L3MON4D3/LuaSnip",
-                event = { "InsertEnter", "CmdlineEnter" },
-                wants = "friendly-snippets",
-                requires = { "Icy-Thought/friendly-snippets" },
-                config = [[ prequire('modules.completion.luasnip') ]],
-            },
-        },
-        config = [[ prequire('modules.completion.cmp') ]],
-    })
-    -- use({
-    --     zbirenbaum/copilot.lua",
-    --     after = "nvim-cmp",
-    --     requires = {"zbirenbaum/copilot-cmp"},
-    --     config = [[ prequire('copilot', {}) ]],
-    -- })
-
-    -------===[ Language Specific Configurations ]===-------
-    use({
-        "saecki/crates.nvim",
-        event = "BufRead Cargo.toml",
-        after = "nvim-lspconfig",
-        config = [[ prequire('crates', {}) ]],
-    })
-    use({
-        "simrat39/rust-tools.nvim",
-        ft = "rust",
-        config = [[ prequire('rust-tools', {})
-                    prequire('keymaps.editor.rust-tools')]],
-    })
-    -- use({
-    --     "simrat39/flutter-tools.nvim",
-    --     ft = "dart",
-    --     config = [[ prequire('flutter-tools', {}) ]],
-    -- })
-
-    -- Allow Packer to auto-compile nvim config
-    if packer_bootstrap then
-        packer.sync()
+function Packer:load_packer()
+    if not packer then
+        api.nvim_command("packadd packer.nvim")
+        packer = require("packer")
     end
-end)
+    packer.init({
+        compile_path = packer_compiled,
+        disable_commands = true,
+        display = {
+            open_fn = require("packer.util").float,
+            working_sym = "ﰭ",
+            error_sym = "",
+            done_sym = "",
+            removed_sym = "",
+            moved_sym = "ﰳ",
+        },
+        git = { clone_timeout = 120 },
+    })
+    packer.reset()
+    local use = packer.use
+    self:load_plugins()
+    use({ "wbthomason/packer.nvim", opt = true })
+    for _, repo in ipairs(self.repos) do
+        use(repo)
+    end
+end
+
+function Packer:init_ensure_plugins()
+    local packer_dir = data_dir .. "pack/packer/opt/packer.nvim"
+    local state = uv.fs_stat(packer_dir)
+    if not state then
+        local cmd = "!git clone https://github.com/wbthomason/packer.nvim "
+            .. packer_dir
+        api.nvim_command(cmd)
+        uv.fs_mkdir(data_dir .. "lua", 511, function()
+            assert("make compile path dir failed")
+        end)
+        self:load_packer()
+        packer.install()
+    end
+end
+
+local plugins = setmetatable({}, {
+    __index = function(_, key)
+        if not packer then
+            Packer:load_packer()
+        end
+        return packer[key]
+    end,
+})
+
+function plugins.ensure_plugins()
+    Packer:init_ensure_plugins()
+end
+
+function plugins.auto_compile()
+    local file = api.nvim_buf_get_name(0)
+    if not file:match(vim_path) then
+        return
+    end
+
+    if file:match("plugins.lua") then
+        plugins.clean()
+    end
+    plugins.compile()
+    require("packer_compiled")
+end
+
+function plugins.load_compile()
+    if vim.fn.filereadable(packer_compiled) == 1 then
+        require("packer_compiled")
+    end
+
+    local cmds = {
+        "Compile",
+        "Install",
+        "Update",
+        "Sync",
+        "Clean",
+        "Status",
+    }
+    for _, cmd in ipairs(cmds) do
+        api.nvim_create_user_command("Packer" .. cmd, function()
+            require("core.packer")[string.lower(cmd)]()
+        end, {})
+    end
+
+    local PackerHooks =
+        vim.api.nvim_create_augroup("PackerHooks", { clear = true })
+    vim.api.nvim_create_autocmd("User", {
+        group = PackerHooks,
+        pattern = "PackerCompileDone",
+        callback = function()
+            vim.notify(
+                "Compile Done!",
+                vim.log.levels.INFO,
+                { title = "Packer" }
+            )
+            dofile(vim.env.MYVIMRC)
+        end,
+    })
+
+    -- api.nvim_create_autocmd('BufWritePost', {
+    --   pattern = '*.lua',
+    --   callback = function()
+    --     plugins.auto_compile()
+    --   end,
+    --   desc = 'Auto Compile the neovim config which write in lua',
+    -- })
+end
+
+return plugins
