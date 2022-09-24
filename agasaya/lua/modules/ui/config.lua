@@ -1,6 +1,6 @@
 local config = {}
 
-function bufferline()
+function config.bufferline()
     local bufferline = require("bufferline")
     bufferline.setup({
         options = {
@@ -37,8 +37,8 @@ function bufferline()
     })
 end
 
-function catppuccin()
-    catppuccin = require("catppuccin")
+function config.catppuccin()
+    local catppuccin = require("catppuccin")
     catppuccin.setup({
         transparent_background = false,
         term_colors = true,
@@ -111,15 +111,15 @@ function catppuccin()
     })
 end
 
-function feline()
-	require("feline").setup()
+function config.feline()
+    require("feline").setup()
 end
 
-function fidget()
-	require("fidget").setup()
+function config.fidget()
+    require("fidget").setup()
 end
 
-function dashboard_nvim()
+function config.dashboard_nvim()
     local db = require("dashboard")
     local config_dir = vim.fn.stdpath("config")
 
@@ -177,8 +177,8 @@ function dashboard_nvim()
     }
 end
 
-function tokyonight()
-    tokyonight = require("tokyonight")
+function config.tokyo_night()
+    local tokyonight = require("tokyonight")
     tokyonight.setup({
         style = "night",
         transparent = true,

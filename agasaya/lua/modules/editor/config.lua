@@ -1,10 +1,10 @@
 local config = {}
 
-function align_nvim()
+function config.align_nvim()
     require("keymaps.editor.align")
 end
 
-function autopairs()
+function config.autopairs()
     local npairs = require("nvim-autopairs")
     local Rule = require("nvim-autopairs.rule")
 
@@ -40,7 +40,21 @@ function autopairs()
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 end
 
-function blankline()
+function config.auto_session()
+    local opts = {
+        log_level = "info",
+        auto_session_enable_last_session = true,
+        auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
+        auto_session_enabled = true,
+        auto_save_enabled = true,
+        auto_restore_enabled = true,
+        auto_session_suppress_dirs = nil,
+    }
+
+    require("auto-session").setup(opts)
+end
+
+function config.blankline()
     local blankline = require("indent_blankline")
     blankline.setup({
         char = "│",
@@ -82,15 +96,15 @@ function blankline()
     })
 end
 
-function comment_nvim()
+function config.comment_nvim()
     require("Comment").setup()
 end
 
-function highlight_colors()
+function config.highlight_colors()
     require("nvim-highlight-colors").setup()
 end
 
-function nvim_ufo()
+function config.nvim_ufo()
     local ufo = require("ufo")
     ufo.setup({
         provider_selector = function(bufnr, filetype, buftype)
@@ -99,7 +113,7 @@ function nvim_ufo()
     })
 end
 
-function neorg()
+function config.neorg()
     local neorg = require("neorg")
     neorg.setup({
         load = {
@@ -151,8 +165,8 @@ function neorg()
     })
 end
 
-function treesitter()
-    ts_conf = require("nvim-treesitter.configs")
+function config.treesitter()
+    local ts_conf = require("nvim-treesitter.configs")
     ts_conf.setup({
         autopairs = { enable = true },
         context_commentstring = { enable = true },
@@ -171,6 +185,7 @@ function treesitter()
             "make",
             "markdown",
             "nix",
+            "norg",
             "python",
             "rust",
             "vim",
@@ -246,7 +261,7 @@ function treesitter()
     })
 end
 
-function truezen()
+function config.truezen()
     require("true-zen").setup()
 end
 

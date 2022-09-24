@@ -63,9 +63,9 @@ local enabled_servers = {
     },
 }
 
-local initialize_lsp = function()
-    local handlers = require("modules.completion.handlers")
+local handlers = require("modules.completion.handlers")
 
+local initialize_lsp = function()
     -- Our default LSP-Server configurations
     local default_config = {
         on_attach = handlers.on_attach,
@@ -86,4 +86,4 @@ end
 initialize_lsp()
 
 -- Call forward our LSP-Configuration
-require("modules.completion.handlers").setup()
+handlers.setup()

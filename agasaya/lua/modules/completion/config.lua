@@ -4,7 +4,7 @@ function config.lspconfig()
     require("modules.completion.lspconfig")
 end
 
-function null_ls()
+function config.null_ls()
     local nls = require("null-ls")
     local h = require("null-ls.helpers")
     local u = require("null-ls.utils")
@@ -67,6 +67,7 @@ end
 function config.nvim_cmp()
     local cmp = require("cmp")
     local ls = require("luasnip")
+
     local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0

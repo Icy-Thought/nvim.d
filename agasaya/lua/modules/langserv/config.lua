@@ -1,20 +1,20 @@
 local config = {}
 
-function crates_nvim()
+function config.crates_nvim()
     require("crates").setup()
 end
 
-function rust_tools()
+function config.rust_tools()
     require("rust-tools").setup()
-    require("keymaps.editor.rust-tools")
+    require("keymaps.langserv.rust")
 end
 
-function flutter_tools()
-    require("flutter-tools").setup()
-    require("keymaps.editor.flutter-tools")
-end
+-- function config.flutter_tools()
+--     require("flutter-tools").setup()
+--     require("keymaps.langserv.flutter")
+-- end
 
-function md_preview()
+function config.md_preview()
     local options = {
         mkdp_auto_start = 0,
         mkdp_auto_close = 1,

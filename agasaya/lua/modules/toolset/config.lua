@@ -1,29 +1,29 @@
 local config = {}
 
-function hydra_nvim()
+function config.hydra_nvim()
     require("keymaps.main")
     require("keymaps.options")
 end
 
-function gitsigns()
+function config.gitsigns()
     require("gitsigns").setup()
     require("keymaps.editor.gitsigns")
 end
 
-function nvim_tree()
+function config.nvim_tree()
     require("nvim-tree").setup()
 end
 
-function neogit()
+function config.neogit()
     require("neogit").setup()
 end
 
-function telescope()
+function config.telescope()
     local telescope = require("telescope")
     local ts_prev = require("telescope.previewers")
     local ts_sort = require("telescope.sorters")
 
-    require("keymaps.toolbox.telescope")
+    require("keymaps.toolset.telescope")
 
     telescope.setup({
         defaults = {
@@ -94,14 +94,9 @@ function telescope()
     telescope.load_extension("ui-select")
 end
 
-function toggleterm()
+function config.toggleterm()
     require("toggleterm").setup()
-    require("keymaps.toolbox.toggleterm")
-end
-
-function toggleterm()
-    require("toggleterm").setup()
-    require("keymaps.toolbox.toggleterm")
+    require("keymaps.toolset.toggleterm")
 end
 
 return config
