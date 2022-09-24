@@ -38,6 +38,11 @@ completion["hrsh7th/nvim-cmp"] = {
     },
 }
 
+completion["windwp/nvim-autopairs"] = {
+    event = "InsertEnter",
+    config = conf.autopairs,
+}
+
 -- completion["zbirenbaum/copilot.lua"] = {
 --     after = "nvim-cmp",
 --     requires = "zbirenbaum/copilot-cmp",
