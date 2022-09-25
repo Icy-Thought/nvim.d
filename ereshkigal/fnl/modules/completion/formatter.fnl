@@ -8,8 +8,8 @@
 (local py (require :formatter.filetypes.python))
 
 ;; Language-specific Conf
-(fn alejandra []
-  {:exe :alejandra
+(fn nixpkgs-fmt []
+  {:exe :nixpkgs-fmt
    :stdin true})
 
 (fn markdown-cli []
@@ -57,7 +57,7 @@
                    :jsonc [prettier]
                    :lua [stylua]
                    :markdown [markdown-cli]
-                   :nix [alejandra]
+                   :nix [nixpkgs-fmt]
                    :python [py.black py.isort]
                    :rust [rs.rustfmt]
                    :scss [prettier]

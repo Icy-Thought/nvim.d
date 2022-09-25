@@ -6,9 +6,6 @@ end
 
 function config.null_ls()
     local nls = require("null-ls")
-    local h = require("null-ls.helpers")
-    local u = require("null-ls.utils")
-    local s = require("null-ls.state")
     local builtins = require("null-ls.builtins")
 
     nls.setup({
@@ -20,7 +17,7 @@ function config.null_ls()
             }),
 
             -------===[ Formatting ]===-------
-            builtins.formatting.alejandra,
+            builtins.formatting.nixpkgs_fmt,
             builtins.formatting.stylua,
             builtins.formatting.stylish_haskell,
             builtins.formatting.rome.with({
@@ -180,28 +177,18 @@ function config.nvim_cmp()
         },
     })
 
+    -- Use buffer source for `/` and `?`
+    for _, v in pairs({ "/", "?", ":%s/" }) do
+        cmp.setup.cmdline(v, {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = "buffer" },
+            },
+        })
+    end
+
+    -- Use cmdline & path source for ':'
     cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            { name = "cmdline" },
-        },
-    })
-
-    cmp.setup.cmdline("/", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            { name = "buffer" },
-        },
-    })
-
-    cmp.setup.cmdline(":%s/", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            { name = "buffer" },
-        },
-    })
-
-    cmp.setup.cmdline(":'<,'>s/", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
             { name = "path" },

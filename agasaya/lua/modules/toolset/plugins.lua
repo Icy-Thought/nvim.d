@@ -21,22 +21,22 @@ toolset["kyazdani42/nvim-tree.lua"] = {
     config = conf.nvim_tree,
 }
 
-toolset["TimUntersberger/neogit"] = {
-    cmd = "Neogit",
-    event = "VimEnter",
-    config = conf.neogit,
-    requires = {
-        {
-            "sindrets/diffview.nvim",
-            cmd = {
-                "DiffviewOpen",
-                "DiffviewClose",
-                "DiffviewToggleFiles",
-                "DiffviewFocusFiles",
-            },
-        },
-    },
-}
+-- toolset["TimUntersberger/neogit"] = {
+--     cmd = "Neogit",
+--     event = "VimEnter",
+--     config = conf.neogit,
+--     requires = {
+--         {
+--             "sindrets/diffview.nvim",
+--             cmd = {
+--                 "DiffviewOpen",
+--                 "DiffviewClose",
+--                 "DiffviewToggleFiles",
+--                 "DiffviewFocusFiles",
+--             },
+--         },
+--     },
+-- }
 
 toolset["nvim-telescope/telescope.nvim"] = {
     module = "telescope",

@@ -36,7 +36,7 @@ local code_actions = null_ls.builtins.code_actions
 null_ls.setup({
     debounce = 150,
     sources = {
-        formatting.alejandra,
+        formatting.nixpkgs_fmt,
         formatting.stylua,
         formatting.prettier.with({
             extra_args = {
