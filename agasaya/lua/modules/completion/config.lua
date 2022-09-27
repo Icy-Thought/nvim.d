@@ -66,7 +66,7 @@ function config.nvim_cmp()
     local ls = require("luasnip")
 
     local has_words_before = function()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0
             and vim.api
                     .nvim_buf_get_lines(0, line - 1, line, true)[1]
@@ -178,21 +178,18 @@ function config.nvim_cmp()
     })
 
     -- Use buffer source for `/` and `?`
-    for _, v in pairs({ "/", "?", ":%s/" }) do
-        cmp.setup.cmdline(v, {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = {
-                { name = "buffer" },
-            },
-        })
-    end
+    cmp.setup.cmdline({ "/", "?", ":%s/" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = "buffer" },
+        },
+    })
 
     -- Use cmdline & path source for ':'
     cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
             { name = "path" },
-        }, {
             { name = "cmdline" },
         }),
     })
