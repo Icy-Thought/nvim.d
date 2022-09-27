@@ -58,25 +58,19 @@ local neovide_config = function()
         vim.cmd("colorscheme oxocarbon-lua")
         vim.o.guifont = "VictorMono Nerd Font:h9:b"
 
-        local settings = {
-            -- general
-            "neovide_no_idle = v:true",
-            "neovide_transparency = 0.85",
-            "neovide_cursor_antialiasing = v:true",
-            "neovide_cursor_trail_length = 0.05",
-            "neovide_cursor_animation_length = 0.03",
+        -- general
+        vim.g.neovide_no_idle = true
+        vim.g.neovide_transparency = 0.85
+        vim.g.neovide_cursor_antialiasing = true
+        vim.g.neovide_cursor_trail_length = 0.05
+        vim.g.neovide_cursor_animation_length = 0.03
 
-            -- vfx settings
-            "neovide_cursor_vfx_mode = 'sonicboom'",
-            "neovide_cursor_vfx_opacity = 200.0",
-            "neovide_cursor_vfx_particle_density = 5.0",
-            "neovide_cursor_vfx_particle_lifetime = 1.2",
-            "neovide_cursor_vfx_particle_speed = 20.0",
-        }
-
-        for _, value in pairs(settings) do
-            vim.cmd("let g:" .. value)
-        end
+        -- vfx settings
+        vim.g.neovide_cursor_vfx_mode = "sonicboom"
+        vim.g.neovide_cursor_vfx_opacity = 200.0
+        vim.g.neovide_cursor_vfx_particle_density = 5.0
+        vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
+        vim.g.neovide_cursor_vfx_particle_speed = 20.0
     else
         return nil
     end
