@@ -17,9 +17,9 @@ function config.null_ls()
             }),
 
             -------===[ Formatting ]===-------
+            builtins.formatting.brittany,
             builtins.formatting.nixpkgs_fmt,
             builtins.formatting.stylua,
-            builtins.formatting.stylish_haskell,
             builtins.formatting.rome.with({
                 filetypes = { "markdown", "javascript", "json", "typescript" },
                 extra_args = {
