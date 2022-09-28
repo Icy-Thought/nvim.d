@@ -22,7 +22,6 @@ toolset["kyazdani42/nvim-tree.lua"] = {
 }
 
 toolset["TimUntersberger/neogit"] = {
-    commit = "e6d8ec6e46807dffb55915ee53296b501a2390e7",
     cmd = "Neogit",
     event = "VimEnter",
     config = conf.neogit,

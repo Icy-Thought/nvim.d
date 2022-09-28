@@ -35,8 +35,8 @@ local def_basics = {
     ["n|<C-Right>"] = map_cr("vertical resize +2"):with_noremap():with_silent(),
 
     -- (Barbar.nvim) buffer navigation
-    ["n|<S-l>"] = map_cr("BufferLineCyclePrev"):with_noremap(),
-    ["n|<S-h>"] = map_cr("BufferLineCycleNext"):with_noremap(),
+    ["n|<S-l>"] = map_cr("BufferLineCycleNext"):with_noremap(),
+    ["n|<S-h>"] = map_cr("BufferLineCyclePrev"):with_noremap(),
 
     -- (Barbar.nvim) Re-order buffers -> previous || next
     ["n|<A-<>"] = map_cmd("BufferLineMovePrev"):with_noremap():with_silent(),
