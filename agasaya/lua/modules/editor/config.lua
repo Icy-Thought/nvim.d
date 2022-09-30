@@ -130,6 +130,8 @@ function config.neorg()
 end
 
 function config.treesitter()
+    require("keymaps.editor.treesitter")
+
     local ts_conf = require("nvim-treesitter.configs")
     ts_conf.setup({
         autopairs = { enable = true },
