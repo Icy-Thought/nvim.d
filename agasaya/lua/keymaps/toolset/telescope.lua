@@ -40,7 +40,7 @@ Hydra({
         { "k", cmd("Telescope keymaps") },
         { "O", cmd("Telescope vim_options") },
         { "r", cmd("Telescope resume") },
-        { "p", cmd("Telescope projects"), { desc = "projects" } },
+        { "p", cmd("Telescope project"), { desc = "projects" } },
         {
             "/",
             cmd("Telescope current_buffer_fuzzy_find"),
