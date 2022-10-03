@@ -11,22 +11,11 @@ function config.null_ls()
     nls.setup({
         debounce = 150,
         sources = {
-            -------===[ Diagnostics ]===-------
-            builtins.diagnostics.markdownlint.with({
-                command = "markdownlint-cli2",
-            }),
-
             -------===[ Formatting ]===-------
+            builtins.formatting.stylua,
             builtins.formatting.brittany,
             builtins.formatting.nixpkgs_fmt,
-            builtins.formatting.stylua,
-            builtins.formatting.rome.with({
-                filetypes = { "markdown", "javascript", "json", "typescript" },
-                extra_args = {
-                    "--indent-size 4",
-                    "--indent-style space",
-                },
-            }),
+            builtins.formatting.deno_fmt,
             builtins.formatting.black.with({
                 extra_args = { "--fast" },
                 filetypes = { "python" },
