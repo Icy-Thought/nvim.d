@@ -48,7 +48,7 @@ local vim_options = function()
         linebreak = true,
         list = true,
         listchars = {
-            eol = "↴",
+            eol = "",
             extends = "→",
             nbsp = "+",
             precedes = "←",
@@ -67,6 +67,7 @@ local vim_options = function()
         shiftround = true,
         shiftwidth = 4,
         shortmess = { c = true, I = true, s = true },
+        showbreak = "↳",
         showmode = false,
         showtabline = 2,
         sidescrolloff = 8,
