@@ -148,10 +148,10 @@ local general_snippets = {
         t("} f(x_{k}) \\times \\Delta x"),
     }),
     s("integral", {
-        t("\\int\\displaylimits_{"),
-        i(1),
+        t("\\int_{"),
+        i(1, "a"),
         t("}^{"),
-        i(2),
+        i(2, "b"),
         t("} "),
         i(0),
     }),
