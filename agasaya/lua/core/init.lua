@@ -55,7 +55,6 @@ end
 
 local neovide_config = function()
     if vim.g.neovide then
-        vim.cmd("colorscheme oxocarbon-lua")
         vim.o.guifont = "VictorMono Nerd Font:h9:b"
 
         -- general
@@ -71,13 +70,13 @@ local neovide_config = function()
         vim.g.neovide_cursor_vfx_particle_density = 5.0
         vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
         vim.g.neovide_cursor_vfx_particle_speed = 20.0
-    else
-        return nil
     end
 end
 
 core.init = function()
     disable_distribution_plugins()
+    disable_providers()
+
     map_leader()
     neovide_config()
 

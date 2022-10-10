@@ -19,31 +19,28 @@ ui["j-hui/fidget.nvim"] = {
     config = conf.fidget,
 }
 
+ui["nvim-lualine/lualine.nvim"] = {
+    event = "VimEnter",
+    -- config = conf.lualine,
+}
+
 -- ui["catppuccin/nvim"] = {
 --     as = "catppuccin",
+--     after = "lualine.nvim",
 --     run = "CatppuccinCompile",
 --     config = conf.catppuccin,
 -- }
 
 ui["folke/tokyonight.nvim"] = {
     branch = "main",
-    config = conf.tokyo_night,
-}
-
-ui["B4mbus/oxocarbon-lua.nvim"] = {
-    opt = false,
-    -- config = conf.oxocarbon,
+    after = "lualine.nvim",
+    config = conf.tokyonight,
 }
 
 ui["decaycs/decay.nvim"] = {
-    opt = false,
     as = "decay",
-    -- config = conf.decay,
-}
-
-ui["nvim-lualine/lualine.nvim"] = {
-    event = "VimEnter",
-    -- config = conf.lualine,
+    after = "lualine.nvim",
+    config = conf.decay,
 }
 
 return ui

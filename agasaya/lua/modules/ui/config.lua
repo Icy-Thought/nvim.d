@@ -38,68 +38,74 @@ function config.bufferline()
 end
 
 function config.catppuccin()
-    local catppuccin = require("catppuccin")
-    catppuccin.setup({
-        transparent_background = false,
-        term_colors = true,
-        compile = {
-            enabled = true,
-            path = vim.fn.stdpath("cache") .. "/catppuccin",
-            suffix = "_compiled",
-        },
-        styles = {
-            comments = { "italic" },
-            functions = { "italic", "bold" },
-            keywords = { "italic" },
-            strings = {},
-            variables = {},
-        },
-        integrations = {
-            treesitter = true,
-            native_lsp = {
+    if not vim.g.neovide then
+        local catppuccin = require("catppuccin")
+        catppuccin.setup({
+            transparent_background = false,
+            term_colors = true,
+            compile = {
                 enabled = true,
-                virtual_text = {
-                    errors = { "italic" },
-                    hints = { "italic" },
-                    warnings = { "italic" },
-                    information = { "italic" },
+                path = vim.fn.stdpath("cache") .. "/catppuccin",
+                suffix = "_compiled",
+            },
+            styles = {
+                comments = { "italic" },
+                functions = { "italic", "bold" },
+                keywords = { "italic" },
+                strings = {},
+                variables = {},
+            },
+            integrations = {
+                treesitter = true,
+                native_lsp = {
+                    enabled = true,
+                    virtual_text = {
+                        errors = { "italic" },
+                        hints = { "italic" },
+                        warnings = { "italic" },
+                        information = { "italic" },
+                    },
+                    underlines = {
+                        errors = { "underline" },
+                        hints = { "underline" },
+                        warnings = { "underline" },
+                        information = { "underline" },
+                    },
                 },
-                underlines = {
-                    errors = { "underline" },
-                    hints = { "underline" },
-                    warnings = { "underline" },
-                    information = { "underline" },
+                bufferline = true,
+                dashboard = true,
+                gitgutter = false,
+                gitsigns = true,
+                indent_blankline = {
+                    enabled = true,
+                    colored_indent_levels = true,
                 },
+                -- lightspeed = false,
+                lsp_saga = true,
+                lsp_trouble = true,
+                markdown = true,
+                neogit = true,
+                -- notify = true,
+                telescope = true,
+                nvimtree = {
+                    enabled = true,
+                    show_root = true,
+                },
+                which_key = true,
             },
-            bufferline = true,
-            dashboard = true,
-            gitgutter = false,
-            gitsigns = true,
-            indent_blankline = {
-                enabled = true,
-                colored_indent_levels = true,
-            },
-            -- lightspeed = false,
-            lsp_saga = true,
-            lsp_trouble = true,
-            markdown = true,
-            neogit = true,
-            -- notify = true,
-            telescope = true,
-            nvimtree = {
-                enabled = true,
-                show_root = true,
-            },
-            which_key = true,
-        },
-    })
+        })
 
-    -- Our desired Catppuccin flavour:
-    vim.g.catppuccin_flavour = "mocha"
+        vim.g.catppuccin_flavour = "mocha"
+
+        require("lualine").setup({
+            options = { theme = "catppuccin" },
+        })
+
+        vim.cmd("colorscheme catppuccin")
+    end
 
     -- Compile Catppuccin on `PackerCompile`
     local autocmd = vim.api.nvim_create_autocmd
-
     autocmd("User", {
         pattern = "PackerCompileDone",
         callback = function()
@@ -111,8 +117,55 @@ function config.catppuccin()
     })
 end
 
-function config.fidget()
-    require("fidget").setup()
+function config.decay()
+    if vim.g.neovide then
+        require("decay").setup({
+            style = "dark",
+            italics = {
+                code = true,
+                comments = true,
+            },
+            nvim_tree = {
+                contrast = true,
+            },
+        })
+
+        require("lualine").setup({
+            options = { theme = "decay" },
+        })
+
+        vim.cmd("colorscheme decay")
+    end
+end
+
+function config.tokyonight()
+    if not vim.g.neovide then
+        local tokyonight = require("tokyonight")
+        tokyonight.setup({
+            style = "night",
+            transparent = true,
+            terminal_colors = true,
+            styles = {
+                comments = "italic",
+                functions = "italic,bold",
+                keywords = "italic",
+                variables = "NONE",
+
+                sidebars = "dark",
+                floats = "dark",
+            },
+            sidebars = { "qf", "help", "terminal", "packer" },
+            day_brightness = 0.3,
+            hide_inactive_statusline = false,
+            dim_inactive = false,
+        })
+
+        require("lualine").setup({
+            options = { theme = "tokyonight" },
+        })
+
+        vim.cmd("colorscheme tokyonight")
+    end
 end
 
 function config.dashboard_nvim()
@@ -173,30 +226,8 @@ function config.dashboard_nvim()
     }
 end
 
-function config.tokyo_night()
-    local tokyonight = require("tokyonight")
-    tokyonight.setup({
-        style = "night",
-        transparent = true,
-        terminal_colors = true,
-        styles = {
-            comments = "italic",
-            functions = "italic,bold",
-            keywords = "italic",
-            variables = "NONE",
-
-            sidebars = "dark",
-            floats = "dark",
-        },
-        sidebars = { "qf", "help", "terminal", "packer" },
-        day_brightness = 0.3,
-        hide_inactive_statusline = false,
-        dim_inactive = false,
-    })
-
-    if not vim.g.neovide then
-        vim.cmd("colorscheme tokyonight")
-    end
+function config.fidget()
+    require("fidget").setup()
 end
 
 return config
