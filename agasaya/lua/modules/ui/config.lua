@@ -111,10 +111,6 @@ function config.catppuccin()
     })
 end
 
-function config.feline()
-    require("feline").setup()
-end
-
 function config.fidget()
     require("fidget").setup()
 end

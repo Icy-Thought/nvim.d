@@ -35,9 +35,15 @@ ui["B4mbus/oxocarbon-lua.nvim"] = {
     -- config = conf.oxocarbon,
 }
 
-ui["feline-nvim/feline.nvim"] = {
+ui["decaycs/decay.nvim"] = {
+    opt = false,
+    as = "decay",
+    -- config = conf.decay,
+}
+
+ui["nvim-lualine/lualine.nvim"] = {
     event = "VimEnter",
-    config = conf.feline,
+    -- config = conf.lualine,
 }
 
 return ui
