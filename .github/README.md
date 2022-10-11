@@ -3,6 +3,7 @@
 </p>
 
 # Neovim Dotfiles
+
 This repository consists of:
 
 1. `niflheim`: a configuration I stitched together with the help of the default

@@ -32,10 +32,10 @@ Hydra({
         {
             "f",
             cmd("Lspsaga lsp_finder"),
-            { desc = "lookup code definition + reference" },
+            { desc = "Lookup code definition + reference" },
         },
-        { "a", cmd("Lspsaga code_action"), { desc = "cursor code action" } },
-        { "r", cmd("Lspsaga rename"), { desc = "rename selected definition" } },
+        { "a", cmd("Lspsaga code_action"), { desc = "Cursor code action" } },
+        { "r", cmd("Lspsaga rename"), { desc = "Rename selected definition" } },
         {
             "d",
             cmd("Lspsaga peek_definition"),
@@ -94,6 +94,6 @@ Hydra({
             cmd("Format"),
             { exit = true, desc = "Format current buffer!" },
         },
-        { "q", nil, { exit = true, nowait = true, desc = "exit" } },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
     },
 })

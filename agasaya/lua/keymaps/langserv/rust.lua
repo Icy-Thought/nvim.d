@@ -38,6 +38,6 @@ Hydra({
         { "w", cmd("RustReloadWorkspace") },
         { "g", cmd("RustViewCrateGraph") },
         { "i", cmd("RustToggleInlayHints") },
-        { "q", nil, { exit = true, nowait = true, desc = "exit" } },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
     },
 })

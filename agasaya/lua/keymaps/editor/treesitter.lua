@@ -25,13 +25,13 @@ Hydra({
     mode = { "n", "x" },
     body = "<Leader>z",
     heads = {
-        { "z", cmd("TZAtaraxis"), { desc = "enable true-zen Mode" } },
-        { "p", cmd("TSPlayground"), { desc = "treesitter playground" } },
+        { "z", cmd("TZAtaraxis"), { desc = "Enable true-zen Mode" } },
+        { "p", cmd("TSPlayground"), { desc = "Treesitter playground" } },
         {
             "h",
             cmd("TSHighlightCapturesUnderCursor"),
             { desc = "TS Highlight under cursor" },
         },
-        { "q", nil, { exit = true, nowait = true, desc = "exit" } },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
     },
 })

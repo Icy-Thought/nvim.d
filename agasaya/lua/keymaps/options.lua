@@ -52,7 +52,7 @@ Hydra({
                     vim.o.arabic = true
                 end
             end,
-            { desc = "arabic writing environment" },
+            { desc = "Arabic writing env" },
         },
         {
             "n",
@@ -63,7 +63,7 @@ Hydra({
                     vim.o.number = true
                 end
             end,
-            { desc = "number" },
+            { desc = "Number-line" },
         },
         {
             "v",
@@ -74,7 +74,7 @@ Hydra({
                     vim.o.virtualedit = "all"
                 end
             end,
-            { desc = "virtualedit" },
+            { desc = "Virtual-edit" },
         },
         {
             "i",
@@ -85,7 +85,7 @@ Hydra({
                     vim.o.list = true
                 end
             end,
-            { desc = "show invisible" },
+            { desc = "Show invisible" },
         },
         {
             "s",
@@ -96,7 +96,7 @@ Hydra({
                     vim.o.spell = true
                 end
             end,
-            { exit = true, desc = "spell" },
+            { exit = true, desc = "Spell-check" },
         },
         {
             "w",
@@ -116,7 +116,7 @@ Hydra({
                     vim.keymap.del("n", "j")
                 end
             end,
-            { desc = "wrap" },
+            { desc = "Wrap lines" },
         },
         {
             "c",
@@ -127,7 +127,7 @@ Hydra({
                     vim.o.cursorline = true
                 end
             end,
-            { desc = "cursor line" },
+            { desc = "Cursor line" },
         },
         { "q", nil, { exit = true } },
     },

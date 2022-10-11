@@ -27,28 +27,28 @@ Hydra({
         {
             "v",
             cmd("ToggleTerm size=80 direction=vertical"),
-            { desc = "launch vertical terminal" },
+            { desc = "Launch vertical terminal" },
         },
         {
             "f",
             cmd("ToggleTerm direction=float"),
-            { desc = "launch floating terminal" },
+            { desc = "Launch floating terminal" },
         },
         {
             "t",
             cmd("ToggleTerm direction=tab"),
-            { desc = "launch tabbed terminal" },
+            { desc = "Launch tabbed terminal" },
         },
         {
             "p",
             cmd("lua _PYTHON_TOGGLE"),
-            { desc = "launch terminal in py-env" },
+            { desc = "Launch terminal in py-env" },
         },
         {
             "<Enter>",
             cmd("ToggleTerm size=10 direction=horizontal"),
-            { desc = "launch horizontal terminal" },
+            { desc = "Launch horizontal terminal" },
         },
-        { "q", nil, { exit = true, nowait = true, desc = "exit" } },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
     },
 })

@@ -51,6 +51,7 @@ toolset["nvim-telescope/telescope.nvim"] = {
         },
         "nvim-telescope/telescope-project.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
+        "MrcJkb/telescope-manix",
     },
 }
 

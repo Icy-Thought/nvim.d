@@ -56,7 +56,7 @@ Hydra({
                 end)
                 return "<Ignore>"
             end,
-            { expr = true, desc = "next hunk" },
+            { expr = true, desc = "Next hunk" },
         },
         {
             "K",
@@ -69,31 +69,31 @@ Hydra({
                 end)
                 return "<Ignore>"
             end,
-            { expr = true, desc = "prev hunk" },
+            { expr = true, desc = "Prev hunk" },
         },
         {
             "s",
             ":Gitsigns stage_hunk<CR>",
-            { silent = true, desc = "stage hunk" },
+            { silent = true, desc = "Stage hunk" },
         },
-        { "u", gitsigns.undo_stage_hunk, { desc = "undo last stage" } },
-        { "S", gitsigns.stage_buffer, { desc = "stage buffer" } },
-        { "p", gitsigns.preview_hunk, { desc = "preview hunk" } },
+        { "u", gitsigns.undo_stage_hunk, { desc = "Undo last stage" } },
+        { "S", gitsigns.stage_buffer, { desc = "Stage buffer" } },
+        { "p", gitsigns.preview_hunk, { desc = "Preview hunk" } },
         {
             "d",
             gitsigns.toggle_deleted,
-            { nowait = true, desc = "toggle deleted" },
+            { nowait = true, desc = "Toggle deleted" },
         },
-        { "b", gitsigns.blame_line, { desc = "blame" } },
+        { "b", gitsigns.blame_line, { desc = "Blame" } },
         {
             "B",
             function()
                 gitsigns.blame_line({ full = true })
             end,
-            { desc = "blame show full" },
+            { desc = "Blame show full" },
         },
-        { "/", gitsigns.show, { exit = true, desc = "show base file" } }, -- show the base of the file
+        { "/", gitsigns.show, { exit = true, desc = "Show base file" } }, -- show the base of the file
         { "<Enter>", cmd("Neogit"), { exit = true, desc = "Neogit" } },
-        { "q", nil, { exit = true, nowait = true, desc = "exit" } },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
     },
 })

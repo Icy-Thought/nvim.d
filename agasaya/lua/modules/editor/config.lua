@@ -4,6 +4,10 @@ function config.align_nvim()
     require("keymaps.editor.align")
 end
 
+function config.autolist()
+    require("autolist").setup()
+end
+
 function config.auto_session()
     local opts = {
         log_level = "info",
@@ -66,6 +70,34 @@ end
 
 function config.highlight_colors()
     require("nvim-highlight-colors").setup()
+end
+
+function config.live_cmd()
+    require("live-command").setup({
+        commands = {
+            G = { cmd = "g" },
+            Norm = { cmd = "norm" },
+            Reg = {
+                cmd = "norm",
+                args = function(opts)
+                    return (opts.count == -1 and "" or opts.count)
+                        .. "@"
+                        .. opts.args
+                end,
+                range = "",
+            },
+        },
+        defaults = {
+            enable_highlighting = true,
+            inline_highlighting = true,
+            hl_groups = {
+                insertion = "DiffAdd",
+                deletion = "DiffDelete",
+                change = "DiffChange",
+            },
+            debug = false,
+        },
+    })
 end
 
 function config.nvim_ufo()

@@ -1,9 +1,19 @@
 local editor = {}
 local conf = require("modules.editor.config")
 
+editor["smjonas/live-command.nvim"] = {
+    event = "BufReadPost",
+    config = conf.live_cmd,
+}
+
 editor["Vonr/align.nvim"] = {
     event = "BufReadPost",
     config = conf.align_nvim,
+}
+
+editor["gaoDean/autolist.nvim"] = {
+    ft = { "markdown", "text" },
+    config = conf.autolist,
 }
 
 editor["rmagatti/auto-session"] = {
@@ -38,17 +48,6 @@ editor["lukas-reineke/indent-blankline.nvim"] = {
 }
 
 -- editor["mfussenegger/nvim-dap"] = {
---     cmd = {
---         "DapSetLogLevel",
---         "DapShowLog",
---         "DapContinue",
---         "DapToggleBreakpoint",
---         "DapToggleRepl",
---         "DapStepOver",
---         "DapStepInto",
---         "DapStepOut",
---         "DapTerminate",
---     },
 --     module = "dap",
 --     config = conf.nvim_dap,
 -- }
