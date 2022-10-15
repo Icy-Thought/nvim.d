@@ -42,9 +42,7 @@ M.setup = function()
 end
 
 -- Boilerplate LSP-Conf
-M.capabilities = require("cmp_nvim_lsp").update_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-)
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Disable LSP formatting in favor of null-ls
 -- WARNING: Make sure not to run this on **null-ls** itself!
