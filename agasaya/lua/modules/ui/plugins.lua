@@ -5,7 +5,7 @@ ui["kyazdani42/nvim-web-devicons"] = { module = "nvim-web-devicons" }
 
 ui["akinsho/bufferline.nvim"] = {
     tag = "*",
-    event = "BufReadPost",
+    event = "BufWinEnter",
     config = conf.bufferline,
 }
 
@@ -20,7 +20,7 @@ ui["j-hui/fidget.nvim"] = {
 }
 
 ui["nvim-lualine/lualine.nvim"] = {
-    event = "VimEnter",
+    event = "UIEnter",
     -- config = conf.lualine,
 }
 
