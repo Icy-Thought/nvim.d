@@ -8,7 +8,7 @@ local main_hints = [[
   _e_: Toggle Tree                  _k_: Killall Other Buffer(s)
   _s_: Save Buffer                  _p_: Telescope Dotfiles
   _m_: Man-Pages                    _t_: Change Theme
-  _n_: Nix Man-Page
+  _n_: Nix Man-Page                 _l_: Toggle CodeWindow
 
 ^
   _<Enter>_: Dashboard                   _q_: Quit
@@ -36,6 +36,15 @@ Hydra({
             "k",
             cmd("%bd|e#"),
             { desc = "Close every buffer, EXCEPT active buf" },
+        },
+        {
+            "l",
+            function()
+                local codewindow = require("codewindow")
+                codewindow.toggle_minimap()
+                codewindow.toggle_focus()
+            end,
+            { desc = "Open/Close code-window" },
         },
         { "m", cmd("Telescope man_pages"), { desc = "Launch man-pages" } },
         { "n", cmd("Telescope manix"), { desc = "Nix docummentation search" } },

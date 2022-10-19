@@ -18,10 +18,4 @@ langserv["simrat39/rust-tools.nvim"] = {
 --     config = conf.flutter_tools,
 -- }
 
-langserv["toppair/peek.nvim"] = {
-    ft = "markdown",
-    run = "deno task --quiet build:fast",
-    config = conf.peek_nvim,
-}
-
 return langserv

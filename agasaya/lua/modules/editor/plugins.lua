@@ -75,6 +75,12 @@ editor["kevinhwang91/nvim-ufo"] = {
     requires = { "kevinhwang91/promise-async" },
 }
 
+editor["toppair/peek.nvim"] = {
+    ft = "markdown",
+    run = "deno task --quiet build:fast",
+    config = conf.peek_nvim,
+}
+
 editor["Pocco81/TrueZen.nvim"] = {
     event = "BufReadPost",
     after = "nvim-treesitter",

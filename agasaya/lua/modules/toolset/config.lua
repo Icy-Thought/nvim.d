@@ -1,5 +1,9 @@
 local config = {}
 
+function config.codewindow()
+    require("codewindow").setup()
+end
+
 function config.hydra_nvim()
     require("keymaps.main")
     require("keymaps.options")

@@ -1,6 +1,11 @@
 local toolset = {}
 local conf = require("modules.toolset.config")
 
+toolset["gorbit99/codewindow.nvim"] = {
+    event = "BufReadPost",
+    config = conf.codewindow,
+}
+
 toolset["anuvyklack/hydra.nvim"] = {
     module = "hydra",
     keys = "<leader>",
