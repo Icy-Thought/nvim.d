@@ -27,7 +27,6 @@ toolset["kyazdani42/nvim-tree.lua"] = {
 }
 
 toolset["TimUntersberger/neogit"] = {
-    cmd = "Neogit",
     event = "VimEnter",
     config = conf.neogit,
     requires = {
