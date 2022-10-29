@@ -84,9 +84,9 @@ local auto_snippets = {
     s({ trig = "__", wordTrig = false }, { t("_{"), i(1), t("} "), i(0) }),
     s({ trig = ">>", wordTrig = false }, { t("\\gg "), i(0) }),
     s({ trig = "<<", wordTrig = false }, { t("\\ll "), i(0) }),
-    s("sin", { t("\\sin("), i(1, "x"), t(") "), i(0) }),
-    s("cos", { t("\\cos("), i(1, "x"), t(") "), i(0) }),
-    s("tan", { t("\\tan("), i(1, "x"), t(") "), i(0) }),
+    s("sin", { t("\\sin{"), i(1, "\\theta"), t("} "), i(0) }),
+    s("cos", { t("\\cos{"), i(1, "\\theta"), t("} "), i(0) }),
+    s("tan", { t("\\tan{"), i(1, "\\theta"), t("} "), i(0) }),
 }
 
 for _, v in pairs({ "bar", "hat", "vec", "tilde" }) do
