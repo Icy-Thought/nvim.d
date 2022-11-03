@@ -1,11 +1,6 @@
 local editor = {}
 local conf = require("modules.editor.config")
 
-editor["smjonas/live-command.nvim"] = {
-    event = "BufReadPost",
-    config = conf.live_cmd,
-}
-
 editor["Vonr/align.nvim"] = {
     event = "BufReadPost",
     config = conf.align_nvim,
@@ -24,6 +19,11 @@ editor["rmagatti/auto-session"] = {
 editor["numToStr/Comment.nvim"] = {
     event = "BufReadPost",
     config = conf.comment_nvim,
+}
+
+editor["smjonas/live-command.nvim"] = {
+    event = "BufReadPost",
+    config = conf.live_cmd,
 }
 
 editor["nvim-treesitter/nvim-treesitter"] = {
@@ -79,6 +79,11 @@ editor["toppair/peek.nvim"] = {
     ft = "markdown",
     run = "deno task --quiet build:fast",
     config = conf.peek_nvim,
+}
+
+editor["michaelb/sniprun"] = {
+    run = "bash ./install.sh",
+    config = conf.sniprun,
 }
 
 editor["Pocco81/TrueZen.nvim"] = {
