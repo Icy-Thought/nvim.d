@@ -14,7 +14,38 @@ local enabled_servers = {
     },
     hls = {},
     nil_ls = {}, -- Nix Expression Language
-    pyright = {},
+    pylsp = {
+        settings = {
+            pylsp = {
+                configurationSources = { "flake8" },
+                plugins = {
+                    jedi_completion = {
+                        include_params = true,
+                        enable = true,
+                    },
+                    pylsp_mypy = {
+                        enabled = true,
+                        live_mode = false,
+                        dmypy = true,
+                        strict = true,
+                        overrides = {
+                            "--disallow-untyped-defs",
+                            "--ignore-missing-imports",
+                            true,
+                        },
+                    },
+                    pydocstyle = {
+                        enabled = true,
+                        ignore = { "D1", "D203", "D213", "D416" },
+                    },
+                    flake8 = {
+                        enabled = true,
+                        maxLineLength = 120,
+                    },
+                },
+            },
+        },
+    },
     rust_analyzer = {},
     sumneko_lua = {
         settings = {
