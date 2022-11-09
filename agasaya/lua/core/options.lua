@@ -52,7 +52,7 @@ local vim_options = function()
             extends = "→",
             nbsp = "+",
             precedes = "←",
-            space = "⋅",
+            -- space = "⋅",
             tab = "»·",
             trail = "•",
         },
