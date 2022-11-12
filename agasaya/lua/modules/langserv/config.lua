@@ -10,6 +10,12 @@ function config.haskell_tools()
             repl = { handler = "toggleterm" },
         },
         hls = {
+            on_attach = function(client, bufnr)
+                if client.name ~= "null-ls" then
+                    client.server_capabilities.documentFormattingProvider =
+                        false
+                end
+            end,
             haskell = {
                 checkProject = false,
                 formattingProvider = "stylish-haskell",

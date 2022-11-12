@@ -60,6 +60,7 @@ toolset["nvim-telescope/telescope.nvim"] = {
 }
 
 toolset["akinsho/toggleterm.nvim"] = {
+    module = "toggleterm",
     event = "UIEnter",
     config = conf.toggleterm,
 }

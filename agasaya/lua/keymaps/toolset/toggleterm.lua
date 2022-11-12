@@ -26,7 +26,7 @@ Hydra({
     heads = {
         {
             "v",
-            cmd("ToggleTerm size=80 direction=vertical"),
+            cmd("ToggleTerm direction=vertical"),
             { desc = "Launch vertical terminal" },
         },
         {
@@ -46,7 +46,7 @@ Hydra({
         },
         {
             "<Enter>",
-            cmd("ToggleTerm size=10 direction=horizontal"),
+            cmd("ToggleTerm direction=horizontal"),
             { desc = "Launch horizontal terminal" },
         },
         { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
