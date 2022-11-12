@@ -13,7 +13,6 @@ function config.null_ls()
         sources = {
             -------===[ Formatting ]===-------
             builtins.formatting.stylua,
-            builtins.formatting.brittany,
             builtins.formatting.nixpkgs_fmt,
             builtins.formatting.deno_fmt,
             builtins.formatting.black.with({

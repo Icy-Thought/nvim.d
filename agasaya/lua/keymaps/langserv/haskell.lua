@@ -1,11 +1,14 @@
 local Hydra = require("hydra")
 
-local haskell_hint = [[
-                  Haskell
+local ht = require("haskell-tools")
 
-  _c_: Codelens
+local haskell_hint = [[
+                     Haskell
+
+  _b_: Buffer -> GHCi           _c_: Codelens
+  _r_: Toggle GHCi
 ^
-  _<Enter>_: Launch Hoggle            _q_: Quit!
+  _<Enter>_: Hello, Hoggle?         _q_: Quit!
 ]]
 
 Hydra({
@@ -23,18 +26,31 @@ Hydra({
     body = "<Leader>h",
     heads = {
         {
+            "b",
+            function()
+                ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+            end,
+        },
+        {
             "c",
             function()
                 vim.lsp.codelens.run()
             end,
-            { desc = "codelens??" },
+            { desc = "place a microscopic-lens on your damned code" },
+        },
+        {
+            "r",
+            function()
+                ht.repl.toggle()
+            end,
+            { desc = "toggle GHCi repl instance" },
         },
         {
             "<Enter>",
             function()
                 require("haskell-tools").hoogle.hoogle_signature()
             end,
-            { desc = "Launch Haskell Search Engine" },
+            { desc = "launch Haskell search engine" },
         },
         { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
     },

@@ -1,10 +1,10 @@
 local langserv = {}
 local conf = require("modules.langserv.config")
 
--- langserv["MrcJkb/haskell-tools.nvim"] = {
---     ft = "haskell",
---     config = conf.haskell_tools,
--- } TODO formatting sucks..
+langserv["MrcJkb/haskell-tools.nvim"] = {
+    ft = "haskell",
+    config = conf.haskell_tools,
+}
 
 langserv["saecki/crates.nvim"] = {
     event = "BufRead Cargo.toml",

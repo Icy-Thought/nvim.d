@@ -4,8 +4,19 @@ function config.haskell_tools()
     require("keymaps.langserv.haskell")
 
     require("haskell-tools").setup({
+        tools = {
+            codeLens = { autoRefresh = true },
+            hoogle = { mode = "auto" },
+            repl = { handler = "toggleterm" },
+        },
         hls = {
-            haskell = { formattingProvider = "brittany" },
+            haskell = {
+                checkProject = false,
+                formattingProvider = "stylish-haskell",
+                plugin = {
+                    refineImports = { codeLensOn = false },
+                },
+            },
         },
     })
 end
