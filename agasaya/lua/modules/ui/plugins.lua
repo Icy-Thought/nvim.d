@@ -31,6 +31,18 @@ ui["nvim-lualine/lualine.nvim"] = {
 --     config = conf.catppuccin,
 -- }
 
+ui["folke/noice.nvim"] = {
+    event = "UIEnter",
+    config = conf.noice,
+    requires = { "MunifTanjim/nui.nvim" },
+}
+
+ui["rcarriga/nvim-notify"] = {
+    event = "UIEnter",
+    module = "notify",
+    config = conf.nvim_notify,
+}
+
 ui["folke/tokyonight.nvim"] = {
     branch = "main",
     after = "lualine.nvim",
