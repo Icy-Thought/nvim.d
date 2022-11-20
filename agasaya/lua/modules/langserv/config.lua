@@ -7,20 +7,17 @@ function config.haskell_tools()
         tools = {
             codeLens = { autoRefresh = true },
             hoogle = { mode = "auto" },
+            hover = { disable = true },
             repl = { handler = "toggleterm" },
         },
         hls = {
-            on_attach = function(client, bufnr)
-                if client.name ~= "null-ls" then
-                    client.server_capabilities.documentFormattingProvider =
-                        false
-                end
-            end,
-            haskell = {
-                checkProject = false,
-                formattingProvider = "stylish-haskell",
-                plugin = {
-                    refineImports = { codeLensOn = false },
+            settings = {
+                haskell = {
+                    checkProject = false,
+                    formattingProvider = "stylish-haskell",
+                    plugin = {
+                        refineImports = { codeLensOn = false },
+                    },
                 },
             },
         },
