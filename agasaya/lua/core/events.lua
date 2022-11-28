@@ -31,8 +31,8 @@ function events.load_autocmds()
         pattern = "*",
         callback = function()
             vim.highlight.on_yank({
-                higroup = "Visual",
-                timeout = 200,
+                higroup = "IncSearch",
+                timeout = 50,
             })
         end,
     })

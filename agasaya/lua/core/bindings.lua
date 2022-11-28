@@ -35,8 +35,8 @@ local def_basics = {
     ["n|<C-Right>"] = map_cr("vertical resize +2"):with_noremap():with_silent(),
 
     -- (Barbar.nvim) buffer navigation
-    ["n|<S-l>"] = map_cr("BufferLineCycleNext"):with_noremap(),
-    ["n|<S-h>"] = map_cr("BufferLineCyclePrev"):with_noremap(),
+    ["n|L"] = map_cr("BufferLineCycleNext"):with_noremap(),
+    ["n|H"] = map_cr("BufferLineCyclePrev"):with_noremap(),
 
     -- (Barbar.nvim) Re-order buffers -> previous || next
     ["n|<A-<>"] = map_cmd("BufferLineMovePrev"):with_noremap():with_silent(),
@@ -46,9 +46,17 @@ local def_basics = {
     ["n|<A-p>"] = map_cmd("BufferLineTogglePin"):with_noremap():with_silent(),
     ["n|<A-c>"] = map_cmd("BufferlineCloseButton"):with_noremap():with_silent(),
 
-    -- Move text up and down
-    ["n|<A-j>"] = map_cmd("<Esc>:m .+1<CR>==gi"):with_noremap(),
-    ["n|<A-k>"] = map_cmd("<Esc>:m .-2<CR>==gi"):with_noremap(),
+    -- Remap scroll -> scroll + cursor in middle of screen!
+    ["n|<C-d>"] = map_cmd("<C-d>zz"):with_noremap():with_silent(),
+    ["n|<C-u>"] = map_cmd("<C-u>zz"):with_noremap():with_silent(),
+
+    -- Search and replace word under cursor
+    ["n|<A-s>"] = map_cmd(":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+        :with_noremap()
+        :with_silent(),
+
+    -- Make current file executable
+    ["n|<A-x>"] = map_cmd("!chmod +x %"):with_noremap():with_silent(),
 
     -------===[ Insert Mode ]===-------
     -- Press jk fast to enter
@@ -60,16 +68,12 @@ local def_basics = {
     ["v|>"] = map_cmd(">gv"):with_noremap(),
 
     -- Move text up and down
-    ["v|<A-j>"] = map_cmd(":m .+1<CR>=="):with_noremap(),
-    ["v|<A-k>"] = map_cmd(":m .-2<CR>=="):with_noremap(),
-    ["v|p"] = map_cmd('"_dP'):with_noremap(),
+    ["v|J"] = map_cmd(":m '>+1<CR>gv=gv"):with_noremap(),
+    ["v|K"] = map_cmd(":m '<-2<CR>gv=gv"):with_noremap(),
 
     -------===[ Visual-Block Mode ]===-------
-    -- Move text up and down
-    ["x|J"] = map_cmd(":move '>+1<CR>gv-gv"):with_noremap(),
-    ["x|K"] = map_cmd(":move '<-2<CR>gv-gv"):with_noremap(),
-    ["x|<A-j>"] = map_cmd(":move '>+1<CR>gv-gv"):with_noremap(),
-    ["x|<A-k>"] = map_cmd(":move '<-2<CR>gv-gv"):with_noremap(),
+    -- Paste in place of word -> move word to newline
+    ["x|p"] = map_cmd('"_dP'):with_noremap(),
 
     -------===[ Terminal Mode ]===-------
     -- Better terminal navigation
