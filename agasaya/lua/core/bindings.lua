@@ -12,7 +12,6 @@ local map_cmd = bind.map_cmd
 -- -> Command_Mode       = "c",
 
 local def_basics = {
-    -------===[ Normal Mode ]===-------
     -- <Esc> -> disable highlight
     ["n|<Esc>"] = map_cr("noh"):with_noremap():with_silent(),
 
@@ -58,11 +57,21 @@ local def_basics = {
     -- Make current file executable
     ["n|<A-x>"] = map_cmd("!chmod +x %"):with_noremap():with_silent(),
 
-    -------===[ Insert Mode ]===-------
+    -- Paste in place of word -> move word to newline
+    ["x|p"] = map_cmd('"_dP'):with_noremap(),
+
+    -- (quick) Yank to clipboard
+    ["n|<A-y>"] = map_cmd('"+y'):with_noremap():with_silent(),
+    ["v|<A-y>"] = map_cmd('"+y'):with_noremap():with_silent(),
+    ["n|<A-Y>"] = map_cmd('"+Y'):with_silent(),
+
+    -- Delete without yanking
+    ["n|<A-d>"] = map_cmd('"_d'):with_noremap():with_silent(),
+    ["v|<A-d>"] = map_cmd('"_d'):with_noremap():with_silent(),
+
     -- Press jk fast to enter
     ["i|jk"] = map_cmd("<ESC>"):with_noremap(),
 
-    -------===[ Visual Mode ]===-------
     -- Stay in indent mode
     ["v|<"] = map_cmd("<gv"):with_noremap(),
     ["v|>"] = map_cmd(">gv"):with_noremap(),
@@ -71,11 +80,6 @@ local def_basics = {
     ["v|J"] = map_cmd(":m '>+1<CR>gv=gv"):with_noremap(),
     ["v|K"] = map_cmd(":m '<-2<CR>gv=gv"):with_noremap(),
 
-    -------===[ Visual-Block Mode ]===-------
-    -- Paste in place of word -> move word to newline
-    ["x|p"] = map_cmd('"_dP'):with_noremap(),
-
-    -------===[ Terminal Mode ]===-------
     -- Better terminal navigation
     ["t|<C-h>"] = map_cmd("<C-\\><C-N><C-w>h"):with_silent(),
     ["t|<C-j>"] = map_cmd("<C-\\><C-N><C-w>j"):with_silent(),
