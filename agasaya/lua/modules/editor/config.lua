@@ -109,55 +109,13 @@ function config.nvim_ufo()
     })
 end
 
-function config.neorg()
-    local neorg = require("neorg")
-    neorg.setup({
-        load = {
-            ["core.defaults"] = {},
-            ["core.norg.concealer"] = {
-                config = {
-                    markup_preset = "dimmed",
-                    icon_preset = "diamond",
-                },
-            },
-            ["core.norg.dirman"] = {
-                config = {
-                    workspaces = {
-                        work = "~/Notes/Neorg/Work",
-                        home = "~/Notes/Neorg/Journal",
-                        GTD = "~/Notes/Neorg/GTD",
-                    },
-                    autochdir = true,
-                    autodetect = true,
-                    open_last_workspace = true,
-                    default_workspace = "home",
-                },
-            },
-            ["core.gtd.base"] = {
-                config = {
-                    workspace = "GTD",
-                },
-            },
-            ["core.norg.journal"] = {
-                config = {
-                    workspace = "~/Notes/Neorg/Journal",
-                    strategy = "nested",
-                },
-            },
-            ["core.presenter"] = {
-                config = {
-                    zen_mode = "truezen",
-                },
-            },
-            ["core.export"] = {},
-            ["core.norg.qol.toc"] = {
-                config = {
-                    default_toc_mode = "split",
-                    toc_split_placement = "left",
-                    close_split_on_jump = false,
-                },
-            },
-        },
+function config.org_mode()
+    local org_mode = require("orgmode")
+
+    org_mode.setup_ts_grammar()
+    org_mode.setup({
+        org_agenda_files = { "~/Notes/Org-Mode/*" },
+        org_default_notes_file = "~/Notes/Org-Mode/refile.org",
     })
 end
 
@@ -202,6 +160,21 @@ function config.treesitter()
     ts_conf.setup({
         autopairs = { enable = true },
         context_commentstring = { enable = true },
+        highlight = {
+            enable = true,
+            disable = { "vim" },
+            additional_vim_regex_highlighting = { "org" },
+        },
+        indent = { enable = true },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "gnn",
+                node_incremental = "gnn",
+                scope_incremental = "gns",
+                node_decremental = "gnp",
+            },
+        },
         ensure_installed = {
             "bash",
             "c",
@@ -217,21 +190,10 @@ function config.treesitter()
             "make",
             "markdown",
             "nix",
-            "norg",
+            "org",
             "python",
             "rust",
             "vim",
-        },
-        highlight = { enable = true, disable = { "vim" } },
-        indent = { enable = true },
-        incremental_selection = {
-            enable = true,
-            keymaps = {
-                init_selection = "gnn",
-                node_incremental = "gnn",
-                scope_incremental = "gns",
-                node_decremental = "gnp",
-            },
         },
         rainbow = {
             enable = true,

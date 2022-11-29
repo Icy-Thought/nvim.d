@@ -62,10 +62,10 @@ editor["brenoprata10/nvim-highlight-colors"] = {
     config = conf.highlight_colors,
 }
 
-editor["nvim-neorg/neorg"] = {
-    ft = "norg",
+editor["nvim-orgmode/orgmode"] = {
+    ft = "org",
     after = "nvim-treesitter",
-    config = conf.neorg,
+    config = conf.org_mode,
 }
 
 editor["kevinhwang91/nvim-ufo"] = {
