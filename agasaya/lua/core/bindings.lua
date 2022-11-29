@@ -60,15 +60,6 @@ local def_basics = {
     -- Paste in place of word -> move word to newline
     ["x|p"] = map_cmd('"_dP'):with_noremap(),
 
-    -- (quick) Yank to clipboard
-    ["n|<A-y>"] = map_cmd('"+y'):with_noremap():with_silent(),
-    ["v|<A-y>"] = map_cmd('"+y'):with_noremap():with_silent(),
-    ["n|<A-Y>"] = map_cmd('"+Y'):with_silent(),
-
-    -- Delete without yanking
-    ["n|<A-d>"] = map_cmd('"_d'):with_noremap():with_silent(),
-    ["v|<A-d>"] = map_cmd('"_d'):with_noremap():with_silent(),
-
     -- Press jk fast to enter
     ["i|jk"] = map_cmd("<ESC>"):with_noremap(),
 
