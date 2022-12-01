@@ -28,6 +28,7 @@ ls.add_snippets("tex", {
         t({
             "\\documentclass[10pt,a4paper,twocolumn]{report}",
             "\\setcounter{secnumdepth}{4}",
+            "\\setcounter{tocdepth}{3}",
             "",
             "\\usepackage[margin=2cm]{geometry}",
             "\\setlength{\\columnsep}{1.5cm}",
