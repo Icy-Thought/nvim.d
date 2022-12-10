@@ -43,16 +43,16 @@ ui["rcarriga/nvim-notify"] = {
     config = conf.nvim_notify,
 }
 
+ui["nyoom-engineering/oxocarbon.nvim"] = {
+    event = "UIEnter",
+    after = "lualine.nvim",
+    config = conf.oxocarbon,
+}
+
 ui["folke/tokyonight.nvim"] = {
     branch = "main",
     after = "lualine.nvim",
     config = conf.tokyonight,
-}
-
-ui["decaycs/decay.nvim"] = {
-    as = "decay",
-    after = "lualine.nvim",
-    config = conf.decay,
 }
 
 return ui

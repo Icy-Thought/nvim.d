@@ -24,7 +24,12 @@ function config.bufferline()
                     text_align = "left",
                 },
             },
-            diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            diagnostics_indicator = function(
+                count,
+                level,
+                diagnostics_dict,
+                context
+            )
                 local s = " "
                 for e, n in pairs(diagnostics_dict) do
                     local sym = e == "error" and " "
@@ -117,24 +122,9 @@ function config.catppuccin()
     })
 end
 
-function config.decay()
+function config.oxocorbon()
     if vim.g.neovide then
-        require("decay").setup({
-            style = "dark",
-            italics = {
-                code = true,
-                comments = true,
-            },
-            nvim_tree = {
-                contrast = true,
-            },
-        })
-
-        require("lualine").setup({
-            options = { theme = "decay" },
-        })
-
-        vim.cmd("colorscheme decay")
+        vim.cmd("colorscheme oxocorbon")
     end
 end
 
