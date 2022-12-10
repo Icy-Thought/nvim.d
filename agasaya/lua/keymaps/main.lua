@@ -27,7 +27,7 @@ Hydra({
         },
     },
     mode = "n",
-    body = "<Leader>w",
+    body = "<leader>w",
     heads = {
         { "b", cmd("Telescope buffers"), { desc = "Switch buffer" } },
         { "c", cmd("bd!"), { desc = "Close active buffer" } },

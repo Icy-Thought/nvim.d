@@ -23,7 +23,7 @@ Hydra({
         },
     },
     mode = { "n", "x" },
-    body = "<Leader>z",
+    body = "<leader>z",
     heads = {
         { "z", cmd("TZAtaraxis"), { desc = "Enable true-zen Mode" } },
         { "p", cmd("TSPlayground"), { desc = "Treesitter playground" } },

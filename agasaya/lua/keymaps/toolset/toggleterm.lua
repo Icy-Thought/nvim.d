@@ -22,7 +22,7 @@ Hydra({
         },
     },
     mode = "n",
-    body = "<Leader>t",
+    body = "<leader>t",
     heads = {
         {
             "v",

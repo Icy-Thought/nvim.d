@@ -33,9 +33,9 @@ function config.rust_tools()
     require("keymaps.langserv.rust")
 end
 
--- function config.flutter_tools()
---     require("flutter-tools").setup()
---     require("keymaps.langserv.flutter")
--- end
+function config.flutter_tools()
+    require("flutter-tools").setup()
+    require("keymaps.langserv.flutter")
+end
 
 return config

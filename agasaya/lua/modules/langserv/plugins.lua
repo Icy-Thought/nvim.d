@@ -16,9 +16,9 @@ langserv["simrat39/rust-tools.nvim"] = {
     config = conf.rust_tools,
 }
 
--- langserv["simrat39/flutter-tools.nvim"] = {
---     ft = "dart",
---     config = conf.flutter_tools,
--- }
+langserv["simrat39/flutter-tools.nvim"] = {
+    ft = "dart",
+    config = conf.flutter_tools,
+}
 
 return langserv
