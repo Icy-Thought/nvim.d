@@ -51,10 +51,10 @@ function events.load_autocmds()
     })
 
     -- Auto change directory
-    autocmd("BufEnter", {
-        pattern = "*",
-        command = "silent! lcd %:p:h",
-    })
+    -- autocmd("BufEnter", {
+    --     pattern = "*",
+    --     command = "silent! lcd %:p:h",
+    -- })
 
     -- Force write shada on nvim exit
     autocmd("VimLeave", {
