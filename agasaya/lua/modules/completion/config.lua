@@ -153,7 +153,6 @@ function config.nvim_cmp()
             end,
         },
         sources = {
-            -- { name = "copilot" },
             { name = "nvim_lsp" },
             { name = "nvim_lua" },
             { name = "luasnip" },
@@ -179,6 +178,14 @@ function config.nvim_cmp()
             { name = "cmdline" },
         }),
     })
+end
+
+function config.copilot()
+    vim.defer_fn(function()
+        require("copilot").setup()
+    end, 100)
+
+    require("copilot_cmp").setup()
 end
 
 function config.luasnip()

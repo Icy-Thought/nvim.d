@@ -6,6 +6,11 @@ toolset["gorbit99/codewindow.nvim"] = {
     config = conf.codewindow,
 }
 
+toolset["jackMort/ChatGPT.nvim"] = {
+    event = "UIEnter",
+    config = conf.chatgpt,
+}
+
 toolset["anuvyklack/hydra.nvim"] = {
     module = "hydra",
     keys = "<leader>",

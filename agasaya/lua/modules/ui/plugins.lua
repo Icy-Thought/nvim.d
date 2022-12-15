@@ -31,10 +31,11 @@ ui["nvim-lualine/lualine.nvim"] = {
 --     config = conf.catppuccin,
 -- }
 
+ui["MunifTanjim/nui.nvim"] = { module("nui.nvim") }
+
 ui["folke/noice.nvim"] = {
     event = "UIEnter",
     config = conf.noice,
-    requires = { "MunifTanjim/nui.nvim" },
 }
 
 ui["rcarriga/nvim-notify"] = {
@@ -44,13 +45,11 @@ ui["rcarriga/nvim-notify"] = {
 }
 
 ui["nyoom-engineering/oxocarbon.nvim"] = {
-    event = "UIEnter",
     after = "lualine.nvim",
     config = conf.oxocarbon,
 }
 
 ui["folke/tokyonight.nvim"] = {
-    branch = "main",
     after = "lualine.nvim",
     config = conf.tokyonight,
 }

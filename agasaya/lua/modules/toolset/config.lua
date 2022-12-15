@@ -4,6 +4,14 @@ function config.codewindow()
     require("codewindow").setup()
 end
 
+function config.chatgpt()
+    require("chatgpt").setup({
+        chat_window = {
+            border = { text = { top = "ChatGPT-3" } },
+        },
+    })
+end
+
 function config.hydra_nvim()
     require("keymaps.main")
     require("keymaps.options")

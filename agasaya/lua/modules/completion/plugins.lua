@@ -45,8 +45,9 @@ completion["windwp/nvim-autopairs"] = {
 
 -- completion["zbirenbaum/copilot.lua"] = {
 --     after = "nvim-cmp",
---     requires = "zbirenbaum/copilot-cmp",
+--     event = "InsertEnter",
 --     config = conf.copilot,
+--     requires = { "zbirenbaum/copilot-cmp" }
 -- }
 
 return completion
