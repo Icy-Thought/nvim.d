@@ -55,8 +55,8 @@ Hydra({
         { "c", cmd("Telescope commands"), { desc = "Execute command" } },
         {
             "u",
-            cmd("silent! %foldopen! | UndotreeToggle"),
-            { desc = "Undotree" },
+            cmd("Telescope undo"),
+            { desc = "Telescope version of UndoTree" },
         },
         {
             "<Enter>",

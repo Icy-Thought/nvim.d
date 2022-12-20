@@ -117,6 +117,7 @@ function config.telescope()
     telescope.load_extension("project")
     telescope.load_extension("ui-select")
     telescope.load_extension("manix")
+    telescope.load_extension("undo")
 end
 
 function config.toggleterm()
