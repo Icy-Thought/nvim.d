@@ -1,5 +1,9 @@
 local config = {}
 
+function config.lspconfig()
+    require("modules.completion.manual-lsp")
+end
+
 function config.mason_nvim()
     require("modules.completion.mason")
 end

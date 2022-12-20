@@ -132,6 +132,7 @@ function config.tokyonight()
         local tokyonight = require("tokyonight")
         tokyonight.setup({
             style = "night",
+            transparent = true,
             terminal_colors = true,
             styles = {
                 comments = "italic",
