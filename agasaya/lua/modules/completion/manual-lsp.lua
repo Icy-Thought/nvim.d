@@ -71,9 +71,7 @@ local initialize_lsp = function()
     local default_config = {
         on_attach = handlers.on_attach,
         capabilities = handlers.capabilities,
-        flags = {
-            debounce_text_changes = 150,
-        },
+        flags = { debounce_text_changes = 150 },
     }
 
     for server, config in pairs(enabled_servers) do

@@ -46,7 +46,6 @@ function config.catppuccin()
     if not vim.g.neovide then
         local catppuccin = require("catppuccin")
         catppuccin.setup({
-            transparent_background = false,
             term_colors = true,
             compile = {
                 enabled = true,
@@ -133,7 +132,6 @@ function config.tokyonight()
         local tokyonight = require("tokyonight")
         tokyonight.setup({
             style = "night",
-            transparent = true,
             terminal_colors = true,
             styles = {
                 comments = "italic",

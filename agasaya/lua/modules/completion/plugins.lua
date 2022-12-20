@@ -6,7 +6,12 @@ completion["nvim-lua/plenary.nvim"] = { module = "plenary" }
 completion["neovim/nvim-lspconfig"] = {
     module = "lspconfig",
     event = { "BufRead", "BufWinEnter", "BufNewFile" },
-    config = conf.lspconfig,
+}
+
+completion["williamboman/mason.nvim"] = {
+    after = "nvim-lspconfig",
+    config = conf.mason_nvim,
+    requires = { "williamboman/mason-lspconfig.nvim" },
 }
 
 completion["jose-elias-alvarez/null-ls.nvim"] = {
