@@ -121,9 +121,9 @@ function config.catppuccin()
     })
 end
 
-function config.oxocorbon()
+function config.oxocarbon()
     if vim.g.neovide then
-        vim.cmd("colorscheme oxocorbon")
+        vim.cmd("colorscheme oxocarbon")
     end
 end
 
