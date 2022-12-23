@@ -3,6 +3,8 @@ local conf = require("modules.ui.config")
 
 ui["kyazdani42/nvim-web-devicons"] = { module = "nvim-web-devicons" }
 
+ui["MunifTanjim/nui.nvim"] = { module = "nui" }
+
 ui["akinsho/bufferline.nvim"] = {
     tag = "*",
     event = "BufWinEnter",
@@ -30,8 +32,6 @@ ui["nvim-lualine/lualine.nvim"] = {
 --     run = "CatppuccinCompile",
 --     config = conf.catppuccin,
 -- }
-
-ui["MunifTanjim/nui.nvim"] = { module("nui.nvim") }
 
 ui["folke/noice.nvim"] = {
     event = "UIEnter",

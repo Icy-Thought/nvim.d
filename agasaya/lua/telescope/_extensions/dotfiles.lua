@@ -14,8 +14,9 @@ local dotfiles_list = function(opts)
     for file in p:lines() do
         table.insert(list, file)
     end
-    local nvim_conf =
-        io.popen("rg --files " .. os.getenv("HOME") .. "/.config/nvim")
+    local nvim_conf = io.popen(
+        "rg --files " .. os.getenv("HOME") .. "/git/icy-thought/nvim.d/agasaya"
+    )
     for file in nvim_conf:lines() do
         table.insert(list, file)
     end
@@ -28,8 +29,8 @@ local dotfiles = function(opts)
 
     pickers
         .new(opts, {
-            prompt_title = "find in dotfiles",
-            results_title = "Dotfiles",
+            prompt_title = "find in nvim dotfiles",
+            results_title = "Nvim Dotfiles",
             finder = finders.new_table({
                 results = results,
                 entry_maker = make_entry.gen_from_file(opts),
