@@ -2,7 +2,7 @@ return {
     {
         "akinsho/bufferline.nvim",
         version = "*",
-        event = "BufWinEnter",
+        event = "BufAdd",
         config = {
             options = {
                 numbers = "ordinal",
@@ -49,8 +49,7 @@ return {
             local db = require("dashboard")
             local config_dir = vim.fn.stdpath("config")
 
-            db.custom_header =
-                vim.fn.systemlist("cat " .. config_dir .. "/dasHead.txt")
+            db.custom_header = vim.fn.systemlist("cat " .. config_dir .. "/dasHead.txt")
             db.custom_center = {
                 {
                     icon = "  ",
@@ -94,7 +93,6 @@ return {
                     shortcut = "SPC u u",
                     action = "Lazy update",
                 },
-
                 {
                     icon = "  ",
                     desc = "Quit" .. "                                  ",
@@ -111,7 +109,7 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
-        event = "UIEnter",
+        event = "VeryLazy",
         config = true,
     },
     {
@@ -156,7 +154,7 @@ return {
 
             notify.setup({
                 background_colour = "#1A1B26",
-                timeout = 1500,
+                timeout = 1000,
             })
             vim.notify = notify
         end,
@@ -166,4 +164,5 @@ return {
         "kyazdani42/nvim-web-devicons",
         config = { default = true },
     },
+}
 }

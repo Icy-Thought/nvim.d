@@ -1,4 +1,4 @@
-return{
+return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
@@ -86,6 +86,11 @@ return{
         "nyoom-engineering/oxocarbon.nvim",
         lazy = false,
         priority = 1000,
+        config = function()
+            if vim.g.neovide then
+                vim.cmd("colorscheme oxocarbon")
+            end
+        end,
     },
     {
         "folke/tokyonight.nvim",

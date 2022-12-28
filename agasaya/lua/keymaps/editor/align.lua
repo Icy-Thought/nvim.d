@@ -6,7 +6,7 @@ local align_hint = [[
   _a_: 1 Character          _l_: Lua Pattern
   _d_: 2 Character          _p_: Paragraph -> String
   _w_: String               _c_: Paragraph -> 1 Character
-^^^^                        _q_: Quit!
+^^^^                                           _q_: Quit!
 ]]
 
 local ALS = require("align")

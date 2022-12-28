@@ -80,7 +80,7 @@ Hydra({
             position = "middle",
         },
     },
-    mode = "n",
+    mode = "x",
     body = "<leader>w",
     heads = {
         {
@@ -90,5 +90,6 @@ Hydra({
             end,
             { desc = "launch mini-buffer for editing/replacing search term." },
         },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
     },
 })

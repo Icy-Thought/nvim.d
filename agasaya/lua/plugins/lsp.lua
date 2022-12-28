@@ -223,6 +223,7 @@ return {
     },
     {
         "jose-elias-alvarez/null-ls.nvim",
+        event = "BufWritePre",
         config = function()
             local builtins = require("null-ls.builtins")
 
