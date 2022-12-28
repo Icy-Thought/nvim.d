@@ -1,13 +1,19 @@
 local events = {}
 
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
 function events.load_autocmds()
     -- Create dir on save if != existent
     autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function(ctx)
-            return vim.fn.mkdir(vim.fn.fnamemodify(ctx.file, ":p:h"), "p")
+        group = augroup("auto_create_dir", { clear = true }),
+        callback = function(event)
+            local file = vim.loop.fs_realpath(event.match) or event.match
+            local backup = vim.fn.fnamemodify(file, ":p:~:h")
+
+            vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+            backup = backup:gsub("[/\\]", "%%")
+            vim.go.backupext = backup
         end,
     })
 

@@ -66,14 +66,10 @@ core.init = function()
     map_leader()
     neovide_config()
 
-    local packer = require("core.packer")
-    packer.ensure_plugins()
-
+    require("core.lazy")
     require("core.options")
     require("core.bindings")
     require("core.events")
-
-    packer.load_compile()
 end
 
 return core

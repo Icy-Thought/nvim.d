@@ -1,6 +1,12 @@
-local handlers = require("modules.completion.handlers")
+local M = {
+    enabled = false,
+    "williamboman/mason.nvim",
+    dependencies = { "williamboman/mason-lspconfig.nvim" },
+}
 
-local function init_mason_lsp()
+function M.config()
+    require("completion.lspconf.diagnostics")
+
     local nvim_lsp = require("lspconfig")
     local mason = require("mason")
     local mason_lsp = require("mason-lspconfig")
@@ -107,9 +113,3 @@ local function init_mason_lsp()
         end,
     })
 end
-
--- Let's initiallize the LSP server!
-init_mason_lsp()
-
--- Call forward our LSP-Configuration
-handlers.setup()

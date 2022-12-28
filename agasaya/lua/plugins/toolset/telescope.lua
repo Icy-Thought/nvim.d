@@ -1,53 +1,26 @@
-local config = {}
-
-function config.codewindow()
-    require("codewindow").setup()
-end
-
-function config.chatgpt()
-    require("chatgpt").setup({
-        chat_window = {
-            border = { text = { top = "ChatGPT-3" } },
+local M = {
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    dependencies = {
+        "nvim-telescope/telescope-file-browser.nvim",
+        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        {
+            "nvim-telescope/telescope-frecency.nvim",
+            dependencies = { "tami5/sqlite.lua" },
         },
-    })
-end
+        "nvim-telescope/telescope-project.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
+        "MrcJkb/telescope-manix",
+        "debugloop/telescope-undo.nvim",
+    },
+}
 
-function config.hydra_nvim()
-    require("keymaps.main")
-    require("keymaps.options")
-end
+function M.config()
+    require("keymaps.toolset.telescope")
 
-function config.gitsigns()
-    require("gitsigns").setup()
-    require("keymaps.editor.gitsigns")
-end
-
-function config.nvim_tree()
-    require("nvim-tree").setup()
-end
-
-function config.neogit()
-    local neogit = require("neogit")
-    neogit.setup({
-        disable_signs = false,
-        disable_context_highlighting = false,
-        disable_commit_confirmation = false,
-        signs = {
-            -- { CLOSED, OPENED }
-            section = { ">", "v" },
-            item = { ">", "v" },
-            hunk = { "", "" },
-        },
-        integrations = { diffview = true },
-    })
-end
-
-function config.telescope()
     local telescope = require("telescope")
     local ts_prev = require("telescope.previewers")
     local ts_sort = require("telescope.sorters")
-
-    require("keymaps.toolset.telescope")
 
     telescope.setup({
         defaults = {
@@ -120,26 +93,4 @@ function config.telescope()
     telescope.load_extension("undo")
 end
 
-function config.toggleterm()
-    require("keymaps.toolset.toggleterm")
-
-    require("toggleterm").setup({
-        auto_scroll = true,
-        close_on_exit = true,
-        start_in_insert = true,
-        direction = "vertical",
-        float_opts = {
-            border = "curved", -- 'shadow' = ???
-            winblend = 3,
-        },
-        size = function(term)
-            if term.direction == "horizontal" then
-                return 15
-            elseif term.direction == "vertical" then
-                return vim.o.columns * 0.4
-            end
-        end,
-    })
-end
-
-return config
+return M

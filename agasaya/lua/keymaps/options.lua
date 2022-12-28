@@ -22,7 +22,7 @@ Hydra({
         invoke_on_body = true,
         hint = {
             border = "rounded",
-            position = "middle",
+            offset = 3,
             funcs = {
                 arabic = function()
                     if vim.o.arabic then
@@ -32,6 +32,7 @@ Hydra({
                     end
                 end,
             },
+            position = "middle",
         },
     },
     mode = { "n", "x" },
