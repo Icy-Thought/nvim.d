@@ -165,4 +165,3 @@ return {
         config = { default = true },
     },
 }
-}

@@ -58,6 +58,7 @@ return {
                 hunk = { "", "" },
             },
             integrations = { diffview = true },
+            use_magit_keybindings = true,
         },
     },
     {
