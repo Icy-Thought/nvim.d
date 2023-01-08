@@ -2,12 +2,12 @@ local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
 local term_hint = [[
-                  Toggle-Term
-
-  _v_: Vertical                _t_: Tabbed
-  _f_: Float                   _p_: Python-Env
-^
-  _<Enter>_: horizontal        _q_: Quit
+  ^^                 Toggle-Term                 ^
+  ^
+  ^^ _v_: Vertical                _t_: Tabbed     ^
+  ^^ _f_: Float                   _p_: Python-Env ^
+  ^
+  ^^ _<Enter>_: horizontal             _q_: Quit! ^
 ]]
 
 Hydra({

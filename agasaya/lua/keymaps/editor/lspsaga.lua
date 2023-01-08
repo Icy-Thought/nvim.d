@@ -2,16 +2,16 @@ local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
 local nSaga_hint = [[
-                     Lspsaga (Normal)
-
-  _f_: LSP-Finder                  _l_: Line Diagnostic
-  _a_: Code Action                 _c_: Cursor Diagnostic
-  _h_: Hover-DOC                   _[_: Preview Diagnostics
-  _r_: Rename Definition           _]_: Next Diagnostics
-  _d_: Peek Definition             _k_: Previous Err. Diagnostic
-  _o_: Outline Buffer              _j_: Next Err. Diagnostic
-^
-  _<Enter>_: Format Buffer                              _q_: Quit
+  ^^                   Lspsaga (Normal)                            ^
+  ^
+  ^^ _f_: LSP-Finder                  _l_: Line Diagnostic          ^
+  ^^ _a_: Code Action                 _c_: Cursor Diagnostic        ^
+  ^^ _h_: Hover-DOC                   _[_: Preview Diagnostics      ^
+  ^^ _r_: Rename Definition           _]_: Next Diagnostics         ^
+  ^^ _d_: Peek Definition             _k_: Previous Err. Diagnostic ^
+  ^^ _o_: Outline Buffer              _j_: Next Err. Diagnostic     ^
+  ^
+  ^^ _<Enter>_: Format Buffer                            _q_: Quit! ^
 ]]
 
 Hydra({

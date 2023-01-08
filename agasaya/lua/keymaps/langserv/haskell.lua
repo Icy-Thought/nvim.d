@@ -3,12 +3,12 @@ local Hydra = require("hydra")
 local ht = require("haskell-tools")
 
 local haskell_hint = [[
-                     Haskell
-
-  _b_: Buffer -> GHCi           _c_: Codelens
-  _r_: Toggle GHCi
-^
-  _<Enter>_: Hello, Hoggle?         _q_: Quit!
+  ^^                  Haskell                   ^
+  ^
+  ^^ _b_: Buffer -> GHCi           _c_: Codelens ^
+  ^^ _r_: Toggle GHCi                            ^
+  ^
+  ^^ _<Enter>_: Hello, Hoggle?        _q_: Quit! ^
 ]]
 
 Hydra({

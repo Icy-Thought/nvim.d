@@ -2,14 +2,15 @@ local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
 local gitsign_hint = [[
-                      Git
-    _J_: Next Hunk        _d_: Show Deleted
-    _K_: Prev Hunk        _u_: Undo Last Stage
-    _s_: Stage Hunk       _/_: Show Base File
-    _p_: Preview Hunk     _S_: Stage Buffer
-    _b_: Blame Line       _B_: Blame Show Full
+  ^^                  Git                      ^
   ^
-    _<Enter>_: Neogit                _q_: Quit!
+  ^^ _J_: Next Hunk        _d_: Show Deleted    ^
+  ^^ _K_: Prev Hunk        _u_: Undo Last Stage ^
+  ^^ _s_: Stage Hunk       _/_: Show Base File  ^
+  ^^ _p_: Preview Hunk     _S_: Stage Buffer    ^
+  ^^ _b_: Blame Line       _B_: Blame Show Full ^
+  ^
+  ^^ _<Enter>_: Neogit               _q_: Quit! ^
 ]]
 
 local gitsigns = require("gitsigns")

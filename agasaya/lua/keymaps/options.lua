@@ -1,17 +1,17 @@
 local Hydra = require("hydra")
 
 local option_hint = [[
-  ^ ^        Options
+  ^^            ⚙  Options            ^
   ^
-  _a_ %{arabic} Arabic
-  _c_ %{cul} cursor line
-  _i_ %{list} invisible characters
-  _n_ %{nu} number
-  _s_ %{spell} spell
-  _v_ %{ve} virtual edit
-  _w_ %{wrap} wrap
+  ^^ _a_ %{arabic} Arabic             ^
+  ^^ _c_ %{cul} cursor line           ^
+  ^^ _i_ %{list} invisible characters ^
+  ^^ _n_ %{nu} number                 ^
+  ^^ _s_ %{spell} spell               ^
+  ^^ _v_ %{ve} virtual edit           ^
+  ^^ _w_ %{wrap} wrap                 ^
   ^
-       ^^^^                _q_
+  ^^                       _q_: Quit! ^
 ]]
 
 Hydra({
