@@ -1,7 +1,8 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        event = { "BufRead", "BufWinEnter", "BufNewFile" },
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "glepnir/lspsaga.nvim" },
         config = function()
             require("plugins.lspconf.diagnostics")
 
@@ -44,6 +45,7 @@ return {
                     settings = {
                         texlab = {
                             auxDirectory = "build",
+                            bibtexFormatter = "texlab",
                             build = {
                                 executable = "tectonic",
                                 args = {
@@ -62,11 +64,12 @@ return {
                             },
                             chktex = {
                                 onEdit = false,
-                                onOpenAndSave = true,
+                                onOpenAndSave = false,
                             },
                             diagnosticsDelay = 100,
-                            formatterLineLength = 80,
-                            latexFormatter = "texlab",
+                            formatterLineLength = 120,
+                            latexFormatter = "latexindent",
+                            latexindent = { modifyLineBreaks = false },
                         },
                     },
                 },
@@ -188,7 +191,6 @@ return {
                             texlab = {
                                 auxDirectory = "build",
                                 build = {
-                                    executable = "tectonic",
                                     args = {
                                         "%f",
                                         "--synctex",
@@ -197,15 +199,16 @@ return {
                                         "--outdir",
                                         "build",
                                     },
+                                    executable = "tectonic",
                                     onSave = true,
                                 },
                                 forwardSearch = {
-                                    executable = "zathura",
                                     args = {
                                         "--synctex-forward",
                                         "%l:1:%f",
                                         "%p",
                                     },
+                                    executable = "zathura",
                                 },
                                 chktex = {
                                     onEdit = false,
