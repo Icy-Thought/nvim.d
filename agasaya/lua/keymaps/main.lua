@@ -31,7 +31,7 @@ Hydra({
     heads = {
         { "b", cmd("Telescope buffers"), { desc = "Switch buffer" } },
         { "c", cmd("bd!"), { desc = "Close active buffer" } },
-        { "e", cmd("NvimTreeToggle"), { desc = "Toggle-Tree on working dir" } },
+        { "e", cmd("Neotree toggle"), { desc = "Toggle Tree on working dir" } },
         { "k", cmd("%bd|e#"), { desc = "Close buffers, EXCEPT active buf" } },
         {
             "l",

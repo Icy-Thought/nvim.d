@@ -62,10 +62,21 @@ return {
         },
     },
     {
-        "kyazdani42/nvim-tree.lua",
-        version = "nightly",
-        cmd = "NvimTreeToggle",
-        config = true,
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        cmd = "Neotree",
+        init = function()
+            vim.g.neo_tree_remove_legacy_commands = 1
+            if vim.fn.argc() == 1 then
+                local stat = vim.loop.fs_stat(vim.fn.argv(0))
+                if stat and stat.type == "directory" then
+                    require("neo-tree")
+                end
+            end
+        end,
+        opts = {
+            filesystem = { follow_current_file = true },
+        },
     },
     {
         "toppair/peek.nvim",
