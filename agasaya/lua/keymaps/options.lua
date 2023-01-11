@@ -22,7 +22,6 @@ Hydra({
         invoke_on_body = true,
         hint = {
             border = "rounded",
-            offset = 3,
             funcs = {
                 arabic = function()
                     if vim.o.arabic then

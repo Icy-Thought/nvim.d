@@ -23,7 +23,6 @@ Hydra({
         invoke_on_body = true,
         hint = {
             border = "rounded",
-            offset = 3,
             position = "middle",
         },
     },
