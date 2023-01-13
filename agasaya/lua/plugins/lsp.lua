@@ -2,7 +2,6 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
-        dependencies = { "glepnir/lspsaga.nvim" },
         config = function()
             require("plugins.lspconf.diagnostics")
 
@@ -92,13 +91,16 @@ return {
     },
     {
         "glepnir/lspsaga.nvim",
+        event = "BufRead",
         config = function()
             require("keymaps.editor.lspsaga")
 
-            require("lspsaga").init_lsp_saga({
-                border_style = "rounded",
-                code_action_icon = " ",
-                diagnostic_header = { " ", " ", " ", " " },
+            require("lspsaga").setup({
+                ui = {
+                    border = "rounded",
+                    code_action = " ",
+                    diagnostic = { " ", " ", " ", " " },
+                },
             })
         end,
     },
