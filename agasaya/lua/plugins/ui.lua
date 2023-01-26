@@ -2,8 +2,8 @@ return {
     {
         "akinsho/bufferline.nvim",
         version = "*",
-        event = "BufAdd",
-        config = {
+        event = "BufEnter",
+        opts = {
             options = {
                 numbers = "ordinal",
                 diagnostics = "nvim_lsp",
@@ -41,65 +41,77 @@ return {
                 end,
             },
         },
+        config = function(_, opts)
+            require("bufferline").setup(opts)
+        end,
     },
     {
         "glepnir/dashboard-nvim",
         event = "BufWinEnter",
-        config = function()
-            local db = require("dashboard")
+        opts = function()
             local config_dir = vim.fn.stdpath("config")
-
-            db.custom_header = vim.fn.systemlist("cat " .. config_dir .. "/dasHead.txt")
-            db.custom_center = {
-                {
-                    icon = "  ",
-                    desc = "Switch Colorscheme" .. "                    ",
-                    shortcut = "SPC s c",
-                    action = "Telescope colorscheme",
-                },
-                {
-                    icon = "  ",
-                    desc = "File Frecency" .. "                         ",
-                    shortcut = "SPC f r",
-                    action = "lua require('telescope').extensions.frecency.frecency()",
-                },
-                {
-                    icon = "  ",
-                    desc = "Find File" .. "                             ",
-                    shortcut = "SPC f f",
-                    action = "Telescope find_files",
-                },
-                {
-                    icon = "  ",
-                    desc = "New File" .. "                              ",
-                    shortcut = "SPC f n",
-                    action = "DashboardNewFile",
-                },
-                {
-                    icon = "  ",
-                    desc = "Find Project" .. "                          ",
-                    shortcut = "SPC f p",
-                    action = "Telescope project",
-                },
-                {
-                    icon = "  ",
-                    desc = "Browse Neovim Dotfiles" .. "                ",
-                    action = "Telescope dotfiles path=" .. config_dir,
-                    shortcut = "SPC f d",
-                },
-                {
-                    icon = "  ",
-                    desc = "Update Plugins" .. "                        ",
-                    shortcut = "SPC u u",
-                    action = "Lazy update",
-                },
-                {
-                    icon = "  ",
-                    desc = "Quit" .. "                                  ",
-                    shortcut = "SPC q q",
-                    action = "q",
+            return {
+                theme = "doom",
+                config = {
+                    header = vim.fn.systemlist(
+                        "cat " .. config_dir .. "/dasHead.txt"
+                    ),
+                    center = {
+                        {
+                            action = "Telescope colorscheme",
+                            desc = "Switch Colorscheme"
+                                .. "                    ", -- TODO: more appropriate solution
+                            icon = "  ",
+                            key = "SPC s c",
+                        },
+                        {
+                            action = "lua require('telescope').extensions.frecency.frecency()",
+                            desc = "File Frecency",
+                            icon = "  ",
+                            key = "SPC f r",
+                        },
+                        {
+                            action = "Telescope find_files",
+                            desc = "Find File",
+                            icon = "  ",
+                            key = "SPC f f",
+                        },
+                        {
+                            action = "DashboardNewFile",
+                            desc = "New File",
+                            icon = "  ",
+                            key = "SPC f n",
+                        },
+                        {
+                            action = "Telescope project",
+                            desc = "Find Project",
+                            icon = "  ",
+                            key = "SPC f p",
+                        },
+                        {
+                            action = "Telescope dotfiles path=" .. config_dir,
+                            desc = "Browse Neovim Dotfiles",
+                            icon = "  ",
+                            key = "SPC f d",
+                        },
+                        {
+                            action = "Lazy update",
+                            desc = "Update Plugins",
+                            icon = "  ",
+                            key = "SPC u u",
+                        },
+                        {
+                            action = "q",
+                            desc = "Quit",
+                            icon = "  ",
+                            key = "SPC q q",
+                        },
+                    },
                 },
             }
+        end,
+        config = function(_, opts)
+            require("dashboard").setup(opts)
         end,
     },
     {
@@ -115,53 +127,58 @@ return {
     {
         "folke/noice.nvim",
         event = "UIEnter",
-        config = function()
+        opts = {
+            hacks = { cmp_popup_row_offset = 1 },
+            views = {
+                mini = {
+                    position = { row = "90%", col = "100%" },
+                },
+                cmdline_popup = {
+                    position = { row = "30%", col = "50%" },
+                    size = { width = "40%", height = "auto" },
+                },
+            },
+            lsp = {
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
+            },
+            presets = {
+                bottom_search = false,
+                command_palette = true,
+                long_message_to_split = true,
+                inc_rename = false,
+                lsp_doc_border = false,
+            },
+        },
+        config = function(_, opts)
             if not vim.g.neovide then
-                require("noice").setup({
-                    hacks = { cmp_popup_row_offset = 1 },
-                    views = {
-                        mini = {
-                            position = { row = "90%", col = "100%" },
-                        },
-                        cmdline_popup = {
-                            position = { row = "30%", col = "50%" },
-                            size = { width = "40%", height = "auto" },
-                        },
-                    },
-                    lsp = {
-                        override = {
-                            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                            ["vim.lsp.util.stylize_markdown"] = true,
-                            ["cmp.entry.get_documentation"] = true,
-                        },
-                    },
-                    presets = {
-                        bottom_search = false,
-                        command_palette = true,
-                        long_message_to_split = true,
-                        inc_rename = false,
-                        lsp_doc_border = false,
-                    },
-                })
+                require("noice").setup(opts)
             end
         end,
     },
     {
         "rcarriga/nvim-notify",
         event = "UIEnter",
-        config = function()
+        opts = {
+            background_colour = "#1A1B26",
+            timeout = 1000,
+        },
+        config = function(_, opts)
             local notify = require("notify")
 
-            notify.setup({
-                background_colour = "#1A1B26",
-                timeout = 1000,
-            })
+            notify.setup(opts)
             vim.notify = notify
         end,
     },
     { "MunifTanjim/nui.nvim" },
     {
         "kyazdani42/nvim-web-devicons",
-        config = { default = true },
+        opts = { default = true },
+        config = function(_, opts)
+            require("nvim-web-devicons").setup(opts)
+        end,
     },
 }

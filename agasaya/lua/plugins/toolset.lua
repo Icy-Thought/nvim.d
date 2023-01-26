@@ -2,13 +2,11 @@ return {
     {
         "jackMort/ChatGPT.nvim",
         event = "UIEnter",
-        config = function()
-            require("chatgpt").setup({
-                chat_window = {
-                    border = { text = { top = "ChatGPT-3" } },
-                },
-            })
-        end,
+        opts = {
+            chat_window = {
+                border = { text = { top = "ChatGPT-3" } },
+            },
+        },
     },
     {
         "gorbit99/codewindow.nvim",
@@ -47,7 +45,7 @@ return {
                 },
             },
         },
-        config = {
+        opts = {
             disable_signs = false,
             disable_context_highlighting = false,
             disable_commit_confirmation = false,
@@ -75,6 +73,7 @@ return {
             end
         end,
         opts = {
+            window = { width = 33 },
             filesystem = { follow_current_file = true },
         },
     },
@@ -82,21 +81,22 @@ return {
         "toppair/peek.nvim",
         ft = "markdown",
         build = "deno task --quiet build:fast",
-        config = function()
+        opts = {
+            auto_load = false,
+            close_on_bdelete = true,
+            syntax = true,
+            theme = "dark",
+            update_on_change = true,
+            throttle_at = 200000,
+            throttle_time = "auto",
+        },
+        config = function(_, opts)
+            require("peek").setup(opts)
+
             local create_cmd = vim.api.nvim_create_user_command
 
             create_cmd("PeekOpen", require("peek").open, {})
             create_cmd("PeekClose", require("peek").close, {})
-
-            require("peek").setup({
-                auto_load = false,
-                close_on_bdelete = true,
-                syntax = true,
-                theme = "dark",
-                update_on_change = true,
-                throttle_at = 200000,
-                throttle_time = "auto",
-            })
         end,
     },
     {
@@ -114,14 +114,10 @@ return {
             "MrcJkb/telescope-manix",
             "debugloop/telescope-undo.nvim",
         },
-        config = function()
-            require("keymaps.toolset.telescope")
-
-            local telescope = require("telescope")
+        opts = function()
             local ts_prev = require("telescope.previewers")
             local ts_sort = require("telescope.sorters")
-
-            telescope.setup({
+            return {
                 defaults = {
                     prompt_prefix = "   ",
                     selection_caret = " ",
@@ -181,7 +177,11 @@ return {
                         case_mode = "smart_case",
                     },
                 },
-            })
+            }
+        end,
+        config = function(_, opts)
+            local telescope = require("telescope")
+            telescope.setup(opts)
 
             telescope.load_extension("dotfiles")
             telescope.load_extension("file_browser")
@@ -190,31 +190,36 @@ return {
             telescope.load_extension("ui-select")
             telescope.load_extension("manix")
             telescope.load_extension("undo")
+
+            -- Hydra bindings:
+            require("keymaps.toolset.telescope")
         end,
     },
     {
         "akinsho/toggleterm.nvim",
         event = "UIEnter",
-        config = function()
-            require("keymaps.toolset.toggleterm")
+        opts = {
+            auto_scroll = true,
+            close_on_exit = true,
+            start_in_insert = true,
+            direction = "vertical",
+            float_opts = {
+                border = "curved", -- 'shadow' = ???
+                winblend = 3,
+            },
+            size = function(term)
+                if term.direction == "horizontal" then
+                    return 15
+                elseif term.direction == "vertical" then
+                    return vim.o.columns * 0.4
+                end
+            end,
+        },
+        config = function(_, opts)
+            require("toggleterm").setup(opts)
 
-            require("toggleterm").setup({
-                auto_scroll = true,
-                close_on_exit = true,
-                start_in_insert = true,
-                direction = "vertical",
-                float_opts = {
-                    border = "curved", -- 'shadow' = ???
-                    winblend = 3,
-                },
-                size = function(term)
-                    if term.direction == "horizontal" then
-                        return 15
-                    elseif term.direction == "vertical" then
-                        return vim.o.columns * 0.4
-                    end
-                end,
-            })
+            -- Hydra bindings:
+            require("keymaps.toolset.toggleterm")
         end,
     },
 }

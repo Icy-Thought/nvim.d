@@ -7,28 +7,28 @@ return {
     {
         "MrcJkb/haskell-tools.nvim",
         ft = "haskell",
-        config = function()
-            require("keymaps.langserv.haskell")
-
-            require("haskell-tools").setup({
-                tools = {
-                    codeLens = { autoRefresh = true },
-                    hoogle = { mode = "auto" },
-                    hover = { disable = true },
-                    repl = { handler = "toggleterm" },
-                },
-                hls = {
-                    settings = {
-                        haskell = {
-                            checkProject = false,
-                            formattingProvider = "stylish-haskell",
-                            plugin = {
-                                refineImports = { codeLensOn = false },
-                            },
+        opts = {
+            tools = {
+                codeLens = { autoRefresh = true },
+                hoogle = { mode = "auto" },
+                hover = { disable = true },
+                repl = { handler = "toggleterm" },
+            },
+            hls = {
+                settings = {
+                    haskell = {
+                        checkProject = false,
+                        formattingProvider = "stylish-haskell",
+                        plugin = {
+                            refineImports = { codeLensOn = false },
                         },
                     },
                 },
-            })
+            },
+        },
+        config = function(_, opts)
+            require("haskell-tools").setup(opts)
+            require("keymaps.langserv.haskell")
         end,
     },
     {

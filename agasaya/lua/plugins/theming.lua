@@ -4,44 +4,45 @@ return {
         name = "catppuccin",
         enabled = false,
         build = "CatppuccinCompile",
-        config = function()
+        opts = {
+            term_colors = true,
+            compile = {
+                enabled = true,
+                path = vim.fn.stdpath("cache") .. "/catppuccin",
+                suffix = "_compiled",
+            },
+            styles = {
+                comments = { "italic" },
+                functions = { "italic", "bold" },
+                keywords = { "italic" },
+                strings = {},
+                variables = {},
+            },
+            integrations = {
+                bufferline = true,
+                gitsigns = true,
+                indent_blankline = {
+                    colored_indent_levels = true,
+                },
+                -- lightspeed = false,
+                lsp_saga = true,
+                lsp_trouble = true,
+                neogit = true,
+                notify = true,
+                neotree = true,
+                nvimtree = false,
+            },
+        },
+        config = function(_, opts)
+            -- Import our setup options:
+            require("catppuccin").setup(opts)
+
+            vim.g.catppuccin_flavour = "mocha"
+            require("lualine").setup({
+                options = { theme = "catppuccin" },
+            })
+
             if not vim.g.neovide then
-                require("catppuccin").setup({
-                    term_colors = true,
-                    compile = {
-                        enabled = true,
-                        path = vim.fn.stdpath("cache") .. "/catppuccin",
-                        suffix = "_compiled",
-                    },
-                    styles = {
-                        comments = { "italic" },
-                        functions = { "italic", "bold" },
-                        keywords = { "italic" },
-                        strings = {},
-                        variables = {},
-                    },
-                    integrations = {
-                        bufferline = true,
-                        gitsigns = true,
-                        indent_blankline = {
-                            colored_indent_levels = true,
-                        },
-                        -- lightspeed = false,
-                        lsp_saga = true,
-                        lsp_trouble = true,
-                        neogit = true,
-                        notify = true,
-                        neotree = true,
-                        nvimtree = false,
-                    },
-                })
-
-                vim.g.catppuccin_flavour = "mocha"
-
-                require("lualine").setup({
-                    options = { theme = "catppuccin" },
-                })
-
                 vim.cmd("colorscheme catppuccin")
             end
 
@@ -72,31 +73,32 @@ return {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-        config = function()
+        opts = {
+            style = "night",
+            transparent = true,
+            terminal_colors = true,
+            styles = {
+                comments = { italic = true },
+                functions = { italic = true, bold = true },
+                keywords = { italic = true },
+                variables = {},
+                sidebars = "dark",
+                floats = "dark",
+            },
+            sidebars = { "qf", "help", "terminal", "packer" },
+            day_brightness = 0.3,
+            hide_inactive_statusline = false,
+            dim_inactive = false,
+        },
+        config = function(_, opts)
+            -- Import our setup options:
+            require("tokyonight").setup(opts)
+
+            require("lualine").setup({
+                options = { theme = "tokyonight" },
+            })
+
             if not vim.g.neovide then
-                require("tokyonight").setup({
-                    style = "night",
-                    transparent = true,
-                    terminal_colors = true,
-                    styles = {
-                        comments = "italic",
-                        functions = "italic,bold",
-                        keywords = "italic",
-                        variables = "NONE",
-
-                        sidebars = "dark",
-                        floats = "dark",
-                    },
-                    sidebars = { "qf", "help", "terminal", "packer" },
-                    day_brightness = 0.3,
-                    hide_inactive_statusline = false,
-                    dim_inactive = false,
-                })
-
-                require("lualine").setup({
-                    options = { theme = "tokyonight" },
-                })
-
                 vim.cmd("colorscheme tokyonight")
             end
         end,

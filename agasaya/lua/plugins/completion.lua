@@ -3,30 +3,39 @@ return {
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
-        config = function()
-            local npairs = require("nvim-autopairs")
+        opts = {
+            enable_check_bracket_line = false,
+            check_ts = true,
+            ts_config = {
+                lua = { "string" },
+                javascript = { "template_string" },
+                java = false,
+            },
+        },
+        config = function(_, opts)
+            local autopairs = require("nvim-autopairs")
             local Rule = require("nvim-autopairs.rule")
 
-            -- Initialize without config
-            npairs.setup()
+            -- Apply defined options to nvim-autopairs:
+            autopairs.setup(opts)
 
             -- Use built-in conditions
             local cond = require("nvim-autopairs.conds")
-            npairs.add_rules({
+            autopairs.add_rules({
                 Rule("(", ")", { "tex", "latex" })
                     :with_pair(cond.not_before_text("\\"))
                     :with_pair(cond.not_before_text("@")),
             })
 
-            npairs.add_rules({
+            autopairs.add_rules({
                 Rule("\\(", "\\)", { "tex", "latex" }),
             })
 
-            npairs.add_rules({
+            autopairs.add_rules({
                 Rule("\\[", "\\]", { "tex", "latex" }),
             })
 
-            npairs.add_rules({
+            autopairs.add_rules({
                 Rule("\\left(", "\\right)", { "tex", "latex" }):with_pair(
                     cond.not_before_text("\\")
                 ),
@@ -43,11 +52,15 @@ return {
         "zbirenbaum/copilot.lua",
         enabled = false,
         event = "VeryLazy",
-        config = function()
-            vim.defer_fn(function()
-                require("copilot").setup()
-            end, 100)
+        dependencies = { "zbirenbaum/copilot-cmp" },
+        opts = {
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+        },
+        config = function(_, opts)
+            require("copilot").setup(opts)
 
+            -- Tell nvim-cmp to handle copilot completions:
             require("copilot_cmp").setup()
         end,
     },
@@ -55,35 +68,27 @@ return {
         "L3MON4D3/LuaSnip",
         event = "InsertEnter",
         dependencies = { "Icy-Thought/friendly-snippets" },
-        config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-
-            local ls = require("luasnip")
-            local types = require("luasnip.util.types")
-
+        init = function()
             -- Load custom lua-snippets
-            local load_custom_snippets = function()
-                local snippets = vim.fn.stdpath("config") .. "/snippets/*lua"
-                local paths = vim.split(vim.fn.glob(snippets), "\n")
+            local snippets = vim.fn.stdpath("config") .. "/snippets/*lua"
+            local paths = vim.split(vim.fn.glob(snippets), "\n")
 
-                --After saving a luasnip file reload it
-                vim.api.nvim_create_autocmd("BufWritePost", {
-                    callback = function()
-                        dofile(vim.fn.expand("%"))
-                        require("cmp_luasnip").clear_cache() --reload the cmp source
-                    end,
-                    pattern = paths,
-                })
+            --After saving a luasnip file reload it
+            vim.api.nvim_create_autocmd("BufWritePost", {
+                callback = function()
+                    dofile(vim.fn.expand("%"))
+                    require("cmp_luasnip").clear_cache() --reload the cmp source
+                end,
+                pattern = paths,
+            })
 
-                for _, v in ipairs(paths) do
-                    dofile(v)
-                end
+            for _, v in ipairs(paths) do
+                dofile(v)
             end
-
-            -- Now we load our snippets:
-            load_custom_snippets()
-
-            ls.config.set_config({
+        end,
+        opts = function()
+            local types = require("luasnip.util.types")
+            return {
                 delete_check_events = "TextChangedI",
                 enable_autosnippets = true,
                 ext_opts = {
@@ -102,25 +107,14 @@ return {
                 region_check_events = "CursorMoved",
                 store_selection_keys = "<Tab>",
                 updateevents = "TextChanged,TextChangedI,InsertLeave",
-            })
-
-            -- Keymaps required for dynamic_node(s)
-            local keymap = vim.keymap.set
-            local opts = { noremap = true, silent = true }
-
-            keymap({ "i", "s" }, "<C-n>", function()
-                if ls.choice_active() then
-                    ls.change_choice(1)
-                end
-            end, opts)
-
-            keymap({ "i", "s" }, "<C-p>", function()
-                if ls.choice_active() then
-                    ls.change_choice(-1)
-                end
-            end, opts)
+            }
+        end,
+        config = function(_, opts)
+            require("luasnip").setup(opts)
+            require("luasnip.loaders.from_vscode").lazy_load()
         end,
     },
+    { "onsails/lspkind-nvim" },
     {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
@@ -132,9 +126,10 @@ return {
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
         },
-        config = function()
+        opts = function()
             local cmp = require("cmp")
             local ls = require("luasnip")
+            local lspkind = require("lspkind")
 
             local has_words_before = function()
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -143,10 +138,10 @@ return {
                             .nvim_buf_get_lines(0, line - 1, line, true)[1]
                             :sub(col, col)
                             :match("%s")
-                        == nil
+                            == nil
             end
 
-            cmp.setup({
+            return {
                 experimental = {
                     ghost_text = false,
                     native_menu = false,
@@ -157,44 +152,26 @@ return {
                 },
                 formatting = {
                     fields = { "kind", "abbr", "menu" },
-                    format = function(entry, vim_item)
-                        local lspkind_icons = {
-                            Text = " ",
-                            Method = " ",
-                            Function = " ",
-                            Constructor = " ",
-                            Field = " ",
-                            Variable = " ",
-                            Class = " ",
-                            Interface = " ",
-                            Module = " ",
-                            Property = " ",
-                            Unit = " ",
-                            Value = " ",
-                            Enum = " ",
-                            Keyword = " ",
-                            Snippet = " ",
-                            Color = " ",
-                            File = " ",
-                            Reference = " ",
-                            Folder = " ",
-                            EnumMember = " ",
-                            Constant = " ",
-                            Struct = " ",
-                            Event = " ",
-                            Operator = " ",
-                            TypeParameter = " ",
-                        }
-                        vim_item.kind =
-                            string.format("[%s]", lspkind_icons[vim_item.kind])
-                        vim_item.menu = ({
-                            nvim_lsp = "[LSP]",
-                            luasnip = "[SNIP]",
-                            buffer = "[BUF]",
-                            path = "[PATH]",
-                        })[entry.source.name]
-                        return vim_item
-                    end,
+                    format = lspkind.cmp_format({
+                        mode = "symbol_text",
+                        maxwidth = 50,
+                        ellipsis_char = "...",
+                        before = function(entry, vim_item)
+                            -- Surround icons with []
+                            vim_item.kind = string.format(
+                                "[%s]",
+                                lspkind.presets.default[vim_item.kind]
+                            )
+                            -- Define custom identifiers:
+                            vim_item.menu = ({
+                                nvim_lsp = "[LSP]",
+                                luasnip = "[SNIP]",
+                                buffer = "[BUF]",
+                                path = "[PATH]",
+                            })[entry.source.name]
+                            return vim_item
+                        end,
+                    }),
                 },
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -237,7 +214,11 @@ return {
                     { name = "buffer" },
                     { name = "orgmode" },
                 },
-            })
+            }
+        end,
+        config = function(_, opts)
+            local cmp = require("cmp")
+            cmp.setup(opts)
 
             -- Use buffer source for `/` and `?`
             cmp.setup.cmdline({ "/", "?", ":%s/" }, {

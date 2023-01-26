@@ -92,23 +92,26 @@ return {
     {
         "glepnir/lspsaga.nvim",
         event = "BufRead",
-        config = function()
+        opts = {
+            ui = {
+                border = "rounded",
+                code_action = " ",
+                diagnostic = { " ", " ", " ", " " },
+            },
+        },
+        config = function(_, opts)
+            require("lspsaga").setup(opts)
             require("keymaps.editor.lspsaga")
-
-            require("lspsaga").setup({
-                ui = {
-                    border = "rounded",
-                    code_action = " ",
-                    diagnostic = { " ", " ", " ", " " },
-                },
-            })
         end,
     },
     {
         enabled = false,
         "williamboman/mason.nvim",
         dependencies = { "williamboman/mason-lspconfig.nvim" },
-        config = function()
+        opts = {
+            ui = { border = "rounded" },
+        },
+        config = function(_, opts)
             require("plugins.lspconf.diagnostics")
 
             local nvim_lsp = require("lspconfig")
@@ -116,9 +119,7 @@ return {
             local mason_lsp = require("mason-lspconfig")
 
             -- Setting up our Mason environment:
-            mason.setup({
-                ui = { border = "rounded" },
-            })
+            mason.setup(opts)
 
             mason_lsp.setup({
                 ensure_installed = {
@@ -132,6 +133,7 @@ return {
                 automatic_installation = false,
             })
 
+            local handlers = require("plugins.lspconf.handlers")
             local default_config = {
                 on_attach = handlers.on_attach,
                 capabilities = handlers.capabilities,
@@ -229,10 +231,9 @@ return {
     {
         "jose-elias-alvarez/null-ls.nvim",
         event = "BufWritePre",
-        config = function()
+        opts = function()
             local builtins = require("null-ls.builtins")
-
-            require("null-ls").setup({
+            return {
                 debounce = 150,
                 sources = {
                     -------===[ Formatting ]===-------
@@ -261,7 +262,10 @@ return {
                         })
                     end
                 end,
-            })
+            }
+        end,
+        config = function(_, opts)
+            require("null-ls").setup(opts)
         end,
     },
 }
