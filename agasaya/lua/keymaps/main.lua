@@ -2,15 +2,15 @@ local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
 local normal_hints = [[
-  ^^                        Main Hydra                             ^
+  ^^                        Main Hydra                     ^
   ^
-  ^^ _b_: Switch Buffer                _c_: Close Buffer            ^
-  ^^ _e_: Toggle Tree                  _k_: Killall Other Buffer(s) ^
-  ^^ _p_: Telescope Dotfiles           _r_: Structural Replace      ^
-  ^^ _m_: Man-Pages                    _t_: Change Theme            ^
-  ^^ _n_: Nix Man-Page                 _l_: Toggle CodeWindow       ^
+  ^^ _b_: Switch Buff.              _c_: Close Buff.        ^
+  ^^ _e_: NeoTree                   _k_: Kill Other Buff.   ^
+  ^^ _p_: TS-Dotfiles               _r_: Structural Replace ^
+  ^^ _m_: Man-Pages                 _t_: Change Theme       ^
+  ^^ _n_: Nix Man-Page              _l_: CodeWindow         ^
   ^
-  ^^ _<Enter>_: Dashboard                                _q_: Quit! ^
+  ^^ _<Enter>_: Dashboard                        _q_: Quit! ^
 ]]
 
 Hydra({

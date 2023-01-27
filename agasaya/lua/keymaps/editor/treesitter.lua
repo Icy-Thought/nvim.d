@@ -2,13 +2,13 @@ local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
 local ts_hint = [[
-  ^^        פּ Visuals          ^
+  ^^        פּ Visuals (Treesitter)        ^
   ^
-  ^^ _z_: TrueZen Ataraxis     ^
-  ^^ _p_: TS Playground        ^
-  ^^ _h_: TS Highlight Capture ^
+  ^^ _z_: TrueZen Ataraxis                ^
+  ^^ _p_: TS Playground                   ^
+  ^^ _h_: TS Highlight Capture            ^
   ^
-  ^^                _q_: Quit! ^
+  ^^                           _q_: Quit! ^
 ]]
 
 Hydra({

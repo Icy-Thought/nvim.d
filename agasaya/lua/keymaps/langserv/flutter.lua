@@ -2,15 +2,15 @@ local Hydra = require("hydra")
 local cmd = require("hydra.keymap-util").cmd
 
 local flutter_hint = [[
-  ^^                         Flutter-Tools                                   ^
+  ^^                             Flutter-Tools                             ^
   ^
-  ^^ _d_: (start) Dev-Tools Server     _e_: Display Emulators                 ^
-  ^^ _r_: Reload Session               _c_: (list) Connected Devices          ^
-  ^^ _R_: Restart Session              _w_: (toggle) Project Widget-Tree      ^
-  ^^ _D_: De-attach Session            _l_: Restart LSP Server                ^
-  ^^ _E_: End Session!                 _L_: (force) LSP -> Custom re-analysis ^
+  ^^ _d_: (start) Dev-Tools Serv.           _e_: Display Emulators          ^
+  ^^ _r_: Reload Session                    _c_: Connected Devices          ^
+  ^^ _R_: Restart Session                   _w_: Project Widget-Tree        ^
+  ^^ _D_: De-attach Session                 _l_: Restart LSP Serv.          ^
+  ^^ _E_: End Session!                      _L_: LSP -> Custom re-analysis! ^
   ^
-  ^^ _i_: (current) Run Project                                    _q_: Quit! ^
+  ^^ _i_: Run Project                                            _q_: Quit! ^
 ]]
 
 Hydra({

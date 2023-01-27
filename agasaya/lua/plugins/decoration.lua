@@ -34,15 +34,13 @@ return {
             },
         },
         config = function(_, opts)
-            -- Import our setup options:
             require("catppuccin").setup(opts)
-
             vim.g.catppuccin_flavour = "mocha"
-            require("lualine").setup({
-                options = { theme = "catppuccin" },
-            })
 
             if not vim.g.neovide then
+                require("lualine").setup({
+                    options = { theme = "catppuccin" },
+                })
                 vim.cmd("colorscheme catppuccin")
             end
 
@@ -91,14 +89,12 @@ return {
             dim_inactive = false,
         },
         config = function(_, opts)
-            -- Import our setup options:
             require("tokyonight").setup(opts)
 
-            require("lualine").setup({
-                options = { theme = "tokyonight" },
-            })
-
             if not vim.g.neovide then
+                require("lualine").setup({
+                    options = { theme = "tokyonight" },
+                })
                 vim.cmd("colorscheme tokyonight")
             end
         end,
