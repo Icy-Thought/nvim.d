@@ -230,7 +230,7 @@ return {
     },
     {
         "jose-elias-alvarez/null-ls.nvim",
-        event = "BufWritePre",
+        event = "BufReadPre",
         opts = function()
             local builtins = require("null-ls.builtins")
             return {
@@ -263,9 +263,6 @@ return {
                     end
                 end,
             }
-        end,
-        config = function(_, opts)
-            require("null-ls").setup(opts)
         end,
     },
 }

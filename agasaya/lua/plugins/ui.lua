@@ -41,9 +41,6 @@ return {
                 end,
             },
         },
-        config = function(_, opts)
-            require("bufferline").setup(opts)
-        end,
     },
     {
         "glepnir/dashboard-nvim",
@@ -110,9 +107,6 @@ return {
                 },
             }
         end,
-        config = function(_, opts)
-            require("dashboard").setup(opts)
-        end,
     },
     {
         "j-hui/fidget.nvim",
@@ -164,21 +158,31 @@ return {
         event = "UIEnter",
         opts = {
             background_colour = "#1A1B26",
+            max_height = function()
+                return math.floor(vim.o.lines * 0.85)
+            end,
+            max_width = function()
+                return math.floor(vim.o.lines * 0.85)
+            end,
             timeout = 1000,
         },
-        config = function(_, opts)
-            local notify = require("notify")
-
-            notify.setup(opts)
-            vim.notify = notify
-        end,
     },
-    { "MunifTanjim/nui.nvim" },
     {
-        "kyazdani42/nvim-web-devicons",
-        opts = { default = true },
-        config = function(_, opts)
-            require("nvim-web-devicons").setup(opts)
+        "stevearc/dressing.nvim",
+        lazy = true,
+        init = function()
+            ---@diagnostic disable-next-line: duplicate-set-field
+            vim.ui.select = function(...)
+                require("lazy").load({ plugins = { "dressing.nvim" } })
+                return vim.ui.select(...)
+            end
+            ---@diagnostic disable-next-line: duplicate-set-field
+            vim.ui.input = function(...)
+                require("lazy").load({ plugins = { "dressing.nvim" } })
+                return vim.ui.input(...)
+            end
         end,
     },
+    { "MunifTanjim/nui.nvim", lazy = true },
+    { "nvim-tree/nvim-web-devicons", lazy = true },
 }

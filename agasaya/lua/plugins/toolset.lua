@@ -73,8 +73,9 @@ return {
             end
         end,
         opts = {
-            window = { width = 33 },
+            close_if_last_window = true,
             filesystem = { follow_current_file = true },
+            window = { width = 33 },
         },
     },
     {

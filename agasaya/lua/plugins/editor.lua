@@ -24,9 +24,6 @@ return {
             auto_restore_enabled = true,
             auto_session_suppress_dirs = nil,
         },
-        config = function(_, opts)
-            require("auto-session").setup(opts)
-        end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -69,9 +66,6 @@ return {
                 "import",
             },
         },
-        config = function(_, opts)
-            require("indent_blankline").setup(opts)
-        end,
     },
     {
         "numToStr/Comment.nvim",
@@ -106,9 +100,6 @@ return {
                 debug = false,
             },
         },
-        config = function(_, opts)
-            require("live-command").setup(opts)
-        end,
     },
     {
         "brenoprata10/nvim-highlight-colors",
@@ -158,9 +149,6 @@ return {
             inline_messages = 0,
             borders = "shadow",
         },
-        config = function(_, opts)
-            require("sniprun").setup(opts)
-        end,
     },
     {
         "cshuaimin/ssr.nvim",
