@@ -1,4 +1,4 @@
-local core = {}
+local config = {}
 
 local disable_distribution_plugins = function()
     local plugins = {
@@ -55,21 +55,21 @@ end
 
 local neovide_config = function()
     if vim.g.neovide then
-        require("core.neovide")
+        require("config.neovide")
     end
 end
 
-core.init = function()
+config.init = function()
     disable_distribution_plugins()
     disable_providers()
 
     map_leader()
     neovide_config()
 
-    require("core.lazy")
-    require("core.options")
-    require("core.bindings")
-    require("core.events")
+    require("config.lazy")
+    require("config.options")
+    require("config.bindings")
+    require("config.autocmds")
 end
 
-return core
+return config

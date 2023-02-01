@@ -1,11 +1,11 @@
-local events = {}
+local autocmds = {}
 
-local autocmd = vim.api.nvim_create_autocmd
+local aucmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
-function events.load_autocmds()
+function autocmds.load_autocmds()
     -- Create dir on save if != existent
-    autocmd("BufWritePre", {
+    aucmd("BufWritePre", {
         group = augroup("auto_create_dir", { clear = true }),
         callback = function(event)
             local file = vim.loop.fs_realpath(event.match) or event.match
@@ -18,7 +18,7 @@ function events.load_autocmds()
     })
 
     -- Auto move to the location of the last edit
-    autocmd("BufReadPost", {
+    aucmd("BufReadPost", {
         group = augroup("jump_to_last_position", { clear = true }),
         callback = function()
             if
@@ -33,7 +33,7 @@ function events.load_autocmds()
     })
 
     -- Highlight yanked text
-    autocmd("TextYankPost", {
+    aucmd("TextYankPost", {
         group = augroup("highlight_yanked_text", { clear = true }),
         pattern = "*",
         callback = function()
@@ -45,14 +45,14 @@ function events.load_autocmds()
     })
 
     -- Auto change directory
-    autocmd("BufEnter", {
+    aucmd("BufEnter", {
         group = augroup("autocd_on_bufenter", { clear = true }),
         pattern = "*",
         command = "silent! lcd %:p:h",
     })
 
     -- Force write shada when nvim == idle!
-    autocmd({ "CursorHold", "TextYankPost", "FocusGained", "FocusLost" }, {
+    aucmd({ "CursorHold", "TextYankPost", "FocusGained", "FocusLost" }, {
         group = augroup("autocd_on_enter", { clear = true }),
         pattern = "*",
         callback = function()
@@ -64,21 +64,21 @@ function events.load_autocmds()
     })
 
     -- Check file status for focused window (more eager than 'autoread')
-    autocmd("FocusGained", {
+    aucmd("FocusGained", {
         group = augroup("eager_autoread", { clear = true }),
         pattern = "*",
         command = "checktime",
     })
 
     -- Equalize window dimensions when resizing vim window
-    autocmd("VimResized", {
+    aucmd("VimResized", {
         group = augroup("appropriate_resizing", { clear = true }),
         pattern = "*",
         command = "tabdo wincmd =",
     })
 
     -- Limit text-width to 80 chars for documentation formats
-    autocmd("FileType", {
+    aucmd("FileType", {
         group = augroup("text_width_limiter", { clear = true }),
         pattern = "markdown,norg",
         callback = function()
@@ -91,4 +91,4 @@ function events.load_autocmds()
     })
 end
 
-events.load_autocmds()
+autocmds.load_autocmds()
