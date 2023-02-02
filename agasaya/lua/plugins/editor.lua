@@ -12,7 +12,7 @@ return {
         config = true,
     },
     {
-        enabled = false,
+        enabled = true,
         "rmagatti/auto-session",
         cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
         opts = {
