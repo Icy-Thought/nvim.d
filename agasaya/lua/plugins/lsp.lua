@@ -238,7 +238,7 @@ return {
                 sources = {
                     -------===[ Formatting ]===-------
                     builtins.formatting.stylua,
-                    builtins.formatting.nixpkgs_fmt,
+                    builtins.formatting.nixfmt,
                     builtins.formatting.deno_fmt,
                     builtins.formatting.black.with({
                         extra_args = { "--fast" },
