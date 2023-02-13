@@ -21,7 +21,7 @@ return {
                 nil_ls = {}, -- Nix Expression Language
                 pyright = {},
                 rust_analyzer = {},
-                sumneko_lua = {
+                lua_ls = {
                     settings = {
                         Lua = {
                             diagnostics = {
