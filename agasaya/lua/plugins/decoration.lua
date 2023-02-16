@@ -58,7 +58,30 @@ return {
         end,
     },
     {
+        "projekt0n/github-nvim-theme",
+        lazy = false,
+        tag = "v0.0.7",
+        priority = 1000,
+        opts = {
+            dark_float = true,
+            theme_style = "dark_default",
+            transparent = false,
+            comment_style = "italic",
+            keyword_style = "italic",
+            function_style = "italic",
+            overrides = function()
+                return { BufferLineBackground = {} }
+            end,
+        },
+        config = function(_, opts)
+            if vim.g.neovide then
+                require("github-theme").setup(opts)
+            end
+        end,
+    },
+    {
         "nyoom-engineering/oxocarbon.nvim",
+        enabled = false,
         lazy = false,
         priority = 1000,
         config = function()
