@@ -1,17 +1,15 @@
-vim.o.guifont = "VictorMono Nerd Font:h9:b"
+vim.opt.guifont = "VictorMono Nerd Font:h10"
 
 -- general
 local options = {
     neovide_confirm_quit = true,
     neovide_no_idle = true,
     neovide_transparency = 0.85,
-
     neovide_input_use_logo = true,
     neovide_remember_window_size = false,
     neovide_cursor_antialiasing = true,
     neovide_hide_mouse_when_typing = true,
     neovide_font_subpixel_antialiasing = 1,
-
     -- vfx settings
     neovide_cursor_vfx_mode = "sonicboom",
     neovide_cursor_vfx_opacity = 200.0,
