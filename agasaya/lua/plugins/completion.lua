@@ -51,18 +51,8 @@ return {
     {
         "zbirenbaum/copilot.lua",
         enabled = false,
-        event = "VeryLazy",
-        dependencies = { "zbirenbaum/copilot-cmp" },
-        opts = {
-            suggestion = { enabled = false },
-            panel = { enabled = false },
-        },
-        config = function(_, opts)
-            require("copilot").setup(opts)
-
-            -- Tell nvim-cmp to handle copilot completions:
-            require("copilot_cmp").setup()
-        end,
+        event = "InsertEnter",
+        opts = { suggestion = { debounce = 50 } },
     },
     {
         "L3MON4D3/LuaSnip",
@@ -121,6 +111,7 @@ return {
         dependencies = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-cmdline",
+            -- "zbirenbaum/copilot-cmp",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
@@ -138,7 +129,7 @@ return {
                             .nvim_buf_get_lines(0, line - 1, line, true)[1]
                             :sub(col, col)
                             :match("%s")
-                            == nil
+                        == nil
             end
 
             return {
@@ -207,6 +198,7 @@ return {
                     end,
                 },
                 sources = {
+                    -- { name = "copilot" },
                     { name = "nvim_lsp" },
                     { name = "nvim_lua" },
                     { name = "luasnip" },
