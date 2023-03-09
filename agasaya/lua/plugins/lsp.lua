@@ -46,14 +46,13 @@ return {
                             auxDirectory = "build",
                             bibtexFormatter = "texlab",
                             build = {
-                                executable = "tectonic",
+                                executable = "latexmk",
                                 args = {
+                                    "-pdf",
+                                    "-interaction=nonstopmode",
+                                    "-synctex=1",
                                     "%f",
-                                    "--synctex",
-                                    "--keep-logs",
-                                    "--keep-intermediates",
-                                    "--outdir",
-                                    "build",
+                                    "-output-directory=../build",
                                 },
                                 onSave = true,
                             },
@@ -146,7 +145,6 @@ return {
                         default_config,
                     })
                 end,
-
                 -- (Override) Configurations:
                 ["clangd"] = function()
                     nvim_lsp.clangd.setup({
@@ -160,7 +158,6 @@ return {
                         },
                     })
                 end,
-
                 ["sumneko_lua"] = function()
                     nvim_lsp.sumneko_lua.setup({
                         default_config,
@@ -186,7 +183,6 @@ return {
                         },
                     })
                 end,
-
                 ["texlab"] = function()
                     nvim_lsp.texlab.setup({
                         default_config,
@@ -196,14 +192,12 @@ return {
                                 auxDirectory = "build",
                                 build = {
                                     args = {
+                                        "-pdf",
+                                        "-interaction=nonstopmode",
+                                        "-synctex=1",
                                         "%f",
-                                        "--synctex",
-                                        "--keep-logs",
-                                        "--keep-intermediates",
-                                        "--outdir",
-                                        "build",
                                     },
-                                    executable = "tectonic",
+                                    executable = "latexmk",
                                     onSave = true,
                                 },
                                 forwardSearch = {
