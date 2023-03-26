@@ -129,10 +129,9 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = "BufReadPost",
-
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            "p00f/nvim-ts-rainbow",
+            "HiPhish/nvim-ts-rainbow2",
             { "nvim-treesitter/playground", cmd = "TSPlayground" },
         },
         opts = {
@@ -182,8 +181,9 @@ return {
             },
             rainbow = {
                 enable = true,
-                extended_mode = true, -- Highlight non-parentheses delimiters
-                max_file_lines = 1000,
+                disable = { "jsx", "cpp" },
+                query = "rainbow-parens",
+                strategy = require("ts-rainbow").strategy.global,
             },
             textobjects = {
                 select = {
