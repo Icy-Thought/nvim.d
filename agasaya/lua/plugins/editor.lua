@@ -137,7 +137,7 @@ return {
         opts = {
             autopairs = { enable = true },
             context_commentstring = { enable = true },
-            -- Disable TS when using larger files
+            -- Disable TS when in larger files
             disable = function(lang, buf)
                 local max_filesize = 100 * 1024 -- 100 KB
                 local ok, stats =
@@ -179,12 +179,15 @@ return {
                 "python",
                 "rust",
             },
-            rainbow = {
-                enable = true,
-                disable = { "jsx", "cpp" },
-                query = "rainbow-parens",
-                strategy = require("ts-rainbow").strategy.global,
-            },
+            rainbow = function()
+                local rainbow = require("ts-rainbow")
+                return {
+                    enable = true,
+                    disable = { "jsx", "cpp" },
+                    query = { "rainbow-parens" },
+                    strategy = { rainbow.strategy.global },
+                }
+            end,
             textobjects = {
                 select = {
                     enable = true,
