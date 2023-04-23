@@ -91,7 +91,27 @@ return {
         end,
     },
     {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            disable_background = true,
+        },
+        config = function(_, opts)
+            require("rose-pine").setup(opts)
+
+            if not vim.g.neovide then
+                require("lualine").setup({
+                    options = { theme = "rose-pine" },
+                })
+                vim.cmd("colorscheme rose-pine")
+            end
+        end,
+    },
+    {
         "folke/tokyonight.nvim",
+        enabled = false,
         lazy = false,
         priority = 1000,
         opts = {
