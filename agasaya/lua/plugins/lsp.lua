@@ -232,7 +232,7 @@ return {
                 sources = {
                     -------===[ Formatting ]===-------
                     builtins.formatting.stylua,
-                    builtins.formatting.nixfmt,
+                    builtins.formatting.alejandra,
                     builtins.formatting.deno_fmt,
                     builtins.formatting.black.with({
                         extra_args = { "--fast" },
