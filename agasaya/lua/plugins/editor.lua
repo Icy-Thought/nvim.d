@@ -12,20 +12,6 @@ return {
         config = true,
     },
     {
-        enabled = true,
-        "rmagatti/auto-session",
-        cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
-        opts = {
-            log_level = "info",
-            auto_session_enable_last_session = true,
-            auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
-            auto_session_enabled = true,
-            auto_save_enabled = true,
-            auto_restore_enabled = true,
-            auto_session_suppress_dirs = nil,
-        },
-    },
-    {
         "lukas-reineke/indent-blankline.nvim",
         event = "BufReadPost",
         opts = {
@@ -75,6 +61,22 @@ return {
     {
         "brenoprata10/nvim-highlight-colors",
         event = "BufReadPost",
+        config = true,
+    },
+    {
+        "gennaro-tedesco/nvim-possession",
+        dependencies = { "ibhagwan/fzf-lua" },
+        opts = {
+            autoload = false,
+            autoswitch = {
+                enable = false,
+                exclude_ft = { "" },
+            },
+            post_hook = function()
+                require("nvim-tree").toggle(false, true)
+            end,
+            sessions = { sessions_icon = "" },
+        },
         config = true,
     },
     {
