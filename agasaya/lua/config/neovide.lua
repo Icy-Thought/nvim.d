@@ -1,4 +1,4 @@
-vim.opt.guifont = "JetBrainsMono Nerd Font:h10"
+vim.opt.guifont = "VictorMono Nerd Font:h10"
 
 -- general
 local options = {
