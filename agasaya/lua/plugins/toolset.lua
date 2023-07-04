@@ -32,7 +32,7 @@ return {
         end,
     },
     {
-        "TimUntersberger/neogit",
+        "NeogitOrg/neogit",
         event = "VimEnter",
         dependencies = {
             {
