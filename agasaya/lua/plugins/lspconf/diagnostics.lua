@@ -15,7 +15,8 @@ function M.setup()
         underline = true,
         update_in_insert = true,
         virtual_text = {
-            source = true,
+            source = "always",
+            prefix = "▎",
         },
     })
 

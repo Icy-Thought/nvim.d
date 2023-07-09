@@ -19,7 +19,7 @@ return {
                     },
                 },
                 nil_ls = {}, -- Nix Expression Language
-                pyright = {},
+                pylsp = {},
                 rust_analyzer = {},
                 lua_ls = {
                     settings = {
@@ -124,7 +124,9 @@ return {
                 ensure_installed = {
                     "clangd",
                     "nil_ls",
-                    "pyright",
+                    "pylsp",
+                    "mypy",
+                    "ruff",
                     "rust_analyzer",
                     "sumneko_lua",
                     "texlab",
@@ -230,10 +232,16 @@ return {
             return {
                 debounce = 150,
                 sources = {
-                    -------===[ Formatting ]===-------
-                    builtins.formatting.stylua,
-                    builtins.formatting.alejandra,
-                    builtins.formatting.deno_fmt,
+                    -------===[ Python ]===-------
+                    builtins.diagnostics.mypy.with({
+                        extra_args = {
+                            "--ignore-missing-imports",
+                            "--cache-dir=/dev/null",
+                        },
+                    }),
+                    builtins.diagnostics.ruff.with({
+                        extra_args = { "--ignore", "E501" },
+                    }),
                     builtins.formatting.black.with({
                         extra_args = { "--fast" },
                         filetypes = { "python" },
@@ -242,6 +250,11 @@ return {
                         extra_args = { "--profile", "black" },
                         filetypes = { "python" },
                     }),
+
+                    -------===[ General ]===-------
+                    builtins.formatting.stylua,
+                    builtins.formatting.alejandra, -- Nix
+                    builtins.formatting.deno_fmt,  -- Js / Ts
 
                     -------===[ Code Action ]===-------
                     builtins.code_actions.shellcheck,

@@ -109,11 +109,6 @@ return {
         end,
     },
     {
-        "j-hui/fidget.nvim",
-        event = "BufReadPost",
-        config = true,
-    },
-    {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         config = true,
