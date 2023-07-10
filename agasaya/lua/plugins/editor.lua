@@ -93,37 +93,6 @@ return {
         end,
     },
     {
-        "nvim-orgmode/orgmode",
-        ft = "org",
-        opts = {
-            org_agenda_files = { "~/Notes/Org-Mode/*" },
-            org_default_notes_file = "~/Notes/Org-Mode/refile.org",
-        },
-        config = function(_, opts)
-            require("orgmode").setup(opts)
-            require("orgmode").setup_ts_grammar()
-        end,
-    },
-    {
-        enabled = false,
-        "michaelb/sniprun",
-        build = "bash ./install.sh",
-        opts = {
-            selected_interpreters = {},
-            repl_enable = {},
-            repl_disable = {},
-            interpreter_options = {},
-            display = {
-                "Classic",
-                "VirtualTextOk",
-                "VirtualTextErr",
-                "LongTempFloatingWindow",
-            },
-            inline_messages = 0,
-            borders = "shadow",
-        },
-    },
-    {
         "cshuaimin/ssr.nvim",
         keys = { "<leader>wr" },
     },
@@ -172,7 +141,6 @@ return {
                 "fennel",
                 "fish",
                 "haskell",
-                "help",
                 "latex",
                 "lua",
                 "markdown",
