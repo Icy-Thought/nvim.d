@@ -109,6 +109,15 @@ return {
         end,
     },
     {
+        "j-hui/fidget.nvim",
+        event = "BufReadPost",
+        opts = {
+            sources = {
+                ["null-ls"] = { ignore = true },
+            },
+        },
+    },
+    {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         config = true,
@@ -128,6 +137,7 @@ return {
                 },
             },
             lsp = {
+                progress = { enabled = false },
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                     ["vim.lsp.util.stylize_markdown"] = true,
