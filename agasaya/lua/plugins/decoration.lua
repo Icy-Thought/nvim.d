@@ -47,7 +47,7 @@ return {
             -- Compile Catppuccin on `PackerCompile`
             local autocmd = vim.api.nvim_create_autocmd
             autocmd("User", {
-                pattern = "PackerCompileDone",
+                pattern = "LazyDone",
                 callback = function()
                     vim.cmd("CatppuccinCompile")
                     vim.defer_fn(function()
@@ -80,6 +80,38 @@ return {
         end,
     },
     {
+        "rebelot/kanagawa.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            compile = true,
+            transparent = true,
+        },
+        config = function(_, opts)
+            require("kanagawa").setup(opts)
+
+            if not vim.g.neovide then
+                require("lualine").setup({
+                    options = { theme = "kanagawa" },
+                })
+                vim.cmd("colorscheme kanagawa")
+            end
+
+            -- Compile Catppuccin on `PackerCompile`
+            local autocmd = vim.api.nvim_create_autocmd
+            autocmd("User", {
+                pattern = "LazyDone",
+                callback = function()
+                    vim.cmd("KanagawaCompile")
+                    vim.defer_fn(function()
+                        vim.cmd("colorscheme kanagawa")
+                    end, 0) -- Defered for live reloading
+                end,
+            })
+        end,
+    },
+
+    {
         "nyoom-engineering/oxocarbon.nvim",
         enabled = false,
         lazy = false,
@@ -93,6 +125,7 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
+        enabled = false,
         lazy = false,
         priority = 1000,
         opts = {
