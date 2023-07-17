@@ -152,11 +152,6 @@ return {
                 lsp_doc_border = false,
             },
         },
-        config = function(_, opts)
-            if not vim.g.neovide then
-                require("noice").setup(opts)
-            end
-        end,
     },
     {
         "rcarriga/nvim-notify",

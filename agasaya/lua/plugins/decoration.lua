@@ -43,18 +43,6 @@ return {
                 })
                 vim.cmd("colorscheme catppuccin")
             end
-
-            -- Compile Catppuccin on `PackerCompile`
-            local autocmd = vim.api.nvim_create_autocmd
-            autocmd("User", {
-                pattern = "LazyDone",
-                callback = function()
-                    vim.cmd("CatppuccinCompile")
-                    vim.defer_fn(function()
-                        vim.cmd("colorscheme catppuccin")
-                    end, 0) -- Defered for live reloading
-                end,
-            })
         end,
     },
     {
@@ -83,6 +71,7 @@ return {
         "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
+        build = ":KanagawaCompile",
         opts = {
             compile = true,
             transparent = true,
@@ -96,18 +85,6 @@ return {
                 })
                 vim.cmd("colorscheme kanagawa")
             end
-
-            -- Compile Catppuccin on `PackerCompile`
-            local autocmd = vim.api.nvim_create_autocmd
-            autocmd("User", {
-                pattern = "LazyDone",
-                callback = function()
-                    vim.cmd("KanagawaCompile")
-                    vim.defer_fn(function()
-                        vim.cmd("colorscheme kanagawa")
-                    end, 0) -- Defered for live reloading
-                end,
-            })
         end,
     },
 
