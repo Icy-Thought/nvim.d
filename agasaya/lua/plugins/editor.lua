@@ -18,11 +18,11 @@ return {
         opts = {
             indent = {
                 char = "│",
-                whitespace = {
-                    highlight = { "Whitespace", "NonText" },
-                    remove_blankline_trail = true,
-                },
                 smart_indent_cap = true,
+            },
+            whitespace = {
+                highlight = { "Whitespace", "NonText" },
+                remove_blankline_trail = true,
             },
             exclude = {
                 filetypes = {
