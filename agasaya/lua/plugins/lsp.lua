@@ -19,7 +19,7 @@ return {
                     },
                 },
                 nil_ls = {}, -- Nix Expression Language
-                pylsp = {},
+                pyright = {},
                 rust_analyzer = {},
                 lua_ls = {
                     settings = {
@@ -124,9 +124,7 @@ return {
                 ensure_installed = {
                     "clangd",
                     "nil_ls",
-                    "pylsp",
-                    "mypy",
-                    "ruff",
+                    "pyright",
                     "rust_analyzer",
                     "sumneko_lua",
                     "texlab",
@@ -233,15 +231,6 @@ return {
                 debounce = 150,
                 sources = {
                     -------===[ Python ]===-------
-                    builtins.diagnostics.mypy.with({
-                        extra_args = {
-                            "--ignore-missing-imports",
-                            "--cache-dir=/dev/null",
-                        },
-                    }),
-                    builtins.diagnostics.ruff.with({
-                        extra_args = { "--ignore", "E501" },
-                    }),
                     builtins.formatting.black.with({
                         extra_args = { "--fast" },
                         filetypes = { "python" },
