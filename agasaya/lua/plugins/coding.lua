@@ -8,7 +8,6 @@ return {
             "nvim-telescope/telescope.nvim",
             "nvim-tree/nvim-web-devicons",
             "nvim-treesitter/nvim-treesitter",
-            "rcarriga/nvim-notify",
         },
         opts = {
             lang = "rust",

@@ -154,20 +154,6 @@ return {
         },
     },
     {
-        "rcarriga/nvim-notify",
-        event = "UIEnter",
-        opts = {
-            background_colour = "#1A1B26",
-            max_height = function()
-                return math.floor(vim.o.lines * 0.85)
-            end,
-            max_width = function()
-                return math.floor(vim.o.lines * 0.85)
-            end,
-            timeout = 1000,
-        },
-    },
-    {
         "stevearc/dressing.nvim",
         lazy = true,
         init = function()
