@@ -2,15 +2,16 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
-        enabled = false,
-        build = "CatppuccinCompile",
+        lazy = false,
+        priority = 1000,
         opts = {
-            term_colors = true,
-            compile = {
-                enabled = true,
-                path = vim.fn.stdpath("cache") .. "/catppuccin",
-                suffix = "_compiled",
+            flavour = "mocha",
+            background = {
+                light = "latte",
+                dark = "mocha",
             },
+            transparent_background = true,
+            term_colors = true,
             styles = {
                 comments = { "italic" },
                 functions = { "italic", "bold" },
@@ -47,8 +48,8 @@ return {
     },
     {
         "projekt0n/github-nvim-theme",
-        lazy = false,
         tag = "v0.0.7",
+        lazy = false,
         priority = 1000,
         opts = {
             dark_float = true,
@@ -69,9 +70,10 @@ return {
     },
     {
         "rebelot/kanagawa.nvim",
+        build = ":KanagawaCompile",
+        enabled = false,
         lazy = false,
         priority = 1000,
-        build = ":KanagawaCompile",
         opts = {
             compile = true,
             transparent = true,
