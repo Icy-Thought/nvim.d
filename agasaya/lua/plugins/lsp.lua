@@ -71,6 +71,7 @@ return {
                         },
                     },
                 },
+                typst_lsp = {},
             }
 
             -- Our default LSP-Server configurations
