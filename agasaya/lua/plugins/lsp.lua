@@ -19,7 +19,15 @@ return {
                     },
                 },
                 nil_ls = {}, -- Nix Expression Language
-                pyright = {},
+                pylyzer = {
+                    settings = {
+                        python = {
+                            diagnostics = true,
+                            inlayHints = true,
+                            smartCompletion = true,
+                        },
+                    },
+                },
                 rust_analyzer = {},
                 lua_ls = {
                     settings = {
@@ -125,7 +133,7 @@ return {
                 ensure_installed = {
                     "clangd",
                     "nil_ls",
-                    "pyright",
+                    "pylyzer",
                     "rust_analyzer",
                     "sumneko_lua",
                     "texlab",
