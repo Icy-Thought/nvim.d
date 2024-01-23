@@ -44,7 +44,6 @@ local vim_options = function()
         inccommand = "nosplit",
         incsearch = true,
         infercase = true,
-        iskeyword = { "-" },
         joinspaces = false,
         linebreak = true,
         list = true,
