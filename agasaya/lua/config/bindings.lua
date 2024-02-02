@@ -12,11 +12,12 @@ local map_cmd = bind.map_cmd
 -- -> Command_Mode       = "c",
 
 local def_basics = {
-    -- <Esc> -> disable highlight
-    ["n|<Esc>"] = map_cr("noh"):with_noremap():with_silent(),
-
     -- Quicker access to `:`
     ["n|;"] = map_cmd(":"):with_noremap(),
+
+    -- <SPC> + y -> system clipboard
+    ["nv|<leader>y"] = map_cmd('"+y'):with_noremap(),
+    ["n|<leader>Y"] = map_cmd('"+Y'):with_noremap(),
 
     -- Ctrl + s -> save current buffer
     ["n|<C-s>"] = map_cu("write"):with_noremap(),
@@ -60,7 +61,7 @@ local def_basics = {
     -- Paste in place of word -> move word to newline
     ["x|p"] = map_cmd('"_dP'):with_noremap(),
 
-    -- Press jk fast to enter
+    -- Quick `jk` -> EXIT
     ["i|jk"] = map_cmd("<ESC>"):with_noremap(),
 
     -- Stay in indent mode

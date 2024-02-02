@@ -24,7 +24,6 @@ local vim_options = function()
         backup = false,
         breakat = [[\ \	;:,!?]],
         breakindentopt = { "shift:2", "min:20" },
-        clipboard = "unnamedplus",
         completeopt = { "menuone", "noselect" },
         concealcursor = "niv",
         confirm = true,
