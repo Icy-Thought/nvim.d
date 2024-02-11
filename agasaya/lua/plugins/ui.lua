@@ -124,7 +124,11 @@ return {
     },
     {
         "folke/noice.nvim",
-        event = "UIEnter",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
         opts = {
             hacks = { cmp_popup_row_offset = 1 },
             views = {
