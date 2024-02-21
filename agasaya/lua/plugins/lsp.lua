@@ -19,15 +19,16 @@ return {
                     },
                 },
                 nil_ls = {}, -- Nix Expression Language
-                pylyzer = {
-                    settings = {
-                        python = {
-                            diagnostics = true,
-                            inlayHints = true,
-                            smartCompletion = true,
-                        },
-                    },
-                },
+                -- pylyzer = {
+                --     settings = {
+                --         python = {
+                --             diagnostics = true,
+                --             inlayHints = true,
+                --             smartCompletion = true,
+                --         },
+                --     },
+                -- },
+                pyright = {},
                 rust_analyzer = {},
                 lua_ls = {
                     settings = {
