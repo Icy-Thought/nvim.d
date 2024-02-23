@@ -28,8 +28,6 @@ return {
                 --         },
                 --     },
                 -- },
-                pyright = {},
-                rust_analyzer = {},
                 lua_ls = {
                     settings = {
                         Lua = {
@@ -48,6 +46,8 @@ return {
                         },
                     },
                 },
+                pyright = {},
+                rust_analyzer = {},
                 texlab = {
                     log_level = vim.lsp.protocol.MessageType.Log,
                     settings = {
@@ -81,6 +81,7 @@ return {
                     },
                 },
                 typst_lsp = {},
+                zls = {},
             }
 
             -- Our default LSP-Server configurations
@@ -138,6 +139,7 @@ return {
                     "rust_analyzer",
                     "sumneko_lua",
                     "texlab",
+                    "zls",
                 },
                 automatic_installation = false,
             })
@@ -253,7 +255,8 @@ return {
                     -------===[ General ]===-------
                     builtins.formatting.stylua,
                     builtins.formatting.alejandra, -- Nix
-                    builtins.formatting.deno_fmt,  -- Js / Ts
+                    builtins.formatting.deno_fmt,  -- JS / TS
+                    builtins.formatting.zigfmt,
 
                     -------===[ Code Action ]===-------
                     builtins.code_actions.shellcheck,
