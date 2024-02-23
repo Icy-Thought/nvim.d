@@ -235,7 +235,7 @@ return {
         end,
     },
     {
-        "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
         event = "BufReadPre",
         opts = function()
             local builtins = require("null-ls.builtins")
