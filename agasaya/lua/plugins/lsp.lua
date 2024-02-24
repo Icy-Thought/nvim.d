@@ -253,7 +253,6 @@ return {
                     -------===[ General ]===-------
                     builtins.formatting.stylua,
                     builtins.formatting.alejandra, -- Nix
-                    builtins.formatting.deno_fmt, -- JS / TS
 
                     -------===[ Code Action ]===-------
                     builtins.code_actions.shellcheck,
