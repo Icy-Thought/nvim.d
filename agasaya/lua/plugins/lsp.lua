@@ -253,9 +253,6 @@ return {
                     -------===[ General ]===-------
                     builtins.formatting.stylua,
                     builtins.formatting.alejandra, -- Nix
-
-                    -------===[ Code Action ]===-------
-                    builtins.code_actions.shellcheck,
                 },
                 on_attach = function(client, bufnr)
                     if client.supports_method("textDocument/formatting") then
