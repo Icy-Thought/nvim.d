@@ -15,7 +15,7 @@ local dotfiles_list = function(opts)
         table.insert(list, file)
     end
     local nvim_conf = io.popen(
-        "rg --files " .. os.getenv("HOME") .. "/Workspace/public/nvim.d/agasaya"
+        "rg --files " .. os.getenv("HOME") .. "/Workspace/public/nvim.d"
     )
     for file in nvim_conf:lines() do
         table.insert(list, file)
