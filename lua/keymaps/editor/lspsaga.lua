@@ -91,7 +91,7 @@ Hydra({
         },
         {
             "<Enter>",
-            cmd("Format"),
+            cmd("lua vim.lsp.buf.format()"),
             { exit = true, desc = "Format current buffer!" },
         },
         { "q", nil, { exit = true, nowait = true, desc = "Exit" } },

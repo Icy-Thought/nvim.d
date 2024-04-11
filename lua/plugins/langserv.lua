@@ -6,28 +6,9 @@ return {
     },
     {
         "MrcJkb/haskell-tools.nvim",
-        ft = "haskell",
-        opts = {
-            tools = {
-                codeLens = { autoRefresh = true },
-                hoogle = { mode = "auto" },
-                hover = { disable = true },
-                repl = { handler = "toggleterm" },
-            },
-            hls = {
-                settings = {
-                    haskell = {
-                        checkProject = false,
-                        formattingProvider = "fourmolu",
-                        plugin = {
-                            refineImports = { codeLensOn = false },
-                        },
-                    },
-                },
-            },
-        },
-        config = function(_, opts)
-            require("haskell-tools").setup(opts)
+        version = "^3", -- Recommended
+        ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+        config = function()
             require("keymaps.langserv.haskell")
         end,
     },

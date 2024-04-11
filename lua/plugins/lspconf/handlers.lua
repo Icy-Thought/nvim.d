@@ -6,16 +6,6 @@ M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Disable LSP formatting in favor of null-ls
 -- WARNING: Make sure not to run this on **null-ls** itself!
 M.on_attach = function(client, bufnr)
-    local lsp_formatting = function(bufnr)
-        vim.lsp.buf.format({
-            async = true,
-            bufnr = bufnr,
-            filter = function(client)
-                return client.name == "null-ls"
-            end,
-        })
-    end
-
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     if client.supports_method("textDocument/formatting") then
@@ -24,7 +14,10 @@ M.on_attach = function(client, bufnr)
             group = augroup,
             buffer = bufnr,
             callback = function()
-                lsp_formatting(bufnr)
+                vim.lsp.buf.format({
+                    async = false,
+                    bufnr = bufnr,
+                })
             end,
         })
     end
