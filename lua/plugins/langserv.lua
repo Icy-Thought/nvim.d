@@ -18,7 +18,7 @@ return {
                 settings = {
                     haskell = {
                         checkProject = false,
-                        formattingProvider = "stylish-haskell",
+                        formattingProvider = "fourmolu",
                         plugin = {
                             refineImports = { codeLensOn = false },
                         },
