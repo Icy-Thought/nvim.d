@@ -70,7 +70,7 @@ return {
                         {
                             action = "Telescope find_files",
                             desc = "Find File",
-                            icon = "  ",
+                            icon = "󰮗  ",
                             key = "SPC f f",
                         },
                         {
@@ -100,7 +100,7 @@ return {
                         {
                             action = "q",
                             desc = "Quit",
-                            icon = "  ",
+                            icon = "󰿅  ",
                             key = "SPC q q",
                         },
                     },
