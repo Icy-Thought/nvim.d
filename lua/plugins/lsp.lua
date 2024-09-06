@@ -252,7 +252,7 @@ return {
 
                     -------===[ General ]===-------
                     builtins.formatting.stylua,
-                    builtins.formatting.alejandra, -- Nix
+                    builtins.formatting.nixfmt, -- Nix
                 },
             }
         end,
