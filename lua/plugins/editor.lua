@@ -8,7 +8,7 @@ return {
     },
     {
         "gaoDean/autolist.nvim",
-        ft = { "markdown", "text" },
+        filetypes = { "markdown", "text" },
         config = true,
     },
     {

@@ -15,7 +15,7 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
-        ft = "gitcommit",
+        filetypes = "gitcommit",
         event = "BufReadPost",
         config = function()
             require("gitsigns").setup()
@@ -80,7 +80,7 @@ return {
     },
     {
         "toppair/peek.nvim",
-        ft = "markdown",
+        filetypes = "markdown",
         build = "deno task --quiet build:fast",
         opts = {
             auto_load = false,
