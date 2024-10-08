@@ -111,11 +111,7 @@ return {
     {
         "j-hui/fidget.nvim",
         event = "BufReadPost",
-        opts = {
-            sources = {
-                ["null-ls"] = { ignore = true },
-            },
-        },
+        opts = {},
     },
     {
         "nvim-lualine/lualine.nvim",
