@@ -14,30 +14,30 @@ local flutter_hint = [[
 ]]
 
 Hydra({
-	name = "Flutter-Tools",
-	hint = flutter_hint,
-	config = {
-		color = "teal",
-		invoke_on_body = true,
-		hint = {
-			border = "rounded",
-			position = "middle",
-		},
-	},
-	mode = "n",
-	body = "<leader>d",
-	heads = {
-		{ "c", cmd("FlutterDevices") },
-		{ "d", cmd("FlutterDevTools") },
-		{ "D", cmd("FlutterDetach") },
-		{ "e", cmd("FlutterEmulators") },
-		{ "E", cmd("FlutterQuit") },
-		{ "l", cmd("FlutterLspRestart") },
-		{ "L", cmd("FlutterReanalyze") },
-		{ "r", cmd("FlutterReload") },
-		{ "R", cmd("FlutterRestart") },
-		{ "w", cmd("FlutterOutlineToggle") },
-		{ "<Enter>", cmd("FlutterRun") },
-		{ "q", nil, { exit = true, nowait = true, desc = "Exit" } },
-	},
+    name = "Flutter-Tools",
+    hint = flutter_hint,
+    config = {
+        color = "teal",
+        invoke_on_body = true,
+        hint = {
+            border = "rounded",
+            position = "middle",
+        },
+    },
+    mode = "n",
+    body = "<leader>d",
+    heads = {
+        { "c", cmd("FlutterDevices") },
+        { "d", cmd("FlutterDevTools") },
+        { "D", cmd("FlutterDetach") },
+        { "e", cmd("FlutterEmulators") },
+        { "E", cmd("FlutterQuit") },
+        { "l", cmd("FlutterLspRestart") },
+        { "L", cmd("FlutterReanalyze") },
+        { "r", cmd("FlutterReload") },
+        { "R", cmd("FlutterRestart") },
+        { "w", cmd("FlutterOutlineToggle") },
+        { "<Enter>", cmd("FlutterRun") },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
+    },
 })

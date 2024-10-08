@@ -11,44 +11,44 @@ local term_hint = [[
 ]]
 
 Hydra({
-	name = "ToggleTerm",
-	hint = term_hint,
-	config = {
-		color = "teal",
-		invoke_on_body = true,
-		hint = {
-			border = "rounded",
-			position = "middle",
-		},
-	},
-	mode = "n",
-	body = "<leader>t",
-	heads = {
-		{
-			"v",
-			cmd("ToggleTerm direction=vertical"),
-			{ desc = "Launch vertical terminal" },
-		},
-		{
-			"f",
-			cmd("ToggleTerm direction=float"),
-			{ desc = "Launch floating terminal" },
-		},
-		{
-			"t",
-			cmd("ToggleTerm direction=tab"),
-			{ desc = "Launch tabbed terminal" },
-		},
-		{
-			"p",
-			cmd("lua _PYTHON_TOGGLE"),
-			{ desc = "Launch terminal in py-env" },
-		},
-		{
-			"<Enter>",
-			cmd("ToggleTerm direction=horizontal"),
-			{ desc = "Launch horizontal terminal" },
-		},
-		{ "q", nil, { exit = true, nowait = true, desc = "Exit" } },
-	},
+    name = "ToggleTerm",
+    hint = term_hint,
+    config = {
+        color = "teal",
+        invoke_on_body = true,
+        hint = {
+            border = "rounded",
+            position = "middle",
+        },
+    },
+    mode = "n",
+    body = "<leader>t",
+    heads = {
+        {
+            "v",
+            cmd("ToggleTerm direction=vertical"),
+            { desc = "Launch vertical terminal" },
+        },
+        {
+            "f",
+            cmd("ToggleTerm direction=float"),
+            { desc = "Launch floating terminal" },
+        },
+        {
+            "t",
+            cmd("ToggleTerm direction=tab"),
+            { desc = "Launch tabbed terminal" },
+        },
+        {
+            "p",
+            cmd("lua _PYTHON_TOGGLE"),
+            { desc = "Launch terminal in py-env" },
+        },
+        {
+            "<Enter>",
+            cmd("ToggleTerm direction=horizontal"),
+            { desc = "Launch horizontal terminal" },
+        },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
+    },
 })

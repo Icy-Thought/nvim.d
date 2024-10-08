@@ -14,30 +14,30 @@ local rust_hint = [[
 ]]
 
 Hydra({
-	name = "Rust-Tools",
-	hint = rust_hint,
-	config = {
-		color = "teal",
-		invoke_on_body = true,
-		hint = {
-			border = "rounded",
-			position = "middle",
-		},
-	},
-	mode = "n",
-	body = "<leader>r",
-	heads = {
-		{ "r", cmd("RustRunnables") },
-		{ "d", cmd("RustDebuggables") },
-		{ "s", cmd("RustSSR") },
-		{ "h", cmd("RustHoverActions") },
-		{ "D", cmd("RustOpenExternalDocs") },
-		{ "m", cmd("RustExpandMacro") },
-		{ "c", cmd("RustOpenCargo") },
-		{ "p", cmd("RustParentModule") },
-		{ "w", cmd("RustReloadWorkspace") },
-		{ "g", cmd("RustViewCrateGraph") },
-		{ "i", cmd("RustToggleInlayHints") },
-		{ "q", nil, { exit = true, nowait = true, desc = "Exit" } },
-	},
+    name = "Rust-Tools",
+    hint = rust_hint,
+    config = {
+        color = "teal",
+        invoke_on_body = true,
+        hint = {
+            border = "rounded",
+            position = "middle",
+        },
+    },
+    mode = "n",
+    body = "<leader>r",
+    heads = {
+        { "r", cmd("RustRunnables") },
+        { "d", cmd("RustDebuggables") },
+        { "s", cmd("RustSSR") },
+        { "h", cmd("RustHoverActions") },
+        { "D", cmd("RustOpenExternalDocs") },
+        { "m", cmd("RustExpandMacro") },
+        { "c", cmd("RustOpenCargo") },
+        { "p", cmd("RustParentModule") },
+        { "w", cmd("RustReloadWorkspace") },
+        { "g", cmd("RustViewCrateGraph") },
+        { "i", cmd("RustToggleInlayHints") },
+        { "q", nil, { exit = true, nowait = true, desc = "Exit" } },
+    },
 })
