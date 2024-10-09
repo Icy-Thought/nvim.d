@@ -103,135 +103,15 @@ return {
     {
         "glepnir/lspsaga.nvim",
         event = "BufRead",
-        opts = {
-            ui = {
-                border = "rounded",
-                code_action = "󰛩 ",
-                diagnostic = " ",
-            },
-        },
-        config = function(_, opts)
-            require("lspsaga").setup(opts)
-            require("keymaps.editor.lspsaga")
-        end,
-    },
-    {
-        enabled = false,
-        "williamboman/mason.nvim",
-        dependencies = { "williamboman/mason-lspconfig.nvim" },
-        opts = {
-            ui = { border = "rounded" },
-        },
-        config = function(_, opts)
-            require("plugins.lspconf.diagnostics")
-
-            local nvim_lsp = require("lspconfig")
-            local mason = require("mason")
-            local mason_lsp = require("mason-lspconfig")
-
-            -- Setting up our Mason environment:
-            mason.setup(opts)
-
-            mason_lsp.setup({
-                ensure_installed = {
-                    "clangd",
-                    "nil_ls",
-                    "pylyzer",
-                    "rust_analyzer",
-                    "sumneko_lua",
-                    "texlab",
+        config = function()
+            require("lspsaga").setup({
+                ui = {
+                    border = "rounded",
+                    code_action = "󰛩 ",
+                    diagnostic = " ",
                 },
-                automatic_installation = false,
             })
-
-            local handlers = require("plugins.lspconf.handlers")
-            local default_config = {
-                on_attach = handlers.on_attach,
-                capabilities = handlers.capabilities,
-                flags = { debounce_text_changes = 150 },
-            }
-
-            mason_lsp.setup_handlers({
-                function(server_name)
-                    require("lspconfig")[server_name].setup({
-                        default_config,
-                    })
-                end,
-                -- (Override) Configurations:
-                ["clangd"] = function()
-                    nvim_lsp.clangd.setup({
-                        default_config,
-                        cmd = {
-                            "clangd",
-                            "--background-index",
-                            "--suggest-missing-includes",
-                            "--clang-tidy",
-                            "--header-insertion=iwyu",
-                        },
-                    })
-                end,
-                ["sumneko_lua"] = function()
-                    nvim_lsp.sumneko_lua.setup({
-                        default_config,
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim", "packer_plugins" },
-                                },
-                                workspace = {
-                                    library = {
-                                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                        [vim.fn.expand(
-                                            "$VIMRUNTIME/lua/vim/lsp"
-                                        )] = true,
-                                    },
-                                    maxPreload = 100000,
-                                    preloadFileSize = 10000,
-                                },
-                                telemetry = { enable = false },
-                                -- Prevent TS from overriding sumneko_lua highlighting!
-                                semantic = { enable = false },
-                            },
-                        },
-                    })
-                end,
-                ["texlab"] = function()
-                    nvim_lsp.texlab.setup({
-                        default_config,
-                        log_level = vim.lsp.protocol.MessageType.Log,
-                        settings = {
-                            texlab = {
-                                auxDirectory = "build",
-                                build = {
-                                    args = {
-                                        "-pdf",
-                                        "-interaction=nonstopmode",
-                                        "-synctex=1",
-                                        "%f",
-                                    },
-                                    executable = "latexmk",
-                                    onSave = true,
-                                },
-                                forwardSearch = {
-                                    args = {
-                                        "--synctex-forward",
-                                        "%l:1:%f",
-                                        "%p",
-                                    },
-                                    executable = "zathura",
-                                },
-                                chktex = {
-                                    onEdit = false,
-                                    onOpenAndSave = true,
-                                },
-                                diagnosticsDelay = 100,
-                                formatterLineLength = 80,
-                                latexFormatter = "texlab",
-                            },
-                        },
-                    })
-                end,
-            })
+            require("keymaps.editor.lspsaga")
         end,
     },
     {
