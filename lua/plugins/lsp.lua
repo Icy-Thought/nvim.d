@@ -81,6 +81,8 @@ return {
                     },
                 },
                 typst_lsp = {},
+                biome = {},
+                tsserver = {},
             }
 
             -- Our default LSP-Server configurations
@@ -104,8 +106,8 @@ return {
         opts = {
             ui = {
                 border = "rounded",
-                code_action = " ",
-                diagnostic = { " ", " ", " ", " " },
+                code_action = "󰛩 ",
+                diagnostic = " ",
             },
         },
         config = function(_, opts)
@@ -253,6 +255,7 @@ return {
                     -------===[ General ]===-------
                     builtins.formatting.stylua,
                     builtins.formatting.nixfmt, -- Nix
+                    builtins.formatting.biome,
                 },
             }
         end,

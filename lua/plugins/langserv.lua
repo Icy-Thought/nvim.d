@@ -20,10 +20,4 @@ return {
             require("rust-tools").setup()
         end,
     },
-    {
-        "pmizio/typescript-tools.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        opts = {},
-    },
 }
