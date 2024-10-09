@@ -81,8 +81,8 @@ return {
                     },
                 },
                 typst_lsp = {},
+                ts_ls = {},
                 biome = {},
-                tsserver = {},
             }
 
             -- Our default LSP-Server configurations
