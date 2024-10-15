@@ -80,7 +80,7 @@ return {
                         },
                     },
                 },
-                typst_lsp = {},
+                tinymist = {},
                 ts_ls = {},
                 biome = {},
             }
