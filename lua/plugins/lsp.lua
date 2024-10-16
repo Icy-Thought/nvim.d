@@ -122,20 +122,10 @@ return {
             return {
                 debounce = 150,
                 sources = {
-                    -------===[ Python ]===-------
-                    builtins.formatting.black.with({
-                        extra_args = { "--fast" },
-                        filetypes = { "python" },
-                    }),
-                    builtins.formatting.isort.with({
-                        extra_args = { "--profile", "black" },
-                        filetypes = { "python" },
-                    }),
-
-                    -------===[ General ]===-------
-                    builtins.formatting.stylua,
-                    builtins.formatting.nixfmt, -- Nix
                     builtins.formatting.biome,
+                    builtins.formatting.nixfmt,
+                    builtins.formatting.ruff,
+                    builtins.formatting.stylua,
                 },
             }
         end,
