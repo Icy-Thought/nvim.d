@@ -1,25 +1,25 @@
 <p align="center">
-  <img src="./assets/png/knight-chess.png" alt="Knight (Chess)" width="300" height="300"/>
+  <img src="./assets/main/png/knight-chess.png" alt="Knight (Chess)" width="300" height="300"/>
 </p>
 
 # Neovim Dotfiles
 
-This repository consists of:
+This repository consists of several branches, where:
 
-1. `niflheim`: a configuration I stitched together with the help of the default
-   settings of the installed plugin mentioned in the project's README. 
+1. `Agasaya`: is a lua-based Neovim setup and the one I am mainly running today.
 
-2. `ereshkigal`: lisp-based neovim setup. 
+2. `Ereshkigal`: is a lisp-based Neovim setup that relies on [Fennel](https://fennel-lang.org/).
 
-3. `agasaya`: lua-based neovim setup. 
+3. `Niflheim`: is a configuration I stitched together with the help of the default
+   settings of the installed plugin mentioned in the project's README through nix the package manager.
 
 # Agasaya
 
-![Agasaya](./assets/png/agasaya.png)
+![Agasaya](./assets/themes/png/kanagawa.png)
 
-Agasaya is a non nix-dependent neovim configuration file that I crafted myself
-and consists mainly of a minimal setup and neovide settings for the sake of
-having a neovim-gui available.
+Agasaya is a non nix-dependent Neovim configuration file that I crafted myself
+and consists mainly of a minimal setup and Neovide settings for the sake of
+having a Neovim GUI available.
 
 You might notice that there is a missing `init.lua` file in this folder and the
 reason for that is that I have decided to generate it through `home-manager`

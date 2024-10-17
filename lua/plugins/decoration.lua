@@ -2,6 +2,7 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
+        enabled = false,
         lazy = false,
         priority = 1000,
         opts = {
@@ -71,7 +72,6 @@ return {
     {
         "rebelot/kanagawa.nvim",
         build = ":KanagawaCompile",
-        enabled = false,
         lazy = false,
         priority = 1000,
         opts = {
