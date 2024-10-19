@@ -47,6 +47,7 @@ return {
                     },
                 },
                 pyright = {},
+                ruff = {},
                 rust_analyzer = {},
                 texlab = {
                     log_level = vim.lsp.protocol.MessageType.Log,
@@ -124,7 +125,6 @@ return {
                 sources = {
                     builtins.formatting.biome,
                     builtins.formatting.nixfmt,
-                    builtins.formatting.ruff,
                     builtins.formatting.stylua,
                 },
             }
